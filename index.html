@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Jeannie Pezan – Coldwell Banker real estate agent serving Naperville, Chicago, and Chicagoland. Bilingual, 13+ years experience, 500+ homes sold." />
+  <meta name="keywords" content="Jeannie Pezan, Coldwell Banker, real estate, Naperville, Chicago, Chicagoland, homes for sale, bilingual realtor" />
+  <meta name="author" content="Jeannie Pezan" />
+  <meta property="og:title" content="Jeannie Pezan | Coldwell Banker Real Estate" />
+  <meta property="og:description" content="Chicagoland's trusted real estate expert. Bilingual, 13+ years experience." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://jeanniep.coldwellhomes.com" />
+  <title>Jeannie Pezan | Coldwell Banker Real Estate – Chicagoland</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="#home" class="nav-logo">
+        <div class="nav-logo-icon">
+          <i class="fas fa-home"></i>
+        </div>
+        <div class="nav-logo-text">
+          <span class="nav-logo-name">Jeannie Pezan</span>
+          <span class="nav-logo-brand">Coldwell Banker</span>
+        </div>
+      </a>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home" class="nav-link active">Home</a></li>
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#listings" class="nav-link">Listings</a></li>
+        <li><a href="#reviews" class="nav-link">Reviews</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+
+      <a href="tel:7192131100" class="nav-phone-btn">
+        <i class="fas fa-phone"></i>
+        <span>(719) 213-1100</span>
+      </a>
+
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero" id="home">
+    <div class="hero-bg"></div>
+    <div class="hero-pattern"></div>
+
+    <div class="hero-content">
+      <div class="hero-badge reveal">
+        <i class="fas fa-star"></i>
+        Chicagoland's Trusted Real Estate Expert
+        <i class="fas fa-star"></i>
+      </div>
+
+      <h1 class="hero-title reveal">
+        <span class="hero-title-name">Jeannie Pezan</span>
+        <em class="hero-title-tagline">Guiding You Home</em>
+      </h1>
+
+      <p class="hero-subtitle reveal">
+        Bilingual real estate professional serving Naperville, Chicago, and all of Chicagoland.<br />
+        With over 13 years of expertise, I make buying and selling simple, successful, and stress-free.
+      </p>
+
+      <div class="hero-cta-row reveal">
+        <a href="#listings" class="btn btn-gold">
+          <i class="fas fa-search"></i> Browse Homes
+        </a>
+        <a href="#valuation" class="btn btn-outline-white">
+          <i class="fas fa-chart-line"></i> Home Valuation
+        </a>
+      </div>
+
+      <div class="hero-search reveal">
+        <div class="search-tabs">
+          <button class="search-tab active" data-tab="buy">BUY</button>
+          <button class="search-tab" data-tab="sell">SELL</button>
+        </div>
+        <div class="search-input-row">
+          <i class="fas fa-map-marker-alt search-icon"></i>
+          <input
+            type="text"
+            class="search-input"
+            id="heroSearch"
+            placeholder="Enter city, zip, or neighborhood…"
+            aria-label="Search by city, zip, or neighborhood"
+          />
+          <button class="search-btn" onclick="handleSearch()">
+            <i class="fas fa-search"></i> Search
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-agent-card reveal">
+      <div class="agent-card-avatar">JP</div>
+      <div class="agent-card-info">
+        <strong>Jeannie Pezan</strong>
+        <span>REALTOR® | CBR</span>
+        <span class="agent-card-rating">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          &nbsp;5.0
+        </span>
+      </div>
+    </div>
+
+    <div class="scroll-indicator">
+      <span>Scroll</span>
+      <div class="scroll-dot"></div>
+    </div>
+  </section>
+
+  <!-- ===== STATS ===== -->
+  <section class="stats-section" id="stats">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-item reveal">
+          <div class="stat-number">
+            <span class="counter" data-target="13">0</span>
+            <span class="stat-plus">+</span>
+          </div>
+          <div class="stat-label">Years Experience</div>
+          <div class="stat-sub">Licensed Since 2011</div>
+        </div>
+        <div class="stat-item reveal">
+          <div class="stat-number">
+            <span class="counter" data-target="500">0</span>
+            <span class="stat-plus">+</span>
+          </div>
+          <div class="stat-label">Homes Sold</div>
+          <div class="stat-sub">Across Chicagoland</div>
+        </div>
+        <div class="stat-item reveal">
+          <div class="stat-number">
+            <span class="counter" data-target="98">0</span>
+            <span class="stat-plus">%</span>
+          </div>
+          <div class="stat-label">Client Satisfaction</div>
+          <div class="stat-sub">5-Star Reviews</div>
+        </div>
+        <div class="stat-item reveal">
+          <div class="stat-number">
+            <span class="counter" data-target="2">0</span>
+          </div>
+          <div class="stat-label">Languages</div>
+          <div class="stat-sub">English &amp; Spanish</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SERVICES ===== -->
+  <section class="services-section" id="services">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag">What I Offer</span>
+        <h2 class="section-title">How I Can Help You</h2>
+        <p class="section-subtitle">Full-service real estate representation tailored to your unique needs</p>
+      </div>
+
+      <div class="services-grid">
+        <div class="service-card reveal">
+          <div class="service-icon">
+            <i class="fas fa-key"></i>
+          </div>
+          <h3 class="service-title">Buy a Home</h3>
+          <p class="service-desc">
+            From neighborhood tours to closing day, I guide you through every step of the home-buying process. Access exclusive MLS listings, expert negotiation, and hands-on support.
+          </p>
+          <a href="#listings" class="service-link">
+            Browse Listings <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+
+        <div class="service-card service-card--featured reveal">
+          <div class="service-featured-badge">Most Popular</div>
+          <div class="service-icon">
+            <i class="fas fa-tag"></i>
+          </div>
+          <h3 class="service-title">Sell Your Home</h3>
+          <p class="service-desc">
+            Maximize your sale price with professional staging advice, targeted marketing, HD photography, and my proven pricing strategy built on 13+ years of local market expertise.
+          </p>
+          <a href="#valuation" class="service-link">
+            Get Your Value <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+
+        <div class="service-card reveal">
+          <div class="service-icon">
+            <i class="fas fa-truck-moving"></i>
+          </div>
+          <h3 class="service-title">Relocation Services</h3>
+          <p class="service-desc">
+            Moving to or from Chicagoland? I specialize in seamless corporate and family relocations — bilingual support, neighborhood insights, and a trusted network of local professionals.
+          </p>
+          <a href="#contact" class="service-link">
+            Get Started <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+
+        <div class="service-card reveal">
+          <div class="service-icon">
+            <i class="fas fa-chart-bar"></i>
+          </div>
+          <h3 class="service-title">Investment Properties</h3>
+          <p class="service-desc">
+            Build long-term wealth through smart real estate investment. I identify high-ROI opportunities, analyze rental income potential, and help you build a profitable property portfolio.
+          </p>
+          <a href="#contact" class="service-link">
+            Learn More <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ABOUT ===== -->
+  <section class="about-section" id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-image-col reveal">
+          <div class="about-image-placeholder">
+            <div class="about-image-initials">JP</div>
+            <div class="about-top-producer-badge">
+              <i class="fas fa-trophy"></i>
+              <div>
+                <strong>Top Producer</strong>
+                <span>Coldwell Banker 2024</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="about-content-col reveal">
+          <span class="section-tag">About Jeannie</span>
+          <h2 class="section-title">Your Dedicated Chicagoland Real Estate Partner</h2>
+          <p class="about-text">
+            With over 13 years of experience in the Chicagoland real estate market, I've helped hundreds of families find their perfect home, sell for top dollar, and navigate every step of the process with confidence.
+          </p>
+          <p class="about-text">
+            As a bilingual agent (English &amp; Spanish), I'm proud to serve the diverse communities of Naperville, Chicago, Downers Grove, Orland Park, and beyond. My approach is built on transparency, hustle, and genuine care for every client.
+          </p>
+
+          <ul class="about-checklist">
+            <li><i class="fas fa-check-circle"></i> Licensed REALTOR® Since 2011</li>
+            <li><i class="fas fa-check-circle"></i> Bilingual — English &amp; Spanish</li>
+            <li><i class="fas fa-check-circle"></i> Certified Relocation Specialist</li>
+            <li><i class="fas fa-check-circle"></i> Naperville &amp; Chicagoland Expert</li>
+            <li><i class="fas fa-check-circle"></i> Coldwell Banker Top Producer 2024</li>
+          </ul>
+
+          <div class="about-cta-row">
+            <a href="#contact" class="btn btn-navy">
+              <i class="fas fa-envelope"></i> Work With Me
+            </a>
+            <a href="tel:7192131100" class="btn btn-outline-navy">
+              <i class="fas fa-phone"></i> Call Now
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FEATURED LISTINGS ===== -->
+  <section class="listings-section" id="listings">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag">Properties</span>
+        <h2 class="section-title">Featured Listings</h2>
+        <p class="section-subtitle">Explore available homes across Chicagoland — updated daily from MRED MLS</p>
+      </div>
+
+      <div class="listing-filters reveal">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="for-sale">For Sale</button>
+        <button class="filter-btn" data-filter="luxury">Luxury</button>
+      </div>
+
+      <div class="listings-grid">
+        <!-- Card 1: Chicago -->
+        <div class="listing-card reveal" data-category="for-sale">
+          <div class="listing-image" style="background: linear-gradient(135deg, #1a3a5c 0%, #2a5298 50%, #c9a84c 100%);">
+            <div class="listing-image-overlay">
+              <span class="listing-badge listing-badge--sale">For Sale</span>
+              <button class="listing-save" aria-label="Save listing">
+                <i class="far fa-heart"></i>
+              </button>
+            </div>
+            <div class="listing-image-address-preview">
+              <i class="fas fa-map-marker-alt"></i> Chicago, IL
+            </div>
+          </div>
+          <div class="listing-body">
+            <div class="listing-price">$269,999</div>
+            <div class="listing-address">4842 N. Lamon Avenue, Chicago, IL 60630</div>
+            <div class="listing-details">
+              <span><i class="fas fa-bed"></i> 4 Beds</span>
+              <span><i class="fas fa-bath"></i> 3 Baths</span>
+              <span><i class="fas fa-ruler-combined"></i> 1,850 sqft</span>
+            </div>
+            <div class="listing-footer">
+              <span class="listing-mls">MLS# 11984201</span>
+              <a href="#contact" class="btn btn-sm btn-navy">Schedule Tour</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2: Downers Grove (Luxury) -->
+        <div class="listing-card reveal" data-category="luxury">
+          <div class="listing-image" style="background: linear-gradient(135deg, #0f2235 0%, #1a3a5c 40%, #8b6914 100%);">
+            <div class="listing-image-overlay">
+              <span class="listing-badge listing-badge--luxury">Luxury</span>
+              <button class="listing-save" aria-label="Save listing">
+                <i class="far fa-heart"></i>
+              </button>
+            </div>
+            <div class="listing-image-address-preview">
+              <i class="fas fa-map-marker-alt"></i> Downers Grove, IL
+            </div>
+          </div>
+          <div class="listing-body">
+            <div class="listing-price">$1,999,900</div>
+            <div class="listing-address">1420 Maple Avenue, Downers Grove, IL 60515</div>
+            <div class="listing-details">
+              <span><i class="fas fa-bed"></i> 4 Beds</span>
+              <span><i class="fas fa-bath"></i> 5 Baths</span>
+              <span><i class="fas fa-ruler-combined"></i> 5,200 sqft</span>
+            </div>
+            <div class="listing-footer">
+              <span class="listing-mls">MLS# 11956482</span>
+              <a href="#contact" class="btn btn-sm btn-navy">Schedule Tour</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3: Orland Park -->
+        <div class="listing-card reveal" data-category="for-sale">
+          <div class="listing-image" style="background: linear-gradient(135deg, #1a3a5c 0%, #2e6b8a 60%, #c9a84c 100%);">
+            <div class="listing-image-overlay">
+              <span class="listing-badge listing-badge--sale">For Sale</span>
+              <button class="listing-save" aria-label="Save listing">
+                <i class="far fa-heart"></i>
+              </button>
+            </div>
+            <div class="listing-image-address-preview">
+              <i class="fas fa-map-marker-alt"></i> Orland Park, IL
+            </div>
+          </div>
+          <div class="listing-body">
+            <div class="listing-price">$639,000</div>
+            <div class="listing-address">16050 Ravinia Ave, Orland Park, IL 60462</div>
+            <div class="listing-details">
+              <span><i class="fas fa-bed"></i> 4 Beds</span>
+              <span><i class="fas fa-bath"></i> 4 Baths</span>
+              <span><i class="fas fa-ruler-combined"></i> 3,100 sqft</span>
+            </div>
+            <div class="listing-footer">
+              <span class="listing-mls">MLS# 12012345</span>
+              <a href="#contact" class="btn btn-sm btn-navy">Schedule Tour</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 4: Naperville (Luxury) -->
+        <div class="listing-card reveal" data-category="luxury">
+          <div class="listing-image" style="background: linear-gradient(135deg, #0f2235 0%, #1a3a5c 50%, #a8892f 100%);">
+            <div class="listing-image-overlay">
+              <span class="listing-badge listing-badge--luxury">Luxury</span>
+              <button class="listing-save" aria-label="Save listing">
+                <i class="far fa-heart"></i>
+              </button>
+            </div>
+            <div class="listing-image-address-preview">
+              <i class="fas fa-map-marker-alt"></i> Naperville, IL
+            </div>
+          </div>
+          <div class="listing-body">
+            <div class="listing-price">$489,900</div>
+            <div class="listing-address">2847 Warrenville Road, Naperville, IL 60564</div>
+            <div class="listing-details">
+              <span><i class="fas fa-bed"></i> 3 Beds</span>
+              <span><i class="fas fa-bath"></i> 3 Baths</span>
+              <span><i class="fas fa-ruler-combined"></i> 2,400 sqft</span>
+            </div>
+            <div class="listing-footer">
+              <span class="listing-mls">MLS# 12019988</span>
+              <a href="#contact" class="btn btn-sm btn-navy">Schedule Tour</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="listings-view-all reveal">
+        <a href="#contact" class="btn btn-outline-navy">
+          <i class="fas fa-th-large"></i> View All Listings
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== HOME VALUATION ===== -->
+  <section class="valuation-section" id="valuation">
+    <div class="valuation-bg"></div>
+    <div class="container">
+      <div class="valuation-content reveal">
+        <span class="section-tag section-tag--light">Free Service</span>
+        <h2 class="valuation-title">What's Your Home Worth?</h2>
+        <p class="valuation-subtitle">
+          Get an instant, expert-backed estimate based on real Chicagoland market data — no obligation, no pressure.
+        </p>
+        <div class="valuation-form">
+          <div class="valuation-input-wrap">
+            <i class="fas fa-map-marker-alt"></i>
+            <input
+              type="text"
+              id="valuationInput"
+              class="valuation-input"
+              placeholder="Enter your home address…"
+              aria-label="Enter your home address for valuation"
+            />
+          </div>
+          <button class="btn btn-gold valuation-btn" onclick="handleValuation()">
+            <i class="fas fa-chart-line"></i> Get Free Estimate
+          </button>
+        </div>
+        <p class="valuation-note">
+          <i class="fas fa-lock"></i> No obligation. Completely confidential. Results delivered within 24 hours.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TESTIMONIALS ===== -->
+  <section class="testimonials-section" id="reviews">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag">Client Reviews</span>
+        <h2 class="section-title">What My Clients Say</h2>
+        <p class="section-subtitle">Real stories from real clients — I'm proud to have earned their trust</p>
+      </div>
+
+      <div class="testimonials-wrapper reveal">
+        <div class="testimonials-track" id="testimonialsTrack">
+
+          <div class="testimonial-card">
+            <div class="testimonial-stars">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+              <i class="fas fa-star"></i><i class="fas fa-star"></i>
+            </div>
+            <p class="testimonial-text">
+              "Jeannie was absolutely incredible from start to finish. She found us our dream home in Naperville in just 3 weeks. Her knowledge of the local market and her genuine care for our family made all the difference. Highly recommend!"
+            </p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">MR</div>
+              <div class="testimonial-info">
+                <strong>Maria R.</strong>
+                <span>Naperville, IL — Buyer</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-stars">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+              <i class="fas fa-star"></i><i class="fas fa-star"></i>
+            </div>
+            <p class="testimonial-text">
+              "Sold our Downers Grove home in just 9 days — $28,000 over asking price! Jeannie's pricing strategy and marketing were exceptional. She was always reachable, professional, and made the entire process effortless."
+            </p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">TS</div>
+              <div class="testimonial-info">
+                <strong>Thomas S.</strong>
+                <span>Downers Grove, IL — Seller</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-stars">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+              <i class="fas fa-star"></i><i class="fas fa-star"></i>
+            </div>
+            <p class="testimonial-text">
+              "We relocated from Texas to Chicago with two kids and a tight timeline. Jeannie coordinated everything remotely, spoke Spanish with my mother-in-law, and had us in our new home within 6 weeks. She's truly one of a kind!"
+            </p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">LM</div>
+              <div class="testimonial-info">
+                <strong>Linda M.</strong>
+                <span>Chicago, IL — Relocation Buyer</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-stars">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+              <i class="fas fa-star"></i><i class="fas fa-star"></i>
+            </div>
+            <p class="testimonial-text">
+              "Jeannie helped me purchase my first investment property in Orland Park. Her market insight, patience, and bilingual service were invaluable. The property was cash-flowing within the first month. I'm already planning my second purchase with her!"
+            </p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">CR</div>
+              <div class="testimonial-info">
+                <strong>Carlos R.</strong>
+                <span>Orland Park, IL — Investor</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="testimonial-controls">
+          <button class="testimonial-btn" id="prevTestimonial" aria-label="Previous testimonial">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <div class="testimonial-dots" id="testimonialDots"></div>
+          <button class="testimonial-btn" id="nextTestimonial" aria-label="Next testimonial">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PARTNERS ===== -->
+  <section class="partners-section">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag">Trusted Network</span>
+        <h2 class="section-title">Our Preferred Partners</h2>
+      </div>
+      <div class="partners-grid reveal">
+        <div class="partner-item">
+          <i class="fas fa-landmark"></i>
+          <span>Point Mortgage</span>
+        </div>
+        <div class="partner-item">
+          <i class="fas fa-file-contract"></i>
+          <span>Home Title Group</span>
+        </div>
+        <div class="partner-item">
+          <i class="fas fa-shield-alt"></i>
+          <span>American Home Shield</span>
+        </div>
+        <div class="partner-item">
+          <i class="fas fa-truck-moving"></i>
+          <span>Cartus</span>
+        </div>
+        <div class="partner-item">
+          <i class="fas fa-chart-line"></i>
+          <span>NextLevel</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CONTACT ===== -->
+  <section class="contact-section" id="contact">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag section-tag--light">Get In Touch</span>
+        <h2 class="section-title contact-title">Let's Start Your Journey</h2>
+        <p class="section-subtitle contact-subtitle">Ready to buy, sell, or just have questions? Reach out — I respond within hours.</p>
+      </div>
+
+      <div class="contact-grid">
+        <div class="contact-info-col reveal">
+          <div class="contact-info-card">
+            <h3 class="contact-info-heading">Reach Me Directly</h3>
+
+            <div class="contact-info-item">
+              <div class="contact-info-icon"><i class="fas fa-phone"></i></div>
+              <div>
+                <strong>Phone / WhatsApp</strong>
+                <a href="tel:7192131100">(719) 213-1100</a>
+              </div>
+            </div>
+            <div class="contact-info-item">
+              <div class="contact-info-icon"><i class="fas fa-phone-alt"></i></div>
+              <div>
+                <strong>Office Line</strong>
+                <a href="tel:6308320268">(630) 832-0268</a>
+              </div>
+            </div>
+            <div class="contact-info-item">
+              <div class="contact-info-icon"><i class="fas fa-map-marker-alt"></i></div>
+              <div>
+                <strong>Office Address</strong>
+                <span>2400 Ogden Ave, Suite 100<br />Lisle, IL 60532</span>
+              </div>
+            </div>
+            <div class="contact-info-item">
+              <div class="contact-info-icon"><i class="fas fa-language"></i></div>
+              <div>
+                <strong>Languages</strong>
+                <span>English &amp; Español</span>
+              </div>
+            </div>
+
+            <div class="contact-social">
+              <a href="#" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+              <a href="#" class="social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+              <a href="#" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+              <a href="#" class="social-link" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+              <a href="#" class="social-link" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-form-col reveal">
+          <div class="contact-form-card">
+            <h3 class="contact-form-heading">Send a Message</h3>
+            <form class="contact-form" id="contactForm" onsubmit="handleSubmit(event)" novalidate>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="firstName">First Name *</label>
+                  <input type="text" id="firstName" name="firstName" required placeholder="Jane" />
+                </div>
+                <div class="form-group">
+                  <label for="lastName">Last Name *</label>
+                  <input type="text" id="lastName" name="lastName" required placeholder="Smith" />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="phone">Phone</label>
+                  <input type="tel" id="phone" name="phone" placeholder="(630) 000-0000" />
+                </div>
+                <div class="form-group">
+                  <label for="email">Email *</label>
+                  <input type="email" id="email" name="email" required placeholder="jane@example.com" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="interest">I'm Interested In *</label>
+                <select id="interest" name="interest" required>
+                  <option value="" disabled selected>Select an option…</option>
+                  <option value="buy">Buying a Home</option>
+                  <option value="sell">Selling My Home</option>
+                  <option value="relocation">Relocation Services</option>
+                  <option value="invest">Investment Properties</option>
+                  <option value="valuation">Free Home Valuation</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="city">City / Neighborhood</label>
+                <input type="text" id="city" name="city" placeholder="Naperville, Chicago, Downers Grove…" />
+              </div>
+              <div class="form-group">
+                <label for="message">Message *</label>
+                <textarea id="message" name="message" required rows="4" placeholder="Tell me a bit about what you're looking for…"></textarea>
+              </div>
+              <button type="submit" class="btn btn-gold form-submit-btn" id="submitBtn">
+                <i class="fas fa-paper-plane"></i>
+                <span class="btn-text">Send Message</span>
+                <span class="btn-loading" style="display:none;"><i class="fas fa-spinner fa-spin"></i> Sending…</span>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer" id="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand-col">
+          <div class="footer-logo">
+            <div class="footer-logo-icon"><i class="fas fa-home"></i></div>
+            <div class="footer-logo-text">
+              <span class="footer-logo-name">Jeannie Pezan</span>
+              <span class="footer-logo-brand">Coldwell Banker</span>
+            </div>
+          </div>
+          <p class="footer-bio">
+            Chicagoland's trusted bilingual real estate expert. Dedicated to guiding buyers, sellers, and investors to success since 2011.
+          </p>
+          <div class="footer-social">
+            <a href="#" class="footer-social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="footer-social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="footer-social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" class="footer-social-link" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            <a href="#" class="footer-social-link" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-links-col">
+          <h4 class="footer-col-title">Quick Links</h4>
+          <ul class="footer-list">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About Jeannie</a></li>
+            <li><a href="#listings">Featured Listings</a></li>
+            <li><a href="#reviews">Client Reviews</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links-col">
+          <h4 class="footer-col-title">Services</h4>
+          <ul class="footer-list">
+            <li><a href="#services">Buy a Home</a></li>
+            <li><a href="#services">Sell Your Home</a></li>
+            <li><a href="#services">Relocation Services</a></li>
+            <li><a href="#services">Investment Properties</a></li>
+            <li><a href="#valuation">Free Home Valuation</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-contact-col">
+          <h4 class="footer-col-title">Contact Info</h4>
+          <div class="footer-contact-item">
+            <i class="fas fa-phone"></i>
+            <a href="tel:7192131100">(719) 213-1100</a>
+          </div>
+          <div class="footer-contact-item">
+            <i class="fas fa-phone-alt"></i>
+            <a href="tel:6308320268">(630) 832-0268</a>
+          </div>
+          <div class="footer-contact-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>2400 Ogden Ave, Suite 100<br />Lisle, IL 60532</span>
+          </div>
+          <div class="footer-contact-item">
+            <i class="fas fa-language"></i>
+            <span>English &amp; Español</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div class="footer-bottom-left">
+          <p>&copy; 2024 Jeannie Pezan. All rights reserved. Licensed REALTOR® in Illinois.</p>
+          <p class="footer-mred">MLS data courtesy of MRED (Midwest Real Estate Data). Information is deemed reliable but not guaranteed.</p>
+        </div>
+        <div class="footer-bottom-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Accessibility</a>
+          <a href="#">DMCA Notice</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== FLOATING PHONE BUTTON ===== -->
+  <a href="tel:7192131100" class="floating-phone" aria-label="Call Jeannie Pezan">
+    <i class="fas fa-phone"></i>
+  </a>
+
+  <!-- ===== SCROLL TO TOP ===== -->
+  <button class="scroll-top" id="scrollTop" aria-label="Scroll to top">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <!-- ===== TOAST NOTIFICATION ===== -->
+  <div class="toast" id="toast" role="alert" aria-live="polite"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
