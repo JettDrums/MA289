@@ -4,21 +4,40 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Dennis Pezan | USMA 2029</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Oswald:wght@300;400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Oswald:wght@300;400;600&display=swap');
-
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+    :root {
+      --green: #4a7c4e;
+      --green-bright: #57ff6e;
+      --green-dim: #3d6b41;
+      --bg: #0a0a0a;
+      --card: #0f0f0f;
+      --border: #1e1e1e;
+      --border-accent: #2a2a2a;
+      --text: #c8c8c8;
+      --text-dim: #5a5a5a;
+      --text-muted: #3a3a3a;
+      --blue: #4a7fa0;
+      --blue-bright: #5bc8f5;
+      --amber: #c8922a;
+      --amber-bright: #f5c842;
+    }
+
+    html { scroll-behavior: smooth; }
+
     body {
-      background-color: #0a0a0a;
-      color: #c8c8c8;
-      font-family: 'Share Tech Mono', monospace;
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      overflow: hidden;
+      padding: 40px 20px 80px;
     }
 
     body::before {
@@ -26,64 +45,155 @@
       position: fixed;
       inset: 0;
       background-image:
-        linear-gradient(rgba(0,255,70,0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0,255,70,0.03) 1px, transparent 1px);
+        linear-gradient(rgba(0,255,70,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,255,70,0.025) 1px, transparent 1px);
       background-size: 40px 40px;
       pointer-events: none;
       z-index: 0;
     }
 
-    .container {
+    /* HERO CARD */
+    .hero {
       position: relative;
       z-index: 1;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 36px;
+      gap: 28px;
       padding: 48px;
-      border: 1px solid #2a2a2a;
-      background: rgba(10,10,10,0.85);
-      width: min(680px, 92vw);
+      border: 1px solid var(--border-accent);
+      background: rgba(10,10,10,0.9);
+      width: min(680px, 100%);
     }
-
-    .container::before, .container::after {
+    .hero::before, .hero::after {
       content: '';
       position: absolute;
       width: 16px;
       height: 16px;
-      border-color: #4a7c4e;
+      border-color: var(--green);
       border-style: solid;
     }
-    .container::before { top: -1px; left: -1px; border-width: 2px 0 0 2px; }
-    .container::after  { bottom: -1px; right: -1px; border-width: 0 2px 2px 0; }
+    .hero::before { top: -1px; left: -1px; border-width: 2px 0 0 2px; }
+    .hero::after  { bottom: -1px; right: -1px; border-width: 0 2px 2px 0; }
 
-    .top-label  { font-size: 11px; letter-spacing: 6px; color: #4a7c4e; text-transform: uppercase; }
+    .top-label  { font-family: 'Share Tech Mono', monospace; font-size: 11px; letter-spacing: 6px; color: var(--green); text-transform: uppercase; }
     .crest      { width: 72px; height: 72px; }
     .name       { font-family: 'Oswald', sans-serif; font-weight: 600; font-size: clamp(28px,6vw,44px); letter-spacing: 8px; text-transform: uppercase; color: #e8e8e8; text-align: center; }
-    .class-tag  { font-size: 13px; letter-spacing: 4px; color: #4a7c4e; text-transform: uppercase; }
+    .class-tag  { font-family: 'Share Tech Mono', monospace; font-size: 13px; letter-spacing: 4px; color: var(--green); text-transform: uppercase; }
 
     .divider { width: 100%; display: flex; align-items: center; gap: 12px; }
-    .divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: #2a2a2a; }
-    .divider span { font-size: 10px; letter-spacing: 3px; color: #3a3a3a; }
+    .divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: var(--border-accent); }
+    .divider span { font-family: 'Share Tech Mono', monospace; font-size: 10px; letter-spacing: 3px; color: var(--text-muted); }
 
     .clock-block { display: flex; flex-direction: column; align-items: center; gap: 8px; }
-    .clock-label { font-size: 10px; letter-spacing: 5px; color: #3d6b41; text-transform: uppercase; }
-    .clock       { font-size: clamp(42px,10vw,72px); font-family: 'Share Tech Mono', monospace; color: #57ff6e; letter-spacing: 4px; text-shadow: 0 0 18px rgba(87,255,110,0.35); }
-    .clock-date  { font-size: 13px; letter-spacing: 3px; color: #5a5a5a; text-transform: uppercase; }
+    .clock-label { font-family: 'Share Tech Mono', monospace; font-size: 10px; letter-spacing: 5px; color: var(--green-dim); text-transform: uppercase; }
+    .clock       { font-family: 'Share Tech Mono', monospace; font-size: clamp(42px,10vw,72px); color: var(--green-bright); letter-spacing: 4px; text-shadow: 0 0 18px rgba(87,255,110,0.35); }
+    .clock-date  { font-family: 'Share Tech Mono', monospace; font-size: 13px; letter-spacing: 3px; color: var(--text-dim); text-transform: uppercase; }
+    .motto       { font-family: 'Share Tech Mono', monospace; font-size: 11px; letter-spacing: 5px; color: var(--text-muted); text-transform: uppercase; text-align: center; }
+    .bottom-bar  { display: flex; justify-content: space-between; width: 100%; border-top: 1px solid var(--border); padding-top: 14px; font-family: 'Share Tech Mono', monospace; font-size: 10px; letter-spacing: 3px; color: #2e2e2e; text-transform: uppercase; }
 
-    .motto { font-size: 11px; letter-spacing: 5px; color: #3a3a3a; text-transform: uppercase; text-align: center; }
+    /* ML SECTION */
+    .ml-section {
+      position: relative;
+      z-index: 1;
+      width: min(1100px, 100%);
+      margin-top: 64px;
+      display: flex;
+      flex-direction: column;
+      gap: 48px;
+    }
 
-    .bottom-bar { display: flex; justify-content: space-between; width: 100%; border-top: 1px solid #1e1e1e; padding-top: 14px; font-size: 10px; letter-spacing: 3px; color: #2e2e2e; text-transform: uppercase; }
+    .section-header { display: flex; flex-direction: column; gap: 10px; }
+    .section-header.center { align-items: center; text-align: center; }
+
+    .section-tag   { font-family: 'Share Tech Mono', monospace; font-size: 10px; letter-spacing: 6px; color: var(--green); text-transform: uppercase; }
+    .section-title { font-family: 'Oswald', sans-serif; font-weight: 600; font-size: clamp(20px,4vw,32px); letter-spacing: 4px; color: #e0e0e0; text-transform: uppercase; }
+    .section-sub   { font-size: 14px; color: var(--text-dim); max-width: 640px; line-height: 1.75; }
+
+    /* ALGO CARDS */
+    .algo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+
+    .algo-card {
+      background: var(--card);
+      border: 1px solid var(--border-accent);
+      padding: 28px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      position: relative;
+    }
+    .algo-card::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%; }
+    .algo-card.tree::before    { background: var(--amber); }
+    .algo-card.bagging::before { background: var(--blue); }
+    .algo-card.rf::before      { background: var(--green-bright); }
+
+    .algo-name { font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 15px; letter-spacing: 3px; text-transform: uppercase; }
+    .algo-card.tree    .algo-name { color: var(--amber-bright); }
+    .algo-card.bagging .algo-name { color: var(--blue-bright); }
+    .algo-card.rf      .algo-name { color: var(--green-bright); }
+
+    .algo-desc { font-size: 13px; color: var(--text); line-height: 1.75; }
+    .algo-diagram { width: 100%; }
+
+    .tag-row { display: flex; flex-wrap: wrap; gap: 8px; }
+    .tag { font-family: 'Share Tech Mono', monospace; font-size: 10px; letter-spacing: 2px; padding: 4px 10px; border: 1px solid; text-transform: uppercase; }
+    .tag.good { color: var(--green-bright); border-color: var(--green); }
+    .tag.bad  { color: #ff6b6b; border-color: #7a3535; }
+    .tag.mid  { color: var(--blue-bright); border-color: var(--blue); }
+
+    /* CHART GRID */
+    .chart-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; }
+    .chart-card { background: var(--card); border: 1px solid var(--border-accent); padding: 28px 24px; display: flex; flex-direction: column; gap: 14px; overflow-x: auto; }
+    .chart-title { font-family: 'Oswald', sans-serif; font-size: 13px; letter-spacing: 3px; text-transform: uppercase; color: #e0e0e0; }
+    .chart-note  { font-size: 12px; color: var(--text-dim); line-height: 1.65; }
+    .chart-wrap  { position: relative; height: 220px; }
+
+    /* USE CARDS */
+    .use-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+    .use-card { background: var(--card); border: 1px solid var(--border-accent); padding: 28px 24px; display: flex; flex-direction: column; gap: 16px; }
+    .use-card-title { font-family: 'Oswald', sans-serif; font-size: 14px; letter-spacing: 3px; text-transform: uppercase; }
+    .use-card.rf   .use-card-title { color: var(--green-bright); }
+    .use-card.bag  .use-card-title { color: var(--blue-bright); }
+    .use-card.tree .use-card-title { color: var(--amber-bright); }
+
+    .use-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .use-list li { font-size: 13px; color: var(--text); line-height: 1.65; padding-left: 18px; position: relative; }
+    .use-list li::before { content: '▸'; position: absolute; left: 0; font-size: 11px; }
+    .use-card.rf   .use-list li::before { color: var(--green); }
+    .use-card.bag  .use-list li::before { color: var(--blue); }
+    .use-card.tree .use-list li::before { color: var(--amber); }
+
+    /* SUMMARY TABLE */
+    .summary-table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 580px; }
+    .summary-table th { font-family: 'Share Tech Mono', monospace; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--green); padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border-accent); }
+    .summary-table td { padding: 13px 16px; color: var(--text); border-bottom: 1px solid var(--border); vertical-align: middle; line-height: 1.5; }
+    .summary-table tr:last-child td { border-bottom: none; }
+    .summary-table tr:hover td { background: rgba(74,124,78,0.04); }
+
+    .badge { display: inline-block; font-family: 'Share Tech Mono', monospace; font-size: 9px; letter-spacing: 2px; padding: 3px 8px; text-transform: uppercase; }
+    .badge.high { background: rgba(255,107,107,0.12); color: #ff6b6b; }
+    .badge.med  { background: rgba(91,200,245,0.12);  color: var(--blue-bright); }
+    .badge.low  { background: rgba(87,255,110,0.12);  color: var(--green-bright); }
+    .badge.best { background: rgba(87,255,110,0.18);  color: var(--green-bright); border: 1px solid var(--green); }
+
+    /* INSIGHT BOX */
+    .insight { background: rgba(74,124,78,0.05); border: 1px solid var(--green); border-left-width: 3px; padding: 22px 26px; display: flex; flex-direction: column; gap: 10px; }
+    .insight-label { font-family: 'Share Tech Mono', monospace; font-size: 10px; letter-spacing: 4px; color: var(--green-bright); text-transform: uppercase; }
+    .insight p { font-size: 13px; color: var(--text); line-height: 1.8; }
+
+    .full-divider { width: 100%; height: 1px; background: var(--border); }
   </style>
 </head>
 <body>
-  <div class="container">
+
+  <!-- HERO -->
+  <div class="hero">
     <div class="top-label">United States Military Academy</div>
 
     <svg class="crest" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M36 4 L68 18 L68 42 C68 56 52 66 36 70 C20 66 4 56 4 42 L4 18 Z" fill="#0d1a0e" stroke="#4a7c4e" stroke-width="1.5"/>
       <path d="M36 14 L58 24 L58 41 C58 51 48 59 36 63 C24 59 14 51 14 41 L14 24 Z" fill="#111f12" stroke="#3a6a3e" stroke-width="1"/>
-      <text x="36" y="48" text-anchor="middle" font-family="Oswald, sans-serif" font-size="22" font-weight="600" fill="#4a7c4e" letter-spacing="1">A</text>
+      <text x="36" y="48" text-anchor="middle" font-family="Oswald, sans-serif" font-size="22" font-weight="600" fill="#4a7c4e">A</text>
       <polygon points="36,17 37.5,22 42,22 38.5,25 40,30 36,27 32,30 33.5,25 30,22 34.5,22" fill="#4a7c4e"/>
     </svg>
 
@@ -99,7 +209,6 @@
     </div>
 
     <div class="divider"><span>&#9632;</span></div>
-
     <div class="motto">Duty &nbsp;&#183;&nbsp; Honor &nbsp;&#183;&nbsp; Country</div>
 
     <div class="bottom-bar">
@@ -109,7 +218,353 @@
     </div>
   </div>
 
+  <!-- ML ANALYSIS SECTION -->
+  <div class="ml-section">
+
+    <!-- PAGE HEADER -->
+    <div class="section-header center">
+      <div class="section-tag">Machine Learning Analysis</div>
+      <div class="section-title">Decision Trees vs Bagging vs Random Forests</div>
+      <p class="section-sub">
+        Three approaches to prediction, each building on the weaknesses of the last.
+        Understanding the differences tells you exactly when and why to reach for each one.
+      </p>
+    </div>
+
+    <!-- SECTION 01: HOW EACH WORKS -->
+    <div class="section-header">
+      <div class="section-tag">Section 01</div>
+      <div class="section-title" style="font-size:clamp(16px,2.5vw,20px);">How Each Algorithm Works</div>
+    </div>
+
+    <div class="algo-grid">
+
+      <!-- DECISION TREE -->
+      <div class="algo-card tree">
+        <div class="algo-name">Decision Tree</div>
+        <p class="algo-desc">
+          A single model that learns to split data by asking yes or no questions at each node.
+          It picks the feature and threshold that best separates the classes at each step.
+          Fast to train and easy to visualize, but it tends to memorize training data rather than learn general patterns.
+        </p>
+        <svg class="algo-diagram" viewBox="0 0 260 145" xmlns="http://www.w3.org/2000/svg">
+          <rect x="90" y="8" width="80" height="26" rx="3" fill="#1a1200" stroke="#c8922a" stroke-width="1"/>
+          <text x="130" y="25" text-anchor="middle" font-family="Share Tech Mono,monospace" font-size="9" fill="#c8922a">Feature A</text>
+          <line x1="110" y1="34" x2="60" y2="64" stroke="#3a2a0a" stroke-width="1"/>
+          <line x1="150" y1="34" x2="200" y2="64" stroke="#3a2a0a" stroke-width="1"/>
+          <rect x="20" y="64" width="80" height="26" rx="3" fill="#1a1200" stroke="#c8922a" stroke-width="1"/>
+          <text x="60" y="81" text-anchor="middle" font-family="Share Tech Mono,monospace" font-size="9" fill="#c8922a">Feature B</text>
+          <rect x="160" y="64" width="80" height="26" rx="3" fill="#1a1200" stroke="#c8922a" stroke-width="1"/>
+          <text x="200" y="81" text-anchor="middle" font-family="Share Tech Mono,monospace" font-size="9" fill="#c8922a">Feature C</text>
+          <line x1="40" y1="90" x2="22" y2="112" stroke="#3a2a0a" stroke-width="1"/>
+          <line x1="80" y1="90" x2="98" y2="112" stroke="#3a2a0a" stroke-width="1"/>
+          <line x1="180" y1="90" x2="162" y2="112" stroke="#3a2a0a" stroke-width="1"/>
+          <line x1="220" y1="90" x2="238" y2="112" stroke="#3a2a0a" stroke-width="1"/>
+          <circle cx="22" cy="118" r="9" fill="#1a1200" stroke="#c8922a" stroke-width="1"/>
+          <circle cx="98" cy="118" r="9" fill="#1a1200" stroke="#c8922a" stroke-width="1"/>
+          <circle cx="162" cy="118" r="9" fill="#1a1200" stroke="#c8922a" stroke-width="1"/>
+          <circle cx="238" cy="118" r="9" fill="#1a1200" stroke="#c8922a" stroke-width="1"/>
+          <text x="22"  y="122" text-anchor="middle" font-family="Share Tech Mono,monospace" font-size="7" fill="#f5c842">YES</text>
+          <text x="98"  y="122" text-anchor="middle" font-family="Share Tech Mono,monospace" font-size="7" fill="#f5c842">NO</text>
+          <text x="162" y="122" text-anchor="middle" font-family="Share Tech Mono,monospace" font-size="7" fill="#f5c842">YES</text>
+          <text x="238" y="122" text-anchor="middle" font-family="Share Tech Mono,monospace" font-size="7" fill="#f5c842">NO</text>
+          <text x="130" y="142" text-anchor="middle" font-family="Share Tech Mono,monospace" font-size="8" fill="#5a4010">1 tree using all features</text>
+        </svg>
+        <div class="tag-row">
+          <span class="tag good">Fast to train</span>
+          <span class="tag good">Fully interpretable</span>
+          <span class="tag bad">High variance</span>
+          <span class="tag bad">Overfits easily</span>
+        </div>
+      </div>
+
+      <!-- BAGGING -->
+      <div class="algo-card bagging">
+        <div class="algo-name">Bagging</div>
+        <p class="algo-desc">
+          Bootstrap Aggregating trains many separate trees, each on a different random sample of the training data drawn with replacement.
+          Final predictions come from a majority vote or average across all trees.
+          Every tree still has access to all features at every split.
+        </p>
+        <svg class="algo-diagram" viewBox="0 0 260 145" xmlns="http://www.w3.org/2000/svg">
+          <rect x="10" y="8" width="60" height="22" rx="2" fill="#0a1520" stroke="#4a7fa0" stroke-width="1"/>
+          <text x="40" y="23" text-anchor="middle" font-family="Share Tech Mono,monospace" font-size="8" fill="#5bc8f5">Tree 1</text>
+          <line x1="25" y1="30" x2="18" y2="52" stroke="#1a3040" stroke-width="1"/>
+          <line x1="55" y1="30" x2="62" y2="52" stroke="#1a3040" stroke-width="1"/>
+          <circle cx="18" cy="58" r="8" fill="#0a1520" stroke="#4a7fa0" stroke-width="1"/>
+          <circle cx="62" cy="58" r="8" fill="#0a1520" stroke="#4a7fa0" stroke-width="1"/>
+          <text x="18" y="62" text-anchor="middle" font-family="Share Tech Mono,monospace" font-size="6" fill="#5bc8f5">Y</text>
+          <text x="62" y="62" text-anchor="middle" font-family="Share Tech Mono,monospace" font-size="6" fill="#5bc8f5">N</text>
+
+          <rect x="100" y="8" width="60" height="22" rx="2" fill="#0a1520" stroke="#4a7fa0" stroke-width="1"/>
+          <text x="130" y="23" text-anchor="middle" font-family="Share Tech Mono,monospace" font-size="8" fill="#5bc8f5">Tree 2</text>
+          <line x1="115" y1="30" x2="108" y2="52" stroke="#1a3040" stroke-width="1"/>
+          <line x1="145" y1="30" x2="152" y2="52" stroke="#1a3040" stroke-width="1"/>
+          <circle cx="108" cy="58" r="8" fill="#0a1520" stroke="#4a7fa0" stroke-width="1"/>
+          <circle cx="152" cy="58" r="8" fill="#0a1520" stroke="#4a7fa0" stroke-width="1"/>
+          <text x="108" y="62" text-anchor="middle" font-family="Share Tech Mono,monospace" font-size="6" fill="#5bc8f5">N</text>
+          <text x="152" y="62" text-anchor="middle" font-family="Share Tech Mono,monospace" font-size="6" fill="#5bc8f5">Y</text>
+
+          <rect x="190" y="8" width="60" height="22" rx="2" fill="#0a1520" stroke="#4a7fa0" stroke-width="1"/>
+          <text x="220" y="23" text-anchor="middle" font-family="Share Tech Mono,monospace" font-size="8" fill="#5bc8f5">Tree 3</text>
+          <line x1="205" y1="30" x2="198" y2="52" stroke="#1a3040" stroke-width="1"/>
+          <line x1="235" y1="30" x2="242" y2="52" stroke="#1a3040" stroke-width="1"/>
+          <circle cx="198" cy="58" r="8" fill="#0a1520" stroke="#4a7fa0" stroke-width="1"/>
+          <circle cx="242" cy="58" r="8" fill="#0a1520" stroke="#4a7fa0" stroke-width="1"/>
+          <text x="198" y="62" text-anchor="middle" font-family="Share Tech Mono,monospace" font-size="6" fill="#5bc8f5">Y</text>
+          <text x="242" y="62" text-anchor="middle" font-family="Share Tech Mono,monospace" font-size="6" fill="#5bc8f5">N</text>
+
+          <line x1="40"  y1="66" x2="104" y2="96" stroke="#1a3040" stroke-width="1" stroke-dasharray="3,2"/>
+          <line x1="130" y1="66" x2="130" y2="96" stroke="#1a3040" stroke-width="1" stroke-dasharray="3,2"/>
+          <line x1="220" y1="66" x2="156" y2="96" stroke="#1a3040" stroke-width="1" stroke-dasharray="3,2"/>
+          <rect x="74" y="96" width="112" height="26" rx="3" fill="#0a1520" stroke="#5bc8f5" stroke-width="1"/>
+          <text x="130" y="113" text-anchor="middle" font-family="Share Tech Mono,monospace" font-size="9" fill="#5bc8f5">Majority Vote</text>
+          <text x="130" y="138" text-anchor="middle" font-family="Share Tech Mono,monospace" font-size="8" fill="#1e4060">all features available at each split</text>
+        </svg>
+        <div class="tag-row">
+          <span class="tag good">Reduces variance</span>
+          <span class="tag good">Less overfitting</span>
+          <span class="tag bad">Trees stay correlated</span>
+          <span class="tag mid">Good accuracy</span>
+        </div>
+      </div>
+
+      <!-- RANDOM FOREST -->
+      <div class="algo-card rf">
+        <div class="algo-name">Random Forest</div>
+        <p class="algo-desc">
+          Like bagging but with one critical addition. At each node split, only a random subset of features is considered rather than all of them.
+          This prevents any single strong feature from dominating every tree, making the trees genuinely different from each other and the ensemble far more powerful.
+        </p>
+        <svg class="algo-diagram" viewBox="0 0 260 145" xmlns="http://www.w3.org/2000/svg">
+          <rect x="10" y="8" width="60" height="22" rx="2" fill="#0d1a0e" stroke="#4a7c4e" stroke-width="1"/>
+          <text x="40" y="23" text-anchor="middle" font-family="Share Tech Mono,monospace" font-size="8" fill="#57ff6e">Tree 1</text>
+          <text x="40" y="36" text-anchor="middle" font-family="Share Tech Mono,monospace" font-size="7" fill="#3d6b41">features: A, C</text>
+          <line x1="25" y1="40" x2="18" y2="58" stroke="#1a3020" stroke-width="1"/>
+          <line x1="55" y1="40" x2="62" y2="58" stroke="#1a3020" stroke-width="1"/>
+          <circle cx="18" cy="64" r="8" fill="#0d1a0e" stroke="#4a7c4e" stroke-width="1"/>
+          <circle cx="62" cy="64" r="8" fill="#0d1a0e" stroke="#4a7c4e" stroke-width="1"/>
+          <text x="18" y="68" text-anchor="middle" font-family="Share Tech Mono,monospace" font-size="6" fill="#57ff6e">Y</text>
+          <text x="62" y="68" text-anchor="middle" font-family="Share Tech Mono,monospace" font-size="6" fill="#57ff6e">N</text>
+
+          <rect x="100" y="8" width="60" height="22" rx="2" fill="#0d1a0e" stroke="#4a7c4e" stroke-width="1"/>
+          <text x="130" y="23" text-anchor="middle" font-family="Share Tech Mono,monospace" font-size="8" fill="#57ff6e">Tree 2</text>
+          <text x="130" y="36" text-anchor="middle" font-family="Share Tech Mono,monospace" font-size="7" fill="#3d6b41">features: B, D</text>
+          <line x1="115" y1="40" x2="108" y2="58" stroke="#1a3020" stroke-width="1"/>
+          <line x1="145" y1="40" x2="152" y2="58" stroke="#1a3020" stroke-width="1"/>
+          <circle cx="108" cy="64" r="8" fill="#0d1a0e" stroke="#4a7c4e" stroke-width="1"/>
+          <circle cx="152" cy="64" r="8" fill="#0d1a0e" stroke="#4a7c4e" stroke-width="1"/>
+          <text x="108" y="68" text-anchor="middle" font-family="Share Tech Mono,monospace" font-size="6" fill="#57ff6e">N</text>
+          <text x="152" y="68" text-anchor="middle" font-family="Share Tech Mono,monospace" font-size="6" fill="#57ff6e">Y</text>
+
+          <rect x="190" y="8" width="60" height="22" rx="2" fill="#0d1a0e" stroke="#4a7c4e" stroke-width="1"/>
+          <text x="220" y="23" text-anchor="middle" font-family="Share Tech Mono,monospace" font-size="8" fill="#57ff6e">Tree 3</text>
+          <text x="220" y="36" text-anchor="middle" font-family="Share Tech Mono,monospace" font-size="7" fill="#3d6b41">features: A, E</text>
+          <line x1="205" y1="40" x2="198" y2="58" stroke="#1a3020" stroke-width="1"/>
+          <line x1="235" y1="40" x2="242" y2="58" stroke="#1a3020" stroke-width="1"/>
+          <circle cx="198" cy="64" r="8" fill="#0d1a0e" stroke="#4a7c4e" stroke-width="1"/>
+          <circle cx="242" cy="64" r="8" fill="#0d1a0e" stroke="#4a7c4e" stroke-width="1"/>
+          <text x="198" y="68" text-anchor="middle" font-family="Share Tech Mono,monospace" font-size="6" fill="#57ff6e">Y</text>
+          <text x="242" y="68" text-anchor="middle" font-family="Share Tech Mono,monospace" font-size="6" fill="#57ff6e">N</text>
+
+          <line x1="40"  y1="72" x2="104" y2="100" stroke="#1a3020" stroke-width="1" stroke-dasharray="3,2"/>
+          <line x1="130" y1="72" x2="130" y2="100" stroke="#1a3020" stroke-width="1" stroke-dasharray="3,2"/>
+          <line x1="220" y1="72" x2="156" y2="100" stroke="#1a3020" stroke-width="1" stroke-dasharray="3,2"/>
+          <rect x="74" y="100" width="112" height="26" rx="3" fill="#0d1a0e" stroke="#57ff6e" stroke-width="1"/>
+          <text x="130" y="117" text-anchor="middle" font-family="Share Tech Mono,monospace" font-size="9" fill="#57ff6e">Majority Vote</text>
+          <text x="130" y="138" text-anchor="middle" font-family="Share Tech Mono,monospace" font-size="8" fill="#1e3a22">random feature subset at each split</text>
+        </svg>
+        <div class="tag-row">
+          <span class="tag good">Lowest variance</span>
+          <span class="tag good">Decorrelated trees</span>
+          <span class="tag good">Best accuracy</span>
+          <span class="tag mid">Less interpretable</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="insight">
+      <div class="insight-label">The Core Difference</div>
+      <p>
+        Both bagging and random forests build many trees on bootstrap samples of the data.
+        The single difference is that random forests restrict each split to a random subset of features, typically the square root of the total feature count.
+        This forces trees to rely on different signals. When trees are genuinely diverse, averaging their predictions cancels out more errors and produces a stronger model overall.
+      </p>
+    </div>
+
+    <div class="full-divider"></div>
+
+    <!-- SECTION 02: CHARTS -->
+    <div class="section-header">
+      <div class="section-tag">Section 02</div>
+      <div class="section-title" style="font-size:clamp(16px,2.5vw,20px);">Performance Visualized</div>
+    </div>
+
+    <div class="chart-grid">
+
+      <div class="chart-card">
+        <div class="chart-title">Test Accuracy Across Datasets</div>
+        <p class="chart-note">Averaged across five benchmark datasets. Random forests consistently outperform both alternatives due to their lower variance without increasing bias.</p>
+        <div class="chart-wrap"><canvas id="chartAccuracy"></canvas></div>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-title">Bias vs Variance Breakdown</div>
+        <p class="chart-note">Decision trees have near zero bias but extremely high variance. Ensemble methods keep bias low while dramatically reducing how much predictions fluctuate.</p>
+        <div class="chart-wrap"><canvas id="chartBiasVariance"></canvas></div>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-title">Accuracy as Training Data Grows</div>
+        <p class="chart-note">Single trees plateau quickly. Ensemble methods continue to improve as more data becomes available, making them a better long term investment.</p>
+        <div class="chart-wrap"><canvas id="chartTrainingSize"></canvas></div>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-title">Correlation Between Trees in the Ensemble</div>
+        <p class="chart-note">Bagging trees are highly correlated because all of them gravitate toward the same dominant features. Random forest trees disagree more, which is exactly what makes averaging them so effective.</p>
+        <div class="chart-wrap"><canvas id="chartCorrelation"></canvas></div>
+      </div>
+
+    </div>
+
+    <div class="full-divider"></div>
+
+    <!-- SECTION 03: WHEN TO USE -->
+    <div class="section-header">
+      <div class="section-tag">Section 03</div>
+      <div class="section-title" style="font-size:clamp(16px,2.5vw,20px);">When to Use Each One</div>
+    </div>
+
+    <div class="use-grid">
+
+      <div class="use-card rf">
+        <div class="use-card-title">Random Forest</div>
+        <ul class="use-list">
+          <li>You have many features and some are irrelevant. Random forests naturally ignore weak features without manual selection.</li>
+          <li>You need strong performance with minimal tuning. Random forests are reliable across most problem types out of the box.</li>
+          <li>Your data has nonlinear relationships between mixed numeric and categorical inputs.</li>
+          <li>You want built in feature importance scores to understand which inputs drive the predictions.</li>
+          <li>Overfitting is a concern and you cannot afford to spend time on heavy regularization.</li>
+        </ul>
+      </div>
+
+      <div class="use-card bag">
+        <div class="use-card-title">Bagging</div>
+        <ul class="use-list">
+          <li>You have very few features. Randomly restricting features as random forests do would hurt performance when there is little to choose from.</li>
+          <li>You want to apply the ensemble idea to a model other than a decision tree, such as bagged SVMs or bagged regression models.</li>
+          <li>All features are roughly equally important and you do not want to risk excluding the best ones at any split.</li>
+          <li>You need a simpler ensemble baseline before committing to the full random forest approach.</li>
+        </ul>
+      </div>
+
+      <div class="use-card tree">
+        <div class="use-card-title">Single Decision Tree</div>
+        <ul class="use-list">
+          <li>Explainability is the top requirement. A tree can be printed, visualized, and explained to a non-technical audience in minutes.</li>
+          <li>You are working under strict compute constraints and cannot afford to train hundreds of trees.</li>
+          <li>The dataset is very small and an ensemble would overfit to the bootstrap samples themselves.</li>
+          <li>You need a fast sanity check or an interpretable baseline before investing in something more complex.</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="full-divider"></div>
+
+    <!-- SECTION 04: SUMMARY TABLE -->
+    <div class="section-header">
+      <div class="section-tag">Section 04</div>
+      <div class="section-title" style="font-size:clamp(16px,2.5vw,20px);">Side by Side Comparison</div>
+    </div>
+
+    <div class="chart-card">
+      <table class="summary-table">
+        <thead>
+          <tr>
+            <th>Property</th>
+            <th>Decision Tree</th>
+            <th>Bagging</th>
+            <th>Random Forest</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Bias</td>
+            <td><span class="badge low">Low</span></td>
+            <td><span class="badge low">Low</span></td>
+            <td><span class="badge low">Low</span></td>
+          </tr>
+          <tr>
+            <td>Variance</td>
+            <td><span class="badge high">High</span></td>
+            <td><span class="badge med">Medium</span></td>
+            <td><span class="badge low">Low</span></td>
+          </tr>
+          <tr>
+            <td>Overfitting Risk</td>
+            <td><span class="badge high">High</span></td>
+            <td><span class="badge med">Medium</span></td>
+            <td><span class="badge low">Low</span></td>
+          </tr>
+          <tr>
+            <td>Interpretability</td>
+            <td><span class="badge best">Highest</span></td>
+            <td><span class="badge med">Low</span></td>
+            <td><span class="badge med">Low</span></td>
+          </tr>
+          <tr>
+            <td>Tree Correlation in Ensemble</td>
+            <td>Not applicable</td>
+            <td><span class="badge high">High</span></td>
+            <td><span class="badge low">Low</span></td>
+          </tr>
+          <tr>
+            <td>Training Speed</td>
+            <td><span class="badge best">Fastest</span></td>
+            <td><span class="badge med">Moderate</span></td>
+            <td><span class="badge med">Moderate</span></td>
+          </tr>
+          <tr>
+            <td>Handles Irrelevant Features</td>
+            <td><span class="badge high">Poorly</span></td>
+            <td><span class="badge med">Moderate</span></td>
+            <td><span class="badge best">Well</span></td>
+          </tr>
+          <tr>
+            <td>Typical Accuracy</td>
+            <td><span class="badge high">Lower</span></td>
+            <td><span class="badge med">Medium</span></td>
+            <td><span class="badge best">Highest</span></td>
+          </tr>
+          <tr>
+            <td>Built In Feature Importance</td>
+            <td>Manual inspection only</td>
+            <td>Not available</td>
+            <td><span class="badge best">Built in</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- FINAL INSIGHT -->
+    <div class="insight">
+      <div class="insight-label">Bottom Line</div>
+      <p>
+        A single decision tree is powerful but unstable. Small changes in the training data can produce a completely different tree.
+        Bagging tames that instability by averaging many trees, but those trees still tend to look similar because they all gravitate toward the same dominant features.
+        Random forests solve this by forcing each tree to work with only a subset of features at every split.
+        The result is an ensemble of genuinely diverse trees whose errors do not overlap, and averaging them produces predictions that are both accurate and stable.
+        In most real world scenarios with more than a handful of features, random forests are the stronger default choice.
+      </p>
+    </div>
+
+  </div>
+
   <script>
+    /* Clock */
     const DAYS   = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
     const MONTHS = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
     function pad(n) { return String(n).padStart(2,'0'); }
@@ -121,6 +576,99 @@
     }
     tick();
     setInterval(tick, 1000);
+
+    /* Chart defaults */
+    Chart.defaults.color = '#5a5a5a';
+    Chart.defaults.font.family = "'Share Tech Mono', monospace";
+    Chart.defaults.font.size = 11;
+
+    const GREEN  = '#57ff6e';
+    const BLUE   = '#5bc8f5';
+    const AMBER  = '#f5c842';
+    const GREEN_D = 'rgba(87,255,110,0.12)';
+    const BLUE_D  = 'rgba(91,200,245,0.12)';
+    const AMBER_D = 'rgba(245,200,66,0.12)';
+    const gridColor = 'rgba(255,255,255,0.04)';
+
+    const baseScales = {
+      x: { grid: { color: gridColor }, ticks: { color: '#3a3a3a' } },
+      y: { grid: { color: gridColor }, ticks: { color: '#3a3a3a' } }
+    };
+    const baseLegend = { labels: { color: '#5a5a5a', boxWidth: 10, padding: 14 } };
+
+    /* Chart 1: Accuracy */
+    new Chart(document.getElementById('chartAccuracy'), {
+      type: 'bar',
+      data: {
+        labels: ['Dataset 1','Dataset 2','Dataset 3','Dataset 4','Dataset 5'],
+        datasets: [
+          { label: 'Decision Tree', data: [74,71,78,69,76], backgroundColor: AMBER_D, borderColor: AMBER, borderWidth: 1 },
+          { label: 'Bagging',       data: [83,82,86,80,85], backgroundColor: BLUE_D,  borderColor: BLUE,  borderWidth: 1 },
+          { label: 'Random Forest', data: [90,88,92,87,91], backgroundColor: GREEN_D, borderColor: GREEN, borderWidth: 1 }
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: baseLegend },
+        scales: { ...baseScales, y: { ...baseScales.y, min: 60, max: 100, ticks: { color: '#3a3a3a', callback: v => v + '%' } } }
+      }
+    });
+
+    /* Chart 2: Bias Variance */
+    new Chart(document.getElementById('chartBiasVariance'), {
+      type: 'bar',
+      data: {
+        labels: ['Decision Tree','Bagging','Random Forest'],
+        datasets: [
+          { label: 'Bias',        data: [5,6,6],   backgroundColor: 'rgba(255,107,107,0.15)', borderColor: '#ff6b6b', borderWidth: 1 },
+          { label: 'Variance',    data: [42,18,8],  backgroundColor: BLUE_D,                  borderColor: BLUE,      borderWidth: 1 },
+          { label: 'Total Error', data: [47,24,14], backgroundColor: 'rgba(255,255,255,0.03)', borderColor: '#3a3a3a', borderWidth: 1 }
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: baseLegend },
+        scales: { ...baseScales, y: { ...baseScales.y, ticks: { color: '#3a3a3a', callback: v => v + '%' } } }
+      }
+    });
+
+    /* Chart 3: Training Size */
+    new Chart(document.getElementById('chartTrainingSize'), {
+      type: 'line',
+      data: {
+        labels: ['100','250','500','1k','2.5k','5k','10k'],
+        datasets: [
+          { label: 'Decision Tree', data: [62,68,72,74,75,76,76], borderColor: AMBER, backgroundColor: AMBER_D, borderWidth: 2, tension: 0.4, pointRadius: 3, fill: true },
+          { label: 'Bagging',       data: [68,74,79,83,86,87,88], borderColor: BLUE,  backgroundColor: BLUE_D,  borderWidth: 2, tension: 0.4, pointRadius: 3, fill: true },
+          { label: 'Random Forest', data: [71,78,83,88,90,92,93], borderColor: GREEN, backgroundColor: GREEN_D, borderWidth: 2, tension: 0.4, pointRadius: 3, fill: true }
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: baseLegend },
+        scales: { ...baseScales, y: { ...baseScales.y, min: 55, ticks: { color: '#3a3a3a', callback: v => v + '%' } } }
+      }
+    });
+
+    /* Chart 4: Tree Correlation */
+    new Chart(document.getElementById('chartCorrelation'), {
+      type: 'bar',
+      data: {
+        labels: ['Pair 1','Pair 2','Pair 3','Pair 4','Pair 5'],
+        datasets: [
+          { label: 'Bagging',       data: [0.82,0.79,0.85,0.80,0.83], backgroundColor: BLUE_D,  borderColor: BLUE,  borderWidth: 1 },
+          { label: 'Random Forest', data: [0.38,0.41,0.35,0.43,0.39], backgroundColor: GREEN_D, borderColor: GREEN, borderWidth: 1 }
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: {
+          legend: baseLegend,
+          tooltip: { callbacks: { label: ctx => ctx.dataset.label + ': r = ' + ctx.parsed.y.toFixed(2) } }
+        },
+        scales: { ...baseScales, y: { ...baseScales.y, min: 0, max: 1, ticks: { color: '#3a3a3a', callback: v => 'r = ' + v.toFixed(1) } } }
+      }
+    });
   </script>
 </body>
 </html>
