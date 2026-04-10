@@ -409,7 +409,7 @@
   <!-- DEPLOY TIMESTAMP -->
   <div class="deploy-strip">
     <span class="deploy-label">Last pushed by Claude Code</span>
-    <span class="deploy-time">April 10, 2026 at 05:19 UTC</span>
+    <span class="deploy-time" id="deployTime">Loading...</span>
   </div>
 
   <!-- VIBE CODING BANNER -->
@@ -1122,6 +1122,23 @@
 
     /* Init */
     resetNN();
+
+    /* GitHub last commit timestamp */
+    fetch('https://api.github.com/repos/JettDrums/MA289/commits?per_page=1')
+      .then(r => r.json())
+      .then(data => {
+        const date = new Date(data[0].commit.committer.date);
+        const formatted = new Intl.DateTimeFormat('en-US', {
+          timeZone: 'America/New_York',
+          month: 'long', day: 'numeric', year: 'numeric',
+          hour: 'numeric', minute: '2-digit',
+          timeZoneName: 'short'
+        }).format(date);
+        document.getElementById('deployTime').textContent = formatted;
+      })
+      .catch(() => {
+        document.getElementById('deployTime').textContent = 'Unavailable';
+      });
 
     /* Chart defaults */
     Chart.defaults.color = '#5a5a5a';
