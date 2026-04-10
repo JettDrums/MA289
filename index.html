@@ -183,6 +183,149 @@
 
     .full-divider { width: 100%; height: 1px; background: var(--border); }
 
+    /* NEURAL NETWORK SECTION */
+    .nn-section {
+      position: relative;
+      z-index: 1;
+      width: min(1100px, 100%);
+      margin-top: 64px;
+      display: flex;
+      flex-direction: column;
+      gap: 48px;
+    }
+    .nn-two-col {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+    }
+    .nn-meta {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .nn-stat {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .nn-stat-label {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .nn-stat-value {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 20px;
+      color: var(--green-bright);
+      text-shadow: 0 0 12px rgba(87,255,110,0.3);
+    }
+    .nn-stat-value.amber { color: var(--amber-bright); text-shadow: 0 0 12px rgba(245,200,66,0.3); }
+
+    canvas.loss-canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+      background: transparent;
+    }
+
+    .nn-pred-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    .nn-pred-table th {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--green);
+      padding: 10px 14px;
+      text-align: left;
+      border-bottom: 1px solid var(--border-accent);
+    }
+    .nn-pred-table td {
+      padding: 11px 14px;
+      border-bottom: 1px solid var(--border);
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 12px;
+      color: var(--text);
+    }
+    .nn-pred-table tr:last-child td { border-bottom: none; }
+    .pred-val { font-size: 13px; }
+    .pred-val.correct { color: var(--green-bright); }
+    .pred-val.wrong   { color: #ff6b6b; }
+
+    .nn-controls {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 4px;
+    }
+    .nn-btn {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      padding: 10px 20px;
+      border: 1px solid var(--green);
+      background: transparent;
+      color: var(--green-bright);
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .nn-btn:hover  { background: rgba(74,124,78,0.15); }
+    .nn-btn:active { background: rgba(74,124,78,0.3); }
+    .nn-btn.secondary { border-color: var(--border-accent); color: var(--text-dim); }
+    .nn-btn.secondary:hover { background: rgba(255,255,255,0.04); color: var(--text); }
+    .nn-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+
+    .nn-arch-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      padding: 20px 0 4px;
+    }
+    .nn-layer {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+    .nn-layer-label {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+    .nn-node {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1px solid;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 9px;
+    }
+    .nn-node.input  { border-color: var(--amber); color: var(--amber-bright); background: rgba(200,146,42,0.08); }
+    .nn-node.hidden { border-color: var(--blue);  color: var(--blue-bright);  background: rgba(74,127,160,0.08); }
+    .nn-node.output { border-color: var(--green); color: var(--green-bright); background: rgba(74,124,78,0.08); }
+    .nn-connector {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, var(--border-accent), var(--border));
+      min-width: 20px;
+      max-width: 60px;
+      align-self: center;
+      margin: 0 4px;
+    }
+
     /* VIBE CODING BANNER */
     .vibe-banner {
       position: relative;
@@ -624,6 +767,102 @@
 
   </div>
 
+  <!-- NEURAL NETWORK SECTION -->
+  <div class="nn-section">
+
+    <div class="section-header">
+      <div class="section-tag">Section 05</div>
+      <div class="section-title" style="font-size:clamp(16px,2.5vw,20px);">Live Neural Network</div>
+    </div>
+
+    <div class="insight">
+      <div class="insight-label">XOR Problem</div>
+      <p>
+        XOR outputs 1 only when the two inputs differ. No single straight line can separate the classes, which makes it impossible for a linear model to solve.
+        A neural network with at least one hidden layer can learn the nonlinear boundary.
+        This network trains entirely in your browser using vanilla JavaScript with no external libraries.
+      </p>
+    </div>
+
+    <!-- Architecture diagram -->
+    <div class="chart-card" style="gap:10px;">
+      <div class="chart-title">Network Architecture &nbsp; 2 &rarr; 4 &rarr; 1</div>
+      <p class="chart-note">Two inputs feed into four hidden neurons with sigmoid activation, which feed into a single sigmoid output neuron predicting 0 or 1.</p>
+      <div class="nn-arch-row">
+        <div class="nn-layer">
+          <div class="nn-layer-label">Input</div>
+          <div class="nn-node input">x1</div>
+          <div class="nn-node input">x2</div>
+        </div>
+        <div class="nn-connector"></div>
+        <div class="nn-layer">
+          <div class="nn-layer-label">Hidden (4)</div>
+          <div class="nn-node hidden">h1</div>
+          <div class="nn-node hidden">h2</div>
+          <div class="nn-node hidden">h3</div>
+          <div class="nn-node hidden">h4</div>
+        </div>
+        <div class="nn-connector"></div>
+        <div class="nn-layer">
+          <div class="nn-layer-label">Output</div>
+          <div class="nn-node output">out</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="nn-two-col">
+
+      <!-- Loss curve -->
+      <div class="chart-card">
+        <div class="chart-title">Training Loss (Mean Squared Error)</div>
+        <div class="nn-meta">
+          <div class="nn-stat">
+            <div class="nn-stat-label">Epoch</div>
+            <div class="nn-stat-value" id="nnEpoch">0</div>
+          </div>
+          <div class="nn-stat">
+            <div class="nn-stat-label">Loss</div>
+            <div class="nn-stat-value amber" id="nnLoss">0.2500</div>
+          </div>
+          <div class="nn-stat">
+            <div class="nn-stat-label">Status</div>
+            <div class="nn-stat-value" id="nnStatus" style="font-size:12px;letter-spacing:2px;padding-top:4px;">READY</div>
+          </div>
+        </div>
+        <div class="chart-wrap" style="height:200px;">
+          <canvas class="loss-canvas" id="lossCanvas"></canvas>
+        </div>
+      </div>
+
+      <!-- Predictions -->
+      <div class="chart-card">
+        <div class="chart-title">XOR Predictions</div>
+        <table class="nn-pred-table">
+          <thead>
+            <tr>
+              <th>x1</th>
+              <th>x2</th>
+              <th>Expected</th>
+              <th>Predicted</th>
+              <th>Output</th>
+            </tr>
+          </thead>
+          <tbody id="predBody">
+            <tr><td>0</td><td>0</td><td>0</td><td class="pred-val" id="p00">--</td><td id="r00" style="color:var(--text-muted);">--</td></tr>
+            <tr><td>0</td><td>1</td><td>1</td><td class="pred-val" id="p01">--</td><td id="r01" style="color:var(--text-muted);">--</td></tr>
+            <tr><td>1</td><td>0</td><td>1</td><td class="pred-val" id="p10">--</td><td id="r10" style="color:var(--text-muted);">--</td></tr>
+            <tr><td>1</td><td>1</td><td>0</td><td class="pred-val" id="p11">--</td><td id="r11" style="color:var(--text-muted);">--</td></tr>
+          </tbody>
+        </table>
+        <div class="nn-controls">
+          <button class="nn-btn" id="btnTrain">Train Network</button>
+          <button class="nn-btn secondary" id="btnReset">Reset</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
   <script>
     /* Clock */
     const DAYS   = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
@@ -637,6 +876,217 @@
     }
     tick();
     setInterval(tick, 1000);
+
+    /* ── Neural Network ─────────────────────────────────────────── */
+    const XOR_DATA = [[[0,0],0], [[0,1],1], [[1,0],1], [[1,1],0]];
+    const MAX_EPOCHS = 10000;
+    const EPOCHS_PER_FRAME = 80;
+    const LR = 0.5;
+    const HIDDEN = 4;
+
+    let net, losses, epoch, rafId, running;
+
+    function rand() { return (Math.random() - 0.5) * 2; }
+    function sigmoid(x) { return 1 / (1 + Math.exp(-x)); }
+
+    function initNet() {
+      return {
+        W1: Array.from({length: HIDDEN}, () => [rand(), rand()]),
+        b1: Array.from({length: HIDDEN}, () => rand() * 0.1),
+        W2: Array.from({length: HIDDEN}, () => rand()),
+        b2: rand() * 0.1
+      };
+    }
+
+    function forward(n, x) {
+      const h = n.W1.map((w, i) => sigmoid(w[0]*x[0] + w[1]*x[1] + n.b1[i]));
+      const out = sigmoid(n.W2.reduce((s, w, i) => s + w*h[i], n.b2));
+      return { h, out };
+    }
+
+    function trainEpoch(n) {
+      let totalLoss = 0;
+      const dW1 = n.W1.map(() => [0,0]);
+      const db1 = new Array(HIDDEN).fill(0);
+      const dW2 = new Array(HIDDEN).fill(0);
+      let db2 = 0;
+
+      for (const [x, y] of XOR_DATA) {
+        const { h, out } = forward(n, x);
+        totalLoss += (out - y) ** 2;
+        const dOut = 2 * (out - y) * out * (1 - out);
+        for (let i = 0; i < HIDDEN; i++) {
+          dW2[i] += dOut * h[i];
+          const dH = dOut * n.W2[i] * h[i] * (1 - h[i]);
+          dW1[i][0] += dH * x[0];
+          dW1[i][1] += dH * x[1];
+          db1[i] += dH;
+        }
+        db2 += dOut;
+      }
+
+      const m = XOR_DATA.length;
+      for (let i = 0; i < HIDDEN; i++) {
+        n.W1[i][0] -= LR * dW1[i][0] / m;
+        n.W1[i][1] -= LR * dW1[i][1] / m;
+        n.b1[i]    -= LR * db1[i] / m;
+        n.W2[i]    -= LR * dW2[i] / m;
+      }
+      n.b2 -= LR * db2 / m;
+
+      return totalLoss / m;
+    }
+
+    /* Canvas drawing */
+    function drawLoss(canvas, losses) {
+      const dpr = window.devicePixelRatio || 1;
+      const W = canvas.offsetWidth;
+      const H = canvas.offsetHeight;
+      if (W === 0 || H === 0) return;
+      canvas.width  = W * dpr;
+      canvas.height = H * dpr;
+      const ctx = canvas.getContext('2d');
+      ctx.scale(dpr, dpr);
+
+      const pad = { t: 16, r: 16, b: 36, l: 46 };
+      const pw = W - pad.l - pad.r;
+      const ph = H - pad.t - pad.b;
+
+      ctx.fillStyle = '#0f0f0f';
+      ctx.fillRect(0, 0, W, H);
+
+      /* grid */
+      ctx.strokeStyle = 'rgba(255,255,255,0.04)';
+      ctx.lineWidth = 1;
+      for (let i = 0; i <= 4; i++) {
+        const y = pad.t + (i / 4) * ph;
+        ctx.beginPath(); ctx.moveTo(pad.l, y); ctx.lineTo(pad.l + pw, y); ctx.stroke();
+        ctx.fillStyle = '#3a3a3a';
+        ctx.font = '9px Share Tech Mono, monospace';
+        ctx.textAlign = 'right';
+        ctx.fillText((0.25 - i * 0.0625).toFixed(3), pad.l - 6, y + 3);
+      }
+      for (let i = 0; i <= 4; i++) {
+        const x = pad.l + (i / 4) * pw;
+        ctx.beginPath(); ctx.moveTo(x, pad.t); ctx.lineTo(x, pad.t + ph); ctx.stroke();
+        ctx.fillStyle = '#3a3a3a';
+        ctx.textAlign = 'center';
+        ctx.fillText(Math.round((i / 4) * MAX_EPOCHS / 1000) + 'k', x, pad.t + ph + 18);
+      }
+
+      /* axis labels */
+      ctx.fillStyle = '#2e2e2e';
+      ctx.font = '9px Share Tech Mono, monospace';
+      ctx.textAlign = 'center';
+      ctx.fillText('EPOCH', pad.l + pw / 2, H - 2);
+
+      if (losses.length < 2) return;
+
+      /* loss curve — green fill */
+      const step = Math.max(1, Math.floor(losses.length / pw));
+      const pts = [];
+      for (let i = 0; i < losses.length; i += step) pts.push(losses[i]);
+
+      const maxL = 0.25;
+      function px(i) { return pad.l + (i / (pts.length - 1)) * pw; }
+      function py(v) { return pad.t + ph - Math.min(v / maxL, 1) * ph; }
+
+      ctx.beginPath();
+      ctx.moveTo(px(0), py(pts[0]));
+      for (let i = 1; i < pts.length; i++) ctx.lineTo(px(i), py(pts[i]));
+      ctx.lineTo(px(pts.length - 1), pad.t + ph);
+      ctx.lineTo(px(0), pad.t + ph);
+      ctx.closePath();
+      ctx.fillStyle = 'rgba(87,255,110,0.07)';
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.moveTo(px(0), py(pts[0]));
+      for (let i = 1; i < pts.length; i++) ctx.lineTo(px(i), py(pts[i]));
+      ctx.strokeStyle = '#57ff6e';
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+    }
+
+    /* UI updates */
+    function updatePreds() {
+      const pairs = [[[0,0],'p00','r00'], [[0,1],'p01','r01'], [[1,0],'p10','r10'], [[1,1],'p11','r11']];
+      const expected = [0, 1, 1, 0];
+      pairs.forEach(([x, pid, rid], idx) => {
+        const { out } = forward(net, x);
+        const pred = Math.round(out);
+        const correct = pred === expected[idx];
+        const el = document.getElementById(pid);
+        const rel = document.getElementById(rid);
+        el.textContent = out.toFixed(4);
+        el.className = 'pred-val ' + (correct ? 'correct' : 'wrong');
+        rel.textContent = correct ? 'PASS' : 'FAIL';
+        rel.style.color = correct ? 'var(--green-bright)' : '#ff6b6b';
+      });
+    }
+
+    function setStatus(text, color) {
+      const el = document.getElementById('nnStatus');
+      el.textContent = text;
+      el.style.color = color || 'var(--green-bright)';
+    }
+
+    /* Training loop */
+    function trainFrame() {
+      for (let i = 0; i < EPOCHS_PER_FRAME; i++) {
+        if (epoch >= MAX_EPOCHS) break;
+        const loss = trainEpoch(net);
+        if (epoch % 10 === 0) losses.push(loss);
+        epoch++;
+      }
+
+      const lastLoss = losses[losses.length - 1];
+      document.getElementById('nnEpoch').textContent = epoch.toLocaleString();
+      document.getElementById('nnLoss').textContent = lastLoss.toFixed(6);
+      drawLoss(document.getElementById('lossCanvas'), losses);
+      updatePreds();
+
+      if (epoch >= MAX_EPOCHS || lastLoss < 0.001) {
+        running = false;
+        document.getElementById('btnTrain').textContent = 'Train Network';
+        document.getElementById('btnTrain').disabled = false;
+        setStatus(lastLoss < 0.001 ? 'CONVERGED' : 'DONE', 'var(--green-bright)');
+        return;
+      }
+
+      setStatus('TRAINING', 'var(--amber-bright)');
+      rafId = requestAnimationFrame(trainFrame);
+    }
+
+    function resetNN() {
+      cancelAnimationFrame(rafId);
+      running = false;
+      net    = initNet();
+      losses = [];
+      epoch  = 0;
+      document.getElementById('nnEpoch').textContent = '0';
+      document.getElementById('nnLoss').textContent  = '0.2500';
+      setStatus('READY', 'var(--green-bright)');
+      document.getElementById('btnTrain').textContent = 'Train Network';
+      document.getElementById('btnTrain').disabled = false;
+      ['p00','p01','p10','p11'].forEach(id => { document.getElementById(id).textContent = '--'; document.getElementById(id).className = 'pred-val'; });
+      ['r00','r01','r10','r11'].forEach(id => { document.getElementById(id).textContent = '--'; document.getElementById(id).style.color = 'var(--text-muted)'; });
+      drawLoss(document.getElementById('lossCanvas'), []);
+    }
+
+    document.getElementById('btnTrain').addEventListener('click', () => {
+      if (running) return;
+      if (epoch >= MAX_EPOCHS) resetNN();
+      running = true;
+      document.getElementById('btnTrain').textContent = 'Training...';
+      document.getElementById('btnTrain').disabled = true;
+      rafId = requestAnimationFrame(trainFrame);
+    });
+
+    document.getElementById('btnReset').addEventListener('click', resetNN);
+
+    /* Init */
+    resetNN();
 
     /* Chart defaults */
     Chart.defaults.color = '#5a5a5a';
