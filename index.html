@@ -326,6 +326,35 @@
       margin: 0 4px;
     }
 
+    /* DEPLOY TIMESTAMP STRIP */
+    .deploy-strip {
+      position: relative;
+      z-index: 1;
+      width: min(680px, 100%);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 8px 14px;
+      border: 1px solid #1a2e1c;
+      background: rgba(74,124,78,0.06);
+      flex-wrap: wrap;
+    }
+    .deploy-label {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--green-dim);
+    }
+    .deploy-time {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 2px;
+      color: var(--green-bright);
+    }
+
     /* VIBE CODING BANNER */
     .vibe-banner {
       position: relative;
@@ -376,6 +405,12 @@
   </style>
 </head>
 <body>
+
+  <!-- DEPLOY TIMESTAMP -->
+  <div class="deploy-strip">
+    <span class="deploy-label">Last pushed by Claude Code</span>
+    <span class="deploy-time">April 10, 2026 at 05:19 UTC</span>
+  </div>
 
   <!-- VIBE CODING BANNER -->
   <div class="vibe-banner">
