@@ -37,8 +37,65 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 40px 20px 80px;
+      padding: 84px 20px 80px;
     }
+
+    /* FIXED NAV */
+    .site-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      height: 44px;
+      background: rgba(8,8,8,0.97);
+      border-bottom: 1px solid #2a1e00;
+      backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .site-nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: min(1100px, 100%);
+      padding: 0 24px;
+      gap: 24px;
+    }
+    .site-nav-logo {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 600;
+      font-size: 12px;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      color: var(--green-bright);
+      text-decoration: none;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .site-nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+    }
+    .site-nav-link {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      text-decoration: none;
+      padding: 5px 12px;
+      border: 1px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+      white-space: nowrap;
+    }
+    .site-nav-link:hover { color: var(--green-bright); border-color: #2a1e00; }
+    .site-nav-link.active { color: var(--green-bright); border-color: var(--green); }
+
+    /* scroll offset for fixed nav */
+    .scroll-target { scroll-margin-top: 56px; }
 
     body::before {
       content: '';
@@ -407,6 +464,19 @@
 </head>
 <body>
 
+  <!-- FIXED NAV -->
+  <nav class="site-nav" id="siteNav">
+    <div class="site-nav-inner">
+      <a class="site-nav-logo" href="#overview">Pezan &mdash; USMA 2029</a>
+      <div class="site-nav-links">
+        <a class="site-nav-link" href="#overview">Overview</a>
+        <a class="site-nav-link" href="#ml-analysis">ML Analysis</a>
+        <a class="site-nav-link" href="#neural-network">Neural Network</a>
+        <a class="site-nav-link" href="#vibe-coding">Vibe Coding</a>
+      </div>
+    </div>
+  </nav>
+
   <!-- DEPLOY TIMESTAMP -->
   <div class="deploy-strip">
     <span class="deploy-label">Last pushed by Claude Code</span>
@@ -414,7 +484,7 @@
   </div>
 
   <!-- VIBE CODING BANNER -->
-  <div class="vibe-banner">
+  <div class="vibe-banner scroll-target" id="vibe-coding">
     <div class="vibe-top">
       <div class="vibe-title">Vibe Coding Demo</div>
       <a class="vibe-link" href="https://github.com/JettDrums/MA289" target="_blank" rel="noopener">View on GitHub</a>
@@ -427,7 +497,7 @@
   </div>
 
   <!-- HERO -->
-  <div class="hero">
+  <div class="hero scroll-target" id="overview">
     <div class="top-label">United States Military Academy</div>
 
     <img src="USMA_crest_transparent.png" alt="USMA Crest" class="crest-img">
@@ -454,7 +524,7 @@
   </div>
 
   <!-- ML ANALYSIS SECTION -->
-  <div class="ml-section">
+  <div class="ml-section scroll-target" id="ml-analysis">
 
     <!-- PAGE HEADER -->
     <div class="section-header center">
@@ -799,7 +869,7 @@
   </div>
 
   <!-- NEURAL NETWORK SECTION -->
-  <div class="nn-section">
+  <div class="nn-section scroll-target" id="neural-network">
 
     <div class="section-header">
       <div class="section-tag">Section 05</div>
@@ -895,6 +965,24 @@
   </div>
 
   <script>
+    /* Nav active link tracker */
+    (function() {
+      const links = document.querySelectorAll('.site-nav-link');
+      const ids = ['overview', 'ml-analysis', 'neural-network', 'vibe-coding'];
+      function update() {
+        let current = ids[0];
+        for (const id of ids) {
+          const el = document.getElementById(id);
+          if (el && el.getBoundingClientRect().top <= 80) current = id;
+        }
+        links.forEach(l => {
+          l.classList.toggle('active', l.getAttribute('href') === '#' + current);
+        });
+      }
+      window.addEventListener('scroll', update, { passive: true });
+      update();
+    })();
+
     /* Clock */
     const DAYS   = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
     const MONTHS = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
