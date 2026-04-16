@@ -11,9 +11,9 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --green: #4a7c4e;
-      --green-bright: #57ff6e;
-      --green-dim: #3d6b41;
+      --green: #8B6820;
+      --green-bright: #C9A84C;
+      --green-dim: #5A4010;
       --bg: #0a0a0a;
       --card: #0f0f0f;
       --border: #1e1e1e;
@@ -45,8 +45,8 @@
       position: fixed;
       inset: 0;
       background-image:
-        linear-gradient(rgba(0,255,70,0.025) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0,255,70,0.025) 1px, transparent 1px);
+        linear-gradient(rgba(201,168,76,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(201,168,76,0.02) 1px, transparent 1px);
       background-size: 40px 40px;
       pointer-events: none;
       z-index: 0;
@@ -78,7 +78,7 @@
 
     .top-label  { font-family: 'Share Tech Mono', monospace; font-size: 11px; letter-spacing: 6px; color: var(--green); text-transform: uppercase; }
     .crest      { width: 72px; height: 72px; }
-    .crest-img  { width: 80px; height: auto; opacity: 0.92; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.5)); }
+    .crest-img  { width: 175px; height: auto; opacity: 0.95; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.6)); }
     .name       { font-family: 'Oswald', sans-serif; font-weight: 600; font-size: clamp(28px,6vw,44px); letter-spacing: 8px; text-transform: uppercase; color: #e8e8e8; text-align: center; }
     .class-tag  { font-family: 'Share Tech Mono', monospace; font-size: 13px; letter-spacing: 4px; color: var(--green); text-transform: uppercase; }
 
@@ -88,7 +88,7 @@
 
     .clock-block { display: flex; flex-direction: column; align-items: center; gap: 8px; }
     .clock-label { font-family: 'Share Tech Mono', monospace; font-size: 10px; letter-spacing: 5px; color: var(--green-dim); text-transform: uppercase; }
-    .clock       { font-family: 'Share Tech Mono', monospace; font-size: clamp(42px,10vw,72px); color: var(--green-bright); letter-spacing: 4px; text-shadow: 0 0 18px rgba(87,255,110,0.35); }
+    .clock       { font-family: 'Share Tech Mono', monospace; font-size: clamp(42px,10vw,72px); color: var(--green-bright); letter-spacing: 4px; text-shadow: 0 0 18px rgba(201,168,76,0.35); }
     .clock-date  { font-family: 'Share Tech Mono', monospace; font-size: 13px; letter-spacing: 3px; color: var(--text-dim); text-transform: uppercase; }
     .motto       { font-family: 'Share Tech Mono', monospace; font-size: 11px; letter-spacing: 5px; color: var(--text-muted); text-transform: uppercase; text-align: center; }
     .bottom-bar  { display: flex; justify-content: space-between; width: 100%; border-top: 1px solid var(--border); padding-top: 14px; font-family: 'Share Tech Mono', monospace; font-size: 10px; letter-spacing: 3px; color: #2e2e2e; text-transform: uppercase; }
@@ -169,16 +169,16 @@
     .summary-table th { font-family: 'Share Tech Mono', monospace; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--green); padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border-accent); }
     .summary-table td { padding: 13px 16px; color: var(--text); border-bottom: 1px solid var(--border); vertical-align: middle; line-height: 1.5; }
     .summary-table tr:last-child td { border-bottom: none; }
-    .summary-table tr:hover td { background: rgba(74,124,78,0.04); }
+    .summary-table tr:hover td { background: rgba(201,168,76,0.04); }
 
     .badge { display: inline-block; font-family: 'Share Tech Mono', monospace; font-size: 9px; letter-spacing: 2px; padding: 3px 8px; text-transform: uppercase; }
     .badge.high { background: rgba(255,107,107,0.12); color: #ff6b6b; }
     .badge.med  { background: rgba(91,200,245,0.12);  color: var(--blue-bright); }
-    .badge.low  { background: rgba(87,255,110,0.12);  color: var(--green-bright); }
-    .badge.best { background: rgba(87,255,110,0.18);  color: var(--green-bright); border: 1px solid var(--green); }
+    .badge.low  { background: rgba(201,168,76,0.12); color: var(--green-bright); }
+    .badge.best { background: rgba(201,168,76,0.18); color: var(--green-bright); border: 1px solid var(--green); }
 
     /* INSIGHT BOX */
-    .insight { background: rgba(74,124,78,0.05); border: 1px solid var(--green); border-left-width: 3px; padding: 22px 26px; display: flex; flex-direction: column; gap: 10px; }
+    .insight { background: rgba(201,168,76,0.04); border: 1px solid var(--green); border-left-width: 3px; padding: 22px 26px; display: flex; flex-direction: column; gap: 10px; }
     .insight-label { font-family: 'Share Tech Mono', monospace; font-size: 10px; letter-spacing: 4px; color: var(--green-bright); text-transform: uppercase; }
     .insight p { font-size: 13px; color: var(--text); line-height: 1.8; }
 
@@ -220,9 +220,9 @@
       font-family: 'Share Tech Mono', monospace;
       font-size: 20px;
       color: var(--green-bright);
-      text-shadow: 0 0 12px rgba(87,255,110,0.3);
+      text-shadow: 0 0 12px rgba(201,168,76,0.3);
     }
-    .nn-stat-value.amber { color: var(--amber-bright); text-shadow: 0 0 12px rgba(245,200,66,0.3); }
+    .nn-stat-value.amber { color: var(--amber-bright); text-shadow: 0 0 10px rgba(245,200,66,0.2); }
 
     canvas.loss-canvas {
       display: block;
@@ -276,8 +276,8 @@
       cursor: pointer;
       transition: background 0.2s;
     }
-    .nn-btn:hover  { background: rgba(74,124,78,0.15); }
-    .nn-btn:active { background: rgba(74,124,78,0.3); }
+    .nn-btn:hover  { background: rgba(201,168,76,0.12); }
+    .nn-btn:active { background: rgba(201,168,76,0.22); }
     .nn-btn.secondary { border-color: var(--border-accent); color: var(--text-dim); }
     .nn-btn.secondary:hover { background: rgba(255,255,255,0.04); color: var(--text); }
     .nn-btn:disabled { opacity: 0.35; cursor: not-allowed; }
@@ -316,7 +316,7 @@
     }
     .nn-node.input  { border-color: var(--amber); color: var(--amber-bright); background: rgba(200,146,42,0.08); }
     .nn-node.hidden { border-color: var(--blue);  color: var(--blue-bright);  background: rgba(74,127,160,0.08); }
-    .nn-node.output { border-color: var(--green); color: var(--green-bright); background: rgba(74,124,78,0.08); }
+    .nn-node.output { border-color: var(--green); color: var(--green-bright); background: rgba(201,168,76,0.08); }
     .nn-connector {
       flex: 1;
       height: 1px;
@@ -338,8 +338,8 @@
       justify-content: space-between;
       gap: 12px;
       padding: 8px 14px;
-      border: 1px solid #1a2e1c;
-      background: rgba(74,124,78,0.06);
+      border: 1px solid #2a1e00;
+      background: rgba(201,168,76,0.05);
       flex-wrap: wrap;
     }
     .deploy-label {
@@ -397,7 +397,7 @@
       transition: background 0.2s, color 0.2s;
       white-space: nowrap;
     }
-    .vibe-link:hover { background: rgba(74,124,78,0.15); color: var(--green-bright); }
+    .vibe-link:hover { background: rgba(201,168,76,0.12); color: var(--green-bright); }
     .vibe-desc {
       font-size: 13px;
       color: var(--text-dim);
@@ -572,42 +572,42 @@
           This prevents any single strong feature from dominating every tree, making the trees genuinely different from each other and the ensemble far more powerful.
         </p>
         <svg class="algo-diagram" viewBox="0 0 260 145" xmlns="http://www.w3.org/2000/svg">
-          <rect x="10" y="8" width="60" height="22" rx="2" fill="#0d1a0e" stroke="#4a7c4e" stroke-width="1"/>
-          <text x="40" y="23" text-anchor="middle" font-family="Share Tech Mono,monospace" font-size="8" fill="#57ff6e">Tree 1</text>
-          <text x="40" y="36" text-anchor="middle" font-family="Share Tech Mono,monospace" font-size="7" fill="#3d6b41">features: A, C</text>
-          <line x1="25" y1="40" x2="18" y2="58" stroke="#1a3020" stroke-width="1"/>
-          <line x1="55" y1="40" x2="62" y2="58" stroke="#1a3020" stroke-width="1"/>
-          <circle cx="18" cy="64" r="8" fill="#0d1a0e" stroke="#4a7c4e" stroke-width="1"/>
-          <circle cx="62" cy="64" r="8" fill="#0d1a0e" stroke="#4a7c4e" stroke-width="1"/>
-          <text x="18" y="68" text-anchor="middle" font-family="Share Tech Mono,monospace" font-size="6" fill="#57ff6e">Y</text>
-          <text x="62" y="68" text-anchor="middle" font-family="Share Tech Mono,monospace" font-size="6" fill="#57ff6e">N</text>
+          <rect x="10" y="8" width="60" height="22" rx="2" fill="#12100a" stroke="#8B6820" stroke-width="1"/>
+          <text x="40" y="23" text-anchor="middle" font-family="Share Tech Mono,monospace" font-size="8" fill="#C9A84C">Tree 1</text>
+          <text x="40" y="36" text-anchor="middle" font-family="Share Tech Mono,monospace" font-size="7" fill="#5A4010">features: A, C</text>
+          <line x1="25" y1="40" x2="18" y2="58" stroke="#2a1e00" stroke-width="1"/>
+          <line x1="55" y1="40" x2="62" y2="58" stroke="#2a1e00" stroke-width="1"/>
+          <circle cx="18" cy="64" r="8" fill="#12100a" stroke="#8B6820" stroke-width="1"/>
+          <circle cx="62" cy="64" r="8" fill="#12100a" stroke="#8B6820" stroke-width="1"/>
+          <text x="18" y="68" text-anchor="middle" font-family="Share Tech Mono,monospace" font-size="6" fill="#C9A84C">Y</text>
+          <text x="62" y="68" text-anchor="middle" font-family="Share Tech Mono,monospace" font-size="6" fill="#C9A84C">N</text>
 
-          <rect x="100" y="8" width="60" height="22" rx="2" fill="#0d1a0e" stroke="#4a7c4e" stroke-width="1"/>
-          <text x="130" y="23" text-anchor="middle" font-family="Share Tech Mono,monospace" font-size="8" fill="#57ff6e">Tree 2</text>
-          <text x="130" y="36" text-anchor="middle" font-family="Share Tech Mono,monospace" font-size="7" fill="#3d6b41">features: B, D</text>
-          <line x1="115" y1="40" x2="108" y2="58" stroke="#1a3020" stroke-width="1"/>
-          <line x1="145" y1="40" x2="152" y2="58" stroke="#1a3020" stroke-width="1"/>
-          <circle cx="108" cy="64" r="8" fill="#0d1a0e" stroke="#4a7c4e" stroke-width="1"/>
-          <circle cx="152" cy="64" r="8" fill="#0d1a0e" stroke="#4a7c4e" stroke-width="1"/>
-          <text x="108" y="68" text-anchor="middle" font-family="Share Tech Mono,monospace" font-size="6" fill="#57ff6e">N</text>
-          <text x="152" y="68" text-anchor="middle" font-family="Share Tech Mono,monospace" font-size="6" fill="#57ff6e">Y</text>
+          <rect x="100" y="8" width="60" height="22" rx="2" fill="#12100a" stroke="#8B6820" stroke-width="1"/>
+          <text x="130" y="23" text-anchor="middle" font-family="Share Tech Mono,monospace" font-size="8" fill="#C9A84C">Tree 2</text>
+          <text x="130" y="36" text-anchor="middle" font-family="Share Tech Mono,monospace" font-size="7" fill="#5A4010">features: B, D</text>
+          <line x1="115" y1="40" x2="108" y2="58" stroke="#2a1e00" stroke-width="1"/>
+          <line x1="145" y1="40" x2="152" y2="58" stroke="#2a1e00" stroke-width="1"/>
+          <circle cx="108" cy="64" r="8" fill="#12100a" stroke="#8B6820" stroke-width="1"/>
+          <circle cx="152" cy="64" r="8" fill="#12100a" stroke="#8B6820" stroke-width="1"/>
+          <text x="108" y="68" text-anchor="middle" font-family="Share Tech Mono,monospace" font-size="6" fill="#C9A84C">N</text>
+          <text x="152" y="68" text-anchor="middle" font-family="Share Tech Mono,monospace" font-size="6" fill="#C9A84C">Y</text>
 
-          <rect x="190" y="8" width="60" height="22" rx="2" fill="#0d1a0e" stroke="#4a7c4e" stroke-width="1"/>
-          <text x="220" y="23" text-anchor="middle" font-family="Share Tech Mono,monospace" font-size="8" fill="#57ff6e">Tree 3</text>
-          <text x="220" y="36" text-anchor="middle" font-family="Share Tech Mono,monospace" font-size="7" fill="#3d6b41">features: A, E</text>
-          <line x1="205" y1="40" x2="198" y2="58" stroke="#1a3020" stroke-width="1"/>
-          <line x1="235" y1="40" x2="242" y2="58" stroke="#1a3020" stroke-width="1"/>
-          <circle cx="198" cy="64" r="8" fill="#0d1a0e" stroke="#4a7c4e" stroke-width="1"/>
-          <circle cx="242" cy="64" r="8" fill="#0d1a0e" stroke="#4a7c4e" stroke-width="1"/>
-          <text x="198" y="68" text-anchor="middle" font-family="Share Tech Mono,monospace" font-size="6" fill="#57ff6e">Y</text>
-          <text x="242" y="68" text-anchor="middle" font-family="Share Tech Mono,monospace" font-size="6" fill="#57ff6e">N</text>
+          <rect x="190" y="8" width="60" height="22" rx="2" fill="#12100a" stroke="#8B6820" stroke-width="1"/>
+          <text x="220" y="23" text-anchor="middle" font-family="Share Tech Mono,monospace" font-size="8" fill="#C9A84C">Tree 3</text>
+          <text x="220" y="36" text-anchor="middle" font-family="Share Tech Mono,monospace" font-size="7" fill="#5A4010">features: A, E</text>
+          <line x1="205" y1="40" x2="198" y2="58" stroke="#2a1e00" stroke-width="1"/>
+          <line x1="235" y1="40" x2="242" y2="58" stroke="#2a1e00" stroke-width="1"/>
+          <circle cx="198" cy="64" r="8" fill="#12100a" stroke="#8B6820" stroke-width="1"/>
+          <circle cx="242" cy="64" r="8" fill="#12100a" stroke="#8B6820" stroke-width="1"/>
+          <text x="198" y="68" text-anchor="middle" font-family="Share Tech Mono,monospace" font-size="6" fill="#C9A84C">Y</text>
+          <text x="242" y="68" text-anchor="middle" font-family="Share Tech Mono,monospace" font-size="6" fill="#C9A84C">N</text>
 
-          <line x1="40"  y1="72" x2="104" y2="100" stroke="#1a3020" stroke-width="1" stroke-dasharray="3,2"/>
-          <line x1="130" y1="72" x2="130" y2="100" stroke="#1a3020" stroke-width="1" stroke-dasharray="3,2"/>
-          <line x1="220" y1="72" x2="156" y2="100" stroke="#1a3020" stroke-width="1" stroke-dasharray="3,2"/>
-          <rect x="74" y="100" width="112" height="26" rx="3" fill="#0d1a0e" stroke="#57ff6e" stroke-width="1"/>
-          <text x="130" y="117" text-anchor="middle" font-family="Share Tech Mono,monospace" font-size="9" fill="#57ff6e">Majority Vote</text>
-          <text x="130" y="138" text-anchor="middle" font-family="Share Tech Mono,monospace" font-size="8" fill="#1e3a22">random feature subset at each split</text>
+          <line x1="40"  y1="72" x2="104" y2="100" stroke="#2a1e00" stroke-width="1" stroke-dasharray="3,2"/>
+          <line x1="130" y1="72" x2="130" y2="100" stroke="#2a1e00" stroke-width="1" stroke-dasharray="3,2"/>
+          <line x1="220" y1="72" x2="156" y2="100" stroke="#2a1e00" stroke-width="1" stroke-dasharray="3,2"/>
+          <rect x="74" y="100" width="112" height="26" rx="3" fill="#12100a" stroke="#C9A84C" stroke-width="1"/>
+          <text x="130" y="117" text-anchor="middle" font-family="Share Tech Mono,monospace" font-size="9" fill="#C9A84C">Majority Vote</text>
+          <text x="130" y="138" text-anchor="middle" font-family="Share Tech Mono,monospace" font-size="8" fill="#3a2a00">random feature subset at each split</text>
         </svg>
         <div class="tag-row">
           <span class="tag good">Lowest variance</span>
@@ -1028,13 +1028,13 @@
       ctx.lineTo(px(pts.length - 1), pad.t + ph);
       ctx.lineTo(px(0), pad.t + ph);
       ctx.closePath();
-      ctx.fillStyle = 'rgba(87,255,110,0.07)';
+      ctx.fillStyle = 'rgba(201,168,76,0.07)';
       ctx.fill();
 
       ctx.beginPath();
       ctx.moveTo(px(0), py(pts[0]));
       for (let i = 1; i < pts.length; i++) ctx.lineTo(px(i), py(pts[i]));
-      ctx.strokeStyle = '#57ff6e';
+      ctx.strokeStyle = '#C9A84C';
       ctx.lineWidth = 1.5;
       ctx.stroke();
     }
@@ -1141,10 +1141,10 @@
     Chart.defaults.font.family = "'Share Tech Mono', monospace";
     Chart.defaults.font.size = 11;
 
-    const GREEN  = '#57ff6e';
+    const GREEN  = '#C9A84C';
     const BLUE   = '#5bc8f5';
     const AMBER  = '#f5c842';
-    const GREEN_D = 'rgba(87,255,110,0.12)';
+    const GREEN_D = 'rgba(201,168,76,0.12)';
     const BLUE_D  = 'rgba(91,200,245,0.12)';
     const AMBER_D = 'rgba(245,200,66,0.12)';
     const gridColor = 'rgba(255,255,255,0.04)';
