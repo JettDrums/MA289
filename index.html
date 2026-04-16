@@ -466,6 +466,141 @@
       margin: 0 4px;
     }
 
+    /* RF INTERACTIVE DEMO */
+    .rf-demo-section {
+      position: relative;
+      z-index: 1;
+      width: min(1100px, 100%);
+      margin-top: 64px;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+    .rf-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+    @media (max-width: 760px) { .rf-grid { grid-template-columns: 1fr; } }
+
+    .rf-panel {
+      background: var(--card);
+      border: 1px solid var(--border-accent);
+      padding: 28px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+    .rf-panel-title {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--green-bright);
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--border);
+    }
+    .rf-slider-group { display: flex; flex-direction: column; gap: 10px; }
+    .rf-slider-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .rf-slider-label {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--text);
+    }
+    .rf-slider-val {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 14px;
+      color: var(--green-bright);
+      min-width: 30px;
+      text-align: right;
+    }
+    .rf-slider {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 2px;
+      outline: none;
+      cursor: pointer;
+      border-radius: 0;
+    }
+    .rf-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      background: var(--green-bright);
+      border: 2px solid var(--bg);
+      box-shadow: 0 0 8px rgba(201,168,76,0.45);
+      cursor: pointer;
+    }
+    .rf-slider::-moz-range-thumb {
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      background: var(--green-bright);
+      border: 2px solid var(--bg);
+      cursor: pointer;
+    }
+    .rf-slider-desc {
+      font-size: 12px;
+      color: var(--text-dim);
+      line-height: 1.72;
+    }
+    .rf-metrics-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+    .rf-metric {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+      padding: 14px 8px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+    }
+    .rf-metric-label {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 8px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .rf-metric-num {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 28px;
+      line-height: 1;
+      letter-spacing: 1px;
+    }
+    .rf-metric-num.acc  { color: var(--green-bright); text-shadow: 0 0 12px rgba(201,168,76,0.3); }
+    .rf-metric-num.bias { color: #ff6b6b; }
+    .rf-metric-num.vari { color: var(--blue-bright); }
+    .rf-metric-unit {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 8px;
+      letter-spacing: 2px;
+      color: var(--text-muted);
+    }
+    .rf-chart-wrap { width: 100%; }
+    .rf-chart-wrap canvas { display: block; width: 100%; }
+    .rf-insight-box {
+      padding: 12px 16px;
+      border: 1px solid var(--border-accent);
+      border-left: 2px solid var(--green-dim);
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 1px;
+      color: var(--text-dim);
+      line-height: 1.75;
+      min-height: 42px;
+    }
+
     /* HOW THIS WAS BUILT — TIMELINE */
     .timeline-section {
       position: relative;
@@ -670,6 +805,7 @@
         <a class="site-nav-link" href="#overview">Overview</a>
         <a class="site-nav-link" href="#ml-analysis">ML Analysis</a>
         <a class="site-nav-link" href="#neural-network">Neural Network</a>
+        <a class="site-nav-link" href="#rf-demo">RF Demo</a>
         <a class="site-nav-link" href="#vibe-coding">Vibe Coding</a>
         <a class="site-nav-link" href="#how-built">How It Was Built</a>
       </div>
@@ -1198,6 +1334,81 @@
     </div>
   </div>
 
+  <!-- RF INTERACTIVE DEMO -->
+  <div class="rf-demo-section scroll-target" id="rf-demo">
+
+    <div class="section-header">
+      <div class="section-tag">Interactive Demo</div>
+      <div class="section-title" style="font-size:clamp(16px,2.5vw,20px);">Random Forest Explorer</div>
+      <p class="section-sub">Adjust the sliders to see how each hyperparameter affects model performance. Values update in real time based on established bias-variance theory.</p>
+    </div>
+
+    <div class="rf-grid">
+
+      <!-- SLIDERS -->
+      <div class="rf-panel">
+        <div class="rf-panel-title">Hyperparameters &mdash; 10 total features assumed</div>
+
+        <div class="rf-slider-group">
+          <div class="rf-slider-header">
+            <span class="rf-slider-label">Number of Trees</span>
+            <span class="rf-slider-val" id="valTrees">50</span>
+          </div>
+          <input type="range" class="rf-slider" id="sliderTrees" min="1" max="100" value="50">
+          <p class="rf-slider-desc">More trees reduce variance by averaging out the errors each individual tree makes. The biggest gains come in the first 20 trees — returns diminish quickly after that.</p>
+        </div>
+
+        <div class="rf-slider-group">
+          <div class="rf-slider-header">
+            <span class="rf-slider-label">Max Tree Depth</span>
+            <span class="rf-slider-val" id="valDepth">5</span>
+          </div>
+          <input type="range" class="rf-slider" id="sliderDepth" min="1" max="10" value="5">
+          <p class="rf-slider-desc">Deeper trees memorize more of the training data. Too shallow causes underfitting and high bias. Too deep causes each tree to overfit, raising variance even in an ensemble.</p>
+        </div>
+
+        <div class="rf-slider-group">
+          <div class="rf-slider-header">
+            <span class="rf-slider-label">Feature Subset Size</span>
+            <span class="rf-slider-val" id="valFeats">3</span>
+          </div>
+          <input type="range" class="rf-slider" id="sliderFeats" min="1" max="10" value="3">
+          <p class="rf-slider-desc">How many features each split may consider. The classic default is &radic;total features &asymp; 3. Too few makes trees too weak. Too many makes trees correlated, undermining the ensemble.</p>
+        </div>
+      </div>
+
+      <!-- RESULTS -->
+      <div class="rf-panel">
+        <div class="rf-panel-title">Live Results</div>
+
+        <div class="rf-metrics-row">
+          <div class="rf-metric">
+            <div class="rf-metric-label">Accuracy</div>
+            <div class="rf-metric-num acc" id="metricAcc">--</div>
+            <div class="rf-metric-unit">%</div>
+          </div>
+          <div class="rf-metric">
+            <div class="rf-metric-label">Bias</div>
+            <div class="rf-metric-num bias" id="metricBias">--</div>
+            <div class="rf-metric-unit">%</div>
+          </div>
+          <div class="rf-metric">
+            <div class="rf-metric-label">Variance</div>
+            <div class="rf-metric-num vari" id="metricVar">--</div>
+            <div class="rf-metric-unit">%</div>
+          </div>
+        </div>
+
+        <div class="rf-chart-wrap">
+          <canvas id="rfBarChart" height="120"></canvas>
+        </div>
+
+        <div class="rf-insight-box" id="rfInsight"></div>
+      </div>
+
+    </div>
+  </div>
+
   <!-- HOW THIS WAS BUILT -->
   <div class="timeline-section scroll-target" id="how-built">
 
@@ -1267,7 +1478,7 @@
     /* Nav active link tracker */
     (function() {
       const links = document.querySelectorAll('.site-nav-link');
-      const ids = ['overview', 'ml-analysis', 'neural-network', 'vibe-coding', 'how-built'];
+      const ids = ['overview', 'ml-analysis', 'neural-network', 'rf-demo', 'vibe-coding', 'how-built'];
       function update() {
         let current = ids[0];
         for (const id of ids) {
@@ -1710,6 +1921,151 @@
       }
 
       window.addEventListener('load', function () { setTimeout(drawAll, 60); });
+    })();
+
+    /* ── RF Interactive Demo ─────────────────────────────────────── */
+    (function () {
+      var TOTAL = 10;
+      var SQRT_T = Math.sqrt(TOTAL); // ~3.16
+
+      var GOLD   = '#C9A84C'; var GOLD_F  = 'rgba(201,168,76,0.13)';
+      var BLUE   = '#5bc8f5'; var BLUE_F  = 'rgba(91,200,245,0.13)';
+      var RED    = '#ff6b6b'; var RED_F   = 'rgba(255,107,107,0.13)';
+      var GRID   = 'rgba(255,255,255,0.05)';
+      var TICK   = '#3a3a3a';
+      var MONO   = '"Share Tech Mono", monospace';
+
+      function calcMetrics(n, d, f) {
+        // Variance: drops sharply with more trees, rises with depth and feature correlation
+        var vTrees = 0.40 / Math.sqrt(n);
+        var vDepth = 0.022 * d;
+        var vFeats = 0.10 * Math.abs(f - SQRT_T) / TOTAL;
+        var variance = Math.max(0.02, Math.min(0.52, vTrees + vDepth + vFeats));
+
+        // Bias: shallow trees underfit (high bias); very small feature subsets also add bias
+        var bDepth = 0.35 * Math.pow(Math.max(0, 1 - d / 11), 1.4);
+        var bFeats = 0.07 * Math.max(0, (SQRT_T - f) / SQRT_T);
+        var bias = Math.max(0.02, Math.min(0.46, bDepth + bFeats));
+
+        // Accuracy: base + log bonus for trees + bell curve bonus for depth + feat near sqrt
+        var tBonus = 0.19 * (Math.log(n + 1) / Math.log(101));
+        var dBell  = Math.exp(-Math.pow((d - 6) / 3.5, 2));
+        var fBell  = Math.exp(-Math.pow((f - SQRT_T) / 2.0, 2));
+        var acc = Math.max(0.44, Math.min(0.97, 0.58 + tBonus + 0.08 * dBell + 0.06 * fBell));
+
+        return {
+          acc:      Math.round(acc      * 1000) / 10,
+          bias:     Math.round(bias     * 1000) / 10,
+          variance: Math.round(variance * 1000) / 10
+        };
+      }
+
+      function getInsight(n, d, f) {
+        if (n < 8)  return 'Fewer than 8 trees — variance is very high. Add more trees for a meaningful ensemble.';
+        if (d <= 2) return 'Trees are very shallow — high bias and underfitting. Try increasing depth to 4–7.';
+        if (d >= 9) return 'Trees are very deep — each one overfits heavily. Variance climbs even with many trees.';
+        if (f === 1) return 'Single-feature splits are too restrictive — bias rises and trees become too weak.';
+        if (f >= 8)  return 'Large feature subset makes trees highly correlated — the ensemble loses its advantage.';
+        if (Math.abs(f - Math.round(SQRT_T)) <= 1 && n >= 30 && d >= 4 && d <= 7)
+          return 'Well-configured forest — trees are deep enough, numerous enough, and decorrelated. This is close to the classic RF default.';
+        if (n >= 30 && Math.abs(f - Math.round(SQRT_T)) <= 1)
+          return 'Feature subset near \u221a10 \u2248 3 — good decorrelation. Tune depth to balance bias and variance.';
+        return 'Increasing trees reduces variance most efficiently. Aim for depth 4\u20137 and feature subset near 3.';
+      }
+
+      function updateFill(slider) {
+        var pct = (slider.value - slider.min) / (slider.max - slider.min) * 100;
+        slider.style.background =
+          'linear-gradient(to right, #C9A84C ' + pct + '%, #2a2a2a ' + pct + '%)';
+      }
+
+      function drawChart(acc, bias, variance) {
+        var canvas = document.getElementById('rfBarChart');
+        if (!canvas) return;
+        var DPR = window.devicePixelRatio || 1;
+        var W = canvas.offsetWidth || 320;
+        var H = 120;
+        canvas.width  = W * DPR;
+        canvas.height = H * DPR;
+        canvas.style.width  = W + 'px';
+        canvas.style.height = H + 'px';
+        var ctx = canvas.getContext('2d');
+        ctx.scale(DPR, DPR);
+        ctx.fillStyle = '#0f0f0f';
+        ctx.fillRect(0, 0, W, H);
+
+        var rows = [
+          { label: 'Accuracy', val: acc,      max: 100, c: GOLD, f: GOLD_F },
+          { label: 'Bias',     val: bias,     max: 50,  c: RED,  f: RED_F  },
+          { label: 'Variance', val: variance, max: 50,  c: BLUE, f: BLUE_F }
+        ];
+        var labelW = 62, padR = 54, padT = 10;
+        var pw = W - labelW - padR;
+        var rowH = (H - padT * 2) / rows.length;
+
+        rows.forEach(function (r, i) {
+          var barH = 13;
+          var y    = padT + i * rowH + (rowH - barH) / 2;
+          var barW = Math.max(2, (r.val / r.max) * pw);
+
+          // Label
+          ctx.fillStyle = TICK; ctx.font = '9px ' + MONO;
+          ctx.textAlign = 'right';
+          ctx.fillText(r.label, labelW - 6, y + 9);
+
+          // Track
+          ctx.fillStyle = 'rgba(255,255,255,0.04)';
+          ctx.fillRect(labelW, y, pw, barH);
+
+          // Grid line at 50%
+          ctx.strokeStyle = GRID; ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.moveTo(labelW + pw * 0.5, y);
+          ctx.lineTo(labelW + pw * 0.5, y + barH);
+          ctx.stroke();
+
+          // Bar fill
+          ctx.fillStyle = r.f;
+          ctx.fillRect(labelW, y, barW, barH);
+          ctx.strokeStyle = r.c; ctx.lineWidth = 1.5;
+          ctx.strokeRect(labelW, y, barW, barH);
+
+          // Value
+          ctx.fillStyle = r.c;
+          ctx.font = 'bold 10px ' + MONO;
+          ctx.textAlign = 'left';
+          ctx.fillText(r.val.toFixed(1) + '%', labelW + pw + 6, y + 9);
+        });
+      }
+
+      function update() {
+        var n = parseInt(document.getElementById('sliderTrees').value);
+        var d = parseInt(document.getElementById('sliderDepth').value);
+        var f = parseInt(document.getElementById('sliderFeats').value);
+
+        document.getElementById('valTrees').textContent = n;
+        document.getElementById('valDepth').textContent = d;
+        document.getElementById('valFeats').textContent = f;
+
+        updateFill(document.getElementById('sliderTrees'));
+        updateFill(document.getElementById('sliderDepth'));
+        updateFill(document.getElementById('sliderFeats'));
+
+        var m = calcMetrics(n, d, f);
+        document.getElementById('metricAcc').textContent  = m.acc.toFixed(1);
+        document.getElementById('metricBias').textContent = m.bias.toFixed(1);
+        document.getElementById('metricVar').textContent  = m.variance.toFixed(1);
+
+        drawChart(m.acc, m.bias, m.variance);
+        document.getElementById('rfInsight').textContent = getInsight(n, d, f);
+      }
+
+      ['sliderTrees', 'sliderDepth', 'sliderFeats'].forEach(function (id) {
+        var el = document.getElementById(id);
+        if (el) { el.addEventListener('input', update); updateFill(el); }
+      });
+
+      window.addEventListener('load', function () { setTimeout(update, 80); });
     })();
   </script>
 </body>
