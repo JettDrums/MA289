@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Dennis Pezan | USMA 2029</title>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Oswald:wght@300;400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
@@ -1342,98 +1341,194 @@
         document.getElementById('deployTime').textContent = 'Unavailable';
       });
 
-    /* Chart defaults */
-    Chart.defaults.color = '#5a5a5a';
-    Chart.defaults.font.family = "'Share Tech Mono', monospace";
-    Chart.defaults.font.size = 11;
+    /* ── Vanilla Canvas Charts ───────────────────────────────────── */
+    (function () {
+      const DPR  = window.devicePixelRatio || 1;
+      const GOLD  = '#C9A84C';  const GOLD_F  = 'rgba(201,168,76,0.13)';
+      const BLUE  = '#5bc8f5';  const BLUE_F  = 'rgba(91,200,245,0.13)';
+      const AMBER = '#f5c842';  const AMBER_F = 'rgba(245,200,66,0.13)';
+      const RED   = '#ff6b6b';  const RED_F   = 'rgba(255,107,107,0.13)';
+      const GRID  = 'rgba(255,255,255,0.05)';
+      const TICK  = '#3a3a3a';
+      const BG    = '#0f0f0f';
+      const MONO  = '"Share Tech Mono", monospace';
 
-    const GREEN  = '#C9A84C';
-    const BLUE   = '#5bc8f5';
-    const AMBER  = '#f5c842';
-    const GREEN_D = 'rgba(201,168,76,0.12)';
-    const BLUE_D  = 'rgba(91,200,245,0.12)';
-    const AMBER_D = 'rgba(245,200,66,0.12)';
-    const gridColor = 'rgba(255,255,255,0.04)';
-
-    const baseScales = {
-      x: { grid: { color: gridColor }, ticks: { color: '#3a3a3a' } },
-      y: { grid: { color: gridColor }, ticks: { color: '#3a3a3a' } }
-    };
-    const baseLegend = { labels: { color: '#5a5a5a', boxWidth: 10, padding: 14 } };
-
-    /* Chart 1: Accuracy */
-    new Chart(document.getElementById('chartAccuracy'), {
-      type: 'bar',
-      data: {
-        labels: ['Dataset 1','Dataset 2','Dataset 3','Dataset 4','Dataset 5'],
-        datasets: [
-          { label: 'Decision Tree', data: [74,71,78,69,76], backgroundColor: AMBER_D, borderColor: AMBER, borderWidth: 1 },
-          { label: 'Bagging',       data: [83,82,86,80,85], backgroundColor: BLUE_D,  borderColor: BLUE,  borderWidth: 1 },
-          { label: 'Random Forest', data: [90,88,92,87,91], backgroundColor: GREEN_D, borderColor: GREEN, borderWidth: 1 }
-        ]
-      },
-      options: {
-        responsive: true, maintainAspectRatio: false,
-        plugins: { legend: baseLegend },
-        scales: { ...baseScales, y: { ...baseScales.y, min: 60, max: 100, ticks: { color: '#3a3a3a', callback: v => v + '%' } } }
+      function setup(id) {
+        const c = document.getElementById(id);
+        if (!c) return null;
+        const W = c.offsetWidth || 320;
+        const H = c.offsetHeight || 220;
+        c.width  = W * DPR;
+        c.height = H * DPR;
+        c.style.width  = W + 'px';
+        c.style.height = H + 'px';
+        const ctx = c.getContext('2d');
+        ctx.scale(DPR, DPR);
+        ctx.fillStyle = BG;
+        ctx.fillRect(0, 0, W, H);
+        return { ctx, W, H };
       }
-    });
 
-    /* Chart 2: Bias Variance */
-    new Chart(document.getElementById('chartBiasVariance'), {
-      type: 'bar',
-      data: {
-        labels: ['Decision Tree','Bagging','Random Forest'],
-        datasets: [
-          { label: 'Bias',        data: [5,6,6],   backgroundColor: 'rgba(255,107,107,0.15)', borderColor: '#ff6b6b', borderWidth: 1 },
-          { label: 'Variance',    data: [42,18,8],  backgroundColor: BLUE_D,                  borderColor: BLUE,      borderWidth: 1 },
-          { label: 'Total Error', data: [47,24,14], backgroundColor: 'rgba(255,255,255,0.03)', borderColor: '#3a3a3a', borderWidth: 1 }
-        ]
-      },
-      options: {
-        responsive: true, maintainAspectRatio: false,
-        plugins: { legend: baseLegend },
-        scales: { ...baseScales, y: { ...baseScales.y, ticks: { color: '#3a3a3a', callback: v => v + '%' } } }
+      function yGrid(ctx, pad, pw, ph, minV, maxV, steps, fmt) {
+        for (let i = 0; i <= steps; i++) {
+          const v = minV + (maxV - minV) * i / steps;
+          const y = pad.t + ph - (v - minV) / (maxV - minV) * ph;
+          ctx.strokeStyle = GRID; ctx.lineWidth = 1;
+          ctx.beginPath(); ctx.moveTo(pad.l, y); ctx.lineTo(pad.l + pw, y); ctx.stroke();
+          ctx.fillStyle = TICK; ctx.font = '9px ' + MONO;
+          ctx.textAlign = 'right'; ctx.fillText(fmt(v), pad.l - 5, y + 3);
+        }
       }
-    });
 
-    /* Chart 3: Training Size */
-    new Chart(document.getElementById('chartTrainingSize'), {
-      type: 'line',
-      data: {
-        labels: ['100','250','500','1k','2.5k','5k','10k'],
-        datasets: [
-          { label: 'Decision Tree', data: [62,68,72,74,75,76,76], borderColor: AMBER, backgroundColor: AMBER_D, borderWidth: 2, tension: 0.4, pointRadius: 3, fill: true },
-          { label: 'Bagging',       data: [68,74,79,83,86,87,88], borderColor: BLUE,  backgroundColor: BLUE_D,  borderWidth: 2, tension: 0.4, pointRadius: 3, fill: true },
-          { label: 'Random Forest', data: [71,78,83,88,90,92,93], borderColor: GREEN, backgroundColor: GREEN_D, borderWidth: 2, tension: 0.4, pointRadius: 3, fill: true }
-        ]
-      },
-      options: {
-        responsive: true, maintainAspectRatio: false,
-        plugins: { legend: baseLegend },
-        scales: { ...baseScales, y: { ...baseScales.y, min: 55, ticks: { color: '#3a3a3a', callback: v => v + '%' } } }
+      function legend(ctx, pad, items) {
+        let x = pad.l;
+        items.forEach(function (item) {
+          ctx.fillStyle = item.c;
+          ctx.fillRect(x, 8, 10, 8);
+          ctx.fillStyle = '#5a5a5a';
+          ctx.font = '8px ' + MONO; ctx.textAlign = 'left';
+          ctx.fillText(item.l, x + 14, 16);
+          x += ctx.measureText(item.l).width + 28;
+        });
       }
-    });
 
-    /* Chart 4: Tree Correlation */
-    new Chart(document.getElementById('chartCorrelation'), {
-      type: 'bar',
-      data: {
-        labels: ['Pair 1','Pair 2','Pair 3','Pair 4','Pair 5'],
-        datasets: [
-          { label: 'Bagging',       data: [0.82,0.79,0.85,0.80,0.83], backgroundColor: BLUE_D,  borderColor: BLUE,  borderWidth: 1 },
-          { label: 'Random Forest', data: [0.38,0.41,0.35,0.43,0.39], backgroundColor: GREEN_D, borderColor: GREEN, borderWidth: 1 }
-        ]
-      },
-      options: {
-        responsive: true, maintainAspectRatio: false,
-        plugins: {
-          legend: baseLegend,
-          tooltip: { callbacks: { label: ctx => ctx.dataset.label + ': r = ' + ctx.parsed.y.toFixed(2) } }
-        },
-        scales: { ...baseScales, y: { ...baseScales.y, min: 0, max: 1, ticks: { color: '#3a3a3a', callback: v => 'r = ' + v.toFixed(1) } } }
+      /* ── Chart 1: Test Accuracy ── */
+      function drawAccuracy() {
+        var s = setup('chartAccuracy'); if (!s) return;
+        var ctx = s.ctx, W = s.W, H = s.H;
+        var pad = { t: 28, r: 20, b: 52, l: 48 };
+        var pw = W - pad.l - pad.r, ph = H - pad.t - pad.b;
+
+        yGrid(ctx, pad, pw, ph, 60, 100, 4, function(v){ return v + '%'; });
+
+        var bars = [
+          { l: 'Decision Tree', v: 72, c: AMBER, f: AMBER_F },
+          { l: 'Bagging',       v: 84, c: BLUE,  f: BLUE_F  },
+          { l: 'Random Forest', v: 91, c: GOLD,  f: GOLD_F  }
+        ];
+        var slotW = pw / bars.length, bW = slotW * 0.54;
+        bars.forEach(function (b, i) {
+          var bH = (b.v - 60) / 40 * ph;
+          var x  = pad.l + i * slotW + (slotW - bW) / 2;
+          var y  = pad.t + ph - bH;
+          ctx.fillStyle = b.f; ctx.fillRect(x, y, bW, bH);
+          ctx.strokeStyle = b.c; ctx.lineWidth = 1.5; ctx.strokeRect(x, y, bW, bH);
+          ctx.fillStyle = b.c; ctx.font = 'bold 11px ' + MONO;
+          ctx.textAlign = 'center'; ctx.fillText(b.v + '%', x + bW / 2, y - 6);
+          ctx.fillStyle = TICK; ctx.font = '8px ' + MONO;
+          ctx.fillText(b.l, x + bW / 2, pad.t + ph + 20);
+        });
       }
-    });
+
+      /* ── Chart 2: Bias vs Variance ── */
+      function drawBiasVariance() {
+        var s = setup('chartBiasVariance'); if (!s) return;
+        var ctx = s.ctx, W = s.W, H = s.H;
+        var pad = { t: 28, r: 20, b: 52, l: 48 };
+        var pw = W - pad.l - pad.r, ph = H - pad.t - pad.b;
+
+        yGrid(ctx, pad, pw, ph, 0, 50, 5, function(v){ return v + '%'; });
+        legend(ctx, pad, [{ l: 'Bias', c: RED }, { l: 'Variance', c: BLUE }]);
+
+        var groups = [
+          { l: 'Dec. Tree',    bias: 5,  variance: 42 },
+          { l: 'Bagging',      bias: 6,  variance: 18 },
+          { l: 'Rand. Forest', bias: 6,  variance: 8  }
+        ];
+        var slotW = pw / groups.length, bW = slotW * 0.28, gap = slotW * 0.04;
+        groups.forEach(function (g, i) {
+          var cx = pad.l + i * slotW + slotW / 2;
+          var x0 = cx - bW - gap / 2, x1 = cx + gap / 2;
+          var bHb = g.bias / 50 * ph, bHv = g.variance / 50 * ph;
+          var yb = pad.t + ph - bHb, yv = pad.t + ph - bHv;
+          ctx.fillStyle = RED_F;  ctx.fillRect(x0, yb, bW, bHb);
+          ctx.strokeStyle = RED;  ctx.lineWidth = 1.5; ctx.strokeRect(x0, yb, bW, bHb);
+          ctx.fillStyle = BLUE_F; ctx.fillRect(x1, yv, bW, bHv);
+          ctx.strokeStyle = BLUE; ctx.lineWidth = 1.5; ctx.strokeRect(x1, yv, bW, bHv);
+          ctx.fillStyle = TICK; ctx.font = '8px ' + MONO; ctx.textAlign = 'center';
+          ctx.fillText(g.l, cx, pad.t + ph + 20);
+        });
+      }
+
+      /* ── Chart 3: Accuracy vs Training Size (line) ── */
+      function drawTrainingSize() {
+        var s = setup('chartTrainingSize'); if (!s) return;
+        var ctx = s.ctx, W = s.W, H = s.H;
+        var pad = { t: 28, r: 20, b: 52, l: 48 };
+        var pw = W - pad.l - pad.r, ph = H - pad.t - pad.b;
+
+        yGrid(ctx, pad, pw, ph, 55, 100, 5, function(v){ return v + '%'; });
+        legend(ctx, pad, [
+          { l: 'Dec. Tree', c: AMBER },
+          { l: 'Bagging',   c: BLUE  },
+          { l: 'Rand. Forest', c: GOLD }
+        ]);
+
+        var xlabels = ['100','250','500','1k','2.5k','5k','10k'];
+        var series = [
+          { d: [62,68,72,74,75,76,76], c: AMBER, f: AMBER_F },
+          { d: [68,74,79,83,86,87,88], c: BLUE,  f: BLUE_F  },
+          { d: [71,78,83,88,90,92,93], c: GOLD,  f: GOLD_F  }
+        ];
+        var n = xlabels.length;
+        function ptX(i) { return pad.l + (i / (n - 1)) * pw; }
+        function ptY(v) { return pad.t + ph - (v - 55) / 45 * ph; }
+
+        ctx.fillStyle = TICK; ctx.font = '8px ' + MONO; ctx.textAlign = 'center';
+        xlabels.forEach(function(l, i) { ctx.fillText(l, ptX(i), pad.t + ph + 20); });
+
+        series.forEach(function (sr) {
+          ctx.beginPath();
+          ctx.moveTo(ptX(0), ptY(sr.d[0]));
+          for (var i = 1; i < n; i++) ctx.lineTo(ptX(i), ptY(sr.d[i]));
+          ctx.lineTo(ptX(n - 1), pad.t + ph); ctx.lineTo(ptX(0), pad.t + ph);
+          ctx.closePath(); ctx.fillStyle = sr.f; ctx.fill();
+
+          ctx.beginPath();
+          ctx.moveTo(ptX(0), ptY(sr.d[0]));
+          for (var i = 1; i < n; i++) ctx.lineTo(ptX(i), ptY(sr.d[i]));
+          ctx.strokeStyle = sr.c; ctx.lineWidth = 2; ctx.lineJoin = 'round'; ctx.stroke();
+
+          for (var i = 0; i < n; i++) {
+            ctx.beginPath(); ctx.arc(ptX(i), ptY(sr.d[i]), 3, 0, Math.PI * 2);
+            ctx.fillStyle = sr.c; ctx.fill();
+          }
+        });
+      }
+
+      /* ── Chart 4: Tree Correlation ── */
+      function drawCorrelation() {
+        var s = setup('chartCorrelation'); if (!s) return;
+        var ctx = s.ctx, W = s.W, H = s.H;
+        var pad = { t: 28, r: 20, b: 52, l: 52 };
+        var pw = W - pad.l - pad.r, ph = H - pad.t - pad.b;
+
+        yGrid(ctx, pad, pw, ph, 0, 1, 4, function(v){ return 'r=' + v.toFixed(1); });
+
+        var bars = [
+          { l: 'Bagging',       v: 0.82, c: BLUE, f: BLUE_F },
+          { l: 'Random Forest', v: 0.38, c: GOLD, f: GOLD_F }
+        ];
+        var slotW = pw / bars.length, bW = slotW * 0.54;
+        bars.forEach(function (b, i) {
+          var bH = b.v * ph;
+          var x  = pad.l + i * slotW + (slotW - bW) / 2;
+          var y  = pad.t + ph - bH;
+          ctx.fillStyle = b.f; ctx.fillRect(x, y, bW, bH);
+          ctx.strokeStyle = b.c; ctx.lineWidth = 1.5; ctx.strokeRect(x, y, bW, bH);
+          ctx.fillStyle = b.c; ctx.font = 'bold 11px ' + MONO;
+          ctx.textAlign = 'center'; ctx.fillText('r = ' + b.v.toFixed(2), x + bW / 2, y - 6);
+          ctx.fillStyle = TICK; ctx.font = '8px ' + MONO;
+          ctx.fillText(b.l, x + bW / 2, pad.t + ph + 20);
+        });
+      }
+
+      function drawAll() {
+        drawAccuracy(); drawBiasVariance(); drawTrainingSize(); drawCorrelation();
+      }
+
+      window.addEventListener('load', function () { setTimeout(drawAll, 60); });
+    })();
   </script>
 </body>
 </html>
