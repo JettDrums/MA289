@@ -466,6 +466,122 @@
       margin: 0 4px;
     }
 
+    /* HOW THIS WAS BUILT — TIMELINE */
+    .timeline-section {
+      position: relative;
+      z-index: 1;
+      width: min(860px, 100%);
+      margin-top: 64px;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+    .timeline {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 19px;
+      top: 30px;
+      bottom: 30px;
+      width: 1px;
+      background: linear-gradient(
+        to bottom,
+        transparent,
+        var(--green-dim) 8%,
+        var(--green) 40%,
+        var(--green) 60%,
+        var(--green-dim) 92%,
+        transparent
+      );
+    }
+    .tl-step {
+      position: relative;
+      padding: 0 0 24px 58px;
+    }
+    .tl-step:last-child { padding-bottom: 0; }
+    .tl-dot {
+      position: absolute;
+      left: 11px;
+      top: 16px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      border: 1.5px solid var(--green-bright);
+      background: var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 10px rgba(201,168,76,0.25);
+    }
+    .tl-dot::after {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--green-bright);
+    }
+    .tl-card {
+      background: var(--card);
+      border: 1px solid var(--border-accent);
+      border-left: 2px solid var(--green-dim);
+      padding: 18px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      transition: border-left-color 0.2s;
+    }
+    .tl-card:hover { border-left-color: var(--green-bright); }
+    .tl-num {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 4px;
+      color: var(--green-bright);
+      text-transform: uppercase;
+    }
+    .tl-heading {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 600;
+      font-size: 13px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #e0e0e0;
+    }
+    .tl-body {
+      font-size: 13px;
+      color: var(--text-dim);
+      line-height: 1.75;
+    }
+    .tl-footer {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 18px 24px;
+      border: 1px solid #2a1e00;
+      background: rgba(201,168,76,0.04);
+    }
+    .tl-footer-mark {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 16px;
+      color: var(--green-bright);
+      flex-shrink: 0;
+    }
+    .tl-footer-text {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 2px;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      line-height: 1.7;
+    }
+    .tl-footer-text strong {
+      color: var(--green-bright);
+      font-weight: normal;
+    }
+
     /* DEPLOY TIMESTAMP STRIP */
     .deploy-strip {
       position: relative;
@@ -555,6 +671,7 @@
         <a class="site-nav-link" href="#ml-analysis">ML Analysis</a>
         <a class="site-nav-link" href="#neural-network">Neural Network</a>
         <a class="site-nav-link" href="#vibe-coding">Vibe Coding</a>
+        <a class="site-nav-link" href="#how-built">How It Was Built</a>
       </div>
     </div>
   </nav>
@@ -1081,11 +1198,76 @@
     </div>
   </div>
 
+  <!-- HOW THIS WAS BUILT -->
+  <div class="timeline-section scroll-target" id="how-built">
+
+    <div class="section-header">
+      <div class="section-tag">Section 06</div>
+      <div class="section-title" style="font-size:clamp(16px,2.5vw,20px);">How This Was Built</div>
+      <p class="section-sub">A complete site — charts, neural network, styling — produced entirely through conversation. No code editor opened. No syntax written by hand.</p>
+    </div>
+
+    <div class="timeline">
+
+      <div class="tl-step">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-num">Step 01</div>
+          <div class="tl-heading">Described the site concept to Claude Code in plain English</div>
+          <p class="tl-body">The project started with a single prompt describing what the site should contain — a research showcase for MA289 covering decision trees, ensemble methods, and neural networks. No wireframes, no design files, no specifications beyond plain language.</p>
+        </div>
+      </div>
+
+      <div class="tl-step">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-num">Step 02</div>
+          <div class="tl-heading">Claude generated all HTML, CSS, and JavaScript</div>
+          <p class="tl-body">Every element on this page — the hero card, the navigation bar, the algorithm diagrams, the canvas charts, the live neural network trainer, and all styling — was written by Claude in response to natural language prompts. Zero lines were typed manually.</p>
+        </div>
+      </div>
+
+      <div class="tl-step">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-num">Step 03</div>
+          <div class="tl-heading">Files were committed and pushed to GitHub automatically</div>
+          <p class="tl-body">After each change, Claude staged the relevant files, wrote a commit message, and pushed directly to the GitHub repository — all without leaving the conversation. Each session is fully version-controlled and traceable.</p>
+        </div>
+      </div>
+
+      <div class="tl-step">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-num">Step 04</div>
+          <div class="tl-heading">Vercel detected the push and deployed the site live</div>
+          <p class="tl-body">The repository is connected to Vercel, which monitors the main branch for changes. Every push triggers an automatic build and deployment pipeline. The live site updates within seconds of a commit landing on GitHub, with no manual deploy step.</p>
+        </div>
+      </div>
+
+      <div class="tl-step">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-num">Step 05</div>
+          <div class="tl-heading">Iterated by prompting changes — each one auto-deploying within seconds</div>
+          <p class="tl-body">Every feature on this page — the color scheme, the USMA crest, the fixed navigation bar, the About section, the timeline you are reading right now — was added through a follow-up prompt. Describe the change, Claude writes it, GitHub receives it, Vercel ships it.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="tl-footer">
+      <span class="tl-footer-mark">&#9632;</span>
+      <span class="tl-footer-text"><strong>Zero lines of code</strong> were written manually &mdash; every character of HTML, CSS, and JavaScript on this site was generated through plain language conversation with Claude.</span>
+    </div>
+
+  </div>
+
   <script>
     /* Nav active link tracker */
     (function() {
       const links = document.querySelectorAll('.site-nav-link');
-      const ids = ['overview', 'ml-analysis', 'neural-network', 'vibe-coding'];
+      const ids = ['overview', 'ml-analysis', 'neural-network', 'vibe-coding', 'how-built'];
       function update() {
         let current = ids[0];
         for (const id of ids) {
