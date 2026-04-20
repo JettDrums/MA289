@@ -18,8 +18,8 @@
       --border: #1e1e1e;
       --border-accent: #2a2a2a;
       --text: #c8c8c8;
-      --text-dim: #5a5a5a;
-      --text-muted: #3a3a3a;
+      --text-dim: #8c8c8c;
+      --text-muted: #5a5a5a;
       --blue: #4a7fa0;
       --blue-bright: #5bc8f5;
       --amber: #c8922a;
@@ -416,11 +416,12 @@
     .tag.mid  { color: var(--blue-bright); border-color: var(--blue); }
 
     /* CHART GRID */
-    .chart-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; }
+    .chart-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+    @media (max-width: 600px) { .chart-grid { grid-template-columns: 1fr; } }
     .chart-card { background: var(--card); border: 1px solid var(--border-accent); padding: 28px 24px; display: flex; flex-direction: column; gap: 14px; overflow-x: auto; }
     .chart-title { font-family: 'Oswald', sans-serif; font-size: 13px; letter-spacing: 3px; text-transform: uppercase; color: #e0e0e0; }
     .chart-note  { font-size: 12px; color: var(--text-dim); line-height: 1.65; }
-    .chart-wrap  { position: relative; height: 220px; }
+    .chart-wrap  { position: relative; height: 280px; }
 
     /* USE CARDS */
     .use-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
@@ -666,11 +667,95 @@
     .timeline-section {
       position: relative;
       z-index: 1;
-      width: min(860px, 100%);
+      width: min(1100px, 100%);
       margin-top: 64px;
       display: flex;
       flex-direction: column;
       gap: 40px;
+    }
+    .tl-two-col {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 32px;
+      align-items: start;
+    }
+    @media (max-width: 860px) { .tl-two-col { grid-template-columns: 1fr; } }
+    .tl-left { display: flex; flex-direction: column; gap: 24px; }
+
+    /* FLOWCHART PANEL */
+    .fc-panel {
+      background: var(--card);
+      border: 1px solid var(--border-accent);
+      padding: 22px 20px 24px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+    .fc-panel::before, .fc-panel::after {
+      content: '';
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-color: var(--green-dim);
+      border-style: solid;
+    }
+    .fc-panel::before { top: -1px; left: -1px; border-width: 1px 0 0 1px; }
+    .fc-panel::after  { bottom: -1px; right: -1px; border-width: 0 1px 1px 0; }
+    .fc-panel-title {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--green-bright);
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 18px;
+    }
+    .fc-node {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      padding: 9px 12px;
+      background: rgba(0,0,0,0.35);
+      border: 1px solid var(--border);
+      transition: border-color 0.2s;
+    }
+    .fc-node:hover { border-color: var(--border-accent); }
+    .fc-arrow {
+      width: 1px;
+      height: 14px;
+      background: linear-gradient(to bottom, var(--green-dim), var(--green-dim));
+      margin-left: 43px;
+      flex-shrink: 0;
+    }
+    .fc-icon {
+      width: 28px;
+      height: 28px;
+      flex-shrink: 0;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Oswald', sans-serif;
+      font-weight: 600;
+      font-size: 13px;
+      color: #fff;
+      letter-spacing: 0;
+    }
+    .fc-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+    .fc-label {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 1px;
+      color: var(--text);
+      line-height: 1.3;
+    }
+    .fc-sub {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 8px;
+      letter-spacing: 0.5px;
+      color: var(--text-dim);
+      line-height: 1.4;
     }
     .timeline {
       position: relative;
@@ -1406,59 +1491,155 @@
       <p class="section-sub">A complete site — charts, interactive demos, styling — produced entirely through conversation. No code editor opened. No syntax written by hand.</p>
     </div>
 
-    <div class="timeline">
+    <div class="tl-two-col">
 
-      <div class="tl-step">
-        <div class="tl-dot"></div>
-        <div class="tl-card">
-          <div class="tl-num">Step 01</div>
-          <div class="tl-heading">Described the site concept to Claude Code in plain English</div>
-          <p class="tl-body">The project started with a single prompt describing what the site should contain — a research showcase for MA289 covering decision trees, bagging, and random forest ensemble methods. No wireframes, no design files, no specifications beyond plain language.</p>
+      <!-- LEFT: Timeline + footer -->
+      <div class="tl-left">
+        <div class="timeline">
+
+          <div class="tl-step">
+            <div class="tl-dot"></div>
+            <div class="tl-card">
+              <div class="tl-num">Step 01</div>
+              <div class="tl-heading">Described the site concept to Claude Code in plain English</div>
+              <p class="tl-body">The project started with a single prompt describing what the site should contain — a research showcase for MA289 covering decision trees, bagging, and random forest ensemble methods. No wireframes, no design files, no specifications beyond plain language.</p>
+            </div>
+          </div>
+
+          <div class="tl-step">
+            <div class="tl-dot"></div>
+            <div class="tl-card">
+              <div class="tl-num">Step 02</div>
+              <div class="tl-heading">Claude generated all HTML, CSS, and JavaScript</div>
+              <p class="tl-body">Every element on this page — the hero card, the navigation bar, the algorithm diagrams, the canvas charts, the interactive RF explorer, and all styling — was written by Claude in response to natural language prompts. Zero lines were typed manually.</p>
+            </div>
+          </div>
+
+          <div class="tl-step">
+            <div class="tl-dot"></div>
+            <div class="tl-card">
+              <div class="tl-num">Step 03</div>
+              <div class="tl-heading">Files were committed and pushed to GitHub automatically</div>
+              <p class="tl-body">After each change, Claude staged the relevant files, wrote a commit message, and pushed directly to the GitHub repository — all without leaving the conversation. Each session is fully version-controlled and traceable.</p>
+            </div>
+          </div>
+
+          <div class="tl-step">
+            <div class="tl-dot"></div>
+            <div class="tl-card">
+              <div class="tl-num">Step 04</div>
+              <div class="tl-heading">Vercel detected the push and deployed the site live</div>
+              <p class="tl-body">The repository is connected to Vercel, which monitors the main branch for changes. Every push triggers an automatic build and deployment pipeline. The live site updates within seconds of a commit landing on GitHub, with no manual deploy step.</p>
+            </div>
+          </div>
+
+          <div class="tl-step">
+            <div class="tl-dot"></div>
+            <div class="tl-card">
+              <div class="tl-num">Step 05</div>
+              <div class="tl-heading">Iterated by prompting changes — each one auto-deploying within seconds</div>
+              <p class="tl-body">Every feature on this page — the color scheme, the USMA crest, the fixed navigation bar, the About section, the timeline you are reading right now — was added through a follow-up prompt. Describe the change, Claude writes it, GitHub receives it, Vercel ships it.</p>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="tl-footer">
+          <span class="tl-footer-mark">&#9632;</span>
+          <span class="tl-footer-text"><strong>Zero lines of code</strong> were written manually &mdash; every character of HTML, CSS, and JavaScript on this site was generated through plain language conversation with Claude.</span>
         </div>
       </div>
 
-      <div class="tl-step">
-        <div class="tl-dot"></div>
-        <div class="tl-card">
-          <div class="tl-num">Step 02</div>
-          <div class="tl-heading">Claude generated all HTML, CSS, and JavaScript</div>
-          <p class="tl-body">Every element on this page — the hero card, the navigation bar, the algorithm diagrams, the canvas charts, the interactive RF explorer, and all styling — was written by Claude in response to natural language prompts. Zero lines were typed manually.</p>
+      <!-- RIGHT: Infrastructure flowchart -->
+      <div class="fc-panel">
+        <div class="fc-panel-title">Full Setup Infrastructure</div>
+
+        <!-- Node 1: Enterprise access needed -->
+        <div class="fc-node">
+          <div class="fc-icon" style="background:#c9553f;">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L2 19.5h20L12 2zm0 3.5l7.5 13H4.5L12 5.5z"/></svg>
+          </div>
+          <div class="fc-text">
+            <div class="fc-label">Claude Enterprise Access</div>
+            <div class="fc-sub">Licensed accounts needed for cadet team</div>
+          </div>
         </div>
-      </div>
+        <div class="fc-arrow"></div>
 
-      <div class="tl-step">
-        <div class="tl-dot"></div>
-        <div class="tl-card">
-          <div class="tl-num">Step 03</div>
-          <div class="tl-heading">Files were committed and pushed to GitHub automatically</div>
-          <p class="tl-body">After each change, Claude staged the relevant files, wrote a commit message, and pushed directly to the GitHub repository — all without leaving the conversation. Each session is fully version-controlled and traceable.</p>
+        <!-- Node 2: IONOS domain -->
+        <div class="fc-node">
+          <div class="fc-icon" style="background:#003d8f;">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="white" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="5" r="3"/><rect x="10" y="10" width="4" height="11" rx="1"/></svg>
+          </div>
+          <div class="fc-text">
+            <div class="fc-label">IONOS &mdash; Register Domain</div>
+            <div class="fc-sub">dennis-pezan.com</div>
+          </div>
         </div>
-      </div>
+        <div class="fc-arrow"></div>
 
-      <div class="tl-step">
-        <div class="tl-dot"></div>
-        <div class="tl-card">
-          <div class="tl-num">Step 04</div>
-          <div class="tl-heading">Vercel detected the push and deployed the site live</div>
-          <p class="tl-body">The repository is connected to Vercel, which monitors the main branch for changes. Every push triggers an automatic build and deployment pipeline. The live site updates within seconds of a commit landing on GitHub, with no manual deploy step.</p>
+        <!-- Node 3: Zoho email -->
+        <div class="fc-node">
+          <div class="fc-icon" style="background:#c8202f;">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M4 5h16v3L8 16h12v3H4v-3l12-8H4V5z"/></svg>
+          </div>
+          <div class="fc-text">
+            <div class="fc-label">Zoho &mdash; Business Email</div>
+            <div class="fc-sub">dp@dennis-pezan.com</div>
+          </div>
         </div>
-      </div>
+        <div class="fc-arrow"></div>
 
-      <div class="tl-step">
-        <div class="tl-dot"></div>
-        <div class="tl-card">
-          <div class="tl-num">Step 05</div>
-          <div class="tl-heading">Iterated by prompting changes — each one auto-deploying within seconds</div>
-          <p class="tl-body">Every feature on this page — the color scheme, the USMA crest, the fixed navigation bar, the About section, the timeline you are reading right now — was added through a follow-up prompt. Describe the change, Claude writes it, GitHub receives it, Vercel ships it.</p>
+        <!-- Node 4: Enroll cadets -->
+        <div class="fc-node">
+          <div class="fc-icon" style="background:#2a6099;">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="white" xmlns="http://www.w3.org/2000/svg"><circle cx="9" cy="7" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="18" cy="8" r="2.5"/><path d="M15 20c0-2.5 1.3-4.5 3-5"/></svg>
+          </div>
+          <div class="fc-text">
+            <div class="fc-label">Enrolled 5 Cadets</div>
+            <div class="fc-sub">Added as business members &rarr; all 6 licensed</div>
+          </div>
         </div>
-      </div>
+        <div class="fc-arrow"></div>
 
-    </div>
+        <!-- Node 5: Claude Code builds site -->
+        <div class="fc-node">
+          <div class="fc-icon" style="background:#c9553f;">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" xmlns="http://www.w3.org/2000/svg"><polyline points="4 9 8 12 4 15"/><line x1="12" y1="15" x2="19" y2="15"/></svg>
+          </div>
+          <div class="fc-text">
+            <div class="fc-label">Claude Code</div>
+            <div class="fc-sub">Entire site built via plain-language prompts</div>
+          </div>
+        </div>
+        <div class="fc-arrow"></div>
 
-    <div class="tl-footer">
-      <span class="tl-footer-mark">&#9632;</span>
-      <span class="tl-footer-text"><strong>Zero lines of code</strong> were written manually &mdash; every character of HTML, CSS, and JavaScript on this site was generated through plain language conversation with Claude.</span>
-    </div>
+        <!-- Node 6: GitHub push -->
+        <div class="fc-node">
+          <div class="fc-icon" style="background:#161b22;">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+          </div>
+          <div class="fc-text">
+            <div class="fc-label">GitHub &mdash; Push Repository</div>
+            <div class="fc-sub">JettDrums/MA289 &rarr; auto-commit by Claude</div>
+          </div>
+        </div>
+        <div class="fc-arrow"></div>
+
+        <!-- Node 7: Vercel deploy -->
+        <div class="fc-node">
+          <div class="fc-icon" style="background:#000000;">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M24 22.525H0l12-21.05 12 21.05z"/></svg>
+          </div>
+          <div class="fc-text">
+            <div class="fc-label">Vercel &mdash; Auto-Deploy</div>
+            <div class="fc-sub">ma-289.vercel.app live within 30s</div>
+          </div>
+        </div>
+
+      </div><!-- end fc-panel -->
+
+    </div><!-- end tl-two-col -->
 
   </div>
 
