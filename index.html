@@ -174,7 +174,6 @@
 
       /* Section wrappers */
       .ml-section        { margin-top: 40px; gap: 28px; }
-      .nn-section        { margin-top: 40px; gap: 32px; }
       .rf-demo-section   { margin-top: 40px; }
       .timeline-section  { margin-top: 40px; gap: 28px; }
 
@@ -186,18 +185,6 @@
       /* Summary table — relies on chart-card overflow-x:auto */
       .summary-table { min-width: 500px; font-size: 11px; }
       .summary-table th, .summary-table td { padding: 9px 10px; }
-
-      /* NN architecture */
-      .nn-node      { width: 26px; height: 26px; font-size: 8px; }
-      .nn-connector { min-width: 10px; max-width: 28px; }
-      .nn-arch-row  { padding: 12px 0 4px; }
-
-      /* NN prediction table */
-      .nn-pred-table th,
-      .nn-pred-table td { padding: 8px 8px; font-size: 11px; }
-
-      /* NN stat values */
-      .nn-stat-value { font-size: 17px; }
 
       /* RF Demo */
       .rf-panel      { padding: 20px 16px; gap: 20px; }
@@ -237,12 +224,6 @@
       /* Summary table tighter */
       .summary-table { font-size: 10px; }
       .summary-table th, .summary-table td { padding: 7px 8px; }
-
-      /* NN nodes even smaller */
-      .nn-node      { width: 24px; height: 24px; font-size: 7px; }
-      .nn-connector { min-width: 8px; max-width: 20px; }
-      .nn-controls  { flex-direction: column; }
-      .nn-btn       { width: 100%; text-align: center; }
 
       /* Timeline tighter */
       .tl-step { padding: 0 0 16px 40px; }
@@ -476,147 +457,74 @@
 
     .full-divider { width: 100%; height: 1px; background: var(--border); }
 
-    /* NEURAL NETWORK SECTION */
-    .nn-section {
-      position: relative;
-      z-index: 1;
-      width: min(1100px, 100%);
-      margin-top: 64px;
+    /* MATH BLOCK — inline formula displays inside algo cards */
+    .math-block {
+      padding: 14px 16px;
+      background: rgba(0,0,0,0.4);
+      border: 1px solid var(--border);
       display: flex;
       flex-direction: column;
-      gap: 48px;
+      gap: 10px;
     }
-    .nn-two-col {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 24px;
-    }
-    .nn-meta {
-      display: flex;
-      gap: 24px;
-      flex-wrap: wrap;
-    }
-    .nn-stat {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-    .nn-stat-label {
+    .math-block-label {
       font-family: 'Share Tech Mono', monospace;
-      font-size: 9px;
+      font-size: 8px;
       letter-spacing: 4px;
       text-transform: uppercase;
-      color: var(--text-muted);
-    }
-    .nn-stat-value {
-      font-family: 'Share Tech Mono', monospace;
-      font-size: 20px;
-      color: var(--green-bright);
-      text-shadow: 0 0 12px rgba(201,168,76,0.3);
-    }
-    .nn-stat-value.amber { color: var(--amber-bright); text-shadow: 0 0 10px rgba(245,200,66,0.2); }
-
-    canvas.loss-canvas {
-      display: block;
-      width: 100%;
-      height: 100%;
-      background: transparent;
-    }
-
-    .nn-pred-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 13px;
-    }
-    .nn-pred-table th {
-      font-family: 'Share Tech Mono', monospace;
-      font-size: 9px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--green);
-      padding: 10px 14px;
-      text-align: left;
-      border-bottom: 1px solid var(--border-accent);
-    }
-    .nn-pred-table td {
-      padding: 11px 14px;
-      border-bottom: 1px solid var(--border);
-      font-family: 'Share Tech Mono', monospace;
-      font-size: 12px;
-      color: var(--text);
-    }
-    .nn-pred-table tr:last-child td { border-bottom: none; }
-    .pred-val { font-size: 13px; }
-    .pred-val.correct { color: var(--green-bright); }
-    .pred-val.wrong   { color: #ff6b6b; }
-
-    .nn-controls {
       display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-top: 4px;
-    }
-    .nn-btn {
-      font-family: 'Share Tech Mono', monospace;
-      font-size: 10px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      padding: 10px 20px;
-      border: 1px solid var(--green);
-      background: transparent;
-      color: var(--green-bright);
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-    .nn-btn:hover  { background: rgba(201,168,76,0.12); }
-    .nn-btn:active { background: rgba(201,168,76,0.22); }
-    .nn-btn.secondary { border-color: var(--border-accent); color: var(--text-dim); }
-    .nn-btn.secondary:hover { background: rgba(255,255,255,0.04); color: var(--text); }
-    .nn-btn:disabled { opacity: 0.35; cursor: not-allowed; }
-
-    .nn-arch-row {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0;
-      padding: 20px 0 4px;
-    }
-    .nn-layer {
-      display: flex;
-      flex-direction: column;
       align-items: center;
       gap: 10px;
     }
-    .nn-layer-label {
+    .math-block-label::after { content: ''; flex: 0 0 20px; height: 1px; background: currentColor; opacity: 0.3; }
+    .algo-card.tree    .math-block-label { color: var(--amber); }
+    .algo-card.bagging .math-block-label { color: var(--blue-bright); }
+    .algo-card.rf      .math-block-label { color: var(--green); }
+
+    .math-eq {
       font-family: 'Share Tech Mono', monospace;
-      font-size: 9px;
-      letter-spacing: 2px;
+      font-size: 12px;
+      color: #d8d8d8;
+      line-height: 2.0;
+      letter-spacing: 0.2px;
+    }
+    .math-eq .hl { font-weight: 600; }
+    .algo-card.tree    .math-eq .hl { color: var(--amber-bright); }
+    .algo-card.bagging .math-eq .hl { color: var(--blue-bright); }
+    .algo-card.rf      .math-eq .hl { color: var(--green-bright); }
+
+    .math-example {
+      border-top: 1px solid var(--border);
+      padding-top: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .math-example-hdr {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 7px;
+      letter-spacing: 3px;
       text-transform: uppercase;
       color: var(--text-muted);
-      margin-bottom: 4px;
+      margin-bottom: 3px;
     }
-    .nn-node {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      border: 1px solid;
+    .math-example-row {
       display: flex;
-      align-items: center;
-      justify-content: center;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 8px;
       font-family: 'Share Tech Mono', monospace;
-      font-size: 9px;
+      font-size: 10px;
+      color: var(--text-dim);
     }
-    .nn-node.input  { border-color: var(--amber); color: var(--amber-bright); background: rgba(200,146,42,0.08); }
-    .nn-node.hidden { border-color: var(--blue);  color: var(--blue-bright);  background: rgba(74,127,160,0.08); }
-    .nn-node.output { border-color: var(--green); color: var(--green-bright); background: rgba(201,168,76,0.08); }
-    .nn-connector {
-      flex: 1;
-      height: 1px;
-      background: linear-gradient(to right, var(--border-accent), var(--border));
-      min-width: 20px;
-      max-width: 60px;
-      align-self: center;
-      margin: 0 4px;
+    .math-example-row .val { color: var(--amber-bright); font-size: 11px; white-space: nowrap; }
+    .math-example-row.gain .val { color: var(--green-bright); }
+
+    .math-note {
+      font-size: 11px;
+      color: var(--text-dim);
+      line-height: 1.7;
+      border-top: 1px solid var(--border);
+      padding-top: 8px;
     }
 
     /* RF INTERACTIVE DEMO */
@@ -960,7 +868,6 @@
       <div class="site-nav-links" id="navLinks">
         <a class="site-nav-link" href="#overview">Overview</a>
         <a class="site-nav-link" href="#ml-analysis">ML Analysis</a>
-        <a class="site-nav-link" href="#neural-network">Neural Network</a>
         <a class="site-nav-link" href="#rf-demo">RF Demo</a>
         <a class="site-nav-link" href="#vibe-coding">Vibe Coding</a>
         <a class="site-nav-link" href="#how-built">How It Was Built</a>
@@ -1022,7 +929,7 @@
       <div class="about-body">
         <p class="about-line">
           This site is the research project for <strong>MA289</strong>, an undergraduate AI and machine learning research course at the United States Military Academy.
-          The research is conducted under <strong>Major Patrick Kuiper</strong> and focuses on decision tree methodology, ensemble learning, and neural network training.
+          The research is conducted under <strong>Major Patrick Kuiper</strong> and focuses on decision tree methodology, bagging, and random forest ensemble learning.
         </p>
         <p class="about-line">
           The site itself was built entirely through <strong>vibe coding</strong> — every line of HTML, CSS, and JavaScript was generated by Claude through plain language prompts, with no manual coding.
@@ -1078,6 +985,17 @@
           It picks the feature and threshold that best separates the classes at each step.
           Fast to train and easy to visualize, but it tends to memorize training data rather than learn general patterns.
         </p>
+        <div class="math-block">
+          <div class="math-block-label">Split Criterion &mdash; Gini Impurity</div>
+          <div class="math-eq">G(t) = 1 &minus; p<sub>1</sub><sup>2</sup> &minus; p<sub>2</sub><sup>2</sup> &minus; &hellip; &minus; p<sub>k</sub><sup>2</sup></div>
+          <div class="math-example">
+            <div class="math-example-hdr">Worked split &mdash; 10 samples (6 enemy / 4 friendly)</div>
+            <div class="math-example-row"><span>Before split:</span><span class="val">G = 1 &minus; 0.6<sup>2</sup> &minus; 0.4<sup>2</sup> = <span class="hl">0.480</span></span></div>
+            <div class="math-example-row"><span>After best split:</span><span class="val">G&#x0303; = (8/10)(0.219) + (2/10)(0.500) = <span class="hl">0.275</span></span></div>
+            <div class="math-example-row gain"><span>Gini gain:</span><span class="val">0.480 &minus; 0.275 = <span class="hl">0.205 &#x2191;</span></span></div>
+          </div>
+          <p class="math-note">G&thinsp;=&thinsp;0 is a perfectly pure node. Every split picks the threshold that minimizes the weighted Gini of the two children.</p>
+        </div>
         <svg class="algo-diagram" viewBox="0 0 260 145" xmlns="http://www.w3.org/2000/svg">
           <rect x="90" y="8" width="80" height="26" rx="3" fill="#1a1200" stroke="#c8922a" stroke-width="1"/>
           <text x="130" y="25" text-anchor="middle" font-family="Share Tech Mono,monospace" font-size="9" fill="#c8922a">Feature A</text>
@@ -1117,6 +1035,11 @@
           Final predictions come from a majority vote or average across all trees.
           Every tree still has access to all features at every split.
         </p>
+        <div class="math-block">
+          <div class="math-block-label">Bootstrap Sampling + Variance Reduction</div>
+          <div class="math-eq">P(sample in bag) &asymp; <span class="hl">63.2%</span> &nbsp;= 1 &minus; e<sup>&minus;1</sup><br>Var(T&#x0305;<sub>B</sub>) = <span class="hl">&rho;&sigma;<sup>2</sup></span> + (1 &minus; &rho;)&sigma;<sup>2</sup> / B</div>
+          <p class="math-note"><span class="hl">&rho;</span> is the pairwise correlation between trees. The <span class="hl">&rho;&sigma;<sup>2</sup></span> term is a hard floor &mdash; adding more trees never removes it. Only reducing &rho; does. That is exactly what random forests target.</p>
+        </div>
         <svg class="algo-diagram" viewBox="0 0 260 145" xmlns="http://www.w3.org/2000/svg">
           <rect x="10" y="8" width="60" height="22" rx="2" fill="#0a1520" stroke="#4a7fa0" stroke-width="1"/>
           <text x="40" y="23" text-anchor="middle" font-family="Share Tech Mono,monospace" font-size="8" fill="#5bc8f5">Tree 1</text>
@@ -1167,6 +1090,11 @@
           Like bagging but with one critical addition. At each node split, only a random subset of features is considered rather than all of them.
           This prevents any single strong feature from dominating every tree, making the trees genuinely different from each other and the ensemble far more powerful.
         </p>
+        <div class="math-block">
+          <div class="math-block-label">Feature Subset Rule + Decorrelation</div>
+          <div class="math-eq">m = <span class="hl">&#x230A;&radic;p&#x230B;</span> &nbsp;features per split &nbsp;(p=10 &rarr; m=3)<br><br>Bagging: &rho; &asymp; <span style="color:#ff6b6b">0.82</span> &nbsp;&rarr;&nbsp; floor = <span style="color:#ff6b6b">0.82</span>&thinsp;&sigma;<sup>2</sup><br>RF:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&rho; &asymp; <span class="hl">0.38</span> &nbsp;&rarr;&nbsp; floor = <span class="hl">0.38</span>&thinsp;&sigma;<sup>2</sup></div>
+          <p class="math-note">Forcing each split to consider only m features stops dominant features from appearing in every tree. Cutting &rho; from 0.82 to 0.38 more than halves the irreducible variance floor &mdash; gains no number of bagging trees could achieve.</p>
+        </div>
         <svg class="algo-diagram" viewBox="0 0 260 145" xmlns="http://www.w3.org/2000/svg">
           <rect x="10" y="8" width="60" height="22" rx="2" fill="#12100a" stroke="#8B6820" stroke-width="1"/>
           <text x="40" y="23" text-anchor="middle" font-family="Share Tech Mono,monospace" font-size="8" fill="#C9A84C">Tree 1</text>
@@ -1394,102 +1322,6 @@
 
   </div>
 
-  <!-- NEURAL NETWORK SECTION -->
-  <div class="nn-section scroll-target" id="neural-network">
-
-    <div class="section-header">
-      <div class="section-tag">Section 05</div>
-      <div class="section-title" style="font-size:clamp(16px,2.5vw,20px);">Live Neural Network</div>
-    </div>
-
-    <div class="insight">
-      <div class="insight-label">XOR Problem</div>
-      <p>
-        XOR outputs 1 only when the two inputs differ. No single straight line can separate the classes, which makes it impossible for a linear model to solve.
-        A neural network with at least one hidden layer can learn the nonlinear boundary.
-        This network trains entirely in your browser using vanilla JavaScript with no external libraries.
-      </p>
-    </div>
-
-    <!-- Architecture diagram -->
-    <div class="chart-card" style="gap:10px;">
-      <div class="chart-title">Network Architecture &nbsp; 2 &rarr; 4 &rarr; 1</div>
-      <p class="chart-note">Two inputs feed into four hidden neurons with sigmoid activation, which feed into a single sigmoid output neuron predicting 0 or 1.</p>
-      <div class="nn-arch-row">
-        <div class="nn-layer">
-          <div class="nn-layer-label">Input</div>
-          <div class="nn-node input">x1</div>
-          <div class="nn-node input">x2</div>
-        </div>
-        <div class="nn-connector"></div>
-        <div class="nn-layer">
-          <div class="nn-layer-label">Hidden (4)</div>
-          <div class="nn-node hidden">h1</div>
-          <div class="nn-node hidden">h2</div>
-          <div class="nn-node hidden">h3</div>
-          <div class="nn-node hidden">h4</div>
-        </div>
-        <div class="nn-connector"></div>
-        <div class="nn-layer">
-          <div class="nn-layer-label">Output</div>
-          <div class="nn-node output">out</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="nn-two-col">
-
-      <!-- Loss curve -->
-      <div class="chart-card">
-        <div class="chart-title">Training Loss (Mean Squared Error)</div>
-        <div class="nn-meta">
-          <div class="nn-stat">
-            <div class="nn-stat-label">Epoch</div>
-            <div class="nn-stat-value" id="nnEpoch">0</div>
-          </div>
-          <div class="nn-stat">
-            <div class="nn-stat-label">Loss</div>
-            <div class="nn-stat-value amber" id="nnLoss">0.2500</div>
-          </div>
-          <div class="nn-stat">
-            <div class="nn-stat-label">Status</div>
-            <div class="nn-stat-value" id="nnStatus" style="font-size:12px;letter-spacing:2px;padding-top:4px;">READY</div>
-          </div>
-        </div>
-        <div class="chart-wrap" style="height:200px;">
-          <canvas class="loss-canvas" id="lossCanvas"></canvas>
-        </div>
-      </div>
-
-      <!-- Predictions -->
-      <div class="chart-card">
-        <div class="chart-title">XOR Predictions</div>
-        <table class="nn-pred-table">
-          <thead>
-            <tr>
-              <th>x1</th>
-              <th>x2</th>
-              <th>Expected</th>
-              <th>Predicted</th>
-              <th>Output</th>
-            </tr>
-          </thead>
-          <tbody id="predBody">
-            <tr><td>0</td><td>0</td><td>0</td><td class="pred-val" id="p00">--</td><td id="r00" style="color:var(--text-muted);">--</td></tr>
-            <tr><td>0</td><td>1</td><td>1</td><td class="pred-val" id="p01">--</td><td id="r01" style="color:var(--text-muted);">--</td></tr>
-            <tr><td>1</td><td>0</td><td>1</td><td class="pred-val" id="p10">--</td><td id="r10" style="color:var(--text-muted);">--</td></tr>
-            <tr><td>1</td><td>1</td><td>0</td><td class="pred-val" id="p11">--</td><td id="r11" style="color:var(--text-muted);">--</td></tr>
-          </tbody>
-        </table>
-        <div class="nn-controls">
-          <button class="nn-btn" id="btnTrain">Train Network</button>
-          <button class="nn-btn secondary" id="btnReset">Reset</button>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
   <!-- RF INTERACTIVE DEMO -->
   <div class="rf-demo-section scroll-target" id="rf-demo">
 
@@ -1569,9 +1401,9 @@
   <div class="timeline-section scroll-target" id="how-built">
 
     <div class="section-header">
-      <div class="section-tag">Section 06</div>
+      <div class="section-tag">Section 05</div>
       <div class="section-title" style="font-size:clamp(16px,2.5vw,20px);">How This Was Built</div>
-      <p class="section-sub">A complete site — charts, neural network, styling — produced entirely through conversation. No code editor opened. No syntax written by hand.</p>
+      <p class="section-sub">A complete site — charts, interactive demos, styling — produced entirely through conversation. No code editor opened. No syntax written by hand.</p>
     </div>
 
     <div class="timeline">
@@ -1581,7 +1413,7 @@
         <div class="tl-card">
           <div class="tl-num">Step 01</div>
           <div class="tl-heading">Described the site concept to Claude Code in plain English</div>
-          <p class="tl-body">The project started with a single prompt describing what the site should contain — a research showcase for MA289 covering decision trees, ensemble methods, and neural networks. No wireframes, no design files, no specifications beyond plain language.</p>
+          <p class="tl-body">The project started with a single prompt describing what the site should contain — a research showcase for MA289 covering decision trees, bagging, and random forest ensemble methods. No wireframes, no design files, no specifications beyond plain language.</p>
         </div>
       </div>
 
@@ -1590,7 +1422,7 @@
         <div class="tl-card">
           <div class="tl-num">Step 02</div>
           <div class="tl-heading">Claude generated all HTML, CSS, and JavaScript</div>
-          <p class="tl-body">Every element on this page — the hero card, the navigation bar, the algorithm diagrams, the canvas charts, the live neural network trainer, and all styling — was written by Claude in response to natural language prompts. Zero lines were typed manually.</p>
+          <p class="tl-body">Every element on this page — the hero card, the navigation bar, the algorithm diagrams, the canvas charts, the interactive RF explorer, and all styling — was written by Claude in response to natural language prompts. Zero lines were typed manually.</p>
         </div>
       </div>
 
@@ -1661,7 +1493,7 @@
     /* Nav active link tracker */
     (function() {
       const links = document.querySelectorAll('.site-nav-link');
-      const ids = ['overview', 'ml-analysis', 'neural-network', 'rf-demo', 'vibe-coding', 'how-built'];
+      const ids = ['overview', 'ml-analysis', 'rf-demo', 'vibe-coding', 'how-built'];
       function update() {
         let current = ids[0];
         for (const id of ids) {
@@ -1688,217 +1520,6 @@
     }
     tick();
     setInterval(tick, 1000);
-
-    /* ── Neural Network ─────────────────────────────────────────── */
-    const XOR_DATA = [[[0,0],0], [[0,1],1], [[1,0],1], [[1,1],0]];
-    const MAX_EPOCHS = 10000;
-    const EPOCHS_PER_FRAME = 80;
-    const LR = 0.5;
-    const HIDDEN = 4;
-
-    let net, losses, epoch, rafId, running;
-
-    function rand() { return (Math.random() - 0.5) * 2; }
-    function sigmoid(x) { return 1 / (1 + Math.exp(-x)); }
-
-    function initNet() {
-      return {
-        W1: Array.from({length: HIDDEN}, () => [rand(), rand()]),
-        b1: Array.from({length: HIDDEN}, () => rand() * 0.1),
-        W2: Array.from({length: HIDDEN}, () => rand()),
-        b2: rand() * 0.1
-      };
-    }
-
-    function forward(n, x) {
-      const h = n.W1.map((w, i) => sigmoid(w[0]*x[0] + w[1]*x[1] + n.b1[i]));
-      const out = sigmoid(n.W2.reduce((s, w, i) => s + w*h[i], n.b2));
-      return { h, out };
-    }
-
-    function trainEpoch(n) {
-      let totalLoss = 0;
-      const dW1 = n.W1.map(() => [0,0]);
-      const db1 = new Array(HIDDEN).fill(0);
-      const dW2 = new Array(HIDDEN).fill(0);
-      let db2 = 0;
-
-      for (const [x, y] of XOR_DATA) {
-        const { h, out } = forward(n, x);
-        totalLoss += (out - y) ** 2;
-        const dOut = 2 * (out - y) * out * (1 - out);
-        for (let i = 0; i < HIDDEN; i++) {
-          dW2[i] += dOut * h[i];
-          const dH = dOut * n.W2[i] * h[i] * (1 - h[i]);
-          dW1[i][0] += dH * x[0];
-          dW1[i][1] += dH * x[1];
-          db1[i] += dH;
-        }
-        db2 += dOut;
-      }
-
-      const m = XOR_DATA.length;
-      for (let i = 0; i < HIDDEN; i++) {
-        n.W1[i][0] -= LR * dW1[i][0] / m;
-        n.W1[i][1] -= LR * dW1[i][1] / m;
-        n.b1[i]    -= LR * db1[i] / m;
-        n.W2[i]    -= LR * dW2[i] / m;
-      }
-      n.b2 -= LR * db2 / m;
-
-      return totalLoss / m;
-    }
-
-    /* Canvas drawing */
-    function drawLoss(canvas, losses) {
-      const dpr = window.devicePixelRatio || 1;
-      const W = canvas.offsetWidth;
-      const H = canvas.offsetHeight;
-      if (W === 0 || H === 0) return;
-      canvas.width  = W * dpr;
-      canvas.height = H * dpr;
-      const ctx = canvas.getContext('2d');
-      ctx.scale(dpr, dpr);
-
-      const pad = { t: 16, r: 16, b: 36, l: 46 };
-      const pw = W - pad.l - pad.r;
-      const ph = H - pad.t - pad.b;
-
-      ctx.fillStyle = '#0f0f0f';
-      ctx.fillRect(0, 0, W, H);
-
-      /* grid */
-      ctx.strokeStyle = 'rgba(255,255,255,0.04)';
-      ctx.lineWidth = 1;
-      for (let i = 0; i <= 4; i++) {
-        const y = pad.t + (i / 4) * ph;
-        ctx.beginPath(); ctx.moveTo(pad.l, y); ctx.lineTo(pad.l + pw, y); ctx.stroke();
-        ctx.fillStyle = '#3a3a3a';
-        ctx.font = '9px Share Tech Mono, monospace';
-        ctx.textAlign = 'right';
-        ctx.fillText((0.25 - i * 0.0625).toFixed(3), pad.l - 6, y + 3);
-      }
-      for (let i = 0; i <= 4; i++) {
-        const x = pad.l + (i / 4) * pw;
-        ctx.beginPath(); ctx.moveTo(x, pad.t); ctx.lineTo(x, pad.t + ph); ctx.stroke();
-        ctx.fillStyle = '#3a3a3a';
-        ctx.textAlign = 'center';
-        ctx.fillText(Math.round((i / 4) * MAX_EPOCHS / 1000) + 'k', x, pad.t + ph + 18);
-      }
-
-      /* axis labels */
-      ctx.fillStyle = '#2e2e2e';
-      ctx.font = '9px Share Tech Mono, monospace';
-      ctx.textAlign = 'center';
-      ctx.fillText('EPOCH', pad.l + pw / 2, H - 2);
-
-      if (losses.length < 2) return;
-
-      /* loss curve — green fill */
-      const step = Math.max(1, Math.floor(losses.length / pw));
-      const pts = [];
-      for (let i = 0; i < losses.length; i += step) pts.push(losses[i]);
-
-      const maxL = 0.25;
-      function px(i) { return pad.l + (i / (pts.length - 1)) * pw; }
-      function py(v) { return pad.t + ph - Math.min(v / maxL, 1) * ph; }
-
-      ctx.beginPath();
-      ctx.moveTo(px(0), py(pts[0]));
-      for (let i = 1; i < pts.length; i++) ctx.lineTo(px(i), py(pts[i]));
-      ctx.lineTo(px(pts.length - 1), pad.t + ph);
-      ctx.lineTo(px(0), pad.t + ph);
-      ctx.closePath();
-      ctx.fillStyle = 'rgba(201,168,76,0.07)';
-      ctx.fill();
-
-      ctx.beginPath();
-      ctx.moveTo(px(0), py(pts[0]));
-      for (let i = 1; i < pts.length; i++) ctx.lineTo(px(i), py(pts[i]));
-      ctx.strokeStyle = '#C9A84C';
-      ctx.lineWidth = 1.5;
-      ctx.stroke();
-    }
-
-    /* UI updates */
-    function updatePreds() {
-      const pairs = [[[0,0],'p00','r00'], [[0,1],'p01','r01'], [[1,0],'p10','r10'], [[1,1],'p11','r11']];
-      const expected = [0, 1, 1, 0];
-      pairs.forEach(([x, pid, rid], idx) => {
-        const { out } = forward(net, x);
-        const pred = Math.round(out);
-        const correct = pred === expected[idx];
-        const el = document.getElementById(pid);
-        const rel = document.getElementById(rid);
-        el.textContent = out.toFixed(4);
-        el.className = 'pred-val ' + (correct ? 'correct' : 'wrong');
-        rel.textContent = correct ? 'PASS' : 'FAIL';
-        rel.style.color = correct ? 'var(--green-bright)' : '#ff6b6b';
-      });
-    }
-
-    function setStatus(text, color) {
-      const el = document.getElementById('nnStatus');
-      el.textContent = text;
-      el.style.color = color || 'var(--green-bright)';
-    }
-
-    /* Training loop */
-    function trainFrame() {
-      for (let i = 0; i < EPOCHS_PER_FRAME; i++) {
-        if (epoch >= MAX_EPOCHS) break;
-        const loss = trainEpoch(net);
-        if (epoch % 10 === 0) losses.push(loss);
-        epoch++;
-      }
-
-      const lastLoss = losses[losses.length - 1];
-      document.getElementById('nnEpoch').textContent = epoch.toLocaleString();
-      document.getElementById('nnLoss').textContent = lastLoss.toFixed(6);
-      drawLoss(document.getElementById('lossCanvas'), losses);
-      updatePreds();
-
-      if (epoch >= MAX_EPOCHS || lastLoss < 0.001) {
-        running = false;
-        document.getElementById('btnTrain').textContent = 'Train Network';
-        document.getElementById('btnTrain').disabled = false;
-        setStatus(lastLoss < 0.001 ? 'CONVERGED' : 'DONE', 'var(--green-bright)');
-        return;
-      }
-
-      setStatus('TRAINING', 'var(--amber-bright)');
-      rafId = requestAnimationFrame(trainFrame);
-    }
-
-    function resetNN() {
-      cancelAnimationFrame(rafId);
-      running = false;
-      net    = initNet();
-      losses = [];
-      epoch  = 0;
-      document.getElementById('nnEpoch').textContent = '0';
-      document.getElementById('nnLoss').textContent  = '0.2500';
-      setStatus('READY', 'var(--green-bright)');
-      document.getElementById('btnTrain').textContent = 'Train Network';
-      document.getElementById('btnTrain').disabled = false;
-      ['p00','p01','p10','p11'].forEach(id => { document.getElementById(id).textContent = '--'; document.getElementById(id).className = 'pred-val'; });
-      ['r00','r01','r10','r11'].forEach(id => { document.getElementById(id).textContent = '--'; document.getElementById(id).style.color = 'var(--text-muted)'; });
-      drawLoss(document.getElementById('lossCanvas'), []);
-    }
-
-    document.getElementById('btnTrain').addEventListener('click', () => {
-      if (running) return;
-      if (epoch >= MAX_EPOCHS) resetNN();
-      running = true;
-      document.getElementById('btnTrain').textContent = 'Training...';
-      document.getElementById('btnTrain').disabled = true;
-      rafId = requestAnimationFrame(trainFrame);
-    });
-
-    document.getElementById('btnReset').addEventListener('click', resetNN);
-
-    /* Init */
-    resetNN();
 
     /* GitHub last commit timestamp */
     fetch('https://api.github.com/repos/JettDrums/MA289/commits?per_page=1')
