@@ -974,6 +974,12 @@
     </p>
   </div>
 
+  <!-- DEPLOY TIMESTAMP -->
+  <div class="deploy-strip">
+    <span class="deploy-label">Last pushed by Claude Code</span>
+    <span class="deploy-time" id="deployTime">Loading...</span>
+  </div>
+
   <!-- HERO -->
   <div class="hero scroll-target" id="overview">
     <div class="top-label">United States Military Academy</div>
@@ -1235,52 +1241,9 @@
 
     <div class="full-divider"></div>
 
-    <!-- SECTION 03: WHEN TO USE -->
+    <!-- SECTION 03: SUMMARY TABLE -->
     <div class="section-header">
       <div class="section-tag">Section 03</div>
-      <div class="section-title" style="font-size:clamp(16px,2.5vw,20px);">When to Use Each One</div>
-    </div>
-
-    <div class="use-grid">
-
-      <div class="use-card rf">
-        <div class="use-card-title">Random Forest</div>
-        <ul class="use-list">
-          <li>You have many features and some are irrelevant. Random forests naturally ignore weak features without manual selection.</li>
-          <li>You need strong performance with minimal tuning. Random forests are reliable across most problem types out of the box.</li>
-          <li>Your data has nonlinear relationships between mixed numeric and categorical inputs.</li>
-          <li>You want built in feature importance scores to understand which inputs drive the predictions.</li>
-          <li>Overfitting is a concern and you cannot afford to spend time on heavy regularization.</li>
-        </ul>
-      </div>
-
-      <div class="use-card bag">
-        <div class="use-card-title">Bagging</div>
-        <ul class="use-list">
-          <li>You have very few features. Randomly restricting features as random forests do would hurt performance when there is little to choose from.</li>
-          <li>You want to apply the ensemble idea to a model other than a decision tree, such as bagged SVMs or bagged regression models.</li>
-          <li>All features are roughly equally important and you do not want to risk excluding the best ones at any split.</li>
-          <li>You need a simpler ensemble baseline before committing to the full random forest approach.</li>
-        </ul>
-      </div>
-
-      <div class="use-card tree">
-        <div class="use-card-title">Single Decision Tree</div>
-        <ul class="use-list">
-          <li>Explainability is the top requirement. A tree can be printed, visualized, and explained to a non-technical audience in minutes.</li>
-          <li>You are working under strict compute constraints and cannot afford to train hundreds of trees.</li>
-          <li>The dataset is very small and an ensemble would overfit to the bootstrap samples themselves.</li>
-          <li>You need a fast sanity check or an interpretable baseline before investing in something more complex.</li>
-        </ul>
-      </div>
-
-    </div>
-
-    <div class="full-divider"></div>
-
-    <!-- SECTION 04: SUMMARY TABLE -->
-    <div class="section-header">
-      <div class="section-tag">Section 04</div>
       <div class="section-title" style="font-size:clamp(16px,2.5vw,20px);">Side by Side Comparison</div>
     </div>
 
