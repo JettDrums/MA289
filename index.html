@@ -193,8 +193,8 @@
 
       /* Algo / chart / use cards */
       .algo-card, .use-card { padding: 20px 16px; }
-      .chart-card { padding: 20px 16px; }
-      .chart-wrap { height: 180px; }
+      .chart-card { padding: 16px 14px 12px; }
+      .chart-wrap { height: 200px; }
 
       /* Comparison grid — tighter on tablet */
       .cmp-grid { min-width: 560px; }
@@ -227,7 +227,7 @@
       .about-card { padding: 18px 14px; }
 
       /* Charts */
-      .chart-wrap { height: 160px; }
+      .chart-wrap { height: 175px; }
 
       /* Math blocks — shrink to fit narrow phones */
       .math-block { padding: 12px 12px; }
@@ -437,10 +437,10 @@
     /* CHART GRID */
     .chart-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
     @media (max-width: 600px) { .chart-grid { grid-template-columns: 1fr; } }
-    .chart-card { background: var(--card); border: 1px solid var(--border-accent); padding: 28px 24px; display: flex; flex-direction: column; gap: 14px; overflow-x: auto; }
+    .chart-card { background: var(--card); border: 1px solid var(--border-accent); padding: 20px 18px 14px; display: flex; flex-direction: column; gap: 8px; overflow-x: auto; }
     .chart-title { font-family: 'Oswald', sans-serif; font-size: 13px; letter-spacing: 3px; text-transform: uppercase; color: #e0e0e0; }
-    .chart-note  { font-size: 12px; color: var(--text-dim); line-height: 1.65; }
-    .chart-wrap  { position: relative; height: 280px; }
+    .chart-note  { font-size: 12px; color: var(--text-dim); line-height: 1.6; }
+    .chart-wrap  { position: relative; height: 300px; }
 
     /* USE CARDS */
     .use-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
@@ -2038,7 +2038,7 @@
       function drawAccuracy() {
         var s = setup('chartAccuracy'); if (!s) return;
         var ctx = s.ctx, W = s.W, H = s.H;
-        var pad = { t: 28, r: 20, b: 52, l: 48 };
+        var pad = { t: 28, r: 16, b: 38, l: 44 };
         var pw = W - pad.l - pad.r, ph = H - pad.t - pad.b;
 
         yGrid(ctx, pad, pw, ph, 60, 100, 4, function(v){ return v + '%'; });
@@ -2048,7 +2048,7 @@
           { l: 'Bagging',       v: 84, c: BLUE,  f: BLUE_F  },
           { l: 'Random Forest', v: 91, c: GOLD,  f: GOLD_F  }
         ];
-        var slotW = pw / bars.length, bW = slotW * 0.54;
+        var slotW = pw / bars.length, bW = slotW * 0.76;
         bars.forEach(function (b, i) {
           var bH = (b.v - 60) / 40 * ph;
           var x  = pad.l + i * slotW + (slotW - bW) / 2;
@@ -2066,7 +2066,7 @@
       function drawBiasVariance() {
         var s = setup('chartBiasVariance'); if (!s) return;
         var ctx = s.ctx, W = s.W, H = s.H;
-        var pad = { t: 28, r: 20, b: 52, l: 48 };
+        var pad = { t: 28, r: 16, b: 38, l: 44 };
         var pw = W - pad.l - pad.r, ph = H - pad.t - pad.b;
 
         yGrid(ctx, pad, pw, ph, 0, 50, 5, function(v){ return v + '%'; });
@@ -2077,7 +2077,7 @@
           { l: 'Bagging',      bias: 6,  variance: 18 },
           { l: 'Rand. Forest', bias: 6,  variance: 8  }
         ];
-        var slotW = pw / groups.length, bW = slotW * 0.28, gap = slotW * 0.04;
+        var slotW = pw / groups.length, bW = slotW * 0.38, gap = slotW * 0.05;
         groups.forEach(function (g, i) {
           var cx = pad.l + i * slotW + slotW / 2;
           var x0 = cx - bW - gap / 2, x1 = cx + gap / 2;
@@ -2096,7 +2096,7 @@
       function drawTrainingSize() {
         var s = setup('chartTrainingSize'); if (!s) return;
         var ctx = s.ctx, W = s.W, H = s.H;
-        var pad = { t: 28, r: 20, b: 52, l: 48 };
+        var pad = { t: 28, r: 16, b: 38, l: 44 };
         var pw = W - pad.l - pad.r, ph = H - pad.t - pad.b;
 
         yGrid(ctx, pad, pw, ph, 55, 100, 5, function(v){ return v + '%'; });
@@ -2142,7 +2142,7 @@
       function drawCorrelation() {
         var s = setup('chartCorrelation'); if (!s) return;
         var ctx = s.ctx, W = s.W, H = s.H;
-        var pad = { t: 28, r: 20, b: 52, l: 52 };
+        var pad = { t: 28, r: 16, b: 38, l: 48 };
         var pw = W - pad.l - pad.r, ph = H - pad.t - pad.b;
 
         yGrid(ctx, pad, pw, ph, 0, 1, 4, function(v){ return 'r=' + v.toFixed(1); });
@@ -2151,7 +2151,7 @@
           { l: 'Bagging',       v: 0.82, c: BLUE, f: BLUE_F },
           { l: 'Random Forest', v: 0.38, c: GOLD, f: GOLD_F }
         ];
-        var slotW = pw / bars.length, bW = slotW * 0.54;
+        var slotW = pw / bars.length, bW = slotW * 0.70;
         bars.forEach(function (b, i) {
           var bH = b.v * ph;
           var x  = pad.l + i * slotW + (slotW - bW) / 2;
