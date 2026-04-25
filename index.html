@@ -1108,26 +1108,26 @@
 
     <!-- MILITARY RELEVANCE PANEL -->
     <div class="mil-panel">
-      <div class="mil-panel-tag">Why I Built This</div>
-      <div class="mil-panel-title">From MA104 to Random Forests</div>
+      <div class="mil-panel-tag">Why I Picked This Topic</div>
+      <div class="mil-panel-title">A Coin Flip, Twenty Times</div>
       <p class="mil-panel-body">
-        Plebe year started with calculus and probability in <strong>MA104</strong>. This semester in <strong>MA289</strong> those tools turned into real models that learn from data. That progression, from formulas on a board to algorithms that make decisions, is what brought me here.
+        The spark came from a dumb argument in the barracks. A buddy claimed he could call a coin flip right more than half the time. So I started asking him twenty yes-or-no questions about the flipper, the coin, the room, anything he wanted, and tracking which questions actually predicted the outcome. By accident I had built a decision tree.
       </p>
       <p class="mil-panel-body">
-        The practical payoff is simple: the Army runs on decisions made under uncertainty. Random forests handle that uncertainty better than any single model because they ask many trees and combine the answer.
+        That got me curious. One tree was already beating his gut. What happens if I run a hundred of them on slightly different questions and let them vote? That is a random forest. The math behind why voting works turned out to be the most interesting thing I read all semester, and it shows up everywhere the Army cares about being right under pressure.
       </p>
       <div class="mil-use-grid">
         <div class="mil-use">
           <div class="mil-use-label">Sensors</div>
-          <div class="mil-use-text">Telling friend from foe when one sensor gets jammed or spoofed.</div>
+          <div class="mil-use-text">A radar, an infrared camera, and an acoustic sensor each give a noisy guess at whether a contact is friendly. Any one can be jammed. A forest weighs all three together and only commits when most agree, so spoofing one feed does not flip the call.</div>
         </div>
         <div class="mil-use">
           <div class="mil-use-label">Logistics</div>
-          <div class="mil-use-text">Predicting what breaks next so parts and fuel arrive before they run out.</div>
+          <div class="mil-use-text">Every Bradley, generator, and radio leaves a trail of vibration, temperature, and runtime data. Forests learn the patterns that come before a breakdown and flag the vehicle two weeks out, so the part is on the truck before the unit knows it is needed.</div>
         </div>
         <div class="mil-use">
           <div class="mil-use-label">Threats</div>
-          <div class="mil-use-text">Scoring cyber and supply chain anomalies with confidence, not guesses.</div>
+          <div class="mil-use-text">Cyber alerts and supply chain anomalies arrive faster than a human can triage. A forest scores each one as low, medium, or high confidence threat using thousands of past incidents, letting the analyst spend time on the calls that actually matter.</div>
         </div>
       </div>
     </div>
