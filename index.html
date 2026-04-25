@@ -93,6 +93,20 @@
     .site-nav-link:hover { color: var(--green-bright); border-color: #2a1e00; }
     .site-nav-link.active { color: var(--green-bright); border-color: var(--green); }
 
+    /* SCROLL PROGRESS BAR */
+    .scroll-progress {
+      position: fixed;
+      top: 44px;
+      left: 0;
+      height: 2px;
+      width: 0%;
+      background: linear-gradient(90deg, var(--green) 0%, var(--green-bright) 100%);
+      box-shadow: 0 0 8px rgba(201,168,76,0.5);
+      z-index: 99;
+      transition: width 0.08s linear;
+      pointer-events: none;
+    }
+
     /* scroll offset for fixed nav */
     .scroll-target { scroll-margin-top: 56px; }
 
@@ -215,6 +229,13 @@
       /* Charts */
       .chart-wrap { height: 160px; }
 
+      /* Math blocks — shrink to fit narrow phones */
+      .math-block { padding: 12px 12px; }
+      .math-eq { font-size: 11px; line-height: 1.9; }
+      .math-example-row { font-size: 9.5px; }
+      .math-example-row .val { font-size: 10.5px; white-space: normal; }
+      .math-note { font-size: 10.5px; }
+
       /* RF metrics keep 3-col but tighten */
       .rf-metrics-row { gap: 6px; }
       .rf-metric      { padding: 10px 4px; }
@@ -281,6 +302,27 @@
     .clock       { font-family: 'Share Tech Mono', monospace; font-size: clamp(42px,10vw,72px); color: var(--green-bright); letter-spacing: 4px; text-shadow: 0 0 18px rgba(201,168,76,0.35); }
     .clock-date  { font-family: 'Share Tech Mono', monospace; font-size: 13px; letter-spacing: 3px; color: var(--text-dim); text-transform: uppercase; }
     .motto       { font-family: 'Share Tech Mono', monospace; font-size: 11px; letter-spacing: 5px; color: var(--text-muted); text-transform: uppercase; text-align: center; }
+    .hero-thesis {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      line-height: 1.7;
+      color: var(--text-dim);
+      text-align: center;
+      max-width: 480px;
+      padding: 14px 18px;
+      border: 1px solid var(--border);
+      background: rgba(0,0,0,0.35);
+    }
+    .hero-thesis strong { color: var(--green-bright); font-weight: 500; }
+    .hero-thesis-tag {
+      display: block;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 8px;
+      letter-spacing: 4px;
+      color: var(--green);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
     .bottom-bar  { display: flex; justify-content: space-between; width: 100%; border-top: 1px solid var(--border); padding-top: 14px; font-family: 'Share Tech Mono', monospace; font-size: 10px; letter-spacing: 3px; color: #2e2e2e; text-transform: uppercase; }
 
     /* ABOUT SECTION */
@@ -487,7 +529,14 @@
       color: #d8d8d8;
       line-height: 2.0;
       letter-spacing: 0.2px;
+      overflow-x: auto;
+      overflow-y: hidden;
+      white-space: nowrap;
+      padding-bottom: 2px;
+      -webkit-overflow-scrolling: touch;
     }
+    .math-eq::-webkit-scrollbar { height: 3px; }
+    .math-eq::-webkit-scrollbar-thumb { background: var(--border-accent); }
     .math-eq .hl { font-weight: 600; }
     .algo-card.tree    .math-eq .hl { color: var(--amber-bright); }
     .algo-card.bagging .math-eq .hl { color: var(--blue-bright); }
@@ -526,6 +575,77 @@
       line-height: 1.7;
       border-top: 1px solid var(--border);
       padding-top: 8px;
+    }
+
+    /* MILITARY RELEVANCE PANEL */
+    .mil-panel {
+      position: relative;
+      background: linear-gradient(135deg, rgba(20,15,5,0.85) 0%, rgba(10,10,10,0.85) 100%);
+      border: 1px solid var(--green-dim);
+      padding: 28px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .mil-panel::before, .mil-panel::after {
+      content: '';
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      border-color: var(--green-bright);
+      border-style: solid;
+    }
+    .mil-panel::before { top: -1px; left: -1px; border-width: 2px 0 0 2px; }
+    .mil-panel::after  { bottom: -1px; right: -1px; border-width: 0 2px 2px 0; }
+    .mil-panel-tag {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 5px;
+      color: var(--green-bright);
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .mil-panel-tag::after { content: ''; flex: 0 0 36px; height: 1px; background: var(--green-dim); }
+    .mil-panel-title {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 600;
+      font-size: clamp(18px, 3vw, 24px);
+      letter-spacing: 2px;
+      color: #e8e8e8;
+      text-transform: uppercase;
+    }
+    .mil-panel-body {
+      font-size: 13.5px;
+      color: var(--text);
+      line-height: 1.75;
+    }
+    .mil-panel-body strong { color: var(--green-bright); font-weight: 500; }
+    .mil-use-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 8px;
+    }
+    @media (max-width: 700px) { .mil-use-grid { grid-template-columns: 1fr; } }
+    .mil-use {
+      border: 1px solid var(--border);
+      padding: 14px 16px;
+      background: rgba(0,0,0,0.4);
+    }
+    .mil-use-label {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 8px;
+      letter-spacing: 3px;
+      color: var(--green-bright);
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .mil-use-text {
+      font-size: 12px;
+      color: var(--text-dim);
+      line-height: 1.65;
     }
 
     /* RF INTERACTIVE DEMO */
@@ -959,6 +1079,8 @@
     </div>
   </nav>
 
+  <!-- SCROLL PROGRESS BAR -->
+  <div class="scroll-progress" id="scrollProgress"></div>
 
   <!-- DEPLOY TIMESTAMP -->
   <div class="deploy-strip">
@@ -986,6 +1108,11 @@
     <div class="divider"><span>&#9632;</span></div>
     <div class="motto">Duty &nbsp;&#183;&nbsp; Honor &nbsp;&#183;&nbsp; Country</div>
 
+    <div class="hero-thesis">
+      <span class="hero-thesis-tag">MA289 &middot; 10-Minute Brief</span>
+      Why <strong>random forests</strong> outperform single decision trees, demonstrated with the math, the charts, and a live interactive model you can tune in real time.
+    </div>
+
     <div class="bottom-bar">
       <span>USMA</span>
       <span id="zulu">ZULU --:--</span>
@@ -1004,6 +1131,30 @@
         Three approaches to prediction, each building on the weaknesses of the last.
         Understanding the differences tells you exactly when and why to reach for each one.
       </p>
+    </div>
+
+    <!-- MILITARY RELEVANCE PANEL -->
+    <div class="mil-panel">
+      <div class="mil-panel-tag">Why This Matters to the Force</div>
+      <div class="mil-panel-title">From Classroom Math to Mission Decisions</div>
+      <p class="mil-panel-body">
+        Random forests are not abstract theory. They run inside <strong>sensor fusion</strong> systems that classify radar returns as friend or foe, <strong>predictive maintenance</strong> models that forecast which Bradley needs service before it fails, and <strong>logistics pipelines</strong> that allocate fuel and ammunition across a brigade.
+        The reason commanders trust them over single-model predictions is the same reason explained in this brief: ensembles are harder to fool, degrade gracefully, and tell you how confident they are.
+      </p>
+      <div class="mil-use-grid">
+        <div class="mil-use">
+          <div class="mil-use-label">Sensor Fusion</div>
+          <div class="mil-use-text">Combining radar, IR, and acoustic feeds to classify targets where any single sensor can be jammed or spoofed.</div>
+        </div>
+        <div class="mil-use">
+          <div class="mil-use-label">Predictive Logistics</div>
+          <div class="mil-use-text">Forecasting equipment failure and consumable demand across distributed units so resupply arrives before shortages.</div>
+        </div>
+        <div class="mil-use">
+          <div class="mil-use-label">Threat Assessment</div>
+          <div class="mil-use-text">Scoring cyber events, supply chain anomalies, and pattern-of-life data with calibrated confidence, not single guesses.</div>
+        </div>
+      </div>
     </div>
 
     <!-- SECTION 01: HOW EACH WORKS -->
@@ -1453,10 +1604,10 @@
       <div class="fc-panel">
         <div class="fc-panel-title">Full Setup Infrastructure</div>
 
-        <!-- Node 1: Enterprise access needed -->
+        <!-- Node 1: Enterprise access needed (Anthropic / Claude mark) -->
         <div class="fc-node">
-          <div class="fc-icon" style="background:#c9553f;">
-            <svg viewBox="0 0 24 24" width="15" height="15" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L2 19.5h20L12 2zm0 3.5l7.5 13H4.5L12 5.5z"/></svg>
+          <div class="fc-icon" style="background:#cc785c;" aria-label="Anthropic Claude">
+            <svg viewBox="0 0 32 32" width="16" height="16" xmlns="http://www.w3.org/2000/svg" role="img"><title>Anthropic</title><path fill="#fff" d="M9.4 6.5h4.5l6.7 19h-4.6l-1.4-4.1H8.7l-1.4 4.1H2.7L9.4 6.5zm.5 11.5h4.4l-2.2-6.6-2.2 6.6zM23.5 6.5h4.6v19h-4.6v-19z"/></svg>
           </div>
           <div class="fc-text">
             <div class="fc-label">Claude Enterprise Access</div>
@@ -1465,10 +1616,10 @@
         </div>
         <div class="fc-arrow"></div>
 
-        <!-- Node 2: IONOS domain -->
+        <!-- Node 2: IONOS domain (signature blue + bold wordmark dot) -->
         <div class="fc-node">
-          <div class="fc-icon" style="background:#003d8f;">
-            <svg viewBox="0 0 24 24" width="15" height="15" fill="white" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="5" r="3"/><rect x="10" y="10" width="4" height="11" rx="1"/></svg>
+          <div class="fc-icon" style="background:#003d8f;" aria-label="IONOS">
+            <svg viewBox="0 0 32 32" width="20" height="14" xmlns="http://www.w3.org/2000/svg" role="img"><title>IONOS</title><text x="16" y="22" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="900" fill="#fff" letter-spacing="-0.5">1&amp;1</text></svg>
           </div>
           <div class="fc-text">
             <div class="fc-label">IONOS: Register Domain</div>
@@ -1477,10 +1628,10 @@
         </div>
         <div class="fc-arrow"></div>
 
-        <!-- Node 3: Zoho email -->
+        <!-- Node 3: Zoho email (Z mark) -->
         <div class="fc-node">
-          <div class="fc-icon" style="background:#c8202f;">
-            <svg viewBox="0 0 24 24" width="15" height="15" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M4 5h16v3L8 16h12v3H4v-3l12-8H4V5z"/></svg>
+          <div class="fc-icon" style="background:#e42527;" aria-label="Zoho">
+            <svg viewBox="0 0 32 32" width="16" height="16" xmlns="http://www.w3.org/2000/svg" role="img"><title>Zoho</title><path fill="#fff" d="M7 8h18l-13 13h13v3H6l13-13H7V8z"/></svg>
           </div>
           <div class="fc-text">
             <div class="fc-label">Zoho: Business Email</div>
@@ -1503,8 +1654,8 @@
 
         <!-- Node 5: Claude Code builds site -->
         <div class="fc-node">
-          <div class="fc-icon" style="background:#c9553f;">
-            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" xmlns="http://www.w3.org/2000/svg"><polyline points="4 9 8 12 4 15"/><line x1="12" y1="15" x2="19" y2="15"/></svg>
+          <div class="fc-icon" style="background:#1f1f1e;" aria-label="Claude Code terminal">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#cc785c" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" role="img"><title>Terminal</title><polyline points="4 8 8 12 4 16"/><line x1="11" y1="16" x2="20" y2="16"/></svg>
           </div>
           <div class="fc-text">
             <div class="fc-label">Claude Code</div>
@@ -1586,6 +1737,22 @@
       }
       window.addEventListener('scroll', update, { passive: true });
       update();
+    })();
+
+    /* Scroll progress bar */
+    (function() {
+      const bar = document.getElementById('scrollProgress');
+      if (!bar) return;
+      function updateProgress() {
+        const h = document.documentElement;
+        const scrolled = h.scrollTop || document.body.scrollTop;
+        const height = (h.scrollHeight - h.clientHeight);
+        const pct = height > 0 ? (scrolled / height) * 100 : 0;
+        bar.style.width = pct + '%';
+      }
+      window.addEventListener('scroll', updateProgress, { passive: true });
+      window.addEventListener('resize', updateProgress);
+      updateProgress();
     })();
 
     /* Clock */
