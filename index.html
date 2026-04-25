@@ -196,9 +196,9 @@
       .chart-card { padding: 20px 16px; }
       .chart-wrap { height: 180px; }
 
-      /* Summary table — relies on chart-card overflow-x:auto */
-      .summary-table { min-width: 500px; font-size: 11px; }
-      .summary-table th, .summary-table td { padding: 9px 10px; }
+      /* Comparison grid — tighter on tablet */
+      .cmp-grid { min-width: 560px; }
+      .cmp-h, .cmp-prop, .cmp-cell { padding: 14px 14px; }
 
       /* RF Demo */
       .rf-panel      { padding: 20px 16px; gap: 20px; }
@@ -242,9 +242,7 @@
       .rf-metric-num  { font-size: 20px; }
       .rf-slider-desc { font-size: 11px; }
 
-      /* Summary table tighter */
-      .summary-table { font-size: 10px; }
-      .summary-table th, .summary-table td { padding: 7px 8px; }
+      /* Comparison grid — phone tightening handled by .cmp 700px breakpoint */
 
       /* Timeline tighter */
       .tl-step { padding: 0 0 16px 40px; }
@@ -459,18 +457,175 @@
     .use-card.bag  .use-list li::before { color: var(--blue); }
     .use-card.tree .use-list li::before { color: var(--amber); }
 
-    /* SUMMARY TABLE */
-    .summary-table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 580px; }
-    .summary-table th { font-family: 'Share Tech Mono', monospace; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--green); padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border-accent); }
-    .summary-table td { padding: 13px 16px; color: var(--text); border-bottom: 1px solid var(--border); vertical-align: middle; line-height: 1.5; }
-    .summary-table tr:last-child td { border-bottom: none; }
-    .summary-table tr:hover td { background: rgba(201,168,76,0.04); }
+    /* PREMIUM COMPARISON CARD */
+    .cmp-card {
+      position: relative;
+      background: linear-gradient(135deg, rgba(15,15,15,0.96) 0%, rgba(8,8,8,0.96) 100%);
+      border: 1px solid var(--border-accent);
+      overflow-x: auto;
+    }
+    .cmp-card::before, .cmp-card::after {
+      content: '';
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      border-color: var(--green);
+      border-style: solid;
+      pointer-events: none;
+      z-index: 2;
+    }
+    .cmp-card::before { top: -1px; left: -1px; border-width: 2px 0 0 2px; }
+    .cmp-card::after  { bottom: -1px; right: -1px; border-width: 0 2px 2px 0; }
 
-    .badge { display: inline-block; font-family: 'Share Tech Mono', monospace; font-size: 9px; letter-spacing: 2px; padding: 3px 8px; text-transform: uppercase; }
-    .badge.high { background: rgba(255,107,107,0.12); color: #ff6b6b; }
-    .badge.med  { background: rgba(91,200,245,0.12);  color: var(--blue-bright); }
-    .badge.low  { background: rgba(201,168,76,0.12); color: var(--green-bright); }
-    .badge.best { background: rgba(201,168,76,0.18); color: var(--green-bright); border: 1px solid var(--green); }
+    .cmp-grid {
+      display: grid;
+      grid-template-columns: minmax(180px, 1.3fr) 1fr 1fr 1fr;
+      min-width: 640px;
+    }
+
+    .cmp-h {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      padding: 20px 22px 14px;
+      border-bottom: 1px solid var(--border-accent);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      position: relative;
+    }
+    .cmp-h-prop { color: var(--text-muted); }
+    .cmp-h-tree { color: var(--amber-bright); }
+    .cmp-h-bag  { color: var(--blue-bright); }
+    .cmp-h-rf   {
+      color: var(--green-bright);
+      background: linear-gradient(180deg, rgba(201,168,76,0.08) 0%, transparent 100%);
+    }
+    .cmp-h-tree::before, .cmp-h-bag::before, .cmp-h-rf::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+    }
+    .cmp-h-tree::before { background: var(--amber); }
+    .cmp-h-bag::before  { background: var(--blue); }
+    .cmp-h-rf::before   { background: linear-gradient(90deg, var(--green) 0%, var(--green-bright) 100%); box-shadow: 0 0 8px rgba(201,168,76,0.5); }
+
+    .cmp-pill {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 7px;
+      letter-spacing: 2px;
+      background: var(--green-bright);
+      color: #0a0a0a;
+      padding: 2.5px 6px;
+      font-weight: 700;
+    }
+
+    .cmp-prop {
+      padding: 18px 22px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .cmp-prop-name {
+      font-size: 13.5px;
+      color: var(--text);
+      font-weight: 500;
+    }
+    .cmp-prop-sub {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 8.5px;
+      letter-spacing: 1.5px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    .cmp-cell {
+      padding: 18px 22px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      justify-content: center;
+    }
+    .cmp-cell.rf { background: rgba(201,168,76,0.025); }
+
+    .cmp-bar {
+      display: flex;
+      gap: 3px;
+      align-items: center;
+    }
+    .cmp-bar .seg {
+      flex: 1;
+      height: 6px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 1px;
+    }
+    .cmp-cell.tree .cmp-bar .seg.on { background: var(--amber-bright); }
+    .cmp-cell.bag  .cmp-bar .seg.on { background: var(--blue-bright); }
+    .cmp-cell.rf   .cmp-bar .seg.on {
+      background: var(--green-bright);
+      box-shadow: 0 0 5px rgba(201,168,76,0.45);
+    }
+
+    .cmp-label {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 6px;
+    }
+    .cmp-label .star {
+      color: var(--green-bright);
+      font-size: 12px;
+      text-shadow: 0 0 6px rgba(201,168,76,0.7);
+      letter-spacing: 0;
+    }
+
+    .cmp-cell.na .cmp-bar .seg {
+      background: repeating-linear-gradient(45deg, rgba(255,255,255,0.06) 0 3px, transparent 3px 6px);
+      height: 6px;
+    }
+    .cmp-cell.na .cmp-label { color: var(--text-muted); font-size: 9px; }
+
+    /* remove last-row borders */
+    .cmp-grid > div:nth-last-child(-n+4) { border-bottom: none; }
+
+    @media (max-width: 700px) {
+      .cmp-card { overflow: visible; }
+      .cmp-grid { min-width: 0; grid-template-columns: 1fr; }
+      .cmp-h-prop, .cmp-h-tree, .cmp-h-bag, .cmp-h-rf { display: none; }
+      .cmp-prop {
+        padding: 18px 18px 10px;
+        border-top: 2px solid var(--border-accent);
+        border-bottom: none;
+        background: rgba(0,0,0,0.5);
+      }
+      .cmp-cell {
+        padding: 12px 18px;
+        display: grid;
+        grid-template-columns: 110px 1fr;
+        gap: 12px;
+        align-items: center;
+      }
+      .cmp-cell::before {
+        font-family: 'Share Tech Mono', monospace;
+        font-size: 9px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+      }
+      .cmp-cell.tree::before { content: 'Tree'; color: var(--amber-bright); }
+      .cmp-cell.bag::before  { content: 'Bagging'; color: var(--blue-bright); }
+      .cmp-cell.rf::before   { content: 'Random Forest'; color: var(--green-bright); }
+      .cmp-grid > div:nth-last-child(-n+4) { border-bottom: 1px solid var(--border); }
+      .cmp-grid > div:last-child { border-bottom: none; }
+    }
 
     /* INSIGHT BOX */
     .insight { background: rgba(201,168,76,0.04); border: 1px solid var(--green); border-left-width: 3px; padding: 22px 26px; display: flex; flex-direction: column; gap: 10px; }
@@ -1356,73 +1511,142 @@
       <div class="section-title" style="font-size:clamp(16px,2.5vw,20px);">Side by Side Comparison</div>
     </div>
 
-    <div class="chart-card">
-      <table class="summary-table">
-        <thead>
-          <tr>
-            <th>Property</th>
-            <th>Decision Tree</th>
-            <th>Bagging</th>
-            <th>Random Forest</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Bias</td>
-            <td><span class="badge low">Low</span></td>
-            <td><span class="badge low">Low</span></td>
-            <td><span class="badge low">Low</span></td>
-          </tr>
-          <tr>
-            <td>Variance</td>
-            <td><span class="badge high">High</span></td>
-            <td><span class="badge med">Medium</span></td>
-            <td><span class="badge low">Low</span></td>
-          </tr>
-          <tr>
-            <td>Overfitting Risk</td>
-            <td><span class="badge high">High</span></td>
-            <td><span class="badge med">Medium</span></td>
-            <td><span class="badge low">Low</span></td>
-          </tr>
-          <tr>
-            <td>Interpretability</td>
-            <td><span class="badge best">Highest</span></td>
-            <td><span class="badge med">Low</span></td>
-            <td><span class="badge med">Low</span></td>
-          </tr>
-          <tr>
-            <td>Tree Correlation in Ensemble</td>
-            <td>Not applicable</td>
-            <td><span class="badge high">High</span></td>
-            <td><span class="badge low">Low</span></td>
-          </tr>
-          <tr>
-            <td>Training Speed</td>
-            <td><span class="badge best">Fastest</span></td>
-            <td><span class="badge med">Moderate</span></td>
-            <td><span class="badge med">Moderate</span></td>
-          </tr>
-          <tr>
-            <td>Handles Irrelevant Features</td>
-            <td><span class="badge high">Poorly</span></td>
-            <td><span class="badge med">Moderate</span></td>
-            <td><span class="badge best">Well</span></td>
-          </tr>
-          <tr>
-            <td>Typical Accuracy</td>
-            <td><span class="badge high">Lower</span></td>
-            <td><span class="badge med">Medium</span></td>
-            <td><span class="badge best">Highest</span></td>
-          </tr>
-          <tr>
-            <td>Built In Feature Importance</td>
-            <td>Manual inspection only</td>
-            <td>Not available</td>
-            <td><span class="badge best">Built in</span></td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="cmp-card">
+      <div class="cmp-grid">
+
+        <!-- HEADERS -->
+        <div class="cmp-h cmp-h-prop">Property</div>
+        <div class="cmp-h cmp-h-tree">Decision Tree</div>
+        <div class="cmp-h cmp-h-bag">Bagging</div>
+        <div class="cmp-h cmp-h-rf">Random Forest <span class="cmp-pill">Best</span></div>
+
+        <!-- ROW: Variance -->
+        <div class="cmp-prop">
+          <div class="cmp-prop-name">Variance Control</div>
+          <div class="cmp-prop-sub">Stability of predictions</div>
+        </div>
+        <div class="cmp-cell tree">
+          <div class="cmp-bar"><span class="seg on"></span><span class="seg"></span><span class="seg"></span><span class="seg"></span><span class="seg"></span></div>
+          <div class="cmp-label"><span>High variance</span></div>
+        </div>
+        <div class="cmp-cell bag">
+          <div class="cmp-bar"><span class="seg on"></span><span class="seg on"></span><span class="seg on"></span><span class="seg"></span><span class="seg"></span></div>
+          <div class="cmp-label"><span>Reduced</span></div>
+        </div>
+        <div class="cmp-cell rf">
+          <div class="cmp-bar"><span class="seg on"></span><span class="seg on"></span><span class="seg on"></span><span class="seg on"></span><span class="seg on"></span></div>
+          <div class="cmp-label"><span>Lowest</span><span class="star">&#9733;</span></div>
+        </div>
+
+        <!-- ROW: Overfitting -->
+        <div class="cmp-prop">
+          <div class="cmp-prop-name">Overfitting Resistance</div>
+          <div class="cmp-prop-sub">Generalization to new data</div>
+        </div>
+        <div class="cmp-cell tree">
+          <div class="cmp-bar"><span class="seg on"></span><span class="seg"></span><span class="seg"></span><span class="seg"></span><span class="seg"></span></div>
+          <div class="cmp-label"><span>Memorizes</span></div>
+        </div>
+        <div class="cmp-cell bag">
+          <div class="cmp-bar"><span class="seg on"></span><span class="seg on"></span><span class="seg on"></span><span class="seg"></span><span class="seg"></span></div>
+          <div class="cmp-label"><span>Moderate</span></div>
+        </div>
+        <div class="cmp-cell rf">
+          <div class="cmp-bar"><span class="seg on"></span><span class="seg on"></span><span class="seg on"></span><span class="seg on"></span><span class="seg on"></span></div>
+          <div class="cmp-label"><span>Robust</span><span class="star">&#9733;</span></div>
+        </div>
+
+        <!-- ROW: Interpretability -->
+        <div class="cmp-prop">
+          <div class="cmp-prop-name">Interpretability</div>
+          <div class="cmp-prop-sub">How easily a human reads it</div>
+        </div>
+        <div class="cmp-cell tree">
+          <div class="cmp-bar"><span class="seg on"></span><span class="seg on"></span><span class="seg on"></span><span class="seg on"></span><span class="seg on"></span></div>
+          <div class="cmp-label"><span>Crystal clear</span><span class="star">&#9733;</span></div>
+        </div>
+        <div class="cmp-cell bag">
+          <div class="cmp-bar"><span class="seg on"></span><span class="seg on"></span><span class="seg"></span><span class="seg"></span><span class="seg"></span></div>
+          <div class="cmp-label"><span>Black box</span></div>
+        </div>
+        <div class="cmp-cell rf">
+          <div class="cmp-bar"><span class="seg on"></span><span class="seg on"></span><span class="seg"></span><span class="seg"></span><span class="seg"></span></div>
+          <div class="cmp-label"><span>Black box</span></div>
+        </div>
+
+        <!-- ROW: Tree Decorrelation -->
+        <div class="cmp-prop">
+          <div class="cmp-prop-name">Tree Decorrelation</div>
+          <div class="cmp-prop-sub">How diverse the voters are</div>
+        </div>
+        <div class="cmp-cell tree na">
+          <div class="cmp-bar"><span class="seg"></span><span class="seg"></span><span class="seg"></span><span class="seg"></span><span class="seg"></span></div>
+          <div class="cmp-label"><span>Single tree</span></div>
+        </div>
+        <div class="cmp-cell bag">
+          <div class="cmp-bar"><span class="seg on"></span><span class="seg on"></span><span class="seg"></span><span class="seg"></span><span class="seg"></span></div>
+          <div class="cmp-label"><span>Highly correlated</span></div>
+        </div>
+        <div class="cmp-cell rf">
+          <div class="cmp-bar"><span class="seg on"></span><span class="seg on"></span><span class="seg on"></span><span class="seg on"></span><span class="seg on"></span></div>
+          <div class="cmp-label"><span>Genuinely diverse</span><span class="star">&#9733;</span></div>
+        </div>
+
+        <!-- ROW: Training Speed -->
+        <div class="cmp-prop">
+          <div class="cmp-prop-name">Training Speed</div>
+          <div class="cmp-prop-sub">Time to fit the model</div>
+        </div>
+        <div class="cmp-cell tree">
+          <div class="cmp-bar"><span class="seg on"></span><span class="seg on"></span><span class="seg on"></span><span class="seg on"></span><span class="seg on"></span></div>
+          <div class="cmp-label"><span>Fastest</span><span class="star">&#9733;</span></div>
+        </div>
+        <div class="cmp-cell bag">
+          <div class="cmp-bar"><span class="seg on"></span><span class="seg on"></span><span class="seg"></span><span class="seg"></span><span class="seg"></span></div>
+          <div class="cmp-label"><span>Slower (B trees)</span></div>
+        </div>
+        <div class="cmp-cell rf">
+          <div class="cmp-bar"><span class="seg on"></span><span class="seg on"></span><span class="seg on"></span><span class="seg"></span><span class="seg"></span></div>
+          <div class="cmp-label"><span>Parallelizable</span></div>
+        </div>
+
+        <!-- ROW: Noise Tolerance -->
+        <div class="cmp-prop">
+          <div class="cmp-prop-name">Noise Tolerance</div>
+          <div class="cmp-prop-sub">Handles irrelevant features</div>
+        </div>
+        <div class="cmp-cell tree">
+          <div class="cmp-bar"><span class="seg on"></span><span class="seg"></span><span class="seg"></span><span class="seg"></span><span class="seg"></span></div>
+          <div class="cmp-label"><span>Easily fooled</span></div>
+        </div>
+        <div class="cmp-cell bag">
+          <div class="cmp-bar"><span class="seg on"></span><span class="seg on"></span><span class="seg on"></span><span class="seg"></span><span class="seg"></span></div>
+          <div class="cmp-label"><span>Moderate</span></div>
+        </div>
+        <div class="cmp-cell rf">
+          <div class="cmp-bar"><span class="seg on"></span><span class="seg on"></span><span class="seg on"></span><span class="seg on"></span><span class="seg on"></span></div>
+          <div class="cmp-label"><span>Filters noise</span><span class="star">&#9733;</span></div>
+        </div>
+
+        <!-- ROW: Accuracy -->
+        <div class="cmp-prop">
+          <div class="cmp-prop-name">Typical Accuracy</div>
+          <div class="cmp-prop-sub">Real-world benchmark performance</div>
+        </div>
+        <div class="cmp-cell tree">
+          <div class="cmp-bar"><span class="seg on"></span><span class="seg on"></span><span class="seg"></span><span class="seg"></span><span class="seg"></span></div>
+          <div class="cmp-label"><span>Lower</span></div>
+        </div>
+        <div class="cmp-cell bag">
+          <div class="cmp-bar"><span class="seg on"></span><span class="seg on"></span><span class="seg on"></span><span class="seg"></span><span class="seg"></span></div>
+          <div class="cmp-label"><span>Strong</span></div>
+        </div>
+        <div class="cmp-cell rf">
+          <div class="cmp-bar"><span class="seg on"></span><span class="seg on"></span><span class="seg on"></span><span class="seg on"></span><span class="seg on"></span></div>
+          <div class="cmp-label"><span>Highest</span><span class="star">&#9733;</span></div>
+        </div>
+
+      </div>
     </div>
 
     <!-- FINAL INSIGHT -->
