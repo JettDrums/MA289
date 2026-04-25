@@ -302,27 +302,6 @@
     .clock       { font-family: 'Share Tech Mono', monospace; font-size: clamp(42px,10vw,72px); color: var(--green-bright); letter-spacing: 4px; text-shadow: 0 0 18px rgba(201,168,76,0.35); }
     .clock-date  { font-family: 'Share Tech Mono', monospace; font-size: 13px; letter-spacing: 3px; color: var(--text-dim); text-transform: uppercase; }
     .motto       { font-family: 'Share Tech Mono', monospace; font-size: 11px; letter-spacing: 5px; color: var(--text-muted); text-transform: uppercase; text-align: center; }
-    .hero-thesis {
-      font-family: 'Inter', sans-serif;
-      font-size: 13px;
-      line-height: 1.7;
-      color: var(--text-dim);
-      text-align: center;
-      max-width: 480px;
-      padding: 14px 18px;
-      border: 1px solid var(--border);
-      background: rgba(0,0,0,0.35);
-    }
-    .hero-thesis strong { color: var(--green-bright); font-weight: 500; }
-    .hero-thesis-tag {
-      display: block;
-      font-family: 'Share Tech Mono', monospace;
-      font-size: 8px;
-      letter-spacing: 4px;
-      color: var(--green);
-      text-transform: uppercase;
-      margin-bottom: 8px;
-    }
     .bottom-bar  { display: flex; justify-content: space-between; width: 100%; border-top: 1px solid var(--border); padding-top: 14px; font-family: 'Share Tech Mono', monospace; font-size: 10px; letter-spacing: 3px; color: #2e2e2e; text-transform: uppercase; }
 
     /* ABOUT SECTION */
@@ -1108,14 +1087,8 @@
     <div class="divider"><span>&#9632;</span></div>
     <div class="motto">Duty &nbsp;&#183;&nbsp; Honor &nbsp;&#183;&nbsp; Country</div>
 
-    <div class="hero-thesis">
-      <span class="hero-thesis-tag">MA289 &middot; 10-Minute Brief</span>
-      Why <strong>random forests</strong> outperform single decision trees, demonstrated with the math, the charts, and a live interactive model you can tune in real time.
-    </div>
-
     <div class="bottom-bar">
       <span>USMA</span>
-      <span id="zulu">ZULU --:--</span>
       <span>2029</span>
     </div>
   </div>
@@ -1135,24 +1108,26 @@
 
     <!-- MILITARY RELEVANCE PANEL -->
     <div class="mil-panel">
-      <div class="mil-panel-tag">Why This Matters to the Force</div>
-      <div class="mil-panel-title">From Classroom Math to Mission Decisions</div>
+      <div class="mil-panel-tag">Why I Built This</div>
+      <div class="mil-panel-title">From MA104 to Random Forests</div>
       <p class="mil-panel-body">
-        Random forests are not abstract theory. They run inside <strong>sensor fusion</strong> systems that classify radar returns as friend or foe, <strong>predictive maintenance</strong> models that forecast which Bradley needs service before it fails, and <strong>logistics pipelines</strong> that allocate fuel and ammunition across a brigade.
-        The reason commanders trust them over single-model predictions is the same reason explained in this brief: ensembles are harder to fool, degrade gracefully, and tell you how confident they are.
+        Plebe year started with calculus and probability in <strong>MA104</strong>. This semester in <strong>MA289</strong> those tools turned into real models that learn from data. That progression, from formulas on a board to algorithms that make decisions, is what brought me here.
+      </p>
+      <p class="mil-panel-body">
+        The practical payoff is simple: the Army runs on decisions made under uncertainty. Random forests handle that uncertainty better than any single model because they ask many trees and combine the answer.
       </p>
       <div class="mil-use-grid">
         <div class="mil-use">
-          <div class="mil-use-label">Sensor Fusion</div>
-          <div class="mil-use-text">Combining radar, IR, and acoustic feeds to classify targets where any single sensor can be jammed or spoofed.</div>
+          <div class="mil-use-label">Sensors</div>
+          <div class="mil-use-text">Telling friend from foe when one sensor gets jammed or spoofed.</div>
         </div>
         <div class="mil-use">
-          <div class="mil-use-label">Predictive Logistics</div>
-          <div class="mil-use-text">Forecasting equipment failure and consumable demand across distributed units so resupply arrives before shortages.</div>
+          <div class="mil-use-label">Logistics</div>
+          <div class="mil-use-text">Predicting what breaks next so parts and fuel arrive before they run out.</div>
         </div>
         <div class="mil-use">
-          <div class="mil-use-label">Threat Assessment</div>
-          <div class="mil-use-text">Scoring cyber events, supply chain anomalies, and pattern-of-life data with calibrated confidence, not single guesses.</div>
+          <div class="mil-use-label">Threats</div>
+          <div class="mil-use-text">Scoring cyber and supply chain anomalies with confidence, not guesses.</div>
         </div>
       </div>
     </div>
@@ -1616,10 +1591,10 @@
         </div>
         <div class="fc-arrow"></div>
 
-        <!-- Node 2: IONOS domain (signature blue + bold wordmark dot) -->
+        <!-- Node 2: IONOS domain (official wordmark) -->
         <div class="fc-node">
           <div class="fc-icon" style="background:#003d8f;" aria-label="IONOS">
-            <svg viewBox="0 0 32 32" width="20" height="14" xmlns="http://www.w3.org/2000/svg" role="img"><title>IONOS</title><text x="16" y="22" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="900" fill="#fff" letter-spacing="-0.5">1&amp;1</text></svg>
+            <svg viewBox="0 0 64 24" width="28" height="11" xmlns="http://www.w3.org/2000/svg" role="img"><title>IONOS</title><text x="32" y="18" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="16" font-weight="700" fill="#fff" letter-spacing="0.5">IONOS</text></svg>
           </div>
           <div class="fc-text">
             <div class="fc-label">IONOS: Register Domain</div>
@@ -1763,7 +1738,6 @@
       const now = new Date();
       document.getElementById('clock').textContent = pad(now.getHours())+':'+pad(now.getMinutes())+':'+pad(now.getSeconds());
       document.getElementById('date').textContent  = DAYS[now.getDay()]+'  '+pad(now.getDate())+' '+MONTHS[now.getMonth()]+' '+now.getFullYear();
-      document.getElementById('zulu').textContent  = 'ZULU '+pad(now.getUTCHours())+':'+pad(now.getUTCMinutes());
     }
     tick();
     setInterval(tick, 1000);
