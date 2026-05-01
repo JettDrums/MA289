@@ -1400,7 +1400,47 @@
       </p>
     </div>
 
-    <!-- Key Terms -->
+    <!-- MOTIVATION + APPLICABILITY PANEL -->
+    <div class="mil-panel">
+      <div class="mil-panel-tag">Motivation</div>
+      <div class="mil-panel-title">Prediction Under Uncertainty</div>
+      <p class="mil-panel-body">
+        Operations Research is fundamentally about making better decisions with incomplete information. Ensemble methods are a direct expression of that idea in machine learning: rather than searching for a single perfect model, they aggregate many imperfect ones and let disagreement cancel out. The mathematical proof of why averaging reduces error, and the specific condition that makes random forests strictly better than bagging, was the most compelling result I encountered in MA289.
+      </p>
+      <p class="mil-panel-body">
+        The broader appeal is practical. Classification problems appear across every domain an officer will work in: assessing risk, allocating resources, identifying patterns in large datasets. Understanding the tradeoffs between a single interpretable tree and a robust ensemble directly informs when and how to apply these tools in environments where the cost of a wrong prediction is high.
+      </p>
+      <div class="mil-use-grid">
+        <div class="mil-use">
+          <div class="mil-use-label">Predictive Maintenance</div>
+          <div class="mil-use-text">Fleet readiness depends on anticipating equipment failure before it occurs. Random forests trained on sensor telemetry (engine temperature, vibration, operating hours) can flag vehicles and aircraft for inspection before a failure grounds them, reducing unplanned downtime and maintenance costs.</div>
+        </div>
+        <div class="mil-use">
+          <div class="mil-use-label">Medical Triage</div>
+          <div class="mil-use-text">Combat casualty care requires rapid prioritization with limited personnel. Ensemble classifiers trained on vital signs, injury type, and transport time can assist medics in triage decisions, providing a data-driven second opinion that is consistent regardless of fatigue or stress conditions.</div>
+        </div>
+        <div class="mil-use">
+          <div class="mil-use-label">Personnel Readiness</div>
+          <div class="mil-use-text">Predicting soldier readiness and attrition risk from training performance, fitness, and behavioral indicators allows commanders to intervene early. Decision tree models are particularly valuable here because their logic can be audited and explained to leadership, unlike black-box alternatives.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ML ANALYSIS SECTION -->
+  <div class="ml-section scroll-target" id="ml-analysis">
+
+    <!-- PAGE HEADER -->
+    <div class="section-header center">
+      <div class="section-tag">Machine Learning Analysis</div>
+      <div class="section-title">Three Algorithms, One Dataset, Real Results</div>
+      <p class="section-sub">
+        Each model builds on the limitations of the previous one. The results below come from training and evaluating all three on the Titanic dataset using identical preprocessing and splits.
+      </p>
+    </div>
+
+    <!-- KEY TERMS -->
     <div class="section-header">
       <div class="section-tag">Key Terms</div>
       <div class="section-title" style="font-size:clamp(16px,2.5vw,20px);">Glossary</div>
@@ -1438,53 +1478,6 @@
       <div class="glossary-item">
         <div class="glossary-term">Feature Importance</div>
         <div class="glossary-def">How much each input variable contributes to predictions. Random forests compute this by summing the Gini reductions each feature produces, weighted by node sample counts, across all trees.</div>
-      </div>
-    </div>
-
-    <!-- Why it matters -->
-    <div class="insight">
-      <div class="insight-label">Why It Matters</div>
-      <p>The Titanic problem is a well-defined proxy for real-world classification tasks: medical diagnosis, equipment failure prediction, fraud detection. In every case the same question applies: can we learn reliable rules from historical examples to predict an outcome we care about?</p>
-      <p>Understanding <em>why</em> ensemble methods outperform single trees, not just that they do, is the foundation for applying these tools correctly. The core insight is that combining many imperfect, <em>diverse</em> models is more powerful than searching for a single perfect one. Diversity requires both data randomness (bagging) and feature randomness (random forests).</p>
-    </div>
-
-  </div>
-
-  <!-- ML ANALYSIS SECTION -->
-  <div class="ml-section scroll-target" id="ml-analysis">
-
-    <!-- PAGE HEADER -->
-    <div class="section-header center">
-      <div class="section-tag">Machine Learning Analysis</div>
-      <div class="section-title">Three Algorithms, One Dataset, Real Results</div>
-      <p class="section-sub">
-        Each model builds on the limitations of the previous one. The results below come from training and evaluating all three on the Titanic dataset using identical preprocessing and splits.
-      </p>
-    </div>
-
-    <!-- MOTIVATION + APPLICABILITY PANEL -->
-    <div class="mil-panel">
-      <div class="mil-panel-tag">Motivation</div>
-      <div class="mil-panel-title">Prediction Under Uncertainty</div>
-      <p class="mil-panel-body">
-        Operations Research is fundamentally about making better decisions with incomplete information. Ensemble methods are a direct expression of that idea in machine learning: rather than searching for a single perfect model, they aggregate many imperfect ones and let disagreement cancel out. The mathematical proof of why averaging reduces error, and the specific condition that makes random forests strictly better than bagging, was the most compelling result I encountered in MA289.
-      </p>
-      <p class="mil-panel-body">
-        The broader appeal is practical. Classification problems appear across every domain an officer will work in: assessing risk, allocating resources, identifying patterns in large datasets. Understanding the tradeoffs between a single interpretable tree and a robust ensemble directly informs when and how to apply these tools in environments where the cost of a wrong prediction is high.
-      </p>
-      <div class="mil-use-grid">
-        <div class="mil-use">
-          <div class="mil-use-label">Predictive Maintenance</div>
-          <div class="mil-use-text">Fleet readiness depends on anticipating equipment failure before it occurs. Random forests trained on sensor telemetry (engine temperature, vibration, operating hours) can flag vehicles and aircraft for inspection before a failure grounds them, reducing unplanned downtime and maintenance costs.</div>
-        </div>
-        <div class="mil-use">
-          <div class="mil-use-label">Medical Triage</div>
-          <div class="mil-use-text">Combat casualty care requires rapid prioritization with limited personnel. Ensemble classifiers trained on vital signs, injury type, and transport time can assist medics in triage decisions, providing a data-driven second opinion that is consistent regardless of fatigue or stress conditions.</div>
-        </div>
-        <div class="mil-use">
-          <div class="mil-use-label">Personnel Readiness</div>
-          <div class="mil-use-text">Predicting soldier readiness and attrition risk from training performance, fitness, and behavioral indicators allows commanders to intervene early. Decision tree models are particularly valuable here because their logic can be audited and explained to leadership, unlike black-box alternatives.</div>
-        </div>
       </div>
     </div>
 
