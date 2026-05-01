@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Dennis Pezan | USMA 2029</title>
+  <title>Decision Trees &amp; Ensemble Methods | Dennis Pezan</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Oswald:wght@300;400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
@@ -1194,6 +1194,125 @@
       color: var(--text-dim);
       line-height: 1.8;
     }
+
+    /* ── INTRO SECTION ────────────────────────────────────── */
+    .intro-section {
+      position: relative;
+      z-index: 1;
+      width: min(1100px, 100%);
+      margin-top: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    .intro-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    @media (max-width: 700px) { .intro-grid { grid-template-columns: 1fr; } }
+
+    .intro-block {
+      background: var(--card);
+      border: 1px solid var(--border-accent);
+      padding: 28px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .intro-block-label {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 5px;
+      color: var(--green-bright);
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .intro-block-label::after { content: ''; flex: 0 0 24px; height: 1px; background: var(--green-dim); }
+    .intro-block-title {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 600;
+      font-size: 18px;
+      letter-spacing: 2px;
+      color: #e0e0e0;
+      text-transform: uppercase;
+    }
+    .intro-block-body {
+      font-size: 13.5px;
+      color: var(--text);
+      line-height: 1.82;
+    }
+    .intro-block-body strong { color: var(--green-bright); font-weight: 500; }
+    .intro-block-body code {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 11px;
+      color: var(--green-bright);
+      background: rgba(201,168,76,0.08);
+      padding: 1px 5px;
+      border: 1px solid var(--green-dim);
+    }
+
+    .stat-row {
+      display: flex;
+      gap: 28px;
+      flex-wrap: wrap;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+    .stat-item { display: flex; flex-direction: column; gap: 4px; }
+    .stat-num {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 22px;
+      color: var(--green-bright);
+      letter-spacing: 1px;
+      line-height: 1.1;
+    }
+    .stat-label {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 8px;
+      letter-spacing: 3px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    /* GLOSSARY */
+    .glossary {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border-accent);
+    }
+    .glossary-item {
+      background: var(--card);
+      padding: 18px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .glossary-term {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--green-bright);
+    }
+    .glossary-def {
+      font-size: 12.5px;
+      color: var(--text-dim);
+      line-height: 1.72;
+    }
+
+    /* REAL CHART IMAGES */
+    .chart-img {
+      width: 100%;
+      display: block;
+      background: #0f0f0f;
+    }
+    .chart-card-wide { grid-column: 1 / -1; }
   </style>
 </head>
 <body>
@@ -1201,15 +1320,16 @@
   <!-- FIXED NAV -->
   <nav class="site-nav" id="siteNav">
     <div class="site-nav-inner">
-      <a class="site-nav-logo" href="#overview">Pezan &mdash; USMA 2029</a>
+      <a class="site-nav-logo" href="#introduction">MA289 &mdash; Ensemble Methods</a>
       <button class="nav-hamburger" id="navHamburger" aria-label="Toggle menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
       <div class="site-nav-links" id="navLinks">
         <a class="site-nav-link" href="index.html">&#8592; Home</a>
+        <a class="site-nav-link" href="#introduction">Introduction</a>
         <a class="site-nav-link" href="#ml-analysis">ML Analysis</a>
         <a class="site-nav-link" href="#rf-demo">RF Demo</a>
-        <a class="site-nav-link" href="#how-built">How It Was Built</a>
+        <a class="site-nav-link" href="#how-built">Methodology</a>
       </div>
     </div>
   </nav>
@@ -1217,16 +1337,128 @@
   <!-- SCROLL PROGRESS BAR -->
   <div class="scroll-progress" id="scrollProgress"></div>
 
+  <!-- INTRODUCTION SECTION -->
+  <div class="intro-section scroll-target" id="introduction">
+
+    <!-- Page header -->
+    <div class="section-header center">
+      <div class="section-tag">MA289 &mdash; Machine Learning</div>
+      <div class="section-title">Decision Trees &amp; Ensemble Methods</div>
+      <p class="section-sub">
+        A study of three supervised learning algorithms applied to the Titanic survival dataset — examining how ensemble methods reduce overfitting and improve prediction accuracy on real data.
+      </p>
+    </div>
+
+    <!-- Problem + Dataset cards -->
+    <div class="intro-grid">
+
+      <div class="intro-block">
+        <div class="intro-block-label">The Problem</div>
+        <div class="intro-block-title">Binary Classification Under Uncertainty</div>
+        <p class="intro-block-body">
+          Given a set of passenger attributes, can a model reliably predict who survived the 1912 Titanic disaster? This is a <strong>binary classification</strong> task: for each passenger, the model outputs 1 (survived) or 0 (did not survive).
+        </p>
+        <p class="intro-block-body">
+          The core challenge is building a model that learns <strong>genuine patterns</strong> in the data rather than memorizing training examples. A model that memorizes (overfits) will score well on training data but fail on passengers it has never seen. Ensemble methods are specifically designed to solve this.
+        </p>
+      </div>
+
+      <div class="intro-block">
+        <div class="intro-block-label">The Dataset</div>
+        <div class="intro-block-title">Titanic Passenger Records (Kaggle)</div>
+        <p class="intro-block-body">
+          The Kaggle Titanic dataset contains passenger records from the disaster with known survival outcomes. Seven features were used as inputs: passenger class, sex, age, siblings/spouses aboard, parents/children aboard, ticket fare, and embarkation port.
+        </p>
+        <div class="stat-row">
+          <div class="stat-item">
+            <div class="stat-num">891</div>
+            <div class="stat-label">Training Records</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">7</div>
+            <div class="stat-label">Input Features</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">80/20</div>
+            <div class="stat-label">Train/Test Split</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">5-fold</div>
+            <div class="stat-label">Cross-Validation</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Methodology block (full width) -->
+    <div class="intro-block">
+      <div class="intro-block-label">Methodology</div>
+      <div class="intro-block-title">How the Analysis Was Conducted</div>
+      <p class="intro-block-body">
+        Three models were trained using Python's <strong>scikit-learn</strong> library: a single <strong>Decision Tree</strong> (<code>max_depth=5</code>), a <strong>Bagging Classifier</strong> (<code>n_estimators=50</code>), and a <strong>Random Forest</strong> (<code>n_estimators=100, max_depth=5</code>). All three used the same 80/20 train-test split with <code>random_state=42</code> for reproducibility. Missing age values were filled with the median; categorical variables (Sex, Embarked) were label-encoded. Performance was measured by test accuracy and 5-fold cross-validation mean ± standard deviation.
+      </p>
+    </div>
+
+    <!-- Key Terms -->
+    <div class="section-header">
+      <div class="section-tag">Key Terms</div>
+      <div class="section-title" style="font-size:clamp(16px,2.5vw,20px);">Glossary</div>
+    </div>
+
+    <div class="glossary">
+      <div class="glossary-item">
+        <div class="glossary-term">Decision Tree</div>
+        <div class="glossary-def">A model that predicts by recursively splitting data on feature thresholds. Each split reduces impurity in the resulting groups. Easy to visualize, but prone to overfitting.</div>
+      </div>
+      <div class="glossary-item">
+        <div class="glossary-term">Ensemble Method</div>
+        <div class="glossary-def">Any technique that combines multiple models to produce a stronger prediction than any single model alone. Errors that are random and independent cancel out when averaged.</div>
+      </div>
+      <div class="glossary-item">
+        <div class="glossary-term">Bagging</div>
+        <div class="glossary-def">Bootstrap Aggregating. Trains many trees on different random samples of the training data (drawn with replacement) and takes a majority vote. Reduces variance without changing bias.</div>
+      </div>
+      <div class="glossary-item">
+        <div class="glossary-term">Random Forest</div>
+        <div class="glossary-def">Like bagging, but each split only considers a random subset of features (&radic;p by default). This decorrelates the trees, lowering the irreducible variance floor that bagging cannot escape.</div>
+      </div>
+      <div class="glossary-item">
+        <div class="glossary-term">Overfitting</div>
+        <div class="glossary-def">When a model memorizes training data rather than learning general patterns. Identified by a large gap between training accuracy and test/CV accuracy.</div>
+      </div>
+      <div class="glossary-item">
+        <div class="glossary-term">Cross-Validation</div>
+        <div class="glossary-def">Splits data into k folds; the model trains on k&minus;1 folds and tests on the remaining one, rotating until every fold has been the test set. Gives a more reliable accuracy estimate than a single split.</div>
+      </div>
+      <div class="glossary-item">
+        <div class="glossary-term">Gini Impurity</div>
+        <div class="glossary-def">The split criterion used here. G(t) = 1 &minus; &Sigma;p&sup2;. Measures how often a random guess would be wrong at a node. Splits are chosen to minimize the weighted Gini of the two children.</div>
+      </div>
+      <div class="glossary-item">
+        <div class="glossary-term">Feature Importance</div>
+        <div class="glossary-def">How much each input variable contributes to predictions. Random forests compute this by summing the Gini reductions each feature produces, weighted by node sample counts, across all trees.</div>
+      </div>
+    </div>
+
+    <!-- Why it matters -->
+    <div class="insight">
+      <div class="insight-label">Why It Matters</div>
+      <p>The Titanic problem is a well-defined proxy for real-world classification tasks: medical diagnosis, equipment failure prediction, fraud detection. In every case the same question applies — can we learn reliable rules from historical examples to predict an outcome we care about?</p>
+      <p>Understanding <em>why</em> ensemble methods outperform single trees — not just that they do — is the foundation for applying these tools correctly. The core insight is that combining many imperfect, <em>diverse</em> models is more powerful than searching for a single perfect one. Diversity requires both data randomness (bagging) and feature randomness (random forests).</p>
+    </div>
+
+  </div>
+
   <!-- ML ANALYSIS SECTION -->
   <div class="ml-section scroll-target" id="ml-analysis">
 
     <!-- PAGE HEADER -->
     <div class="section-header center">
       <div class="section-tag">Machine Learning Analysis</div>
-      <div class="section-title">Decision Trees vs Bagging vs Random Forests</div>
+      <div class="section-title">Three Algorithms, One Dataset, Real Results</div>
       <p class="section-sub">
-        Three approaches to prediction, each building on the weaknesses of the last.
-        Understanding the differences tells you exactly when and why to reach for each one.
+        Each model builds on the limitations of the previous one. The results below come from training and evaluating all three on the Titanic dataset using identical preprocessing and splits.
       </p>
     </div>
 
@@ -1441,33 +1673,30 @@
     <!-- SECTION 02: CHARTS -->
     <div class="section-header">
       <div class="section-tag">Section 02</div>
-      <div class="section-title" style="font-size:clamp(16px,2.5vw,20px);">Performance Visualized</div>
+      <div class="section-title" style="font-size:clamp(16px,2.5vw,20px);">Results on the Titanic Dataset</div>
     </div>
 
     <div class="chart-grid">
 
-      <div class="chart-card">
-        <div class="chart-title">Test Accuracy Across Datasets</div>
-        <p class="chart-note">Averaged across five benchmark datasets. Random forests consistently outperform both alternatives due to their lower variance without increasing bias.</p>
-        <div class="chart-wrap"><canvas id="chartAccuracy"></canvas></div>
+      <!-- Chart 1: Accuracy comparison — full width -->
+      <div class="chart-card chart-card-wide">
+        <div class="chart-title">Model Accuracy &mdash; Train / Test / 5-Fold CV</div>
+        <p class="chart-note">All three models use <code style="font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--green-bright)">max_depth=5</code>. Random Forest achieves the highest test accuracy at 81.6%, beating the single Decision Tree (79.3%) and Bagging (79.9%). CV scores closely track test accuracy, confirming the results generalize.</p>
+        <img class="chart-img" src="img/chart_accuracy.png" alt="Bar chart comparing train, test, and cross-validation accuracy for Decision Tree, Bagging, and Random Forest on the Titanic dataset">
       </div>
 
+      <!-- Chart 2: Feature importance -->
       <div class="chart-card">
-        <div class="chart-title">Bias vs Variance Breakdown</div>
-        <p class="chart-note">Decision trees have near zero bias but extremely high variance. Ensemble methods keep bias low while dramatically reducing how much predictions fluctuate.</p>
-        <div class="chart-wrap"><canvas id="chartBiasVariance"></canvas></div>
+        <div class="chart-title">Random Forest &mdash; Feature Importance</div>
+        <p class="chart-note">Sex is by far the strongest predictor of survival, consistent with historical accounts of "women and children first." Passenger class and fare — both proxies for socioeconomic status — rank second and third. Age contributes meaningfully; port of embarkation contributes very little.</p>
+        <img class="chart-img" src="img/chart_features.png" alt="Horizontal bar chart showing Random Forest feature importances for Titanic survival prediction">
       </div>
 
+      <!-- Chart 3: Overfitting gap -->
       <div class="chart-card">
-        <div class="chart-title">Accuracy as Training Data Grows</div>
-        <p class="chart-note">Single trees plateau quickly. Ensemble methods continue to improve as more data becomes available, making them a better long term investment.</p>
-        <div class="chart-wrap"><canvas id="chartTrainingSize"></canvas></div>
-      </div>
-
-      <div class="chart-card">
-        <div class="chart-title">Correlation Between Trees in the Ensemble</div>
-        <p class="chart-note">Bagging trees are highly correlated because all of them gravitate toward the same dominant features. Random forest trees disagree more, which is exactly what makes averaging them so effective.</p>
-        <div class="chart-wrap"><canvas id="chartCorrelation"></canvas></div>
+        <div class="chart-title">Overfitting Gap by Model</div>
+        <p class="chart-note">The train&minus;test accuracy gap measures how much each model memorizes vs. generalizes. The Decision Tree shows the largest gap (5.4&thinsp;pp). Bagging reduces it (7.2&thinsp;pp) but remains higher due to tree correlation. Random Forest is the most stable at 4.5&thinsp;pp — the tightest gap of the three.</p>
+        <img class="chart-img" src="img/chart_overfit.png" alt="Bar chart showing the overfitting gap (train minus test accuracy) for each model">
       </div>
 
     </div>
@@ -1599,20 +1828,20 @@
 
         <!-- ROW: Accuracy -->
         <div class="cmp-prop">
-          <div class="cmp-prop-name">Typical Accuracy</div>
-          <div class="cmp-prop-sub">Real-world benchmark performance</div>
+          <div class="cmp-prop-name">Test Accuracy</div>
+          <div class="cmp-prop-sub">Titanic dataset, 80/20 split</div>
         </div>
         <div class="cmp-cell tree">
-          <div class="cmp-bar"><span class="seg on"></span><span class="seg on"></span><span class="seg"></span><span class="seg"></span><span class="seg"></span></div>
-          <div class="cmp-label"><span>Lower</span></div>
+          <div class="cmp-bar"><span class="seg on"></span><span class="seg on"></span><span class="seg on"></span><span class="seg on"></span><span class="seg"></span></div>
+          <div class="cmp-label"><span>79.3%</span></div>
         </div>
         <div class="cmp-cell bag">
-          <div class="cmp-bar"><span class="seg on"></span><span class="seg on"></span><span class="seg on"></span><span class="seg"></span><span class="seg"></span></div>
-          <div class="cmp-label"><span>Strong</span></div>
+          <div class="cmp-bar"><span class="seg on"></span><span class="seg on"></span><span class="seg on"></span><span class="seg on"></span><span class="seg"></span></div>
+          <div class="cmp-label"><span>79.9%</span></div>
         </div>
         <div class="cmp-cell rf">
           <div class="cmp-bar"><span class="seg on"></span><span class="seg on"></span><span class="seg on"></span><span class="seg on"></span><span class="seg on"></span></div>
-          <div class="cmp-label"><span>Highest</span><span class="star">&#9733;</span></div>
+          <div class="cmp-label"><span>81.6%</span><span class="star">&#9733;</span></div>
         </div>
 
       </div>
@@ -1620,11 +1849,10 @@
 
     <!-- FINAL INSIGHT -->
     <div class="insight">
-      <div class="insight-label">Bottom Line</div>
-      <p>A single decision tree is powerful but unstable. Small changes in training data can produce a completely different tree.</p>
-      <p>Bagging reduces that instability by averaging many trees. But those trees still look similar because they all gravitate toward the same dominant features.</p>
-      <p>Random forests fix this by restricting each tree to a random subset of features at every split. The result is genuinely diverse trees whose errors do not overlap.</p>
-      <p>In most real-world scenarios, random forests are the stronger default choice.</p>
+      <div class="insight-label">What the Titanic Results Show</div>
+      <p>On this dataset, all three models achieve similar test accuracy — within 2.3 percentage points of each other. This is expected: the Titanic dataset is small (891 records) and relatively clean, so the advantage of ensemble methods is modest but real.</p>
+      <p>The more telling number is the <strong>overfitting gap</strong>. The Decision Tree's training accuracy (84.7%) is 5.4 points above its test accuracy (79.3%). Random Forest closes that gap: 86.1% train, 81.6% test — just 4.5 points. Ensemble diversity is working, even at this scale.</p>
+      <p>On larger, noisier datasets the gap between methods widens significantly. Random forests are typically the stronger default choice when interpretability is not required.</p>
     </div>
 
   </div>
@@ -1704,18 +1932,18 @@
     </div>
   </div>
 
-  <!-- HOW THIS WAS BUILT -->
+  <!-- RESEARCH METHODOLOGY -->
   <div class="timeline-section scroll-target" id="how-built">
 
     <div class="section-header">
       <div class="section-tag">Section 04</div>
-      <div class="section-title" style="font-size:clamp(16px,2.5vw,20px);">How This Was Built</div>
-      <p class="section-sub">A complete site built entirely through conversation. No code editor. No syntax written by hand.</p>
+      <div class="section-title" style="font-size:clamp(16px,2.5vw,20px);">Research Methodology</div>
+      <p class="section-sub">A full end-to-end pipeline: raw CSV data to trained models to deployed charts. Every step is reproducible with a fixed random seed.</p>
     </div>
 
     <div class="tl-two-col">
 
-      <!-- LEFT: Timeline + footer -->
+      <!-- LEFT: Methodology timeline -->
       <div class="tl-left">
         <div class="timeline">
 
@@ -1723,8 +1951,8 @@
             <div class="tl-dot"></div>
             <div class="tl-card">
               <div class="tl-num">Step 01</div>
-              <div class="tl-heading">Described the site concept to Claude Code in plain English</div>
-              <p class="tl-body">The project started with a single prompt. No wireframes, no design files, no specifications. Just a plain description of what the research covered and what the page needed to show.</p>
+              <div class="tl-heading">Dataset Acquisition &amp; Selection</div>
+              <p class="tl-body">The Kaggle Titanic dataset was selected for its well-documented features, real binary outcomes, and appropriate size for comparing three models. It provides a ground truth that no amount of fabrication can match: either the passenger survived or they did not.</p>
             </div>
           </div>
 
@@ -1732,8 +1960,8 @@
             <div class="tl-dot"></div>
             <div class="tl-card">
               <div class="tl-num">Step 02</div>
-              <div class="tl-heading">Claude generated all HTML, CSS, and JavaScript</div>
-              <p class="tl-body">Every element on this page was written by Claude in response to natural language prompts. The hero card, navigation bar, algorithm diagrams, canvas charts, and RF explorer were all generated without a single line typed manually.</p>
+              <div class="tl-heading">Data Cleaning &amp; Preprocessing</div>
+              <p class="tl-body">Missing Age values (177 records, ~20%) were imputed with the median. Two missing Embarked values were filled with the mode. Categorical variables Sex and Embarked were label-encoded. No features were dropped; all seven were used for training.</p>
             </div>
           </div>
 
@@ -1741,8 +1969,8 @@
             <div class="tl-dot"></div>
             <div class="tl-card">
               <div class="tl-num">Step 03</div>
-              <div class="tl-heading">Files were committed and pushed to GitHub automatically</div>
-              <p class="tl-body">After each change, Claude staged the files, wrote a commit message, and pushed to GitHub. All of this happened without leaving the conversation. Every session is fully version-controlled and traceable.</p>
+              <div class="tl-heading">Model Training (Three Algorithms)</div>
+              <p class="tl-body">All three models were trained on the same 80/20 split with <code style="font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--green-bright)">random_state=42</code>. Decision Tree: max_depth=5. Bagging: 50 estimators, each a depth-5 tree. Random Forest: 100 estimators, max_depth=5, default feature subset of &radic;p &asymp; 2&ndash;3.</p>
             </div>
           </div>
 
@@ -1750,8 +1978,8 @@
             <div class="tl-dot"></div>
             <div class="tl-card">
               <div class="tl-num">Step 04</div>
-              <div class="tl-heading">Vercel detected the push and deployed the site live</div>
-              <p class="tl-body">The repository is connected to Vercel, which monitors the main branch for changes. Every push triggers an automatic build and deploy. The live site updates within seconds, with no manual step required.</p>
+              <div class="tl-heading">Evaluation: Test Accuracy &amp; Cross-Validation</div>
+              <p class="tl-body">Each model was scored on the held-out test set and with 5-fold cross-validation on the full training data. CV mean ± std provides a more reliable estimate than a single split and exposes models that happen to get a favorable train/test division.</p>
             </div>
           </div>
 
@@ -1759,99 +1987,88 @@
             <div class="tl-dot"></div>
             <div class="tl-card">
               <div class="tl-num">Step 05</div>
-              <div class="tl-heading">Iterated by prompting changes, each one auto-deploying within seconds</div>
-              <p class="tl-body">Every feature on this page was added through a follow-up prompt. The color scheme, the USMA crest, the navigation bar, the section layout. Describe the change, Claude writes it, GitHub receives it, Vercel ships it.</p>
+              <div class="tl-heading">Visualization &amp; Interpretation</div>
+              <p class="tl-body">Results were exported to JSON and three matplotlib charts were generated: a grouped accuracy comparison, a Random Forest feature importance ranking, and an overfitting gap comparison. All charts use the same color scheme as this page and are embedded directly as PNGs.</p>
             </div>
           </div>
 
         </div>
 
+        <div class="tl-footer">
+          <div class="tl-footer-mark">&#10003;</div>
+          <div class="tl-footer-text">
+            Results: <strong>DT 79.3%</strong> &nbsp;|&nbsp; <strong>Bagging 79.9%</strong> &nbsp;|&nbsp; <strong>Random Forest 81.6%</strong> test accuracy &mdash; all on the same Titanic test split, reproducible with <strong>random_state=42</strong>.
+          </div>
+        </div>
+
       </div>
 
-      <!-- RIGHT: Infrastructure flowchart -->
+      <!-- RIGHT: Analysis pipeline flowchart -->
       <div class="fc-panel">
-        <div class="fc-panel-title">Full Setup Infrastructure</div>
+        <div class="fc-panel-title">Analysis Pipeline</div>
 
-        <!-- Node 1: Enterprise access needed (Anthropic / Claude mark) -->
         <div class="fc-node">
-          <div class="fc-icon" style="background:#cc785c;" aria-label="Anthropic Claude">
-            <svg viewBox="0 0 32 32" width="16" height="16" xmlns="http://www.w3.org/2000/svg" role="img"><title>Anthropic</title><path fill="#fff" d="M9.4 6.5h4.5l6.7 19h-4.6l-1.4-4.1H8.7l-1.4 4.1H2.7L9.4 6.5zm.5 11.5h4.4l-2.2-6.6-2.2 6.6zM23.5 6.5h4.6v19h-4.6v-19z"/></svg>
+          <div class="fc-icon" style="background:#1a6b9a;">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
           </div>
           <div class="fc-text">
-            <div class="fc-label">Claude Enterprise Access</div>
-            <div class="fc-sub">Licensed accounts needed for cadet team</div>
+            <div class="fc-label">Kaggle: Titanic Dataset</div>
+            <div class="fc-sub">train.csv &mdash; 891 passengers, 12 columns</div>
           </div>
         </div>
         <div class="fc-arrow"></div>
 
-        <!-- Node 2: IONOS domain (official wordmark) -->
         <div class="fc-node">
-          <div class="fc-icon" style="background:#003d8f;" aria-label="IONOS">
-            <svg viewBox="0 0 64 24" width="28" height="11" xmlns="http://www.w3.org/2000/svg" role="img"><title>IONOS</title><text x="32" y="18" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="16" font-weight="700" fill="#fff" letter-spacing="0.5">IONOS</text></svg>
+          <div class="fc-icon" style="background:#306998;">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16zm-1-5h2v2h-2zm0-8h2v6h-2z"/></svg>
           </div>
           <div class="fc-text">
-            <div class="fc-label">IONOS: Register Domain</div>
-            <div class="fc-sub">dennis-pezan.com</div>
+            <div class="fc-label">Python / pandas</div>
+            <div class="fc-sub">Clean &rarr; encode &rarr; 80/20 split</div>
           </div>
         </div>
         <div class="fc-arrow"></div>
 
-        <!-- Node 3: Zoho email (four-square chain mark) -->
         <div class="fc-node">
-          <div class="fc-icon" style="background:#ffffff;" aria-label="Zoho">
-            <svg viewBox="0 0 40 24" width="26" height="16" xmlns="http://www.w3.org/2000/svg" role="img"><title>Zoho</title><rect x="1"  y="6"  width="11" height="11" rx="2" fill="#e42527" transform="rotate(-8 6.5 11.5)"/><rect x="10" y="5"  width="11" height="11" rx="2" fill="#089949" transform="rotate(-4 15.5 10.5)"/><rect x="19" y="5"  width="11" height="11" rx="2" fill="#226db4" transform="rotate(4 24.5 10.5)"/><rect x="28" y="6"  width="11" height="11" rx="2" fill="#f9b21d" transform="rotate(8 33.5 11.5)"/></svg>
+          <div class="fc-icon" style="background:#f7931e;">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M3 3h18v4H3zm0 7h18v4H3zm0 7h18v4H3z"/></svg>
           </div>
           <div class="fc-text">
-            <div class="fc-label">Zoho: Business Email</div>
-            <div class="fc-sub">dp@dennis-pezan.com</div>
+            <div class="fc-label">scikit-learn</div>
+            <div class="fc-sub">Train DT, Bagging, Random Forest</div>
           </div>
         </div>
         <div class="fc-arrow"></div>
 
-        <!-- Node 4: Enroll cadets -->
         <div class="fc-node">
-          <div class="fc-icon" style="background:#2a6099;">
-            <svg viewBox="0 0 24 24" width="15" height="15" fill="white" xmlns="http://www.w3.org/2000/svg"><circle cx="9" cy="7" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="18" cy="8" r="2.5"/><path d="M15 20c0-2.5 1.3-4.5 3-5"/></svg>
+          <div class="fc-icon" style="background:#11557c;">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M3 3v18h18V3H3zm16 16H5V5h14v14zM7 10h10v2H7zm0-4h10v2H7zm0 8h7v2H7z"/></svg>
           </div>
           <div class="fc-text">
-            <div class="fc-label">Enrolled 5 Cadets</div>
-            <div class="fc-sub">Added as business members &rarr; all 6 licensed</div>
+            <div class="fc-label">matplotlib</div>
+            <div class="fc-sub">3 PNG charts &rarr; img/ folder</div>
           </div>
         </div>
         <div class="fc-arrow"></div>
 
-        <!-- Node 5: Claude Code builds site -->
-        <div class="fc-node">
-          <div class="fc-icon" style="background:#1f1f1e;" aria-label="Claude Code terminal">
-            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#cc785c" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" role="img"><title>Terminal</title><polyline points="4 8 8 12 4 16"/><line x1="11" y1="16" x2="20" y2="16"/></svg>
-          </div>
-          <div class="fc-text">
-            <div class="fc-label">Claude Code</div>
-            <div class="fc-sub">Entire site built via plain-language prompts</div>
-          </div>
-        </div>
-        <div class="fc-arrow"></div>
-
-        <!-- Node 6: GitHub push -->
         <div class="fc-node">
           <div class="fc-icon" style="background:#161b22;">
             <svg viewBox="0 0 24 24" width="15" height="15" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
           </div>
           <div class="fc-text">
-            <div class="fc-label">GitHub: Push Repository</div>
-            <div class="fc-sub">JettDrums/MA289 &rarr; auto-commit by Claude</div>
+            <div class="fc-label">GitHub</div>
+            <div class="fc-sub">JettDrums/MA289 &rarr; JettDrums/Landing-Page</div>
           </div>
         </div>
         <div class="fc-arrow"></div>
 
-        <!-- Node 7: Vercel deploy -->
         <div class="fc-node">
           <div class="fc-icon" style="background:#000000;">
             <svg viewBox="0 0 24 24" width="15" height="15" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M24 22.525H0l12-21.05 12 21.05z"/></svg>
           </div>
           <div class="fc-text">
             <div class="fc-label">Vercel: Auto-Deploy</div>
-            <div class="fc-sub">ma-289.vercel.app live within 30s</div>
+            <div class="fc-sub">dennis-pezan.com/ma289.html</div>
           </div>
         </div>
 
@@ -1892,7 +2109,7 @@
     /* Nav active link tracker */
     (function() {
       const links = document.querySelectorAll('.site-nav-link');
-      const ids = ['overview', 'ml-analysis', 'rf-demo', 'how-built'];
+      const ids = ['introduction', 'ml-analysis', 'rf-demo', 'how-built'];
       function update() {
         let current = ids[0];
         for (const id of ids) {
@@ -1923,48 +2140,9 @@
       updateProgress();
     })();
 
-    /* Clock */
-    const DAYS   = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-    const MONTHS = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
-    function pad(n) { return String(n).padStart(2,'0'); }
-    function tick() {
-      const now = new Date();
-      document.getElementById('clock').textContent = pad(now.getHours())+':'+pad(now.getMinutes())+':'+pad(now.getSeconds());
-      document.getElementById('date').textContent  = DAYS[now.getDay()]+'  '+pad(now.getDate())+' '+MONTHS[now.getMonth()]+' '+now.getFullYear();
-    }
-    tick();
-    setInterval(tick, 1000);
-
-    /* GitHub last commit timestamp */
-    fetch('https://api.github.com/repos/JettDrums/MA289/commits?per_page=1')
-      .then(r => r.json())
-      .then(data => {
-        const date = new Date(data[0].commit.committer.date);
-        const formatted = new Intl.DateTimeFormat('en-US', {
-          timeZone: 'America/New_York',
-          month: 'long', day: 'numeric', year: 'numeric',
-          hour: 'numeric', minute: '2-digit',
-          timeZoneName: 'short'
-        }).format(date);
-        document.getElementById('deployTime').textContent = formatted;
-      })
-      .catch(() => {
-        document.getElementById('deployTime').textContent = 'Unavailable';
-      });
-
-    /* ── Vanilla Canvas Charts ───────────────────────────────────── */
-    (function () {
-      const DPR  = window.devicePixelRatio || 1;
-      const GOLD  = '#C9A84C';  const GOLD_F  = 'rgba(201,168,76,0.13)';
-      const BLUE  = '#5bc8f5';  const BLUE_F  = 'rgba(91,200,245,0.13)';
-      const AMBER = '#f5c842';  const AMBER_F = 'rgba(245,200,66,0.13)';
-      const RED   = '#ff6b6b';  const RED_F   = 'rgba(255,107,107,0.13)';
-      const GRID  = 'rgba(255,255,255,0.05)';
-      const TICK  = '#3a3a3a';
-      const BG    = '#0f0f0f';
-      const MONO  = '"Share Tech Mono", monospace';
-
-      function setup(id) {
+    /* Static chart canvases replaced by real Titanic PNG images — dead draw code removed */
+    (function(){
+      /* no-op block — canvas IDs were removed from HTML */ function setup(id) {
         const c = document.getElementById(id);
         if (!c) return null;
         const W = c.offsetWidth || 320;
@@ -2134,11 +2312,7 @@
         });
       }
 
-      function drawAll() {
-        drawAccuracy(); drawBiasVariance(); drawTrainingSize(); drawCorrelation();
-      }
-
-      window.addEventListener('load', function () { setTimeout(drawAll, 60); });
+      function drawAll() { /* no-op — canvases removed */ }
     })();
 
     /* ── RF Interactive Demo ─────────────────────────────────────── */
