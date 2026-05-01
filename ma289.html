@@ -1667,18 +1667,18 @@
 
     <div class="chart-grid">
 
-      <!-- Chart 1: Accuracy comparison — full width -->
-      <div class="chart-card chart-card-wide">
-        <div class="chart-title">Model Accuracy: Train vs. Test</div>
-        <p class="chart-note">All three models use <code style="font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--green-bright)">max_depth=5</code>. Random Forest achieves the highest test accuracy at 81.6%, beating the single Decision Tree (79.3%) and Bagging (79.9%). The gap between train and test bars shows how much each model overfits.</p>
-        <img class="chart-img" src="img/chart_accuracy.png" alt="Bar chart comparing train and test accuracy for Decision Tree, Bagging, and Random Forest on the Titanic dataset">
-      </div>
-
-      <!-- Chart 2: Accuracy vs trees (full width) -->
+      <!-- Chart 1: Accuracy vs trees (full width) -->
       <div class="chart-card chart-card-wide">
         <div class="chart-title">Test Accuracy vs Number of Trees</div>
         <p class="chart-note">Both methods improve quickly, then flatten out. The reason is mathematical: the variance of a B-tree ensemble is <strong style="color:var(--text);font-weight:500">Var = &rho;&sigma;&sup2; + (1&minus;&rho;)&sigma;&sup2;/B</strong>. The second term shrinks as you add trees, but the first term, <strong style="color:var(--text);font-weight:500">&rho;&sigma;&sup2;</strong>, is a hard floor that no number of trees can remove. At 10,000 trees the second term is essentially zero, but accuracy still cannot exceed the ceiling set by that floor. The only way past it is to lower &rho;, the correlation between trees. That is exactly what Random Forest does: by forcing each split to see only a random subset of features, its trees disagree more often, &rho; drops, and the floor is lower. Bagging never reduces &rho; because every tree can use every feature, so it levels off below Random Forest. A Decision Tree is a single tree by definition and is not shown.</p>
         <img class="chart-img" src="img/chart_trees.png" alt="Line chart showing test accuracy vs number of trees for Bagging and Random Forest on the Titanic dataset">
+      </div>
+
+      <!-- Chart 2: Accuracy comparison — full width -->
+      <div class="chart-card chart-card-wide">
+        <div class="chart-title">Model Accuracy: Train vs. Test</div>
+        <p class="chart-note">All three models use <code style="font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--green-bright)">max_depth=5</code>. Random Forest achieves the highest test accuracy at 81.6%, beating the single Decision Tree (79.3%) and Bagging (79.9%). The gap between train and test bars shows how much each model overfits.</p>
+        <img class="chart-img" src="img/chart_accuracy.png" alt="Bar chart comparing train and test accuracy for Decision Tree, Bagging, and Random Forest on the Titanic dataset">
       </div>
 
       <!-- Chart 3: Feature importance -->
