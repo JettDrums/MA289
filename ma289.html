@@ -1395,7 +1395,7 @@
       <div class="intro-block-label">Methodology</div>
       <div class="intro-block-title">How the Analysis Was Conducted</div>
       <p class="intro-block-body">
-        Three models were trained using Python's <strong>scikit-learn</strong> library: a single <strong>Decision Tree</strong> (<code>max_depth=5</code>), a <strong>Bagging Classifier</strong> (<code>n_estimators=100</code>), and a <strong>Random Forest</strong> (<code>n_estimators=100, max_depth=5</code>). All three used the same 80/20 train-test split with <code>random_state=42</code> for reproducibility. Missing age values were filled with the median; categorical variables (Sex, Embarked) were label-encoded. Performance was measured by test accuracy on the held-out test set.
+        Three models were trained using Python's <strong>scikit-learn</strong> library: a single <strong>Decision Tree</strong> (<code>max_depth=5</code>), a <strong>Bagging Classifier</strong> (<code>n_estimators=100</code>), and a <strong>Random Forest</strong> (<code>n_estimators=100, max_depth=5</code>). All three used the same 80/20 train-test split with <code>random_state=42</code> for reproducibility. Missing numerical values such as Age were imputed with the median of the known values; categorical variables (Sex, Embarked) were label-encoded, converting text categories into integers so the models could process them. Performance was measured by test accuracy on the held-out test set.
       </p>
     </div>
 
