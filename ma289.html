@@ -1680,7 +1680,7 @@
       <!-- Chart 1: Accuracy comparison — full width -->
       <div class="chart-card chart-card-wide">
         <div class="chart-title">Model Accuracy: Train / Test / 5-Fold CV</div>
-        <p class="chart-note">All three models use <code style="font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--green-bright)">max_depth=5</code>. Random Forest achieves the highest test accuracy at 81.6%, beating the single Decision Tree (79.3%) and Bagging (79.9%). CV scores closely track test accuracy, confirming the results generalize.</p>
+        <p class="chart-note">All three models use <code style="font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--green-bright)">max_depth=5</code>. Random Forest achieves the highest test accuracy at 81.6%, beating the single Decision Tree (79.3%) and Bagging (79.9%). The gap between train and test bars shows how much each model overfits.</p>
         <img class="chart-img" src="img/chart_accuracy.png" alt="Bar chart comparing train, test, and cross-validation accuracy for Decision Tree, Bagging, and Random Forest on the Titanic dataset">
       </div>
 
