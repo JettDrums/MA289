@@ -1328,7 +1328,6 @@
         <a class="site-nav-link" href="index.html">&#8592; Home</a>
         <a class="site-nav-link" href="#introduction">Introduction</a>
         <a class="site-nav-link" href="#ml-analysis">ML Analysis</a>
-        <a class="site-nav-link" href="#rf-demo">RF Demo</a>
         <a class="site-nav-link" href="#how-built">Methodology</a>
       </div>
     </div>
@@ -1857,8 +1856,8 @@
 
   </div>
 
-  <!-- RF INTERACTIVE DEMO (real Titanic data lookup) -->
-  <div class="rf-demo-section scroll-target" id="rf-demo">
+  <!-- RF INTERACTIVE DEMO removed — small dataset produces noisy results -->
+  <div class="rf-demo-section scroll-target" id="rf-demo" style="display:none">
 
     <div class="section-header">
       <div class="section-tag">Interactive Demo</div>
@@ -2109,7 +2108,7 @@
     /* Nav active link tracker */
     (function() {
       const links = document.querySelectorAll('.site-nav-link');
-      const ids = ['introduction', 'ml-analysis', 'rf-demo', 'how-built'];
+      const ids = ['introduction', 'ml-analysis', 'how-built'];
       function update() {
         let current = ids[0];
         for (const id of ids) {
