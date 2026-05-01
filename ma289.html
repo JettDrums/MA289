@@ -1281,13 +1281,16 @@
 
     /* GLOSSARY */
     .glossary {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
       gap: 1px;
       background: var(--border);
       border: 1px solid var(--border-accent);
     }
     .glossary-item {
+      flex: 0 0 calc(25% - 1px);
+      min-width: 220px;
       background: var(--card);
       padding: 18px 20px;
       display: flex;
