@@ -1587,8 +1587,8 @@
         </p>
         <div class="math-block">
           <div class="math-block-label">Feature Subset Rule + Decorrelation</div>
-          <div class="math-eq">m = <span class="hl">&#x230A;&radic;p&#x230B;</span> &nbsp;features per split &nbsp;(p=7 &rarr; m=2)<br><br>Bagging: &rho; &asymp; <span style="color:#ff6b6b">0.82</span> &nbsp;&rarr;&nbsp; floor = <span style="color:#ff6b6b">0.82</span>&thinsp;&sigma;<sup>2</sup><br>RF:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&rho; &asymp; <span class="hl">0.38</span> &nbsp;&rarr;&nbsp; floor = <span class="hl">0.38</span>&thinsp;&sigma;<sup>2</sup></div>
-          <p class="math-note">Forcing each split to consider only m features stops dominant features from appearing in every tree. Cutting &rho; from 0.82 to 0.38 more than halves the irreducible variance floor. No number of bagging trees can match this.</p>
+          <div class="math-eq">m = <span class="hl">&#x230A;&radic;p&#x230B;</span> &nbsp;features per split &nbsp;(p=7 &rarr; m=2)<br><br>Bagging: &rho; &asymp; <span style="color:#ff6b6b">0.76</span> &nbsp;&rarr;&nbsp; floor = <span style="color:#ff6b6b">0.76</span>&thinsp;&sigma;<sup>2</sup><br>RF:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&rho; &asymp; <span class="hl">0.67</span> &nbsp;&rarr;&nbsp; floor = <span class="hl">0.67</span>&thinsp;&sigma;<sup>2</sup></div>
+          <p class="math-note">Forcing each split to consider only m features stops dominant features from appearing in every tree. Cutting &rho; from 0.76 to 0.67 reduces the irreducible variance floor. No number of bagging trees can match this.</p>
         </div>
         <svg class="algo-diagram" viewBox="0 0 260 145" xmlns="http://www.w3.org/2000/svg">
           <rect x="10" y="8" width="60" height="22" rx="2" fill="#12100a" stroke="#8B6820" stroke-width="1"/>
@@ -2300,8 +2300,8 @@
         yGrid(ctx, pad, pw, ph, 0, 1, 4, function(v){ return 'r=' + v.toFixed(1); });
 
         var bars = [
-          { l: 'Bagging',       v: 0.82, c: BLUE, f: BLUE_F },
-          { l: 'Random Forest', v: 0.38, c: GOLD, f: GOLD_F }
+          { l: 'Bagging',       v: 0.76, c: BLUE, f: BLUE_F },
+          { l: 'Random Forest', v: 0.67, c: GOLD, f: GOLD_F }
         ];
         var slotW = pw / bars.length, bW = slotW * 0.70;
         bars.forEach(function (b, i) {
