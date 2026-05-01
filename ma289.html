@@ -197,7 +197,7 @@
       .chart-wrap { height: 260px; }
 
       /* Comparison grid — tighter on tablet */
-      .cmp-grid { min-width: 560px; }
+      .cmp-grid { min-width: 0; }
       .cmp-h, .cmp-prop, .cmp-cell { padding: 14px 14px; }
 
       /* RF Demo */
@@ -480,8 +480,7 @@
 
     .cmp-grid {
       display: grid;
-      grid-template-columns: minmax(180px, 1.3fr) 1fr 1fr 1fr;
-      min-width: 640px;
+      grid-template-columns: minmax(160px, 1.3fr) 1fr 1fr 1fr;
     }
 
     .cmp-h {
@@ -489,7 +488,7 @@
       font-size: 10px;
       letter-spacing: 3px;
       text-transform: uppercase;
-      padding: 20px 22px 14px;
+      padding: 16px 16px 12px;
       border-bottom: 1px solid var(--border-accent);
       display: flex;
       align-items: center;
@@ -544,7 +543,7 @@
     }
 
     .cmp-cell {
-      padding: 18px 22px;
+      padding: 16px 16px;
       border-bottom: 1px solid var(--border);
       display: flex;
       flex-direction: column;
