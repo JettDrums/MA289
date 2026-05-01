@@ -1382,10 +1382,6 @@
             <div class="stat-num">80/20</div>
             <div class="stat-label">Train/Test Split</div>
           </div>
-          <div class="stat-item">
-            <div class="stat-num">5-fold</div>
-            <div class="stat-label">Cross-Validation</div>
-          </div>
         </div>
       </div>
 
@@ -1396,7 +1392,7 @@
       <div class="intro-block-label">Methodology</div>
       <div class="intro-block-title">How the Analysis Was Conducted</div>
       <p class="intro-block-body">
-        Three models were trained using Python's <strong>scikit-learn</strong> library: a single <strong>Decision Tree</strong> (<code>max_depth=5</code>), a <strong>Bagging Classifier</strong> (<code>n_estimators=50</code>), and a <strong>Random Forest</strong> (<code>n_estimators=100, max_depth=5</code>). All three used the same 80/20 train-test split with <code>random_state=42</code> for reproducibility. Missing age values were filled with the median; categorical variables (Sex, Embarked) were label-encoded. Performance was measured by test accuracy and 5-fold cross-validation mean ± standard deviation.
+        Three models were trained using Python's <strong>scikit-learn</strong> library: a single <strong>Decision Tree</strong> (<code>max_depth=5</code>), a <strong>Bagging Classifier</strong> (<code>n_estimators=50</code>), and a <strong>Random Forest</strong> (<code>n_estimators=100, max_depth=5</code>). All three used the same 80/20 train-test split with <code>random_state=42</code> for reproducibility. Missing age values were filled with the median; categorical variables (Sex, Embarked) were label-encoded. Performance was measured by test accuracy on the held-out test set.
       </p>
     </div>
 
@@ -1465,11 +1461,7 @@
       </div>
       <div class="glossary-item">
         <div class="glossary-term">Overfitting</div>
-        <div class="glossary-def">When a model memorizes training data rather than learning general patterns. Identified by a large gap between training accuracy and test/CV accuracy.</div>
-      </div>
-      <div class="glossary-item">
-        <div class="glossary-term">Cross-Validation</div>
-        <div class="glossary-def">Splits data into k folds; the model trains on k&minus;1 folds and tests on the remaining one, rotating until every fold has been the test set. Gives a more reliable accuracy estimate than a single split.</div>
+        <div class="glossary-def">When a model memorizes training data rather than learning general patterns. Identified by a large gap between training accuracy and test accuracy.</div>
       </div>
       <div class="glossary-item">
         <div class="glossary-term">Gini Impurity</div>
@@ -1673,9 +1665,9 @@
 
       <!-- Chart 1: Accuracy comparison — full width -->
       <div class="chart-card chart-card-wide">
-        <div class="chart-title">Model Accuracy: Train / Test / 5-Fold CV</div>
+        <div class="chart-title">Model Accuracy: Train vs. Test</div>
         <p class="chart-note">All three models use <code style="font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--green-bright)">max_depth=5</code>. Random Forest achieves the highest test accuracy at 81.6%, beating the single Decision Tree (79.3%) and Bagging (79.9%). The gap between train and test bars shows how much each model overfits.</p>
-        <img class="chart-img" src="img/chart_accuracy.png" alt="Bar chart comparing train, test, and cross-validation accuracy for Decision Tree, Bagging, and Random Forest on the Titanic dataset">
+        <img class="chart-img" src="img/chart_accuracy.png" alt="Bar chart comparing train and test accuracy for Decision Tree, Bagging, and Random Forest on the Titanic dataset">
       </div>
 
       <!-- Chart 2: Accuracy vs trees (full width) -->
