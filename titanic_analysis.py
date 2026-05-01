@@ -113,6 +113,40 @@ plt.savefig(r'C:\Users\dennis.pezan\Downloads\GAME_FILE\img\chart_overfit.png', 
 plt.close()
 print("Saved chart_overfit.png")
 
+# ── CHART 4: Accuracy vs Number of Trees (Bagging & RF) ──────────────────────
+# Decision Tree is a single tree by definition — not applicable here.
+TREE_COUNTS = [1, 2, 3, 5, 7, 10, 15, 20, 30, 50, 75, 100]
+bag_scores, rf_scores = [], []
+
+for n in TREE_COUNTS:
+    b = BaggingClassifier(estimator=DecisionTreeClassifier(max_depth=5),
+                          n_estimators=n, random_state=42)
+    b.fit(X_train, y_train)
+    bag_scores.append(round(accuracy_score(y_test, b.predict(X_test)) * 100, 2))
+
+    r = RandomForestClassifier(n_estimators=n, max_depth=5, random_state=42)
+    r.fit(X_train, y_train)
+    rf_scores.append(round(accuracy_score(y_test, r.predict(X_test)) * 100, 2))
+
+fig, ax = plt.subplots(figsize=(8, 4))
+ax.plot(TREE_COUNTS, bag_scores, color='#4a7fa0', linewidth=2,
+        marker='o', markersize=4, label='Bagging')
+ax.plot(TREE_COUNTS, rf_scores,  color='#C9A84C', linewidth=2,
+        marker='o', markersize=4, label='Random Forest')
+
+ax.set_xlabel('Number of Trees', fontsize=11)
+ax.set_ylabel('Test Accuracy (%)', fontsize=11)
+ax.set_title('Test Accuracy vs Number of Trees', fontsize=13, fontweight='bold')
+ax.set_ylim(60, 100)
+ax.legend(fontsize=10)
+ax.yaxis.grid(True, alpha=0.3)
+ax.xaxis.grid(True, alpha=0.15)
+ax.set_axisbelow(True)
+plt.tight_layout()
+plt.savefig(r'C:\Users\dennis.pezan\Downloads\GAME_FILE\img\chart_trees.png', dpi=150)
+plt.close()
+print("Saved chart_trees.png")
+
 # ── SAVE RESULTS JSON ─────────────────────────────────────────────────────────
 with open(r'C:\Users\dennis.pezan\Downloads\GAME_FILE\titanic_results.json', 'w') as f:
     json.dump(results, f, indent=2)

@@ -1684,7 +1684,14 @@
         <img class="chart-img" src="img/chart_accuracy.png" alt="Bar chart comparing train, test, and cross-validation accuracy for Decision Tree, Bagging, and Random Forest on the Titanic dataset">
       </div>
 
-      <!-- Chart 2: Feature importance -->
+      <!-- Chart 2: Accuracy vs trees (full width) -->
+      <div class="chart-card chart-card-wide">
+        <div class="chart-title">Test Accuracy vs Number of Trees</div>
+        <p class="chart-note">Both ensemble methods improve rapidly up to around 20 trees, then the gains diminish. Random Forest levels off higher than Bagging because its random feature subsets keep the trees decorrelated even as more are added. A Decision Tree is not shown here because it is always a single tree by definition — adding more trees is what turns it into an ensemble.</p>
+        <img class="chart-img" src="img/chart_trees.png" alt="Line chart showing test accuracy vs number of trees for Bagging and Random Forest on the Titanic dataset">
+      </div>
+
+      <!-- Chart 3: Feature importance -->
       <div class="chart-card">
         <div class="chart-title">Random Forest: Feature Importance</div>
         <p class="chart-note">Sex is by far the strongest predictor of survival, consistent with historical accounts of "women and children first." Passenger class and fare, both proxies for socioeconomic status, rank second and third. Age contributes meaningfully; port of embarkation contributes very little.</p>
