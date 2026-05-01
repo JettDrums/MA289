@@ -1344,7 +1344,7 @@
       <div class="section-tag">MA289 / Machine Learning</div>
       <div class="section-title">Decision Trees &amp; Ensemble Methods</div>
       <p class="section-sub">
-        A study of three supervised learning algorithms applied to the Titanic survival dataset — examining how ensemble methods reduce overfitting and improve prediction accuracy on real data.
+        A study of three supervised learning algorithms applied to the Titanic survival dataset, examining how ensemble methods reduce overfitting and improve prediction accuracy on real data.
       </p>
     </div>
 
@@ -1443,8 +1443,8 @@
     <!-- Why it matters -->
     <div class="insight">
       <div class="insight-label">Why It Matters</div>
-      <p>The Titanic problem is a well-defined proxy for real-world classification tasks: medical diagnosis, equipment failure prediction, fraud detection. In every case the same question applies — can we learn reliable rules from historical examples to predict an outcome we care about?</p>
-      <p>Understanding <em>why</em> ensemble methods outperform single trees — not just that they do — is the foundation for applying these tools correctly. The core insight is that combining many imperfect, <em>diverse</em> models is more powerful than searching for a single perfect one. Diversity requires both data randomness (bagging) and feature randomness (random forests).</p>
+      <p>The Titanic problem is a well-defined proxy for real-world classification tasks: medical diagnosis, equipment failure prediction, fraud detection. In every case the same question applies: can we learn reliable rules from historical examples to predict an outcome we care about?</p>
+      <p>Understanding <em>why</em> ensemble methods outperform single trees, not just that they do, is the foundation for applying these tools correctly. The core insight is that combining many imperfect, <em>diverse</em> models is more powerful than searching for a single perfect one. Diversity requires both data randomness (bagging) and feature randomness (random forests).</p>
     </div>
 
   </div>
@@ -1466,15 +1466,15 @@
       <div class="mil-panel-tag">Motivation</div>
       <div class="mil-panel-title">Prediction Under Uncertainty</div>
       <p class="mil-panel-body">
-        Operations Research is fundamentally about making better decisions with incomplete information. Ensemble methods are a direct expression of that idea in machine learning: rather than searching for a single perfect model, they aggregate many imperfect ones and let disagreement cancel out. The mathematical proof of why averaging reduces error — and the specific condition that makes random forests strictly better than bagging — was the most compelling result I encountered in MA289.
+        Operations Research is fundamentally about making better decisions with incomplete information. Ensemble methods are a direct expression of that idea in machine learning: rather than searching for a single perfect model, they aggregate many imperfect ones and let disagreement cancel out. The mathematical proof of why averaging reduces error, and the specific condition that makes random forests strictly better than bagging, was the most compelling result I encountered in MA289.
       </p>
       <p class="mil-panel-body">
-        The broader appeal is practical. Classification problems appear across every domain an officer will work in — assessing risk, allocating resources, identifying patterns in large datasets. Understanding the tradeoffs between a single interpretable tree and a robust ensemble directly informs when and how to apply these tools in environments where the cost of a wrong prediction is high.
+        The broader appeal is practical. Classification problems appear across every domain an officer will work in: assessing risk, allocating resources, identifying patterns in large datasets. Understanding the tradeoffs between a single interpretable tree and a robust ensemble directly informs when and how to apply these tools in environments where the cost of a wrong prediction is high.
       </p>
       <div class="mil-use-grid">
         <div class="mil-use">
           <div class="mil-use-label">Predictive Maintenance</div>
-          <div class="mil-use-text">Fleet readiness depends on anticipating equipment failure before it occurs. Random forests trained on sensor telemetry — engine temperature, vibration, operating hours — can flag vehicles and aircraft for inspection before a failure grounds them, reducing unplanned downtime and maintenance costs.</div>
+          <div class="mil-use-text">Fleet readiness depends on anticipating equipment failure before it occurs. Random forests trained on sensor telemetry (engine temperature, vibration, operating hours) can flag vehicles and aircraft for inspection before a failure grounds them, reducing unplanned downtime and maintenance costs.</div>
         </div>
         <div class="mil-use">
           <div class="mil-use-label">Medical Triage</div>
@@ -1687,14 +1687,14 @@
       <!-- Chart 2: Feature importance -->
       <div class="chart-card">
         <div class="chart-title">Random Forest: Feature Importance</div>
-        <p class="chart-note">Sex is by far the strongest predictor of survival, consistent with historical accounts of "women and children first." Passenger class and fare — both proxies for socioeconomic status — rank second and third. Age contributes meaningfully; port of embarkation contributes very little.</p>
+        <p class="chart-note">Sex is by far the strongest predictor of survival, consistent with historical accounts of "women and children first." Passenger class and fare, both proxies for socioeconomic status, rank second and third. Age contributes meaningfully; port of embarkation contributes very little.</p>
         <img class="chart-img" src="img/chart_features.png" alt="Horizontal bar chart showing Random Forest feature importances for Titanic survival prediction">
       </div>
 
       <!-- Chart 3: Overfitting gap -->
       <div class="chart-card">
         <div class="chart-title">Overfitting Gap by Model</div>
-        <p class="chart-note">The train&minus;test accuracy gap measures how much each model memorizes vs. generalizes. The Decision Tree shows the largest gap (5.4&thinsp;pp). Bagging reduces it (7.2&thinsp;pp) but remains higher due to tree correlation. Random Forest is the most stable at 4.5&thinsp;pp — the tightest gap of the three.</p>
+        <p class="chart-note">The train&minus;test accuracy gap measures how much each model memorizes vs. generalizes. The Decision Tree shows the largest gap (5.4&thinsp;pp). Bagging reduces it (7.2&thinsp;pp) but remains higher due to tree correlation. Random Forest is the most stable at 4.5&thinsp;pp, the tightest gap of the three.</p>
         <img class="chart-img" src="img/chart_overfit.png" alt="Bar chart showing the overfitting gap (train minus test accuracy) for each model">
       </div>
 
@@ -1849,8 +1849,8 @@
     <!-- FINAL INSIGHT -->
     <div class="insight">
       <div class="insight-label">What the Titanic Results Show</div>
-      <p>On this dataset, all three models achieve similar test accuracy — within 2.3 percentage points of each other. This is expected: the Titanic dataset is small (891 records) and relatively clean, so the advantage of ensemble methods is modest but real.</p>
-      <p>The more telling number is the <strong>overfitting gap</strong>. The Decision Tree's training accuracy (84.7%) is 5.4 points above its test accuracy (79.3%). Random Forest closes that gap: 86.1% train, 81.6% test — just 4.5 points. Ensemble diversity is working, even at this scale.</p>
+      <p>On this dataset, all three models achieve similar test accuracy, within 2.3 percentage points of each other. This is expected: the Titanic dataset is small (891 records) and relatively clean, so the advantage of ensemble methods is modest but real.</p>
+      <p>The more telling number is the <strong>overfitting gap</strong>. The Decision Tree's training accuracy (84.7%) is 5.4 points above its test accuracy (79.3%). Random Forest closes that gap: 86.1% train, 81.6% test, just 4.5 points. Ensemble diversity is working, even at this scale.</p>
       <p>On larger, noisier datasets the gap between methods widens significantly. Random forests are typically the stronger default choice when interpretability is not required.</p>
     </div>
 
