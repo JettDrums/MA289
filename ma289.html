@@ -1328,6 +1328,7 @@
         <a class="site-nav-link" href="index.html">&#8592; Home</a>
         <a class="site-nav-link" href="#introduction">Introduction</a>
         <a class="site-nav-link" href="#ml-analysis">ML Analysis</a>
+        <a class="site-nav-link" href="#rf-demo">RF Demo</a>
         <a class="site-nav-link" href="#how-built">Methodology</a>
       </div>
     </div>
@@ -1856,20 +1857,20 @@
 
   </div>
 
-  <!-- RF INTERACTIVE DEMO (removed — not Titanic-specific) -->
-  <div class="rf-demo-section scroll-target" id="rf-demo" style="display:none">
+  <!-- RF INTERACTIVE DEMO (real Titanic data lookup) -->
+  <div class="rf-demo-section scroll-target" id="rf-demo">
 
     <div class="section-header">
       <div class="section-tag">Interactive Demo</div>
       <div class="section-title" style="font-size:clamp(16px,2.5vw,20px);">Random Forest Explorer</div>
-      <p class="section-sub">Adjust the sliders to see how each hyperparameter affects model performance. Values update in real time based on established bias-variance theory.</p>
+      <p class="section-sub">Adjust the sliders to see how each hyperparameter actually affected the model when trained on the Titanic dataset. Every result is a real measurement, not a formula.</p>
     </div>
 
     <div class="rf-grid">
 
       <!-- SLIDERS -->
       <div class="rf-panel">
-        <div class="rf-panel-title">Hyperparameters (10 total features assumed)</div>
+        <div class="rf-panel-title">Hyperparameters / Titanic dataset (7 features)</div>
 
         <div class="rf-slider-group">
           <div class="rf-slider-header">
@@ -1877,7 +1878,7 @@
             <span class="rf-slider-val" id="valTrees">50</span>
           </div>
           <input type="range" class="rf-slider" id="sliderTrees" min="1" max="100" value="50">
-          <p class="rf-slider-desc">More trees reduce variance by averaging out individual errors. The biggest gains come in the first 20 trees. Returns diminish quickly after that.</p>
+          <p class="rf-slider-desc">More trees average out individual errors. On Titanic, most of the accuracy gain arrives by tree 20. Past 50 the test score plateaus and you're just adding compute time.</p>
         </div>
 
         <div class="rf-slider-group">
@@ -1886,36 +1887,36 @@
             <span class="rf-slider-val" id="valDepth">5</span>
           </div>
           <input type="range" class="rf-slider" id="sliderDepth" min="1" max="10" value="5">
-          <p class="rf-slider-desc">Deeper trees memorize more of the training data. Too shallow causes underfitting and high bias. Too deep causes each tree to overfit, raising variance even in an ensemble.</p>
+          <p class="rf-slider-desc">Shallow trees underfit; deep trees memorize. Watch the overfitting gap widen as depth increases. Depth 4-6 tends to be the sweet spot on this dataset.</p>
         </div>
 
         <div class="rf-slider-group">
           <div class="rf-slider-header">
-            <span class="rf-slider-label">Feature Subset Size</span>
+            <span class="rf-slider-label">Features per Split</span>
             <span class="rf-slider-val" id="valFeats">3</span>
           </div>
-          <input type="range" class="rf-slider" id="sliderFeats" min="1" max="10" value="3">
-          <p class="rf-slider-desc">How many features each split may consider. The classic default is &radic;total features &asymp; 3. Too few makes trees too weak. Too many makes trees correlated, undermining the ensemble.</p>
+          <input type="range" class="rf-slider" id="sliderFeats" min="1" max="7" value="3">
+          <p class="rf-slider-desc">How many of the 7 features each split may consider. The default is &radic;7 &asymp; 2-3. Using all 7 removes the decorrelation benefit and trees start looking like bagging.</p>
         </div>
       </div>
 
       <!-- RESULTS -->
       <div class="rf-panel">
-        <div class="rf-panel-title">Live Results</div>
+        <div class="rf-panel-title">Real results from Titanic training run</div>
 
         <div class="rf-metrics-row">
           <div class="rf-metric">
-            <div class="rf-metric-label">Accuracy</div>
+            <div class="rf-metric-label">Test Accuracy</div>
             <div class="rf-metric-num acc" id="metricAcc">--</div>
             <div class="rf-metric-unit">%</div>
           </div>
           <div class="rf-metric">
-            <div class="rf-metric-label">Bias</div>
+            <div class="rf-metric-label">Overfit Gap</div>
             <div class="rf-metric-num bias" id="metricBias">--</div>
-            <div class="rf-metric-unit">%</div>
+            <div class="rf-metric-unit">pp</div>
           </div>
           <div class="rf-metric">
-            <div class="rf-metric-label">Variance</div>
+            <div class="rf-metric-label">CV Std</div>
             <div class="rf-metric-num vari" id="metricVar">--</div>
             <div class="rf-metric-unit">%</div>
           </div>
@@ -1925,7 +1926,7 @@
           <canvas id="rfBarChart" height="120"></canvas>
         </div>
 
-        <div class="rf-insight-box" id="rfInsight"></div>
+        <div class="rf-insight-box" id="rfInsight">Loading data...</div>
       </div>
 
     </div>
@@ -2108,7 +2109,7 @@
     /* Nav active link tracker */
     (function() {
       const links = document.querySelectorAll('.site-nav-link');
-      const ids = ['introduction', 'ml-analysis', 'how-built'];
+      const ids = ['introduction', 'ml-analysis', 'rf-demo', 'how-built'];
       function update() {
         let current = ids[0];
         for (const id of ids) {
@@ -2314,11 +2315,8 @@
       function drawAll() { /* no-op — canvases removed */ }
     })();
 
-    /* ── RF Interactive Demo ─────────────────────────────────────── */
+    /* ── RF Interactive Demo (real Titanic data lookup) ──────────── */
     (function () {
-      var TOTAL = 10;
-      var SQRT_T = Math.sqrt(TOTAL); // ~3.16
-
       var GOLD   = '#C9A84C'; var GOLD_F  = 'rgba(201,168,76,0.13)';
       var BLUE   = '#5bc8f5'; var BLUE_F  = 'rgba(91,200,245,0.13)';
       var RED    = '#ff6b6b'; var RED_F   = 'rgba(255,107,107,0.13)';
@@ -2326,42 +2324,45 @@
       var TICK   = '#3a3a3a';
       var MONO   = '"Share Tech Mono", monospace';
 
-      function calcMetrics(n, d, f) {
-        // Variance: drops sharply with more trees, rises with depth and feature correlation
-        var vTrees = 0.40 / Math.sqrt(n);
-        var vDepth = 0.022 * d;
-        var vFeats = 0.10 * Math.abs(f - SQRT_T) / TOTAL;
-        var variance = Math.max(0.02, Math.min(0.52, vTrees + vDepth + vFeats));
+      /* \u2500\u2500 Real data lookup \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500 */
+      var RF_DATA  = null;  // loaded from rf_hyperparams.json
 
-        // Bias: shallow trees underfit (high bias); very small feature subsets also add bias
-        var bDepth = 0.35 * Math.pow(Math.max(0, 1 - d / 11), 1.4);
-        var bFeats = 0.07 * Math.max(0, (SQRT_T - f) / SQRT_T);
-        var bias = Math.max(0.02, Math.min(0.46, bDepth + bFeats));
+      function nearest(val, arr) {
+        return arr.reduce(function(prev, cur) {
+          return Math.abs(cur - val) < Math.abs(prev - val) ? cur : prev;
+        });
+      }
 
-        // Accuracy: base + log bonus for trees + bell curve bonus for depth + feat near sqrt
-        var tBonus = 0.19 * (Math.log(n + 1) / Math.log(101));
-        var dBell  = Math.exp(-Math.pow((d - 6) / 3.5, 2));
-        var fBell  = Math.exp(-Math.pow((f - SQRT_T) / 2.0, 2));
-        var acc = Math.max(0.44, Math.min(0.97, 0.58 + tBonus + 0.08 * dBell + 0.06 * fBell));
-
+      function lookup(n, d, f) {
+        if (!RF_DATA) return null;
+        var n2 = nearest(n, RF_DATA.meta.trees);
+        var d2 = nearest(d, RF_DATA.meta.depths);
+        var f2 = nearest(f, RF_DATA.meta.features);
+        var key = n2 + '|' + d2 + '|' + f2;
+        var r   = RF_DATA.data[key];
+        if (!r) return null;
         return {
-          acc:      Math.round(acc      * 1000) / 10,
-          bias:     Math.round(bias     * 1000) / 10,
-          variance: Math.round(variance * 1000) / 10
+          test:  r.test,
+          gap:   parseFloat((r.train - r.test).toFixed(1)),
+          cv_std: r.cv_std,
+          train: r.train,
+          cv:    r.cv
         };
       }
 
-      function getInsight(n, d, f) {
-        if (n < 8)  return 'Fewer than 8 trees. Variance is very high. Add more trees for a meaningful ensemble.';
-        if (d <= 2) return 'Trees are very shallow. High bias and underfitting. Try increasing depth to 4-7.';
-        if (d >= 9) return 'Trees are very deep. Each one overfits heavily. Variance climbs even with many trees.';
-        if (f === 1) return 'Single-feature splits are too restrictive. Bias rises and trees become too weak.';
-        if (f >= 8)  return 'Large feature subset makes trees highly correlated. The ensemble loses its advantage.';
-        if (Math.abs(f - Math.round(SQRT_T)) <= 1 && n >= 30 && d >= 4 && d <= 7)
-          return 'Well-configured forest. Trees are deep enough, numerous enough, and decorrelated. Close to the classic RF default.';
-        if (n >= 30 && Math.abs(f - Math.round(SQRT_T)) <= 1)
-          return 'Feature subset near \u221a10 \u2248 3. Good decorrelation. Tune depth to balance bias and variance.';
-        return 'Increasing trees reduces variance most efficiently. Aim for depth 4\u20137 and feature subset near 3.';
+      function getInsight(m, n, d, f) {
+        if (!m) return 'Data not loaded.';
+        if (n <= 5)  return 'Only ' + n + ' trees. Predictions are unstable. Test accuracy: ' + m.test + '%. Add more trees.';
+        if (d === 1) return 'Depth 1 \u2014 each tree asks one question. Severe underfitting. Test accuracy: ' + m.test + '%.';
+        if (d === 2) return 'Very shallow trees. High bias on Titanic. Test accuracy: ' + m.test + '%.';
+        if (d >= 9)  return 'Depth ' + d + ' trees overfit heavily. Overfitting gap: ' + m.gap + ' pp. Test accuracy: ' + m.test + '%.';
+        if (f === 7) return 'All 7 features per split \u2014 same as bagging. Trees are correlated. Test: ' + m.test + '%, gap: ' + m.gap + ' pp.';
+        if (f === 1) return 'Only 1 feature per split. Trees are too weak individually. Test accuracy: ' + m.test + '%.';
+        if (m.gap <= 3 && m.test >= 81)
+          return 'Good configuration. Test accuracy ' + m.test + '%, overfitting gap just ' + m.gap + ' pp.';
+        if (m.gap >= 8)
+          return 'Large overfitting gap (' + m.gap + ' pp). Trees are memorizing. Try reducing depth.';
+        return 'Test: ' + m.test + '%  |  Overfitting gap: ' + m.gap + ' pp  |  CV std: \u00b1' + m.cv_std + '%.';
       }
 
       function updateFill(slider) {
@@ -2370,9 +2371,9 @@
           'linear-gradient(to right, #C9A84C ' + pct + '%, #2a2a2a ' + pct + '%)';
       }
 
-      function drawChart(acc, bias, variance) {
+      function drawChart(m) {
         var canvas = document.getElementById('rfBarChart');
-        if (!canvas) return;
+        if (!canvas || !m) return;
         var DPR = window.devicePixelRatio || 1;
         var W = canvas.offsetWidth || 320;
         var H = 120;
@@ -2386,46 +2387,41 @@
         ctx.fillRect(0, 0, W, H);
 
         var rows = [
-          { label: 'Accuracy', val: acc,      max: 100, c: GOLD, f: GOLD_F },
-          { label: 'Bias',     val: bias,     max: 50,  c: RED,  f: RED_F  },
-          { label: 'Variance', val: variance, max: 50,  c: BLUE, f: BLUE_F }
+          { label: 'Test Acc',   val: m.test,   max: 100, c: GOLD, f: GOLD_F, unit: '%'  },
+          { label: 'Overfit',    val: m.gap,    max: 20,  c: RED,  f: RED_F,  unit: 'pp' },
+          { label: 'CV Std',     val: m.cv_std, max: 10,  c: BLUE, f: BLUE_F, unit: '%'  }
         ];
-        var labelW = 62, padR = 54, padT = 10;
+        var labelW = 62, padR = 58, padT = 10;
         var pw = W - labelW - padR;
         var rowH = (H - padT * 2) / rows.length;
 
         rows.forEach(function (r, i) {
           var barH = 13;
           var y    = padT + i * rowH + (rowH - barH) / 2;
-          var barW = Math.max(2, (r.val / r.max) * pw);
+          var barW = Math.max(2, Math.min(pw, (r.val / r.max) * pw));
 
-          // Label
           ctx.fillStyle = TICK; ctx.font = '9px ' + MONO;
           ctx.textAlign = 'right';
           ctx.fillText(r.label, labelW - 6, y + 9);
 
-          // Track
           ctx.fillStyle = 'rgba(255,255,255,0.04)';
           ctx.fillRect(labelW, y, pw, barH);
 
-          // Grid line at 50%
           ctx.strokeStyle = GRID; ctx.lineWidth = 1;
           ctx.beginPath();
           ctx.moveTo(labelW + pw * 0.5, y);
           ctx.lineTo(labelW + pw * 0.5, y + barH);
           ctx.stroke();
 
-          // Bar fill
           ctx.fillStyle = r.f;
           ctx.fillRect(labelW, y, barW, barH);
           ctx.strokeStyle = r.c; ctx.lineWidth = 1.5;
           ctx.strokeRect(labelW, y, barW, barH);
 
-          // Value
           ctx.fillStyle = r.c;
           ctx.font = 'bold 10px ' + MONO;
           ctx.textAlign = 'left';
-          ctx.fillText(r.val.toFixed(1) + '%', labelW + pw + 6, y + 9);
+          ctx.fillText(r.val.toFixed(1) + r.unit, labelW + pw + 6, y + 9);
         });
       }
 
@@ -2442,13 +2438,14 @@
         updateFill(document.getElementById('sliderDepth'));
         updateFill(document.getElementById('sliderFeats'));
 
-        var m = calcMetrics(n, d, f);
-        document.getElementById('metricAcc').textContent  = m.acc.toFixed(1);
-        document.getElementById('metricBias').textContent = m.bias.toFixed(1);
-        document.getElementById('metricVar').textContent  = m.variance.toFixed(1);
-
-        drawChart(m.acc, m.bias, m.variance);
-        document.getElementById('rfInsight').textContent = getInsight(n, d, f);
+        var m = lookup(n, d, f);
+        if (m) {
+          document.getElementById('metricAcc').textContent  = m.test.toFixed(1);
+          document.getElementById('metricBias').textContent = m.gap.toFixed(1);
+          document.getElementById('metricVar').textContent  = m.cv_std.toFixed(1);
+          drawChart(m);
+          document.getElementById('rfInsight').textContent = getInsight(m, n, d, f);
+        }
       }
 
       ['sliderTrees', 'sliderDepth', 'sliderFeats'].forEach(function (id) {
@@ -2456,7 +2453,18 @@
         if (el) { el.addEventListener('input', update); updateFill(el); }
       });
 
-      window.addEventListener('load', function () { setTimeout(update, 80); });
+      /* Load real data from rf_hyperparams.json, then render */
+      fetch('rf_hyperparams.json')
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+          RF_DATA = data;
+          document.getElementById('rfInsight').textContent = '';
+          update();
+        })
+        .catch(function() {
+          document.getElementById('rfInsight').textContent =
+            'Run rf_grid_search.py to generate real Titanic results.';
+        });
     })();
   </script>
 </body>
