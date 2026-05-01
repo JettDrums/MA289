@@ -1320,7 +1320,7 @@
   <!-- FIXED NAV -->
   <nav class="site-nav" id="siteNav">
     <div class="site-nav-inner">
-      <a class="site-nav-logo" href="#introduction">MA289 &mdash; Ensemble Methods</a>
+      <a class="site-nav-logo" href="#introduction">MA289: Ensemble Methods</a>
       <button class="nav-hamburger" id="navHamburger" aria-label="Toggle menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
@@ -1328,7 +1328,6 @@
         <a class="site-nav-link" href="index.html">&#8592; Home</a>
         <a class="site-nav-link" href="#introduction">Introduction</a>
         <a class="site-nav-link" href="#ml-analysis">ML Analysis</a>
-        <a class="site-nav-link" href="#rf-demo">RF Demo</a>
         <a class="site-nav-link" href="#how-built">Methodology</a>
       </div>
     </div>
@@ -1342,7 +1341,7 @@
 
     <!-- Page header -->
     <div class="section-header center">
-      <div class="section-tag">MA289 &mdash; Machine Learning</div>
+      <div class="section-tag">MA289 / Machine Learning</div>
       <div class="section-title">Decision Trees &amp; Ensemble Methods</div>
       <p class="section-sub">
         A study of three supervised learning algorithms applied to the Titanic survival dataset — examining how ensemble methods reduce overfitting and improve prediction accuracy on real data.
@@ -1680,14 +1679,14 @@
 
       <!-- Chart 1: Accuracy comparison — full width -->
       <div class="chart-card chart-card-wide">
-        <div class="chart-title">Model Accuracy &mdash; Train / Test / 5-Fold CV</div>
+        <div class="chart-title">Model Accuracy: Train / Test / 5-Fold CV</div>
         <p class="chart-note">All three models use <code style="font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--green-bright)">max_depth=5</code>. Random Forest achieves the highest test accuracy at 81.6%, beating the single Decision Tree (79.3%) and Bagging (79.9%). CV scores closely track test accuracy, confirming the results generalize.</p>
         <img class="chart-img" src="img/chart_accuracy.png" alt="Bar chart comparing train, test, and cross-validation accuracy for Decision Tree, Bagging, and Random Forest on the Titanic dataset">
       </div>
 
       <!-- Chart 2: Feature importance -->
       <div class="chart-card">
-        <div class="chart-title">Random Forest &mdash; Feature Importance</div>
+        <div class="chart-title">Random Forest: Feature Importance</div>
         <p class="chart-note">Sex is by far the strongest predictor of survival, consistent with historical accounts of "women and children first." Passenger class and fare — both proxies for socioeconomic status — rank second and third. Age contributes meaningfully; port of embarkation contributes very little.</p>
         <img class="chart-img" src="img/chart_features.png" alt="Horizontal bar chart showing Random Forest feature importances for Titanic survival prediction">
       </div>
@@ -1857,8 +1856,8 @@
 
   </div>
 
-  <!-- RF INTERACTIVE DEMO -->
-  <div class="rf-demo-section scroll-target" id="rf-demo">
+  <!-- RF INTERACTIVE DEMO (removed — not Titanic-specific) -->
+  <div class="rf-demo-section scroll-target" id="rf-demo" style="display:none">
 
     <div class="section-header">
       <div class="section-tag">Interactive Demo</div>
@@ -1997,7 +1996,7 @@
         <div class="tl-footer">
           <div class="tl-footer-mark">&#10003;</div>
           <div class="tl-footer-text">
-            Results: <strong>DT 79.3%</strong> &nbsp;|&nbsp; <strong>Bagging 79.9%</strong> &nbsp;|&nbsp; <strong>Random Forest 81.6%</strong> test accuracy &mdash; all on the same Titanic test split, reproducible with <strong>random_state=42</strong>.
+            Results: <strong>DT 79.3%</strong> &nbsp;|&nbsp; <strong>Bagging 79.9%</strong> &nbsp;|&nbsp; <strong>Random Forest 81.6%</strong> test accuracy, all on the same Titanic test split, reproducible with <strong>random_state=42</strong>.
           </div>
         </div>
 
@@ -2013,7 +2012,7 @@
           </div>
           <div class="fc-text">
             <div class="fc-label">Kaggle: Titanic Dataset</div>
-            <div class="fc-sub">train.csv &mdash; 891 passengers, 12 columns</div>
+            <div class="fc-sub">train.csv / 891 passengers, 12 columns</div>
           </div>
         </div>
         <div class="fc-arrow"></div>
@@ -2109,7 +2108,7 @@
     /* Nav active link tracker */
     (function() {
       const links = document.querySelectorAll('.site-nav-link');
-      const ids = ['introduction', 'ml-analysis', 'rf-demo', 'how-built'];
+      const ids = ['introduction', 'ml-analysis', 'how-built'];
       function update() {
         let current = ids[0];
         for (const id of ids) {
