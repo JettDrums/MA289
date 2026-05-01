@@ -1678,7 +1678,7 @@
       <!-- Chart 3: Overfitting gap -->
       <div class="chart-card">
         <div class="chart-title">Overfitting Gap by Model</div>
-        <p class="chart-note">The train&minus;test accuracy gap measures how much each model memorizes vs. generalizes. The Decision Tree shows the largest gap (5.4&thinsp;pp). Bagging reduces it (7.2&thinsp;pp) but remains higher due to tree correlation. Random Forest is the most stable at 4.5&thinsp;pp, the tightest gap of the three.</p>
+        <p class="chart-note">The train&minus;test accuracy gap measures how much each model memorizes vs. generalizes. Decision Tree: 5.4&thinsp;pp. Bagging actually widens it to 7.2&thinsp;pp because its highly correlated trees all overfit in the same direction. Random Forest closes it back down to 4.5&thinsp;pp by decorrelating the trees, giving it the tightest gap of the three.</p>
         <img class="chart-img" src="img/chart_overfit.png" alt="Bar chart showing the overfitting gap (train minus test accuracy) for each model">
       </div>
 
