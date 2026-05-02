@@ -1669,14 +1669,14 @@
       </div>
 
       <!-- Chart 3: Feature importance -->
-      <div class="chart-card">
+      <div class="chart-card chart-card-wide">
         <div class="chart-title">Random Forest: Feature Importance</div>
         <p class="chart-note">Sex is by far the strongest predictor of survival, consistent with historical accounts of "women and children first." Passenger class and fare, both proxies for socioeconomic status, rank second and third. Age contributes meaningfully; port of embarkation contributes very little.</p>
         <img class="chart-img" src="img/chart_features.png" alt="Horizontal bar chart showing Random Forest feature importances for Titanic survival prediction">
       </div>
 
-      <!-- Chart 3: Overfitting gap -->
-      <div class="chart-card">
+      <!-- Chart 4: Overfitting gap -->
+      <div class="chart-card chart-card-wide">
         <div class="chart-title">Overfitting Gap by Model</div>
         <p class="chart-note">The train&minus;test accuracy gap measures how much each model memorizes vs. generalizes. Decision Tree: 5.4&thinsp;pp. Bagging actually widens it to 7.2&thinsp;pp because its highly correlated trees all overfit in the same direction. Random Forest closes it back down to 4.5&thinsp;pp by decorrelating the trees, giving it the tightest gap of the three.</p>
         <img class="chart-img" src="img/chart_overfit.png" alt="Bar chart showing the overfitting gap (train minus test accuracy) for each model">
