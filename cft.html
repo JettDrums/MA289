@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="CFT 2026 Cadet Packing Checklist — West Point">
+<title>CFT 2026 Packing List</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&family=Barlow:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+ 
+  :root {
+    --army:      #1e3a1a;
+    --od:        #3d5c34;
+    --od-light:  #4e7344;
+    --tan:       #b89a5a;
+    --tan-light: #e8dfc4;
+    --tan-pale:  #f5f0e4;
+    --khaki:     #d4c89a;
+    --ink:       #1a1c18;
+    --muted:     #5a5e52;
+    --faint:     #8a8e82;
+    --border:    #c8c4b0;
+    --border-dark: #a09c88;
+    --check-bg:  #2e5228;
+    --bg:        #f2ede0;
+    --surface:   #faf7ee;
+    --surface2:  #f0ead8;
+    --stripe:    rgba(0,0,0,0.025);
+    --radius:    6px;
+    --shadow:    0 2px 12px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.06);
+    --shadow-sm: 0 1px 4px rgba(0,0,0,0.07);
+  }
+ 
+  html { scroll-behavior: smooth; }
+ 
+  body {
+    font-family: 'Barlow', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    min-height: 100vh;
+    font-size: 15px;
+    line-height: 1.5;
+  }
+ 
+  /* ── HEADER ── */
+  header {
+    background: var(--army);
+    color: #fff;
+    padding: 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.25);
+  }
+ 
+  .header-inner {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 14px 20px 12px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 16px;
+  }
+ 
+  .header-left { flex: 1; min-width: 0; }
+ 
+  .header-eyebrow {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--khaki);
+    margin-bottom: 2px;
+  }
+ 
+  .header-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    line-height: 1;
+    color: #fff;
+  }
+ 
+  .header-right {
+    flex-shrink: 0;
+    text-align: right;
+  }
+ 
+  .progress-ring-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+  }
+ 
+  .progress-ring-wrap svg { display: block; }
+ 
+  .progress-pct {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--khaki);
+  }
+ 
+  /* ── PROGRESS BAR ── */
+  .progress-strip {
+    height: 3px;
+    background: rgba(255,255,255,0.12);
+    overflow: hidden;
+  }
+  .progress-strip-fill {
+    height: 100%;
+    background: var(--tan);
+    transition: width 0.4s cubic-bezier(.4,0,.2,1);
+  }
+ 
+  /* ── MAIN LAYOUT ── */
+  .layout {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 20px 16px 60px;
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 24px;
+    align-items: start;
+  }
+ 
+  @media (max-width: 680px) {
+    .layout {
+      grid-template-columns: 1fr;
+      gap: 16px;
+      padding: 14px 12px 60px;
+    }
+    .sidebar { display: none; }
+    .mobile-controls { display: flex !important; }
+  }
+ 
+  /* ── SIDEBAR ── */
+  .sidebar {
+    position: sticky;
+    top: 76px;
+  }
+ 
+  .sidebar-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+  }
+ 
+  .sidebar-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--faint);
+    padding: 10px 14px 8px;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface2);
+  }
+ 
+  .stat-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+ 
+  .stat-cell {
+    background: var(--surface);
+    padding: 12px 14px;
+    text-align: center;
+  }
+ 
+  .stat-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--army);
+    line-height: 1;
+    display: block;
+  }
+ 
+  .stat-label {
+    font-size: 10px;
+    color: var(--faint);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    display: block;
+    margin-top: 3px;
+  }
+ 
+  .filter-list { padding: 8px 0; }
+ 
+  .filter-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 7px 14px;
+    background: none;
+    border: none;
+    font-family: 'Barlow', sans-serif;
+    font-size: 13px;
+    color: var(--muted);
+    cursor: pointer;
+    text-align: left;
+    transition: background 0.1s, color 0.1s;
+    gap: 8px;
+  }
+ 
+  .filter-btn:hover { background: var(--surface2); color: var(--ink); }
+ 
+  .filter-btn.active {
+    color: var(--army);
+    background: var(--tan-pale);
+    font-weight: 500;
+  }
+ 
+  .filter-btn.active::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: var(--od);
+    border-radius: 0 2px 2px 0;
+  }
+ 
+  .filter-btn { position: relative; }
+ 
+  .filter-count {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--faint);
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1px 7px;
+    min-width: 24px;
+    text-align: center;
+  }
+ 
+  .filter-btn.active .filter-count { background: var(--tan-light); border-color: var(--khaki); color: var(--army); }
+ 
+  .sidebar-actions { padding: 10px 14px; border-top: 1px solid var(--border); }
+ 
+  .reset-btn {
+    width: 100%;
+    padding: 7px 12px;
+    background: none;
+    border: 1px solid var(--border-dark);
+    border-radius: var(--radius);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+ 
+  .reset-btn:hover { border-color: #b04040; color: #b04040; background: #fdf2f2; }
+ 
+  /* ── MOBILE CONTROLS ── */
+  .mobile-controls {
+    display: none;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 4px;
+  }
+ 
+  .mobile-filter {
+    padding: 6px 12px;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    background: var(--surface);
+    font-family: 'Barlow', sans-serif;
+    font-size: 12px;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+ 
+  .mobile-filter.active {
+    background: var(--army);
+    border-color: var(--army);
+    color: #fff;
+  }
+ 
+  .mobile-stats {
+    display: none;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+ 
+  @media (max-width: 680px) {
+    .mobile-stats { display: flex; }
+  }
+ 
+  .mobile-stat {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 8px 14px;
+    flex: 1;
+    text-align: center;
+  }
+ 
+  .mobile-stat-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--army);
+    display: block;
+  }
+ 
+  .mobile-stat-label {
+    font-size: 10px;
+    color: var(--faint);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+ 
+  /* ── SECTIONS ── */
+  .sections { display: flex; flex-direction: column; gap: 12px; }
+ 
+  .section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: opacity 0.2s;
+  }
+ 
+  .section.hidden { display: none; }
+ 
+  .section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 11px 16px;
+    cursor: pointer;
+    background: var(--surface2);
+    border-bottom: 1px solid var(--border);
+    user-select: none;
+    gap: 12px;
+    transition: background 0.1s;
+  }
+ 
+  .section-header:hover { background: #e8e2cc; }
+ 
+  .section-header-left { display: flex; align-items: center; gap: 10px; flex: 1; min-width: 0; }
+ 
+  .section-icon {
+    width: 28px;
+    height: 28px;
+    background: var(--army);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+ 
+  .section-icon svg { width: 14px; height: 14px; fill: none; stroke: #fff; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+ 
+  .section-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--army);
+  }
+ 
+  .section-header-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+  }
+ 
+  .section-progress {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--faint);
+    letter-spacing: 0.04em;
+  }
+ 
+  .section-progress.complete { color: var(--od); }
+ 
+  .mini-bar {
+    width: 60px;
+    height: 4px;
+    background: var(--tan-light);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+ 
+  @media (max-width: 480px) { .mini-bar { display: none; } }
+ 
+  .mini-bar-fill {
+    height: 100%;
+    background: var(--od);
+    border-radius: 2px;
+    transition: width 0.3s ease;
+  }
+ 
+  .chevron-icon {
+    width: 16px;
+    height: 16px;
+    color: var(--faint);
+    transition: transform 0.2s;
+    flex-shrink: 0;
+  }
+ 
+  .section.collapsed .chevron-icon { transform: rotate(-90deg); }
+  .section.collapsed .section-body { display: none; }
+ 
+  /* ── ITEMS ── */
+  .section-body { }
+ 
+  .item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--stripe);
+    cursor: pointer;
+    transition: background 0.1s;
+    -webkit-tap-highlight-color: transparent;
+  }
+ 
+  .item:last-child { border-bottom: none; }
+  .item:hover { background: rgba(0,0,0,0.025); }
+  .item:active { background: rgba(0,0,0,0.05); }
+ 
+  .item.checked { background: rgba(46,82,40,0.04); }
+  .item.checked .item-name { text-decoration: line-through; color: var(--faint); }
+ 
+  .checkbox {
+    width: 20px;
+    height: 20px;
+    border: 1.5px solid var(--border-dark);
+    border-radius: 4px;
+    background: #fff;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s;
+  }
+ 
+  .item.checked .checkbox {
+    background: var(--check-bg);
+    border-color: var(--check-bg);
+  }
+ 
+  .check-svg { display: none; width: 11px; height: 11px; }
+  .check-svg path { stroke: #fff; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+  .item.checked .check-svg { display: block; }
+ 
+  .item-text { flex: 1; min-width: 0; }
+ 
+  .item-name {
+    font-size: 13.5px;
+    color: var(--ink);
+    line-height: 1.35;
+    transition: color 0.15s;
+  }
+ 
+  .item-meta {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 2px;
+    flex-wrap: wrap;
+  }
+ 
+  .item-qty {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    color: var(--faint);
+    letter-spacing: 0.04em;
+  }
+ 
+  .badge {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 1px 6px;
+    border-radius: 3px;
+    line-height: 1.6;
+  }
+ 
+  .badge-ii   { background: #dce8f5; color: #1a4a7a; }
+  .badge-opt  { background: var(--surface2); color: var(--faint); border: 1px solid var(--border); }
+  .badge-f    { background: #f5dce8; color: #7a1a4a; }
+  .badge-cft2 { background: #f5ead0; color: #7a4a10; }
+ 
+  /* ── ALL DONE ── */
+  .all-done-banner {
+    display: none;
+    text-align: center;
+    padding: 28px 20px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+  }
+ 
+  .all-done-banner.show { display: block; }
+ 
+  .all-done-banner .icon {
+    width: 40px;
+    height: 40px;
+    background: var(--check-bg);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 12px;
+  }
+ 
+  .all-done-banner .icon svg { width: 20px; height: 20px; stroke: #fff; stroke-width: 2.5; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+ 
+  .all-done-banner h3 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--army);
+    margin-bottom: 4px;
+  }
+ 
+  .all-done-banner p { font-size: 13px; color: var(--muted); }
+ 
+  /* ── FOOTER ── */
+  footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 11px;
+    color: var(--faint);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    border-top: 1px solid var(--border);
+    margin-top: 20px;
+    background: var(--surface2);
+  }
+ 
+  /* ── ANIMATIONS ── */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+ 
+  .section { animation: fadeIn 0.3s ease both; }
+  .section:nth-child(1) { animation-delay: 0.04s; }
+  .section:nth-child(2) { animation-delay: 0.08s; }
+  .section:nth-child(3) { animation-delay: 0.12s; }
+  .section:nth-child(4) { animation-delay: 0.16s; }
+</style>
+</head>
+<body>
+ 
+<header>
+  <div class="header-inner">
+    <div class="header-left">
+      <div class="header-eyebrow">United States Military Academy</div>
+      <div class="header-title">CFT 2026 Packing List</div>
+    </div>
+    <div class="header-right">
+      <div class="progress-ring-wrap">
+        <svg width="44" height="44" viewBox="0 0 44 44">
+          <circle cx="22" cy="22" r="17" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="3.5"/>
+          <circle id="ring-circle" cx="22" cy="22" r="17" fill="none" stroke="#b89a5a" stroke-width="3.5"
+            stroke-dasharray="106.81" stroke-dashoffset="106.81"
+            stroke-linecap="round" transform="rotate(-90 22 22)"
+            style="transition: stroke-dashoffset 0.4s cubic-bezier(.4,0,.2,1)"/>
+          <text x="22" y="27" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-size="11" font-weight="700" fill="#fff" id="ring-text">0%</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+  <div class="progress-strip">
+    <div class="progress-strip-fill" id="strip-fill" style="width:0%"></div>
+  </div>
+</header>
+ 
+<div class="layout">
+ 
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-card">
+      <div class="sidebar-title">Status</div>
+      <div class="stat-row">
+        <div class="stat-cell">
+          <span class="stat-num" id="sb-packed">0</span>
+          <span class="stat-label">Packed</span>
+        </div>
+        <div class="stat-cell">
+          <span class="stat-num" id="sb-remaining">0</span>
+          <span class="stat-label">Remaining</span>
+        </div>
+      </div>
+      <div class="filter-list" id="filter-list">
+        <button class="filter-btn active" onclick="setFilter('all',this)">
+          All items <span class="filter-count" id="fc-all">0</span>
+        </button>
+        <button class="filter-btn" onclick="setFilter('unpacked',this)">
+          Unpacked <span class="filter-count" id="fc-unpacked">0</span>
+        </button>
+        <button class="filter-btn" onclick="setFilter('packed',this)">
+          Packed <span class="filter-count" id="fc-packed">0</span>
+        </button>
+        <button class="filter-btn" onclick="setFilter('issued',this)">
+          If issued <span class="filter-count" id="fc-issued">0</span>
+        </button>
+        <button class="filter-btn" onclick="setFilter('optional',this)">
+          Optional <span class="filter-count" id="fc-optional">0</span>
+        </button>
+      </div>
+      <div class="sidebar-actions">
+        <button class="reset-btn" onclick="resetAll()">Reset All</button>
+      </div>
+    </div>
+  </aside>
+ 
+  <!-- MAIN -->
+  <main>
+    <!-- Mobile stats -->
+    <div class="mobile-stats">
+      <div class="mobile-stat">
+        <span class="mobile-stat-num" id="ms-packed">0</span>
+        <span class="mobile-stat-label">Packed</span>
+      </div>
+      <div class="mobile-stat">
+        <span class="mobile-stat-num" id="ms-remaining">0</span>
+        <span class="mobile-stat-label">Remaining</span>
+      </div>
+      <div class="mobile-stat" style="max-width:80px;">
+        <span class="mobile-stat-num" id="ms-pct">0%</span>
+        <span class="mobile-stat-label">Done</span>
+      </div>
+    </div>
+ 
+    <!-- Mobile filters -->
+    <div class="mobile-controls" id="mobile-controls">
+      <button class="mobile-filter active" onclick="setFilter('all',this)">All</button>
+      <button class="mobile-filter" onclick="setFilter('unpacked',this)">Unpacked</button>
+      <button class="mobile-filter" onclick="setFilter('packed',this)">Packed</button>
+      <button class="mobile-filter" onclick="setFilter('issued',this)">If Issued</button>
+      <button class="mobile-filter" onclick="setFilter('optional',this)">Optional</button>
+      <button class="mobile-filter" onclick="resetAll()" style="margin-left:auto;color:#b04040;border-color:#b04040;">Reset</button>
+    </div>
+ 
+    <div class="sections" id="sections"></div>
+    <div class="all-done-banner" id="all-done">
+      <div class="icon">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <h3>All Items Packed</h3>
+      <p>You're ready. Good luck out there.</p>
+    </div>
+  </main>
+</div>
+ 
+<footer>CFT 2026 &nbsp;|&nbsp; West Point &nbsp;|&nbsp; Dennis Pezan C-2 </footer>
+ 
+<script>
+const ICONS = {
+  "Worn / Carried": `<svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>`,
+  "Assault Pack":   `<svg viewBox="0 0 24 24"><rect x="6" y="3" width="12" height="18" rx="2"/><path d="M9 3v2m6-2v2M6 10h12"/></svg>`,
+  "Molleruck":      `<svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>`,
+  "Garment Bag":    `<svg viewBox="0 0 24 24"><path d="M12 2a3 3 0 0 0-3 3v1H7a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-2V5a3 3 0 0 0-3-3z"/></svg>`,
+};
+ 
+const DATA = [
+  { section: "Worn / Carried", items: [
+    { n:"ACUs (complete set)", q:"1 set" },
+    { n:"Tan T-shirt", q:"1" },
+    { n:"Boot socks", q:"1 pr" },
+    { n:"Belt (tan)", q:"1" },
+    { n:"Hot weather boots", q:"1 pr" },
+    { n:"ID tags", q:"1 set" },
+    { n:"ID card", q:"1" },
+    { n:"Weapons card (N/A 1st class)", q:"1" },
+    { n:"Eye protection w/ clear lens", q:"1" },
+    { n:"Pen or pencil", q:"1" },
+    { n:"Notebook", q:"1" },
+    { n:"Ranger handbook", q:"1" },
+    { n:"Wristwatch", q:"1" },
+    { n:"Nomex gloves (Black/Tan/OCP)", q:"1 pr" },
+    { n:"Army combat helmet", q:"1" },
+    { n:"Helmet cover", q:"1" },
+    { n:"Camo band w/ cat eyes", q:"1" },
+    { n:"NVG mount base plate", q:"1" },
+    { n:"Chinstrap", q:"1" },
+    { n:"Helmet pads", q:"1 set" },
+    { n:"FLC", q:"1" },
+    { n:"Magazines M4", q:"7" },
+    { n:"1-quart canteens", q:"2" },
+    { n:"Canteen cup", q:"1" },
+    { n:"Blank firing adapter (BFA)", q:"1" },
+    { n:"IFAK w/ marking", q:"1" },
+    { n:"Tourniquet (CAT)", q:"1" },
+    { n:"Trauma dressing (ETD)", q:"1" },
+    { n:"Bandage gauze", q:"1" },
+    { n:"Adhesive tape (roll)", q:"1" },
+    { n:"Nasal airway (NPA)", q:"1" },
+    { n:"Rubber gloves", q:"1 pr" },
+    { n:"IFAK pouch", q:"1" },
+    { n:"HG pouches", q:"2" },
+    { n:"Whistle", q:"1" },
+    { n:"Lensatic compass", q:"1", t:"ii" },
+    { n:"Pace count beads", q:"1", t:"opt" },
+    { n:"Headlamp w/ red lens", q:"1", t:"opt" },
+    { n:"Multi-tool (recommended)", q:"1", t:"ii" },
+    { n:"West Point map 1:25,000", q:"1", t:"ii" },
+    { n:"Protractor", q:"1", t:"ii" },
+    { n:"Map marker set", q:"1 set", t:"ii" },
+    { n:"Eyeglasses (if prescribed)", q:"1 pr", t:"ii" },
+    { n:"Hand sanitizer", q:"1", t:"opt" },
+    { n:"1-gallon sealable bags", q:"10", t:"opt" },
+    { n:"Nomex gloves (spare set)", q:"1 pr", t:"ii" },
+    { n:"Pillow (packable)", q:"1", t:"opt" },
+    { n:"Camelbak", q:"1" },
+    { n:"2-quart canteen (right side)", q:"1", t:"ii" },
+    { n:"E-tool w/ case (left side)", q:"1" },
+  ]},
+  { section: "Assault Pack", items: [
+    { n:"Waterproof bag", q:"1" },
+    { n:"Bed roll / bed mat", q:"1" },
+    { n:"Boot socks", q:"4 pr" },
+    { n:"Underwear / bras (females)", q:"4", t:"f" },
+    { n:"Tan T-shirts", q:"3" },
+    { n:"ACU blouse w/ patches", q:"1" },
+    { n:"ACU trouser", q:"1" },
+    { n:"Patrol cap w/ rank & nametape", q:"1" },
+    { n:"Fleece cap", q:"1" },
+    { n:"Poncho", q:"1" },
+    { n:"Poncho liner", q:"1", t:"ii" },
+    { n:"Wet weather top (subdued rank)", q:"1" },
+    { n:"Goretex top w/ patches", q:"1" },
+    { n:"Wet weather bottom", q:"1" },
+    { n:"Baby/wet wipes", q:"1 pk", t:"opt" },
+    { n:"Hygiene kit (3-day supply)", q:"1" },
+    { n:"Shaving cream", q:"1" },
+    { n:"Razor", q:"1" },
+    { n:"Body wash / soap & shampoo", q:"1" },
+    { n:"Foot powder", q:"1" },
+    { n:"Moleskin", q:"1", t:"opt" },
+    { n:"Toothpaste", q:"1" },
+    { n:"Toothbrush", q:"1" },
+    { n:"Sunscreen", q:"1" },
+    { n:"Chapstick", q:"1" },
+    { n:"Nail clippers", q:"1", t:"opt" },
+    { n:"Insect repellant", q:"1", t:"opt" },
+    { n:"Hair tie or bobby pin set", q:"1", t:"f" },
+    { n:"Female hygiene products", q:"as req", t:"f" },
+    { n:"Knee pads", q:"1 pr" },
+    { n:"Sewing kit", q:"1", t:"opt" },
+    { n:"Weapons cleaning kit", q:"1" },
+    { n:"Red lens flashlight w/ spare batteries", q:"1", t:"ii" },
+    { n:"Sleep system (complete)", q:"1" },
+    { n:"Eye protection w/ clear lens (addtnl)", q:"1", t:"opt" },
+    { n:"Ear protection", q:"1 pr" },
+    { n:"Camouflage stick/kit", q:"1" },
+    { n:"Lighter", q:"1" },
+    { n:"550 cord 200ft", q:"1", t:"opt" },
+    { n:"90mph tape (green roll)", q:"1", t:"opt" },
+  ]},
+  { section: "Molleruck", items: [
+    { n:"ACU blouse (patches recommended)", q:"2" },
+    { n:"ACU trouser", q:"2" },
+    { n:"Tan T-shirts", q:"2" },
+    { n:"Boot socks", q:"8 pr" },
+    { n:"Hot weather boots", q:"1 pr" },
+    { n:"Underwear / bras (females)", q:"8", t:"f" },
+    { n:"Waterproof bag (addtnl)", q:"1", t:"ii" },
+    { n:"Laundry bags", q:"2" },
+    { n:"Brown mesh bag", q:"1" },
+    { n:"White mesh bag", q:"1" },
+    { n:"Laundry detergent / pods", q:"1–2 pk" },
+    { n:"Combination locks", q:"2" },
+    { n:"Shower shoes", q:"1 pr" },
+    { n:"PT / reflective belt", q:"1–2" },
+    { n:"APFU shirts (4x SS, 1x LS)", q:"5" },
+    { n:"APFU shorts", q:"4" },
+    { n:"APFU jacket", q:"1" },
+    { n:"Swimsuit (USMA issued — black)", q:"1" },
+    { n:"Black or white socks", q:"8 pr" },
+    { n:"Running shoes", q:"1 pr" },
+    { n:"Bedding sheets", q:"2 sets" },
+    { n:"Bed sleeve", q:"1" },
+    { n:"Spare pens", q:"3–4" },
+    { n:"Spare notebooks", q:"2–3" },
+    { n:"Baby/wet wipes", q:"1–2 pk", t:"opt" },
+    { n:"Brown towel", q:"1" },
+    { n:"Mid-weight cold wx top (waffle)", q:"1" },
+    { n:"Mid-weight cold wx bottom (waffle)", q:"1" },
+    { n:"Additional hygiene kit (30-day)", q:"1", t:"opt" },
+    { n:"Extra razors", q:"4–6", t:"opt" },
+    { n:"Extra foot powder", q:"2–4", t:"opt" },
+    { n:"Extra sunscreen", q:"2–3", t:"opt" },
+    { n:"Extra chapstick", q:"3–4", t:"opt" },
+    { n:"Extra insect repellant", q:"2–4", t:"opt" },
+    { n:"Hair tie / bobby pin (females)", q:"3–4", t:"f" },
+    { n:"Female hygiene products (females)", q:"as req", t:"f" },
+  ]},
+  { section: "Garment Bag", items: [
+    { n:"White over grey", q:"1", t:"cft2" },
+    { n:"White over grey top w/ rank & awards", q:"1", t:"cft2" },
+    { n:"Grey pants", q:"1", t:"cft2" },
+    { n:"White under shirt", q:"1", t:"cft2" },
+    { n:"Black dress socks", q:"1 pr", t:"cft2" },
+    { n:"Low quarters", q:"1 pr", t:"cft2" },
+    { n:"Belt", q:"1", t:"cft2" },
+    { n:"White cover", q:"1", t:"cft2" },
+  ]},
+];
+ 
+const BADGE_LABEL = { ii:"if issued", opt:"optional", f:"females", cft2:"cft 2 only" };
+const BADGE_CLASS = { ii:"badge-ii", opt:"badge-opt", f:"badge-f", cft2:"badge-cft2" };
+ 
+const KEY = "cft2026v2";
+let packed = new Set(JSON.parse(localStorage.getItem(KEY) || "[]"));
+let filter = "all";
+ 
+function save() { localStorage.setItem(KEY, JSON.stringify([...packed])); }
+function ikey(si,ii) { return `${si}:${ii}`; }
+ 
+function totalItems() {
+  let t=0; DATA.forEach(s=>s.items.forEach(()=>t++)); return t;
+}
+function packedCount() { return packed.size; }
+ 
+function itemMatchesFilter(item, si, ii) {
+  const k = ikey(si,ii);
+  if (filter === "packed")   return packed.has(k);
+  if (filter === "unpacked") return !packed.has(k);
+  if (filter === "issued")   return item.t === "ii";
+  if (filter === "optional") return item.t === "opt" || item.t === "f" || item.t === "cft2";
+  return true;
+}
+ 
+function updateProgress() {
+  const total = totalItems();
+  const done  = packedCount();
+  const pct   = total === 0 ? 0 : Math.round((done/total)*100);
+  const circ  = 2 * Math.PI * 17;
+ 
+  document.getElementById("ring-circle").style.strokeDashoffset = circ - (circ * pct / 100);
+  document.getElementById("ring-text").textContent = pct + "%";
+  document.getElementById("strip-fill").style.width = pct + "%";
+ 
+  document.getElementById("sb-packed").textContent    = done;
+  document.getElementById("sb-remaining").textContent = total - done;
+  document.getElementById("ms-packed").textContent    = done;
+  document.getElementById("ms-remaining").textContent = total - done;
+  document.getElementById("ms-pct").textContent       = pct + "%";
+ 
+  document.getElementById("fc-all").textContent      = total;
+  document.getElementById("fc-packed").textContent   = done;
+  document.getElementById("fc-unpacked").textContent = total - done;
+ 
+  let issuedC=0, optC=0;
+  DATA.forEach((sec,si)=>sec.items.forEach((item,ii)=>{
+    if(item.t==="ii") issuedC++;
+    if(item.t==="opt"||item.t==="f"||item.t==="cft2") optC++;
+  }));
+  document.getElementById("fc-issued").textContent   = issuedC;
+  document.getElementById("fc-optional").textContent = optC;
+ 
+  const allDone = done === total && total > 0;
+  document.getElementById("all-done").classList.toggle("show", allDone);
+}
+ 
+function updateSectionUI(si) {
+  const secEl = document.getElementById("sec-"+si);
+  if (!secEl) return;
+  const sec = DATA[si];
+  let vis=0, done=0;
+  sec.items.forEach((item,ii)=>{
+    const show = itemMatchesFilter(item,si,ii);
+    const el = document.getElementById(`item-${si}-${ii}`);
+    if (el) el.style.display = show ? "" : "none";
+    if (show) { vis++; if(packed.has(ikey(si,ii))) done++; }
+  });
+  secEl.style.display = vis===0 ? "none" : "";
+  const prog = secEl.querySelector(".section-progress");
+  if (prog) {
+    prog.textContent = `${done}/${vis}`;
+    prog.classList.toggle("complete", done===vis && vis>0);
+  }
+  const bar = secEl.querySelector(".mini-bar-fill");
+  if (bar) bar.style.width = vis===0 ? "0%" : (Math.round(done/vis*100))+"%";
+}
+ 
+function toggleItem(si, ii) {
+  const k = ikey(si,ii);
+  if (packed.has(k)) packed.delete(k); else packed.add(k);
+  save();
+  const el = document.getElementById(`item-${si}-${ii}`);
+  if (el) {
+    el.classList.toggle("checked", packed.has(k));
+    if ((filter==="packed" && !packed.has(k)) || (filter==="unpacked" && packed.has(k))) {
+      el.style.display = "none";
+    }
+  }
+  updateSectionUI(si);
+  updateProgress();
+}
+ 
+function setFilter(f, btn) {
+  filter = f;
+  document.querySelectorAll(".filter-btn, .mobile-filter").forEach(b=>b.classList.remove("active"));
+  document.querySelectorAll(`.filter-btn, .mobile-filter`).forEach(b=>{
+    if(b.getAttribute("onclick")===`setFilter('${f}',this)`) b.classList.add("active");
+  });
+  DATA.forEach((_,si)=>updateSectionUI(si));
+  updateProgress();
+}
+ 
+function toggleSection(si) {
+  document.getElementById("sec-"+si).classList.toggle("collapsed");
+}
+ 
+function resetAll() {
+  if (!confirm("Reset all items to unpacked?")) return;
+  packed.clear();
+  save();
+  render();
+}
+ 
+function render() {
+  const cont = document.getElementById("sections");
+  cont.innerHTML = "";
+ 
+  DATA.forEach((sec, si) => {
+    const done = sec.items.filter((_,ii)=>packed.has(ikey(si,ii))).length;
+    const vis  = sec.items.filter((item,ii)=>itemMatchesFilter(item,si,ii)).length;
+    const icon = ICONS[sec.section] || ICONS["Assault Pack"];
+ 
+    const div = document.createElement("div");
+    div.className = "section";
+    div.id = "sec-"+si;
+    if (vis===0) div.style.display="none";
+ 
+    div.innerHTML = `
+      <div class="section-header" onclick="toggleSection(${si})">
+        <div class="section-header-left">
+          <div class="section-icon">${icon}</div>
+          <span class="section-name">${sec.section}</span>
+        </div>
+        <div class="section-header-right">
+          <div class="mini-bar"><div class="mini-bar-fill" style="width:${sec.items.length===0?0:Math.round(done/sec.items.length*100)}%"></div></div>
+          <span class="section-progress${done===sec.items.length&&sec.items.length>0?" complete":""}">${done}/${sec.items.length}</span>
+          <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+      </div>
+      <div class="section-body">
+        ${sec.items.map((item,ii)=>{
+          const isPacked = packed.has(ikey(si,ii));
+          const show = itemMatchesFilter(item,si,ii);
+          const badge = item.t ? `<span class="badge ${BADGE_CLASS[item.t]}">${BADGE_LABEL[item.t]}</span>` : "";
+          return `<div class="item${isPacked?" checked":""}" id="item-${si}-${ii}" onclick="toggleItem(${si},${ii})" style="${show?"":"display:none"}">
+            <div class="checkbox">
+              <svg class="check-svg" viewBox="0 0 12 10"><path d="M1 5l3.5 3.5L11 1"/></svg>
+            </div>
+            <div class="item-text">
+              <div class="item-name">${item.n}</div>
+              <div class="item-meta">
+                <span class="item-qty">${item.q}</span>
+                ${badge}
+              </div>
+            </div>
+          </div>`;
+        }).join("")}
+      </div>`;
+    cont.appendChild(div);
+  });
+  updateProgress();
+}
+ 
+render();
+</script>
+</body>
+</html>
