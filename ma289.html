@@ -1370,10 +1370,10 @@
         <div class="intro-block-label">Motivation</div>
         <div class="intro-block-title">Why This Matters</div>
         <p class="intro-block-body">
-          Classification problems appear across every domain an officer works in. Knowing when to use an interpretable single tree versus a robust ensemble matters in any environment where a wrong prediction has real consequences.
+          Classification problems appear across every domain an officer works in. Knowing when to use an interpretable single tree versus a robust ensemble matters in any environment where a wrong prediction has real consequences. Ensemble methods aggregate many imperfect models and let their disagreements cancel out, a direct application of making better decisions under incomplete information.
         </p>
         <p class="intro-block-body">
-          Ensemble methods aggregate many imperfect models and let their disagreements cancel out, a direct application of making better decisions under incomplete information.
+          This manifests in three critical areas. First, predictive maintenance: fleet readiness depends on anticipating equipment failure before it occurs. Random forests trained on sensor telemetry can predict vehicle and aircraft inspection priorities, reducing unplanned downtime. Second, medical triage: combat casualty care requires rapid prioritization with limited personnel. Ensemble classifiers trained on vital signs and injury data assist medics with consistent decisions, regardless of fatigue. Third, personnel readiness: predicting soldier readiness and attrition risk from training performance allows commanders to intervene early. Decision trees are particularly valuable here because their logic can be audited and explained to leadership.
         </p>
       </div>
 
@@ -1409,26 +1409,6 @@
       <p class="intro-block-body">
         Three models were trained using Python's <strong>scikit-learn</strong> library: a single <strong>Decision Tree</strong> (<code>max_depth=5</code>), a <strong>Bagging Classifier</strong> (<code>n_estimators=100, max_depth=5</code>), and a <strong>Random Forest</strong> (<code>n_estimators=100, max_depth=5</code>). All three used the same 80/20 train-test split with <code>random_state=42</code> for reproducibility. Missing numerical values such as Age were imputed with the median of the known values; categorical variables (Sex, Embarked) were label-encoded, converting text categories into integers so the models could process them. Performance was measured by test accuracy on the held-out test set.
       </p>
-    </div>
-
-    <!-- Military Applications -->
-    <div class="mil-panel">
-      <div class="mil-panel-tag">Military Applications</div>
-      <div class="mil-panel-title">Where This Applies</div>
-      <div class="mil-use-grid">
-        <div class="mil-use">
-          <div class="mil-use-label">Predictive Maintenance</div>
-          <div class="mil-use-text">Fleet readiness depends on anticipating equipment failure before it occurs. Random forests trained on sensor telemetry (engine temperature, vibration, operating hours) can flag vehicles and aircraft for inspection before a failure grounds them, reducing unplanned downtime and maintenance costs.</div>
-        </div>
-        <div class="mil-use">
-          <div class="mil-use-label">Medical Triage</div>
-          <div class="mil-use-text">Combat casualty care requires rapid prioritization with limited personnel. Ensemble classifiers trained on vital signs, injury type, and transport time can assist medics in triage decisions, providing a data-driven second opinion that is consistent regardless of fatigue or stress conditions.</div>
-        </div>
-        <div class="mil-use">
-          <div class="mil-use-label">Personnel Readiness</div>
-          <div class="mil-use-text">Predicting soldier readiness and attrition risk from training performance, fitness, and behavioral indicators allows commanders to intervene early. Decision tree models are particularly valuable here because their logic can be audited and explained to leadership, unlike black-box alternatives.</div>
-        </div>
-      </div>
     </div>
 
   </div>
