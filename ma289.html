@@ -1794,10 +1794,9 @@
 
     <!-- FINAL INSIGHT -->
     <div class="insight">
-      <div class="insight-label">What the Titanic Results Show</div>
-      <p>On this dataset, all three models achieve similar test accuracy, within 2.3 percentage points of each other. This is expected: the Titanic dataset is small (891 records) and relatively clean, so the advantage of ensemble methods is modest but real.</p>
-      <p>The more telling number is the <strong>overfitting gap</strong>. The Decision Tree's training accuracy (84.7%) is 5.4 points above its test accuracy (79.3%). Random Forest closes that gap: 86.1% train, 81.6% test, just 4.5 points. Ensemble diversity is working, even at this scale.</p>
-      <p>On larger, noisier datasets the gap between methods widens significantly. Random forests are typically the stronger default choice when interpretability is not required.</p>
+      <div class="insight-label">Takeaways</div>
+      <p>Ensembles are generally the stronger choice, but understanding your data before applying a model matters just as much as the model itself. Bagging underperformed here not because it is a weaker method, but because this dataset has a few heavily weighted features: sex, class, and age dominate survival prediction. When every tree sees all features, they all split on the same signals and stay correlated. Random Forest forces diversity by restricting what each split can see, which is why it pulls ahead.</p>
+      <p>The lesson is not just that Random Forest wins. It is that knowing why it wins, and when it would not, is what makes the difference between applying a tool and understanding one.</p>
     </div>
 
   </div>
