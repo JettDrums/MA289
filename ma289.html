@@ -1359,21 +1359,21 @@
         <div class="intro-block-label">The Problem</div>
         <div class="intro-block-title">Binary Classification Under Uncertainty</div>
         <p class="intro-block-body">
-          Given a set of passenger attributes, can a model reliably predict who survived the 1912 Titanic disaster? This is a <strong>binary classification</strong> task: for each passenger, the model outputs 1 (survived) or 0 (did not survive).
+          Given passenger attributes, can a model reliably predict who survived the 1912 Titanic disaster? For each passenger the model outputs 1 (survived) or 0 (did not survive).
         </p>
         <p class="intro-block-body">
-          The core challenge is building a model that learns <strong>genuine patterns</strong> in the data rather than memorizing training examples. A model that memorizes (overfits) will score well on training data but fail on passengers it has never seen. Ensemble methods are specifically designed to fix the shortcomings of a vanilla model.
+          The core challenge is learning <strong>genuine patterns</strong> rather than memorizing training examples. A model that overfits scores well on training data but fails on new passengers. Ensemble methods are designed to fix exactly that.
         </p>
       </div>
 
       <div class="intro-block">
         <div class="intro-block-label">Motivation</div>
-        <div class="intro-block-title">Prediction Under Uncertainty</div>
-        <p class="intro-block-body">
-          Operations Research is about making better decisions with incomplete information. Ensemble methods apply that idea directly: aggregate many imperfect models and let their disagreements cancel out.
-        </p>
+        <div class="intro-block-title">Why This Matters</div>
         <p class="intro-block-body">
           Classification problems appear across every domain an officer works in. Knowing when to use an interpretable single tree versus a robust ensemble matters in any environment where a wrong prediction has real consequences.
+        </p>
+        <p class="intro-block-body">
+          Ensemble methods aggregate many imperfect models and let their disagreements cancel out — a direct application of making better decisions under incomplete information.
         </p>
       </div>
 
