@@ -25,7 +25,7 @@
       --black:  #0d0d0d;
       --ink:    #1a1a1a;
       --mid:    #4a4a4a;
-      --dim:    #8a8a8a;
+      --dim:    #767676;
       --rule:   #d8d8d8;
       --bg:     #ffffff;
       --bg-off: #f7f7f5;
@@ -71,6 +71,11 @@
       transition: color 0.15s;
     }
     .nav-link:hover { color: var(--black); }
+    .nav-toggle {
+      display: none; background: none; border: 0; cursor: pointer;
+      flex-direction: column; gap: 5px; padding: 6px;
+    }
+    .nav-toggle span { display: block; width: 22px; height: 2px; background: var(--black); }
 
     /* ── HERO ─────────────────────────────────────────── */
     .hero {
@@ -201,6 +206,11 @@
 
     hr.rule { border: none; border-top: 1px solid var(--rule); }
 
+    /* ── ABOUT ────────────────────────────────────────── */
+    .about-body { max-width: 720px; }
+    .about-body p { font-size: 15px; font-weight: 300; line-height: 1.9; color: var(--mid); }
+    .about-body p + p { margin-top: 20px; }
+
     /* ── PROJECTS ─────────────────────────────────────── */
     #projects { background: var(--bg-off); }
     .project-grid {
@@ -325,7 +335,18 @@
       .resume-viewer { display: none; }
     }
     @media (max-width: 540px) {
-      .nav-links { display: none; }
+      .nav-toggle { display: flex; }
+      .nav-links {
+        display: none;
+        position: absolute; top: 56px; left: 0; right: 0;
+        flex-direction: column; gap: 0;
+        background: rgba(255,255,255,0.98);
+        border-bottom: 1px solid var(--rule);
+        padding: 8px 24px 16px;
+        backdrop-filter: blur(8px);
+      }
+      .nav-links.open { display: flex; }
+      .nav-link { padding: 12px 0; }
       .section { padding: 72px 24px; }
     }
   </style>
@@ -336,10 +357,12 @@
   <nav class="nav">
     <div class="nav-inner">
       <a class="nav-logo" href="#top">Dennis Pezan</a>
-      <div class="nav-links">
+      <div class="nav-links" id="navLinks">
+        <a class="nav-link" href="#about">About</a>
         <a class="nav-link" href="#projects">Projects</a>
         <a class="nav-link" href="#resume">Resume</a>
       </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
     </div>
   </nav>
 
@@ -370,6 +393,26 @@
           <img class="hero-photo" src="img/headshot.png" alt="Dennis Pezan" />
         </div>
 
+      </div>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <!-- ABOUT -->
+  <section class="section" id="about">
+    <div class="section-inner">
+      <div class="section-header">
+        <p class="section-label">Profile</p>
+        <h2 class="section-title">About</h2>
+      </div>
+      <div class="about-body">
+        <p>
+          Born in Colorado and raised in Chicago, Dennis Pezan studies Operations Research with a Finance specialization and a minor in Artificial Intelligence at West Point. Over the past year he has focused on the mathematical foundations of predictive modeling through machine learning research in the Department of Mathematical Sciences, with hopes of partnering with SOCOM in the semesters ahead.
+        </p>
+        <p>
+          He is drawn to the intersection of machine learning and military operations, especially how autonomous systems, from aerial to undersea, are reshaping the battlefield. A Stokes Writing Fellow and Dean's List honoree, he will spend this summer at Fort Lee refining predictive models that interface with Army logistics. Outside the classroom, Dennis has earned the Norwegian Foot March Badge and intends to commission as an Infantry officer upon graduation.
+        </p>
       </div>
     </div>
   </section>
@@ -457,12 +500,27 @@
       <span class="footer-name">Dennis Pezan</span>
       <div class="footer-links">
         <a class="footer-link" href="#top">Top</a>
+        <a class="footer-link" href="#about">About</a>
         <a class="footer-link" href="#projects">Projects</a>
         <a class="footer-link" href="#resume">Resume</a>
       </div>
       <span class="footer-copy">&copy; 2026</span>
     </div>
   </footer>
+
+  <script>
+    (function () {
+      var t = document.getElementById('navToggle'), l = document.getElementById('navLinks');
+      if (!t || !l) return;
+      t.addEventListener('click', function () {
+        var open = l.classList.toggle('open');
+        t.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      l.querySelectorAll('a').forEach(function (a) {
+        a.addEventListener('click', function () { l.classList.remove('open'); t.setAttribute('aria-expanded', 'false'); });
+      });
+    })();
+  </script>
 
 </body>
 </html>

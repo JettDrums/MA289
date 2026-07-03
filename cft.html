@@ -30,7 +30,7 @@
     --khaki:     #d4c89a;
     --ink:       #1a1c18;
     --muted:     #5a5e52;
-    --faint:     #8a8e82;
+    --faint:     #666961;
     --border:    #c8c4b0;
     --border-dark: #a09c88;
     --check-bg:  #2e5228;
@@ -596,7 +596,7 @@
     <div class="header-left">
       <a href="/" style="display:inline-block;font-family:'Barlow Condensed',sans-serif;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.55);text-decoration:none;margin-bottom:8px">&#8592;&nbsp; Home</a>
       <div class="header-eyebrow">United States Military Academy</div>
-      <div class="header-title">CFT 2026 Packing List</div>
+      <h1 class="header-title">CFT 2026 Packing List</h1>
     </div>
     <div class="header-right">
       <div class="progress-ring-wrap">
@@ -980,7 +980,7 @@ function render() {
       <div class="section-header" onclick="toggleSection(${si})">
         <div class="section-header-left">
           <div class="section-icon">${icon}</div>
-          <span class="section-name">${sec.section}</span>
+          <h2 class="section-name">${sec.section}</h2>
         </div>
         <div class="section-header-right">
           <div class="mini-bar"><div class="mini-bar-fill" style="width:${sec.items.length===0?0:Math.round(done/sec.items.length*100)}%"></div></div>
