@@ -3,8 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="CFT 2026 Cadet Packing Checklist — West Point">
+<meta name="description" content="Interactive packing checklist for West Point Cadet Field Training (CFT) 2026, with required and optional gear organized by category.">
 <title>CFT 2026 Packing List</title>
+<link rel="canonical" href="https://dennis-pezan.com/cft.html">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://dennis-pezan.com/cft.html">
+<meta property="og:title" content="CFT 2026 Packing List">
+<meta property="og:description" content="Interactive packing checklist for West Point Cadet Field Training (CFT) 2026, with gear organized by category.">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CFT 2026 Packing List">
+<meta name="twitter:description" content="Interactive packing checklist for West Point Cadet Field Training (CFT) 2026.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' fill='%230d0d0d'/><text x='32' y='45' font-family='Georgia,serif' font-size='34' fill='%23ffffff' text-anchor='middle'>DP</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&family=Barlow:wght@400;500&display=swap" rel="stylesheet">
@@ -585,6 +594,7 @@
 <header>
   <div class="header-inner">
     <div class="header-left">
+      <a href="/" style="display:inline-block;font-family:'Barlow Condensed',sans-serif;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.55);text-decoration:none;margin-bottom:8px">&#8592;&nbsp; Home</a>
       <div class="header-eyebrow">United States Military Academy</div>
       <div class="header-title">CFT 2026 Packing List</div>
     </div>
@@ -624,7 +634,7 @@
       </div>
       <div class="filter-list" id="filter-list">
         <button class="filter-btn active" onclick="setFilter('all',this)">
-          All items <span class="filter-count" id="fc-all">0</span>
+          All Items <span class="filter-count" id="fc-all">0</span>
         </button>
         <button class="filter-btn" onclick="setFilter('unpacked',this)">
           Unpacked <span class="filter-count" id="fc-unpacked">0</span>
@@ -633,7 +643,7 @@
           Packed <span class="filter-count" id="fc-packed">0</span>
         </button>
         <button class="filter-btn" onclick="setFilter('issued',this)">
-          If issued <span class="filter-count" id="fc-issued">0</span>
+          If Issued <span class="filter-count" id="fc-issued">0</span>
         </button>
         <button class="filter-btn" onclick="setFilter('optional',this)">
           Optional <span class="filter-count" id="fc-optional">0</span>
@@ -665,7 +675,7 @@
  
     <!-- Mobile filters -->
     <div class="mobile-controls" id="mobile-controls">
-      <button class="mobile-filter active" onclick="setFilter('all',this)">All</button>
+      <button class="mobile-filter active" onclick="setFilter('all',this)">All Items</button>
       <button class="mobile-filter" onclick="setFilter('unpacked',this)">Unpacked</button>
       <button class="mobile-filter" onclick="setFilter('packed',this)">Packed</button>
       <button class="mobile-filter" onclick="setFilter('issued',this)">If Issued</button>
@@ -774,7 +784,7 @@ const DATA = [
     { n:"Sunscreen", q:"1" },
     { n:"Chapstick", q:"1" },
     { n:"Nail clippers", q:"1", t:"opt" },
-    { n:"Insect repellant", q:"1", t:"opt" },
+    { n:"Insect repellent", q:"1", t:"opt" },
     { n:"Hair tie or bobby pin set", q:"1", t:"f" },
     { n:"Female hygiene products", q:"as req", t:"f" },
     { n:"Knee pads", q:"1 pr" },
@@ -782,7 +792,7 @@ const DATA = [
     { n:"Weapons cleaning kit", q:"1" },
     { n:"Red lens flashlight w/ spare batteries", q:"1", t:"ii" },
     { n:"Sleep system (complete)", q:"1" },
-    { n:"Eye protection w/ clear lens (addtnl)", q:"1", t:"opt" },
+    { n:"Eye protection w/ clear lens (additional)", q:"1", t:"opt" },
     { n:"Ear protection", q:"1 pr" },
     { n:"Camouflage stick/kit", q:"1" },
     { n:"Lighter", q:"1" },
@@ -796,7 +806,7 @@ const DATA = [
     { n:"Boot socks", q:"8 pr" },
     { n:"Hot weather boots", q:"1 pr" },
     { n:"Underwear / bras (females)", q:"8", t:"f" },
-    { n:"Waterproof bag (addtnl)", q:"1", t:"ii" },
+    { n:"Waterproof bag (additional)", q:"1", t:"ii" },
     { n:"Laundry bags", q:"2" },
     { n:"Brown mesh bag", q:"1" },
     { n:"White mesh bag", q:"1" },
@@ -807,7 +817,7 @@ const DATA = [
     { n:"APFU shirts (4x SS, 1x LS)", q:"5" },
     { n:"APFU shorts", q:"4" },
     { n:"APFU jacket", q:"1" },
-    { n:"Swimsuit (USMA issued — black)", q:"1" },
+    { n:"Swimsuit (USMA issued, black)", q:"1" },
     { n:"Black or white socks", q:"8 pr" },
     { n:"Running shoes", q:"1 pr" },
     { n:"Bedding sheets", q:"2 sets" },
@@ -823,7 +833,7 @@ const DATA = [
     { n:"Extra foot powder", q:"2–4", t:"opt" },
     { n:"Extra sunscreen", q:"2–3", t:"opt" },
     { n:"Extra chapstick", q:"3–4", t:"opt" },
-    { n:"Extra insect repellant", q:"2–4", t:"opt" },
+    { n:"Extra insect repellent", q:"2–4", t:"opt" },
     { n:"Hair tie / bobby pin (females)", q:"3–4", t:"f" },
     { n:"Female hygiene products (females)", q:"as req", t:"f" },
   ]},

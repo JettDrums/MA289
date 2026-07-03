@@ -3,7 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Dennis Pezan</title>
+  <title>Dennis Pezan | Operations Research &amp; AI Research</title>
+  <meta name="description" content="Dennis Pezan, Operations Research cadet at West Point and undergraduate AI researcher. Projects in machine learning, ensemble methods, and software.">
+  <link rel="canonical" href="https://dennis-pezan.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://dennis-pezan.com/">
+  <meta property="og:title" content="Dennis Pezan | Operations Research &amp; AI Research">
+  <meta property="og:description" content="Operations Research cadet at West Point and undergraduate AI researcher. Projects in machine learning and software.">
+  <meta property="og:image" content="https://dennis-pezan.com/img/headshot.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Dennis Pezan | Operations Research &amp; AI Research">
+  <meta name="twitter:description" content="Operations Research cadet at West Point and undergraduate AI researcher.">
+  <meta name="twitter:image" content="https://dennis-pezan.com/img/headshot.png">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' fill='%230d0d0d'/><text x='32' y='45' font-family='Georgia,serif' font-size='34' fill='%23ffffff' text-anchor='middle'>DP</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
@@ -309,7 +321,8 @@
       .hero-photo-wrap { width: 160px; }
       .resume-layout { grid-template-columns: 1fr; }
       .resume-side { position: static; }
-      iframe.resume-frame { height: 480px; }
+      /* PDF-in-iframe is unreliable on mobile (blank box on iOS/webviews); hide it and lead with the download/open buttons */
+      .resume-viewer { display: none; }
     }
     @media (max-width: 540px) {
       .nav-links { display: none; }
@@ -336,7 +349,7 @@
       <div class="hero-inner">
 
         <div class="hero-text">
-          <p class="hero-eyebrow">United States Military Academy &mdash; Class of 2029</p>
+          <p class="hero-eyebrow">United States Military Academy&ensp;&middot;&ensp;Class of 2029</p>
           <h1 class="hero-name">Dennis<br>Pezan</h1>
           <div class="hero-rule"></div>
           <p class="hero-bio">
@@ -395,8 +408,8 @@
           </p>
           <div class="project-tags">
             <span class="project-tag">Web App</span>
-            <span class="project-tag">React</span>
-            <span class="project-tag">Python</span>
+            <span class="project-tag">JavaScript</span>
+            <span class="project-tag">localStorage</span>
           </div>
           <span class="project-link">Open App</span>
         </a>
@@ -423,7 +436,7 @@
           <div class="resume-block">
             <span class="resume-block-label">Download</span>
             <span class="resume-block-value" style="font-size:16px;font-family:'Inter',sans-serif;font-weight:500">Full Resume</span>
-            <span class="resume-block-sub">PDF &mdash; Spring 2026</span>
+            <span class="resume-block-sub">PDF &middot; Spring 2026</span>
             <div class="resume-btn-stack">
               <a class="btn btn-dark" href="resume.pdf" download="Pezan_Dennis_Resume.pdf">&#8595;&ensp;Download PDF</a>
               <a class="btn btn-outline" href="resume.pdf" target="_blank">&#8599;&ensp;Open in Tab</a>
