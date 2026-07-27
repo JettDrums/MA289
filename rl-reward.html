@@ -152,8 +152,11 @@
     }
     @media (max-width: 720px) { .stats-inner { grid-template-columns: repeat(2, 1fr); gap: 22px; } }
     .stat .num {
-      font-family: var(--serif); font-size: clamp(1.5rem, 3vw, 2rem);
-      font-weight: 700; color: var(--navy); font-variant-numeric: tabular-nums;
+      font-family: var(--sans); font-size: clamp(1.4rem, 2.7vw, 1.85rem);
+      font-weight: 700; color: var(--navy);
+      font-variant-numeric: lining-nums tabular-nums;
+      font-feature-settings: 'lnum' 1, 'tnum' 1;
+      letter-spacing: -0.005em;
     }
     .stat .label {
       font-family: var(--sans); font-size: .82rem; font-weight: 300;
@@ -254,8 +257,8 @@
       </button>
       <div class="site-nav-links" id="navLinks">
         <a class="site-nav-link" href="index.html">&#8592; Home</a>
-        <a class="site-nav-link" href="#setup">The Setup</a>
-        <a class="site-nav-link" href="#catch">The Catch</a>
+        <a class="site-nav-link" href="#setup">Setup</a>
+        <a class="site-nav-link" href="#catch">Diagnosis</a>
         <a class="site-nav-link" href="#results">Results</a>
         <a class="site-nav-link" href="#paper">Full Brief</a>
       </div>
@@ -298,8 +301,8 @@
         <div class="label">Random scenarios used to test the fix</div>
       </div>
       <div class="stat">
-        <div class="num">0</div>
-        <div class="label">Results rounded up to sound better than they are</div>
+        <div class="num">184&rarr;35</div>
+        <div class="label">Decisions per episode, before vs. after</div>
       </div>
     </div>
   </div>
@@ -308,9 +311,9 @@
 
     <section class="block" id="setup">
       <span class="eyebrow">The Setup</span>
-      <h2 class="section-title">Three warehouses, two stores, one AI making the calls</h2>
+      <h2 class="section-title">A three-warehouse distribution network under scheduled demand surges</h2>
       <p>
-        Picture a small distribution network: three regional warehouses, each with a couple of delivery trucks,
+        Consider a small distribution network: three regional warehouses, each with a couple of delivery trucks,
         supplying two retail locations with two product lines. One of those locations is a flagship store that
         periodically goes through a demand surge, a big seasonal sale, say, where it suddenly needs far more
         product, far faster, than usual.
@@ -328,7 +331,7 @@
     </section>
 
     <section class="block" id="catch">
-      <span class="eyebrow">The Catch</span>
+      <span class="eyebrow">The Diagnosis</span>
       <h2 class="section-title">A high score that was hiding bad behavior</h2>
       <p>
         The first reward was simple: pay the agent for every unit of inventory the stores had on hand. When
@@ -372,7 +375,7 @@
 
     <section class="block">
       <span class="eyebrow">The Redesign</span>
-      <h2 class="section-title">Rebuilding what &ldquo;doing a good job&rdquo; means, one broken incentive at a time</h2>
+      <h2 class="section-title">Rebuilding the objective, one diagnosed failure at a time</h2>
       <p>
         Instead of one number, I rebuilt the reward as several distinct pieces added together, each one built to
         close a specific gap the audit had exposed.
@@ -436,7 +439,7 @@
 
     <section class="block" id="results">
       <span class="eyebrow">The Results</span>
-      <h2 class="section-title">Did it actually work? Verified independently, not just scored higher.</h2>
+      <h2 class="section-title">Verified independently of the reward, not just scored higher</h2>
       <p>
         I retrained the agent on the new reward and tested it across 101 random scenarios against several fixed
         rules, including the same hand-written rule from before.
@@ -492,7 +495,7 @@
     </section>
 
     <section class="block">
-      <span class="eyebrow">The Takeaway</span>
+      <span class="eyebrow">Conclusion</span>
       <h2 class="section-title">A high score proves nothing by itself</h2>
       <p class="closing">
         A reinforcement learning agent will always find the fastest literal path to a higher score, whether or not
