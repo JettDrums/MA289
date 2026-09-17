@@ -94,55 +94,9 @@
     .switch[aria-pressed="true"] { background: var(--black); border-color: var(--black); color: #fff; }
     .switch[aria-pressed="true"] .dot { background: #fff; }
 
-    /* ── project masthead ────────────────────────────── */
-    .masthead { padding: 72px 0 0; }
-    .eyebrow {
-      font-size: 11px; font-weight: 500; letter-spacing: .18em;
-      text-transform: uppercase; color: var(--dim); margin-bottom: 20px;
-    }
-    .masthead h1 {
-      font-family: var(--serif); font-weight: 400;
-      font-size: clamp(38px, 5.4vw, 60px); line-height: 1.05;
-      color: var(--black); margin-bottom: 26px; text-wrap: balance;
-    }
-    .masthead .lede {
-      font-size: 17px; line-height: 1.85; color: var(--mid);
-      max-width: 60ch; margin-bottom: 22px;
-    }
-    .masthead .lede strong { font-weight: 500; color: var(--ink); }
-    .hero-rule { width: 36px; height: 1px; background: var(--black); margin-bottom: 28px; }
-
-    .facts {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(140px,1fr));
-      border: 1px solid var(--rule); margin: 32px 0;
-    }
-    .facts div { padding: 16px 18px; border-right: 1px solid var(--rule); }
-    .facts div:last-child { border-right: 0; }
-    .facts dt {
-      font-size: 10px; font-weight: 500; letter-spacing: .13em;
-      text-transform: uppercase; color: var(--faint); margin-bottom: 5px;
-    }
-    .facts dd { font-size: 17px; font-family: var(--serif); color: var(--black); }
-
-    .dl { display: flex; gap: 14px; flex-wrap: wrap; margin: 28px 0 8px; }
-    .dl a {
-      display: inline-flex; align-items: center; gap: 9px;
-      border: 1px solid var(--rule); padding: 11px 18px;
-      font-size: 11px; font-weight: 500; letter-spacing: .11em;
-      text-transform: uppercase; color: var(--ink); text-decoration: none; transition: .15s;
-    }
-    .dl a:hover { border-color: var(--black); background: var(--bg-off); }
-    .dl a .arw { color: var(--dim); }
 
     /* ── document body ───────────────────────────────── */
-    .exam-head { padding-top: 56px; border-top: 1px solid var(--rule); margin-top: 64px; }
-    .nameline {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 6px 28px;
-      font-family: var(--mono); font-size: 11px; letter-spacing: .04em;
-      color: var(--dim); margin-bottom: 14px;
-    }
-    .nameline span { border-bottom: 1px solid var(--rule); padding-bottom: 5px; }
-    .rule-double { border: 0; border-top: 3px double var(--rule); margin: 0 0 24px; }
+    .exam-head { padding-top: 64px; }
     h1 {
       font-family: var(--serif); font-weight: 400;
       font-size: clamp(30px, 4.6vw, 42px); line-height: 1.1;
@@ -293,33 +247,25 @@
     .facil { margin-top: 72px; border-top: 2px solid var(--black); padding-top: 18px; }
     .facil h2 { font-family: var(--serif); font-size: 30px; font-weight: 400; color: var(--black); margin: 6px 0 0; }
     .facil h3 { font-family: var(--serif); font-weight: 400; color: var(--black); }
-    .plan { display: grid; grid-template-columns: auto 1fr; border: 1px solid var(--rule); margin: 22px 0; }
-    .plan dt {
-      font-family: var(--mono); font-size: 12px; padding: 12px 16px;
-      background: var(--bg-off); border-bottom: 1px solid var(--rule); white-space: nowrap; color: var(--black);
-    }
-    .plan dd { margin: 0; padding: 12px 16px; border-bottom: 1px solid var(--rule); font-size: 13.5px; }
-    .plan dt:last-of-type, .plan dd:last-of-type { border-bottom: 0; }
 
     footer {
       margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--rule);
       font-size: 12px; color: var(--faint); line-height: 1.8;
     }
     footer a { color: var(--mid); }
+    .byline { font-family: var(--serif); font-size: 16px; margin-bottom: 8px; }
+    .byline a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--rule); }
+    .byline a:hover { border-bottom-color: var(--black); }
 
     @media (max-width: 620px) {
       .wrap { padding: 0 20px 72px; }
       .bar-in { padding: 8px 20px; gap: 9px; }
       .bar-id { display: none; }
-      .nameline { grid-template-columns: 1fr; }
-      .plan { grid-template-columns: 1fr; }
-      .plan dt { border-bottom: 0; padding-bottom: 0; background: #fff; }
-      .facts div { border-right: 0; border-bottom: 1px solid var(--rule); }
     }
     @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
 
     @media print {
-      .bar, .noprint, .masthead .dl { display: none !important; }
+      .bar, .noprint { display: none !important; }
       body { font-size: 11pt; }
       .wrap { width: auto; padding: 0; }
       .part-head { break-before: page; break-after: avoid; }
@@ -346,40 +292,7 @@
 
 <div class="wrap">
 
-  <header class="masthead">
-    <p class="eyebrow">MA103 Data-Driven Modeling &middot; AY27-1 &middot; Course CIC</p>
-    <h1>MA103 Tutoring</h1>
-    <div class="hero-rule"></div>
-    <p class="lede">
-      As course CIC for MA103, I am responsible for making sure cadets are ready for graded events. Ahead of the first Written Partial Review I built this: a <strong>full-length, timed practice examination</strong> with a complete answer key and scoring rubrics, designed to be worked under exam conditions and then self-scored.
-    </p>
-    <p class="lede">
-      It is reverse-engineered from the course's own instruments &mdash; the published lesson objectives for Lessons 1&ndash;21, the Gate 1 rubric language, and the conventions of Homeworks 1 and 2. Per the course director's guidance, the emphasis is <strong>conceptual understanding and precise mathematical interpretation</strong>, not spreadsheet mechanics, so every computation is small enough to work by hand.
-    </p>
-
-    <dl class="facts">
-      <div><dt>Format</dt><dd>170 pts / 105 min</dd></div>
-      <div><dt>Questions</dt><dd>27</dd></div>
-      <div><dt>Coverage</dt><dd>Lessons 1&ndash;21</dd></div>
-      <div><dt>Built</dt><dd>Sept 2026</dd></div>
-    </dl>
-
-    <div class="dl">
-      <a href="ma103-practice-exam.pdf" target="_blank" rel="noopener">Practice Exam (PDF, 20 pp) <span class="arw">&#8595;</span></a>
-      <a href="ma103-answer-key.pdf" target="_blank" rel="noopener">Answer Key (PDF, 19 pp) <span class="arw">&#8595;</span></a>
-    </div>
-    <p style="font-size:13px;color:var(--dim);margin-top:14px">
-      Work it below in the browser &mdash; there is a timer in the bar above, and <b style="font-weight:500">Answer key</b> reveals the worked solution and rubric under every question. Or print either PDF and run it on paper.
-    </p>
-  </header>
-
   <header class="exam-head">
-    <div class="nameline">
-      <span>CADET:</span><span>SECTION:</span>
-      <span>INSTRUCTOR:</span><span>DATE:</span>
-    </div>
-    <hr class="rule-double">
-    <p class="eyebrow">Blocks 1 &amp; 2 &middot; Lessons 1&ndash;21 &middot; Aligned to HW1 &amp; HW2</p>
     <h1>WPR 1 Practice Examination</h1>
     <p class="sub">Descriptive and predictive modeling &mdash; the Company B ruck march problem</p>
 
@@ -1390,17 +1303,7 @@
     </div>
   </section>
   <section class="facil noprint">
-    <p class="eyebrow">For the CIC</p>
-    <h2>Running the session</h2>
-    <p style="color:var(--ink-soft);margin-top:6px">A three-and-a-half-hour block. The point of the timed run is not the score &mdash; it is to find out which of the seven failure modes below each cadet owns, while there is still a day to fix it.</p>
-
-    <dl class="plan">
-      <dt>0:00 &ndash; 0:10</dt><dd><b>Cold-start drill.</b> Five numbers on the whiteboard. Everyone computes mean, median, and <span class="var">s</span> by hand. Anyone who divides by <span class="var">n</span> instead of <span class="var">n</span> &minus; 1 gets caught here rather than on the WPR.</dd>
-      <dt>0:10 &ndash; 1:55</dt><dd><b>Timed run.</b> 105 minutes, calculators only, phones down. Use the timer in the bar above and call the part transitions out loud at 14, 46, 78, and 100 minutes so cadets learn the pacing.</dd>
-      <dt>1:55 &ndash; 2:15</dt><dd><b>Self-scoring.</b> Turn on the answer key and have cadets score their own paper against the rubrics. Self-scoring beats hearing you read answers &mdash; they have to argue with the rubric.</dd>
-      <dt>2:15 &ndash; 3:10</dt><dd><b>Board the four that break people:</b> Q7 (<span class="var">n</span> &minus; 1), Q18 (residual pattern against <em>fitted values</em>), Q20 (train versus test MAE), Q22&ndash;25 (standardize, distance, majority vote, sensitivity to k). Work each at the board with a cadet driving.</dd>
-      <dt>3:10 &ndash; 3:30</dt><dd><b>Round the room.</b> Every cadet names the one thing they will review tonight. Write the list down &mdash; it tells you what to push to the whole company.</dd>
-    </dl>
+    
 
     <h3 style="font-family:var(--serif);font-size:19px;margin:28px 0 10px">The seven things that actually cost points</h3>
     <div class="miss"><b>1 &mdash; Dividing by n</b>Sample standard deviation divides by <span class="var">n</span> &minus; 1. On Q7 that is 21.75 versus 20.34, and every z-score downstream is then wrong.</div>
@@ -1444,6 +1347,7 @@
   </section>
 
   <footer>
+    <p class="byline"><a href="index.html">Dennis Pezan</a></p>
     MA103 Data-Driven Modeling &middot; AY27-1 &middot; Unofficial practice material prepared for the WPR 1 study session. Coverage drawn from the published lesson objectives for Lessons 1&ndash;21 and the conventions of Homeworks 1 and 2. It is not the examination and does not reproduce any secured assessment.
   </footer>
 </div>
