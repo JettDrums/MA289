@@ -142,6 +142,11 @@
     .q-head { display: flex; gap: 12px; align-items: baseline; margin-bottom: 10px; }
     .q-num { font-family: var(--mono); font-size: 13px; font-weight: 500; color: var(--black); flex: none; min-width: 28px; }
     .q-body { flex: 1; min-width: 0; }
+    .flag {
+      font-size: 9.5px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--bg); background: var(--black); padding: 2px 8px; margin-left: 8px;
+      white-space: nowrap; vertical-align: 2px;
+    }
     .pts {
       font-size: 10px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase;
       color: var(--faint); white-space: nowrap; border: 1px solid var(--rule); padding: 2px 7px; flex: none; align-self: flex-start;
@@ -270,7 +275,7 @@
 <div class="bar noprint">
   <div class="bar-in">
     <a class="bar-home" href="index.html">&#8592; Dennis Pezan</a>
-    <div class="bar-id">MA103 &middot; WPR 1 Practice &middot; 170 pts</div>
+    <div class="bar-id">MA103 &middot; WPR 1 Practice &middot; 164 pts</div>
     <button class="switch" id="keytog" type="button" aria-pressed="false"><span class="dot"></span>Answer key</button>
     <button class="btn" id="pbtn" type="button">Print</button>
   </div>
@@ -288,8 +293,8 @@
     </div>
 
     <dl class="meta">
-      <div><dt>Time limit</dt><dd>105 minutes</dd></div>
-      <div><dt>Total points</dt><dd>170</dd></div>
+      <div><dt>Time limit</dt><dd>100 minutes</dd></div>
+      <div><dt>Total points</dt><dd>164</dd></div>
       <div><dt>Authorized</dt><dd>Calculator only</dd></div>
       <div><dt>Coverage</dt><dd>Lessons 1&ndash;21</dd></div>
     </dl>
@@ -299,38 +304,8 @@
       <li>Round statistics to <b>two decimal places</b> unless told otherwise, carrying unrounded values through intermediate steps.</li>
       <li>Every interpretation must be written <b>in context</b> &mdash; with the variable name and its units. An answer with no units is incomplete.</li>
       <li>Several questions ask you to carry a value forward from an earlier question. If you could not get the earlier value, state your assumption and continue; follow-on credit applies.</li>
-      <li>The WPR itself is 150 points in 95 minutes. This runs slightly long on purpose.</li>
+      <li><b>No formula sheet is provided on the WPR</b>, and none is provided here. There is very little computation on this material &mdash; but what there is, you are expected to know cold.</li>
     </ol>
-
-    <div class="sheet">
-      <h3>Formula sheet</h3>
-      <div class="sheet-grid">
-        <div class="sheet-item"><span class="cap">Sample mean</span>
-          <div class="formula"><span class="var">x&#772;</span> = <span class="frac"><span class="num">&Sigma;<span class="var">x</span><sub>i</sub></span><span class="den"><span class="var">n</span></span></span></div>
-        </div>
-        <div class="sheet-item"><span class="cap">Sample standard deviation</span>
-          <div class="formula"><span class="var">s</span> = <span class="radical"><span class="sign">&radic;</span><span class="rad-body"><span class="frac"><span class="num">&Sigma;(<span class="var">x</span><sub>i</sub> &minus; <span class="var">x&#772;</span>)<sup>2</sup></span><span class="den"><span class="var">n</span> &minus; 1</span></span></span></span></div>
-        </div>
-        <div class="sheet-item"><span class="cap">Interquartile range</span>
-          <div class="formula">IQR = <span class="var">Q</span><sub>3</sub> &minus; <span class="var">Q</span><sub>1</sub> &nbsp;&middot;&nbsp; Range = max &minus; min</div>
-        </div>
-        <div class="sheet-item"><span class="cap">z-score (standardizing)</span>
-          <div class="formula"><span class="var">z</span><sub>i</sub> = <span class="frac"><span class="num"><span class="var">x</span><sub>i</sub> &minus; <span class="var">x&#772;</span></span><span class="den"><span class="var">s</span></span></span></div>
-        </div>
-        <div class="sheet-item"><span class="cap">Regression line &amp; residual</span>
-          <div class="formula"><span class="var">y&#770;</span> = <span class="var">b</span><sub>0</sub> + <span class="var">b</span><sub>1</sub><span class="var">x</span> &nbsp;&nbsp; <span class="var">e</span><sub>i</sub> = <span class="var">y</span><sub>i</sub> &minus; <span class="var">y&#770;</span><sub>i</sub></div>
-        </div>
-        <div class="sheet-item"><span class="cap">Mean absolute error</span>
-          <div class="formula">MAE = <span class="frac"><span class="num">&Sigma;|<span class="var">y</span><sub>i</sub> &minus; <span class="var">y&#770;</span><sub>i</sub>|</span><span class="den"><span class="var">n</span></span></span></div>
-        </div>
-        <div class="sheet-item"><span class="cap">Distance in standardized space</span>
-          <div class="formula"><span class="var">d</span> = <span class="radical"><span class="sign">&radic;</span><span class="rad-body">(<span class="var">z</span><sub>1,i</sub>&minus;<span class="var">z</span><sub>1</sub><sup>*</sup>)<sup>2</sup> + (<span class="var">z</span><sub>2,i</sub>&minus;<span class="var">z</span><sub>2</sub><sup>*</sup>)<sup>2</sup></span></span></div>
-        </div>
-        <div class="sheet-item"><span class="cap">KNN starting value of k</span>
-          <div class="formula"><span class="var">k</span> &asymp; <span class="radical"><span class="sign">&radic;</span><span class="rad-body"><span class="var">n</span><sub>train</sub></span></span>, nearest <b>odd</b> integer</div>
-        </div>
-      </div>
-    </div>
 
     <div class="callout">
       <p><b>Situation.</b> You are the operations officer for Company B, 2nd Regiment. The company runs a 12-mile ruck march at the end of every term, and the commander wants to use last term's data to (1) describe how the company actually performed and (2) predict how individual cadets will do this term, so at-risk cadets can be put on a remedial training plan. All ruck times are in <b>minutes</b>; all cadets carried a 35-pound rucksack over the same route. The Army standard for the 12-mile foot march is <b>180 minutes</b> &mdash; finish at or under it and you earn a <b>GO</b>.</p>
@@ -339,7 +314,7 @@
 
   <section>
     <div class="part-head">
-      <div class="tags"><b>Part I</b> <span>&middot;</span> <span>24 points</span> <span>&middot;</span> <span>~14 minutes</span></div>
+      <div class="tags"><b>Part I</b> <span>&middot;</span> <span>20 points</span> <span>&middot;</span> <span>~12 minutes</span></div>
       <h2 class="part">Modeling Framework &amp; Data</h2>
       <p class="scope">Lessons 1&ndash;3, 8. Framing a question, population versus sample, classifying variables, partitioning data, and telling an unusual observation from a bad one.</p>
     </div>
@@ -411,27 +386,9 @@
       </div>
     </div>
 
-    <div class="q" id="q4">
-      <div class="q-head"><span class="q-num">4.</span><div class="q-body"><b>Unusual or erroneous?</b></div><span class="pts">4 pts</span></div>
-      <div class="q-body">
-        <p>Two records are flagged during cleaning. Classify each as an <b>unusual but legitimate</b> observation or a <b>data error</b>, and state what you would do with each. Use both statistical and contextual reasoning.</p>
-        <ul>
-          <li><b>Record 19:</b> ruck time = 236 minutes</li>
-          <li><b>Record 41:</b> ruck time = 34 minutes</li>
-        </ul>
-        <div class="write" style="--n:4"></div>
-        <div class="keybox" hidden>
-          <h4>Answer &amp; scoring</h4>
-          <p><b>Record 41 (34 min) is a data error.</b> 34 minutes for 12 miles is a 2:50 per mile pace under a 35-pound ruck &mdash; faster than the world record for an unloaded 12 miles. It is physically impossible. Action: return to the source record and correct it; if it cannot be corrected, exclude it and <em>document the exclusion</em>.</p>
-          <p><b>Record 19 (236 min) is unusual but legitimate.</b> 236 minutes is 3 hours 56 minutes &mdash; slow, but entirely possible. Action: <b>keep it.</b> That is exactly the cadet the remedial-training decision is about; deleting it would bias the company's picture of its own risk.</p>
-          <p>Note the through-line to Question 9: 236 does not even clear the |<span class="var">z</span>| &gt; 2.5 screen. Statistics flag values for <em>review</em>; context decides.</p>
-          <div class="rubric">2 pts per record (classification + action). Full credit requires a contextual argument, not just "the number is big."</div>
-        </div>
-      </div>
-    </div>
 
-    <div class="q" id="q5">
-      <div class="q-head"><span class="q-num">5.</span><div class="q-body"><b>The modeling framework.</b></div><span class="pts">4 pts</span></div>
+    <div class="q" id="q4">
+      <div class="q-head"><span class="q-num">4.</span><div class="q-body"><b>The modeling framework.</b></div><span class="pts">4 pts</span></div>
       <div class="q-body">
         <p>For the commander's remedial-training problem, state the <b>decision</b>, the <b>objective</b>, and <b>one assumption</b> the model requires.</p>
         <div class="write" style="--n:4"></div>
@@ -449,12 +406,12 @@
   </section>
   <section>
     <div class="part-head">
-      <div class="tags"><b>Part II</b> <span>&middot;</span> <span>56 points</span> <span>&middot;</span> <span>~32 minutes</span></div>
+      <div class="tags"><b>Part II</b> <span>&middot;</span> <span>54 points</span> <span>&middot;</span> <span>~34 minutes</span></div>
       <h2 class="part">Descriptive Modeling</h2>
       <p class="scope">Lessons 2&ndash;7. Center, spread, quartiles, standardizing, choosing the right summary, correlation, and captioning a figure.</p>
     </div>
 
-    <p>Questions 6&ndash;9 use the eight recorded 12-mile ruck times, in minutes, from <b>1st Platoon</b>, in ascending order:</p>
+    <p>Questions 5&ndash;9 use the eight recorded 12-mile ruck times, in minutes, from <b>1st Platoon</b>, in ascending order:</p>
     <div class="tw">
       <table class="data-mono">
         <caption>1st Platoon &mdash; 12-mile ruck times (minutes)</caption>
@@ -463,8 +420,8 @@
       </table>
     </div>
 
-    <div class="q" id="q6">
-      <div class="q-head"><span class="q-num">6.</span><div class="q-body"><b>Mean and median.</b></div><span class="pts">6 pts</span></div>
+    <div class="q" id="q5">
+      <div class="q-head"><span class="q-num">5.</span><div class="q-body"><b>Mean and median.</b></div><span class="pts">6 pts</span></div>
       <div class="q-body">
         <p>Calculate the mean and the median. Show your work.</p>
         <div class="write" style="--n:3"></div>
@@ -478,8 +435,8 @@
       </div>
     </div>
 
-    <div class="q" id="q7">
-      <div class="q-head"><span class="q-num">7.</span><div class="q-body"><b>Sample standard deviation.</b></div><span class="pts">8 pts</span></div>
+    <div class="q" id="q6">
+      <div class="q-head"><span class="q-num">6.</span><div class="q-body"><b>Sample standard deviation.</b></div><span class="pts">8 pts</span></div>
       <div class="q-body">
         <p>Calculate the sample standard deviation <span class="var">s</span>. Show the squared deviations.</p>
         <div class="formula"><span class="var">s</span> = <span class="radical"><span class="sign">&radic;</span><span class="rad-body"><span class="frac"><span class="num">&Sigma;(<span class="var">x</span><sub>i</sub> &minus; <span class="var">x&#772;</span>)<sup>2</sup></span><span class="den"><span class="var">n</span> &minus; 1</span></span></span></span></div>
@@ -495,38 +452,17 @@
             </tbody>
           </table></div>
           <p>&Sigma; = <b>3310</b> &rarr; <span class="var">s</span><sup>2</sup> = 3310 &divide; 7 = 472.86 &rarr; <span class="var">s</span> = <b class="ans">21.75 minutes</b></p>
-          <p>One observation contributes 2601 of 3310 &mdash; <b>79% of the total squared deviation from a single cadet</b>. That is why <span class="var">s</span> is not resistant, and it motivates Question 8.</p>
+          <p>One observation contributes 2601 of 3310 &mdash; <b>79% of the total squared deviation from a single cadet</b>. That is why <span class="var">s</span> is not resistant &mdash; and why the boxplot in Question 9, which is built from quartiles rather than from <span class="var">s</span>, tells a steadier story about this platoon.</p>
           <div class="rubric">2 pts squared deviations, 2 pts sum, 2 pts dividing by <span class="var">n</span>&minus;1, 2 pts root and units. Dividing by 8 gives 20.34 &mdash; the single most common error on this item.</div>
         </div>
       </div>
     </div>
 
-    <div class="q" id="q8">
-      <div class="q-head"><span class="q-num">8.</span><div class="q-body"><b>Quartiles, IQR, and range.</b></div><span class="pts">6 pts</span></div>
-      <div class="q-body">
-        <p>Using the <b>median-of-halves</b> method &mdash; split the ordered data at the median, then <span class="var">Q</span><sub>1</sub> is the median of the lower four values and <span class="var">Q</span><sub>3</sub> the median of the upper four &mdash; complete the table.</p>
-        <div class="tw">
-          <table class="data-mono"><thead><tr><th><span class="var">Q</span><sub>1</sub></th><th><span class="var">Q</span><sub>3</sub></th><th>IQR</th><th>Range</th></tr></thead>
-          <tbody><tr><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td></tr></tbody></table>
-        </div>
-        <p>Your range should be several times your IQR. Explain what that gap tells you about this platoon, and state which of the two you would report to the commander as the spread of a typical cadet.</p>
-        <div class="write" style="--n:3"></div>
-        <div class="keybox" hidden>
-          <h4>Answer &amp; scoring</h4>
-          <p>Lower half 168, 172, 175, 175 &rarr; <span class="var">Q</span><sub>1</sub> = (172+175)&divide;2 = <b class="ans">173.5</b></p>
-          <p>Upper half 180, 184, 190, 236 &rarr; <span class="var">Q</span><sub>3</sub> = (184+190)&divide;2 = <b class="ans">187</b></p>
-          <p>IQR = <b class="ans">13.5 min</b> &nbsp;&nbsp; Range = 236 &minus; 168 = <b class="ans">68 min</b></p>
-          <p><b>Interpretation:</b> the range is five times the IQR. The middle half of the platoon is packed into a 13.5-minute band, so the 68-minute range is driven almost entirely by one slow cadet. Report the <b>IQR</b> as the spread of a typical cadet &mdash; it is resistant, and the range is not.</p>
-          <p><b>Grading note:</b> Excel's <code>QUARTILE.INC</code> interpolates and returns <b>174.25</b> and <b>185.5</b> (IQR 11.25). Accept either set if the method is named.</p>
-          <div class="rubric">1 pt each for Q1, Q3, IQR, range; 2 pts interpretation, which must contrast resistance rather than just say "IQR is smaller."</div>
-        </div>
-      </div>
-    </div>
 
-    <div class="q" id="q9">
-      <div class="q-head"><span class="q-num">9.</span><div class="q-body"><b>z-scores and the outlier screen.</b></div><span class="pts">8 pts</span></div>
+    <div class="q" id="q7">
+      <div class="q-head"><span class="q-num">7.</span><div class="q-body"><b>z-scores and the outlier screen.</b></div><span class="pts">8 pts</span></div>
       <div class="q-body">
-        <p>Use <b>your own</b> <span class="var">x&#772;</span> from Question 6 and <span class="var">s</span> from Question 7. Follow-on credit applies, so carry your values forward and continue.</p>
+        <p>Use <b>your own</b> <span class="var">x&#772;</span> from Question 5 and <span class="var">s</span> from Question 6. Follow-on credit applies, so carry your values forward and continue.</p>
         <ol class="sub" type="a">
           <li>Calculate the z-score of <span class="var">x</span><sub>8</sub> = 236 and of <span class="var">x</span><sub>1</sub> = 168. Show your work.<div class="write" style="--n:3"></div></li>
           <li>Apply the course's <b>|<span class="var">z</span>| &gt; 2.5</b> screening rule. Which of these two, if either, is flagged as a potential outlier? Then explain what the flag does and does not establish.<div class="write" style="--n:4"></div></li>
@@ -535,15 +471,15 @@
           <h4>Answer &amp; scoring</h4>
           <p>(a) <span class="var">z</span><sub>8</sub> = (236 &minus; 185) &divide; 21.75 = <b class="ans">2.34</b> &nbsp;&nbsp; <span class="var">z</span><sub>1</sub> = (168 &minus; 185) &divide; 21.75 = <b class="ans">&minus;0.78</b></p>
           <p>(b) <b class="ans">Neither observation is flagged.</b> The screen is |<span class="var">z</span>| &gt; 2.5; the slowest cadet reaches only 2.34, and the fastest is well inside at 0.78.</p>
-          <p>What the screen does and does not establish: it is a <b>rule of thumb for selecting values to review</b>, not a test of validity. Clearing it does not certify a value as correct, and exceeding it does not prove a value is wrong &mdash; Record 41 in Question 4 was an error any screen would catch, while a plausible-looking mistyped 185 would pass every screen there is. Context, not the threshold, decides.</p>
+          <p>What the screen does and does not establish: it is a <b>rule of thumb for selecting values to review</b>, not a test of validity. Clearing it does not certify a value as correct, and exceeding it does not prove a value is wrong &mdash; a 34-minute ruck time would be caught by any screen, while a plausible-looking mistyped 185 would pass every screen there is. Context, not the threshold, decides.</p>
           <p>Direction matters too: a <b>positive</b> z on ruck time means <b>slower</b>, not better.</p>
-          <div class="rubric">4 pts (a), 2 per z-score with correct sign. 4 pts (b): 2 for concluding neither is flagged, 2 for the explanation. <b>Follow-on:</b> a cadet who divided by <span class="var">n</span> in Q7 gets <span class="var">s</span> = 20.34 and <span class="var">z</span><sub>8</sub> = 2.51, which <em>does</em> clear the screen &mdash; grade part (b) against their own <span class="var">s</span>.</div>
+          <div class="rubric">4 pts (a), 2 per z-score with correct sign. 4 pts (b): 2 for concluding neither is flagged, 2 for the explanation. <b>Follow-on:</b> a cadet who divided by <span class="var">n</span> in Q6 gets <span class="var">s</span> = 20.34 and <span class="var">z</span><sub>8</sub> = 2.51, which <em>does</em> clear the screen &mdash; grade part (b) against their own <span class="var">s</span>.</div>
         </div>
       </div>
     </div>
 
-    <div class="q" id="q10">
-      <div class="q-head"><span class="q-num">10.</span><div class="q-body"><b>Choosing a measure of center.</b></div><span class="pts">6 pts</span></div>
+    <div class="q" id="q8">
+      <div class="q-head"><span class="q-num">8.</span><div class="q-body"><b>Choosing a measure of center.</b></div><span class="pts">6 pts</span></div>
       <div class="q-body">
         <p>The histogram shows all 64 recorded ruck times in Company B.</p>
         <figure>
@@ -603,10 +539,10 @@
       </div>
     </div>
 
-    <div class="q" id="q11">
-      <div class="q-head"><span class="q-num">11.</span><div class="q-body"><b>Boxplot versus histogram.</b></div><span class="pts">4 pts</span></div>
+    <div class="q" id="q9">
+      <div class="q-head"><span class="q-num">9.</span><div class="q-body"><b>Boxplot versus histogram.</b></div><span class="pts">4 pts</span></div>
       <div class="q-body">
-        <p>Below is a boxplot of the eight 1st Platoon ruck times from Questions 6&ndash;9.</p>
+        <p>Below is a boxplot of the eight 1st Platoon ruck times from Questions 5&ndash;9.</p>
         <figure>
           <svg viewBox="0 0 620 165" role="img" aria-label="Boxplot of eight platoon ruck times with one flagged point far to the right">
             <g class="grid">
@@ -644,22 +580,22 @@
           </svg>
           <figcaption>Figure 2 &mdash; 1st Platoon, n = 8. The point beyond the right whisker is flagged by the 1.5 &times; IQR fence.</figcaption>
         </figure>
-        <p>(a) The box edges should match two values you computed in Question 8. Which two, and do they agree with the figure?</p>
+        <p>(a) Read the five-number summary off the figure: the box edges, the line inside the box, and the whisker ends. State the IQR.</p>
         <div class="write" style="--n:2"></div>
         <p>(b) What does the boxplot show that the histogram does not, and what does the histogram show that the boxplot does not?</p>
         <div class="write" style="--n:4"></div>
         <div class="keybox" hidden>
           <h4>Answer &amp; scoring</h4>
-          <p>(a) The box edges are <b><span class="var">Q</span><sub>1</sub> = 173.5</b> and <b><span class="var">Q</span><sub>3</sub> = 187</b>, and the line inside the box is the median, 177.5. They agree with the figure. The box width <em>is</em> the IQR, 13.5 minutes.</p>
+          <p>(a) <b class="ans">Q<sub>1</sub> &asymp; 173.5</b>, median <b class="ans">177.5</b>, <b class="ans">Q<sub>3</sub> &asymp; 187</b>; whiskers at 168 and 190, with the 236-minute cadet plotted separately past the fence. The box width <em>is</em> the IQR, <b class="ans">&asymp; 13.5 minutes</b> &mdash; read it straight off the axis.</p>
           <p>(b) The <b>boxplot</b> gives the five-number summary and applies the 1.5 &times; IQR fence, so it identifies the 236-minute cadet as a flagged point explicitly and makes the quartiles readable at a glance. The <b>histogram</b> shows the <em>shape</em> &mdash; modality, where the bulk sits, how the tail decays &mdash; which the boxplot hides entirely. A boxplot cannot reveal a bimodal distribution; a histogram cannot give you exact quartiles.</p>
           <p>The right answer to "which is better" is that they answer different questions. For the commander's read-ahead the histogram tells the story; for flagging individual cadets the boxplot does.</p>
-          <div class="rubric">2 pts (a) &mdash; must name Q1 and Q3 specifically. 2 pts (b) &mdash; needs one genuine strength of each, not a restatement of what a boxplot is.</div>
+          <div class="rubric">2 pts (a) &mdash; must name the quartiles and the IQR, read to within a minute or two. 2 pts (b) &mdash; needs one genuine strength of each, not a restatement of what a boxplot is.</div>
         </div>
       </div>
     </div>
 
-    <div class="q" id="q12">
-      <div class="q-head"><span class="q-num">12.</span><div class="q-body"><b>Reading a correlation table.</b></div><span class="pts">8 pts</span></div>
+    <div class="q" id="q10">
+      <div class="q-head"><span class="q-num">10.</span><div class="q-body"><b>Reading a correlation table.</b></div><span class="pts">8 pts</span></div>
       <div class="q-body">
         <p>Excel returns the correlations below, computed on all 64 records. Every cadet carried a 35-pound ruck; the load column varies only because of small differences in how canteens were filled.</p>
         <div class="tw">
@@ -692,8 +628,8 @@
       </div>
     </div>
 
-    <div class="q" id="q13">
-      <div class="q-head"><span class="q-num">13.</span><div class="q-body"><b>Write a caption.</b></div><span class="pts">10 pts</span></div>
+    <div class="q" id="q11">
+      <div class="q-head"><span class="q-num">11.</span><div class="q-body"><b>Write a caption.</b> <span class="flag">Most-missed on Gate 2</span></div><span class="pts">10 pts</span></div>
       <div class="q-body">
         <p>You are preparing a one-page read-ahead for the battalion commander, who has no statistics background and must decide whether to fund a remedial ruck program. Write a caption for <b>Figure 1</b>. A caption has a title and then, in three to five sentences, (1) describes the figure and (2) explains what the reader should take away and why it matters for the decision.</p>
         <div class="write" style="--n:8"></div>
@@ -706,6 +642,7 @@
             <b>6 &mdash; Marginal.</b> Significant omissions or mathematical inaccuracies; takeaway does not answer the commander's question.<br>
             <b>4 &mdash; Marginal.</b> Clear misunderstanding of the figure's elements. &nbsp; <b>0.</b> Blank. &nbsp;(&minus;1 minor error.)
           </div>
+          <p style="margin-top:10px"><b>On Gate 2 the caption was worth 10 of 25 points</b> and was one of the two most-missed items. The grader's note on a 9/10 answer was that the cadet described the model as only over-predicting in a range where the residuals actually fan both ways &mdash; if you write about a residual plot, name the <b>equal-variance</b> problem precisely rather than describing one direction of error.</p>
           <p style="margin-top:10px"><b>Where cadets lose points:</b> no title; describing the axes but never stating a takeaway; writing for a statistician instead of for the commander who has to decide something.</p>
         </div>
       </div>
@@ -787,8 +724,8 @@
       <figcaption>Figure 3 &mdash; Training set with least-squares trendline. Minor gridlines are 2 minutes.</figcaption>
     </figure>
 
-    <div class="q" id="q14">
-      <div class="q-head"><span class="q-num">14.</span><div class="q-body"><b>Read the line of best fit off the graph.</b></div><span class="pts">6 pts</span></div>
+    <div class="q" id="q12">
+      <div class="q-head"><span class="q-num">12.</span><div class="q-body"><b>Read the line of best fit off the graph.</b></div><span class="pts">6 pts</span></div>
       <div class="q-body">
         <p>Do not use the data table &mdash; read Figure 3.</p>
         <ol class="sub" type="a">
@@ -810,24 +747,49 @@
 
     <p>Excel reports the trendline as <b><span class="var">y&#770;</span> = 210 &minus; 1.2<span class="var">x</span></b> with <b>R<sup>2</sup> = 0.854</b>. Use these for the rest of Part III.</p>
 
-    <div class="q" id="q15">
-      <div class="q-head"><span class="q-num">15.</span><div class="q-body"><b>Interpretation.</b></div><span class="pts">8 pts</span></div>
+    <div class="q" id="q13">
+      <div class="q-head"><span class="q-num">13.</span><div class="q-body"><b>Interpretation.</b></div><span class="pts">6 pts</span></div>
       <div class="q-body">
         <ol class="sub" type="a">
           <li>Interpret the <b>slope</b> in context, with units.<div class="write" style="--n:3"></div></li>
-          <li>Interpret the <b>intercept</b> in context, and state whether it is meaningful here.<div class="write" style="--n:3"></div></li>
+          <li>Interpret the <b>intercept</b> in context.<div class="write" style="--n:3"></div></li>
         </ol>
         <div class="keybox" hidden>
           <h4>Answer &amp; scoring</h4>
           <p>(a) Each <b>additional mile per week</b> of training is associated with a <b>1.2-minute decrease</b> in predicted 12-mile ruck time. Say <em>associated with</em>, not <em>causes</em> &mdash; observational data.</p>
-          <p>(b) The intercept says a cadet who trains <b>0 miles per week</b> is predicted to ruck 12 miles in <b>210 minutes</b>. It is <b>not meaningful here</b>: the training data covers only 5 to 30 mi/wk, so <span class="var">x</span> = 0 is <b>extrapolation outside the range of the data</b>.</p>
-          <div class="rubric">4 pts (a): number, both units, direction, association language. "The slope is &minus;1.2" alone earns 1. 4 pts (b): 2 literal reading, 2 extrapolation.</div>
+          <p>(b) The intercept says a cadet who trains <b>0 miles per week</b> is predicted to ruck 12 miles in <b>210 minutes</b>. Note that <span class="var">x</span> = 0 sits outside the training range of 5&ndash;30 mi/wk, so the intercept is an anchor for the line rather than a claim about a real cadet &mdash; Question 14 develops that point.</p>
+          <div class="rubric">4 pts (a): number, both units, direction, association language. "The slope is &minus;1.2" alone earns 1. 2 pts (b) for the literal reading in context.</div>
         </div>
       </div>
     </div>
 
-    <div class="q" id="q16">
-      <div class="q-head"><span class="q-num">16.</span><div class="q-body"><b>R<sup>2</sup>.</b></div><span class="pts">4 pts</span></div>
+    <div class="q" id="q14">
+      <div class="q-head"><span class="q-num">14.</span><div class="q-body"><b>Extrapolation.</b> <span class="flag">Most-missed on Gate 2</span></div><span class="pts">6 pts</span></div>
+      <div class="q-body">
+        <p>The battalion S3 likes your model and proposes using it to identify cadets for a high-mileage training pilot. He asks what ruck time the model predicts for a cadet who trains <b>60 miles per week</b>.</p>
+        <ol class="sub" type="a">
+          <li>Compute the model's prediction at <span class="var">x</span> = 60. Show your work.<div class="write" style="--n:2"></div>
+          <span class="var">y&#770;</span> = <span class="blank"></span> minutes</li>
+          <li>Is this an appropriate use of the model? Justify your answer.<div class="write" style="--n:5"></div></li>
+        </ol>
+        <div class="keybox" hidden>
+          <h4>Answer &amp; scoring</h4>
+          <p>(a) <span class="var">y&#770;</span> = 210 &minus; 1.2(60) = 210 &minus; 72 = <b class="ans">138 minutes</b></p>
+          <p>(b) <b class="ans">No &mdash; this is extrapolation and the prediction is not trustworthy.</b> Three things to say, any two of which earn full credit:</p>
+          <ul>
+            <li><b>Far outside the training range.</b> The model was fit on cadets training 5 to 30 mi/wk. 60 mi/wk is <b>double the largest value the model has ever seen</b>. The straight line was only ever estimated inside that range, and nothing in the data speaks to what happens beyond it.</li>
+            <li><b>The answer is not physically credible.</b> 138 minutes is an 11:30 per mile pace for 12 miles under a 35-pound ruck. Push the line further and it predicts a <b>zero-minute</b> ruck at 175 mi/wk and negative times after that. Returns to training must flatten; a straight line cannot.</li>
+            <li><b>The shape is already wrong inside the range.</b> The residual plot (Question 16) is U-shaped, so the linear model misfits even where there is data. Trusting it outside that range compounds a known error.</li>
+          </ul>
+          <p>What to do instead: collect data on cadets who actually train at that volume, or restrict the model's use to the 5&ndash;30 mi/wk range and say so explicitly when reporting it.</p>
+          <div class="rubric">2 pts (a) for 138 with work. 4 pts (b): full credit states the use is <b>inappropriate</b> with clear justification &mdash; extrapolation far outside the training range, with no evidence the relationship holds there, making the prediction unreliable. 2 of 4 if the answer is "inappropriate" but the justification is vague. <b>0 if the cadet says the use is appropriate</b>, regardless of the arithmetic.</div>
+          <div class="miss"><b>Why this one matters</b>Extrapolation was one of the two most-missed items on Gate 2. Cadets compute the number correctly and then defend using it. The number being computable is not the same as the number being meaningful.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="q" id="q15">
+      <div class="q-head"><span class="q-num">15.</span><div class="q-body"><b>R<sup>2</sup>.</b></div><span class="pts">4 pts</span></div>
       <div class="q-body">
         <p>Complete the sentence, then state one thing R<sup>2</sup> does <b>not</b> tell you.</p>
         <p>Approximately <span class="blank" style="min-width:60px"></span>% of the variation in <span class="blank" style="min-width:170px"></span> is explained by its linear relationship with <span class="blank" style="min-width:170px"></span>.</p>
@@ -836,14 +798,14 @@
         <div class="keybox" hidden>
           <h4>Answer &amp; scoring</h4>
           <p>Approximately <b>85.4%</b> of the variation in <b>12-mile ruck time</b> is explained by its linear relationship with <b>weekly training mileage</b>. Describe it as <b>strong</b>.</p>
-          <p>What it does not tell you: that the linear model is the <em>right shape</em> (Q18 shows it is not), that the model predicts well <b>out of sample</b> (Q20 shows it degrades), or that mileage causes the difference. R<sup>2</sup> is computed on the <b>training data only</b>.</p>
+          <p>What it does not tell you: that the linear model is the <em>right shape</em> (Q17 shows it is not), that the model predicts well <b>out of sample</b> (Q19 shows it degrades), or that mileage causes the difference. R<sup>2</sup> is computed on the <b>training data only</b>.</p>
           <div class="rubric">2 pts completed sentence &mdash; "the model is 85% accurate" is wrong and earns 0. 1 pt strong. 1 pt for a correct limitation.</div>
         </div>
       </div>
     </div>
 
-    <div class="q" id="q17">
-      <div class="q-head"><span class="q-num">17.</span><div class="q-body"><b>Residuals and training error.</b></div><span class="pts">8 pts</span></div>
+    <div class="q" id="q16">
+      <div class="q-head"><span class="q-num">16.</span><div class="q-body"><b>Residuals and training error.</b></div><span class="pts">8 pts</span></div>
       <div class="q-body">
         <p>(a) Complete the four empty rows using <span class="var">y&#770;</span> = 210 &minus; 1.2<span class="var">x</span>.</p>
         <div class="tw">
@@ -874,10 +836,10 @@
       </div>
     </div>
 
-    <div class="q" id="q18">
-      <div class="q-head"><span class="q-num">18.</span><div class="q-body"><b>Residual plot and the regression assumptions.</b></div><span class="pts">10 pts</span></div>
+    <div class="q" id="q17">
+      <div class="q-head"><span class="q-num">17.</span><div class="q-body"><b>Residual plot and the regression assumptions.</b></div><span class="pts">10 pts</span></div>
       <div class="q-body">
-        <p>(a) Plot the six residuals from Question 17 against the <b>fitted values</b> <span class="var">y&#770;</span>.</p>
+        <p>(a) Plot the six residuals from Question 16 against the <b>fitted values</b> <span class="var">y&#770;</span>.</p>
         <figure>
           <svg viewBox="0 0 620 330" role="img" aria-label="Blank axes for plotting residuals against fitted values, with a zero reference line">
             <g class="grid">
@@ -954,7 +916,7 @@
             </svg>
             <figcaption>Figure 4 (key) &mdash; points at <span class="var">y&#770;</span> = 174, 180, 186, 192, 198, 204 with residuals +6, &minus;3, &minus;3, &minus;3, &minus;3, +6</figcaption>
           </figure>
-          <p><b>Plotting note:</b> because the slope is negative, the largest fitted value (204) belongs to the <em>smallest</em> x (5 mi/wk). Cadets who carry their Q17 table over in x-order will place the points left-to-right backwards.</p>
+          <p><b>Plotting note:</b> because the slope is negative, the largest fitted value (204) belongs to the <em>smallest</em> x (5 mi/wk). Cadets who carry their Q16 table over in x-order will place the points left-to-right backwards.</p>
           <p><b>Linearity &mdash; violated.</b> The residuals form a clear <b>U-shape</b>: positive at both ends, negative through the middle, not randomly scattered about <span class="var">e</span> = 0. The line systematically over-predicts in the middle and under-predicts at both ends; a predictable error is a modeling failure, not noise. <b>Next:</b> fit a nonlinear trendline &mdash; a quadratic for a single bend &mdash; and compare on the <b>test set</b>, not on R<sup>2</sup>.</p>
           <p><b>Constant variance &mdash; no evidence of a violation.</b> Residual magnitudes are 6, 3, 3, 3, 3, 6; the vertical spread neither fans out nor compresses systematically as <span class="var">y&#770;</span> increases. With six points this is a weak read, and cadets should say so.</p>
           <p><b>Outliers &mdash; none.</b> No residual sits far outside the range of the others; the two +6 values are the extremes but are equal in size and part of the pattern, not isolated from it.</p>
@@ -963,8 +925,8 @@
       </div>
     </div>
 
-    <div class="q" id="q19">
-      <div class="q-head"><span class="q-num">19.</span><div class="q-body"><b>Distribution of residuals.</b></div><span class="pts">4 pts</span></div>
+    <div class="q" id="q18">
+      <div class="q-head"><span class="q-num">18.</span><div class="q-body"><b>Distribution of residuals.</b></div><span class="pts">4 pts</span></div>
       <div class="q-body">
         <p>Compute the mean, standard deviation, minimum, and maximum of the six training residuals.</p>
         <div class="write" style="--n:3"></div>
@@ -980,8 +942,8 @@
       </div>
     </div>
 
-    <div class="q" id="q20">
-      <div class="q-head"><span class="q-num">20.</span><div class="q-body"><b>Test error versus training error.</b></div><span class="pts">10 pts</span></div>
+    <div class="q" id="q19">
+      <div class="q-head"><span class="q-num">19.</span><div class="q-body"><b>Test error versus training error.</b></div><span class="pts">10 pts</span></div>
       <div class="q-body">
         <p>Three cadets were held out of the fit entirely. Complete the table using <span class="var">y&#770;</span> = 210 &minus; 1.2<span class="var">x</span>.</p>
         <div class="tw">
@@ -996,7 +958,7 @@
             <tfoot><tr><td colspan="3">Test MAE</td><td class="fill"></td></tr></tfoot>
           </table>
         </div>
-        <p>In two to three sentences, compare your test MAE against the <b>training MAE you computed in Question 17(b)</b> and state what the two numbers mean for using this model on this term's cadets.</p>
+        <p>In two to three sentences, compare your test MAE against the <b>training MAE you computed in Question 16(b)</b> and state what the two numbers mean for using this model on this term's cadets.</p>
         <div class="write" style="--n:5"></div>
         <div class="keybox" hidden>
           <h4>Answer &amp; scoring</h4>
@@ -1041,8 +1003,8 @@
     </div>
     <p><b>Cadet Q</b>, whose class is unknown, trains <b>30 mi/wk</b> and runs 2 miles in <b>12.0 minutes</b>.</p>
 
-    <div class="q" id="q21">
-      <div class="q-head"><span class="q-num">21.</span><div class="q-body"><b>Set up the model.</b></div><span class="pts">6 pts</span></div>
+    <div class="q" id="q20">
+      <div class="q-head"><span class="q-num">20.</span><div class="q-body"><b>Set up the model.</b></div><span class="pts">6 pts</span></div>
       <div class="q-body">
         <ol class="sub" type="a">
           <li>State the threshold used to create the class label, and why 180 minutes is a defensible choice here rather than, say, the median ruck time.<div class="write" style="--n:3"></div></li>
@@ -1057,8 +1019,8 @@
       </div>
     </div>
 
-    <div class="q" id="q22">
-      <div class="q-head"><span class="q-num">22.</span><div class="q-body"><b>Standardize.</b></div><span class="pts">8 pts</span></div>
+    <div class="q" id="q21">
+      <div class="q-head"><span class="q-num">21.</span><div class="q-body"><b>Standardize.</b></div><span class="pts">8 pts</span></div>
       <div class="q-body">
         <ol class="sub" type="a">
           <li>Compute the mean and sample standard deviation of <b>weekly mileage</b> across the six training cadets.<div class="write" style="--n:4"></div>
@@ -1077,8 +1039,8 @@
       </div>
     </div>
 
-    <div class="q" id="q23">
-      <div class="q-head"><span class="q-num">23.</span><div class="q-body"><b>Standardized distances.</b></div><span class="pts">8 pts</span></div>
+    <div class="q" id="q22">
+      <div class="q-head"><span class="q-num">22.</span><div class="q-body"><b>Standardized distances.</b></div><span class="pts">8 pts</span></div>
       <div class="q-body">
         <p>Complete the table, then show one full distance calculation.</p>
         <div class="tw">
@@ -1157,14 +1119,14 @@
             </svg>
             <figcaption>Figure 5 (key) &mdash; standardized space; the dashed ring is the k = 3 neighborhood of Q</figcaption>
           </figure>
-          <div class="rubric">3 pts standardized columns, 4 pts distances, 1 pt ranking. Follow-on credit: a wrong <span class="var">s</span> from Q22 carried correctly through still earns the distance points.</div>
+          <div class="rubric">3 pts standardized columns, 4 pts distances, 1 pt ranking. Follow-on credit: a wrong <span class="var">s</span> from Q21 carried correctly through still earns the distance points.</div>
           <div class="miss"><b>Watch for</b>Forgetting to square the difference, or subtracting distances instead of coordinates. Also &minus;1.50 &minus; (&minus;1.00) = &minus;0.50, not &minus;2.50.</div>
         </div>
       </div>
     </div>
 
-    <div class="q" id="q24">
-      <div class="q-head"><span class="q-num">24.</span><div class="q-body"><b>Choose k and classify.</b></div><span class="pts">6 pts</span></div>
+    <div class="q" id="q23">
+      <div class="q-head"><span class="q-num">23.</span><div class="q-body"><b>Choose k and classify.</b></div><span class="pts">6 pts</span></div>
       <div class="q-body">
         <p>(a) Apply the rule of thumb <span class="var">k</span> &asymp; &radic;<span class="var">n</span><sub>train</sub>, rounded to the nearest <b>odd</b> integer.</p>
         <p><span class="var">n</span><sub>train</sub> = <span class="blank" style="min-width:60px"></span> &nbsp; &radic;<span class="var">n</span><sub>train</sub> &asymp; <span class="blank" style="min-width:60px"></span> &nbsp; initial <span class="var">k</span> = <span class="blank" style="min-width:60px"></span></p>
@@ -1193,21 +1155,21 @@
               <tr><td>5</td><td>E, F, D, B, C</td><td>2 GO &ndash; 3 NO-GO</td><td><b>NO-GO</b></td></tr>
             </tbody>
           </table></div>
-          <p>The prediction <b>flips</b> between k = 3 and k = 5. That instability is itself a finding and sets up Question 25.</p>
+          <p>The prediction <b>flips</b> between k = 3 and k = 5. That instability is itself a finding and sets up Question 24.</p>
           <div class="rubric">3 pts (a) &mdash; 1 for k = 3, 2 for the tiebreak explanation. 3 pts (b), 1 per row; the vote count must be shown, not just the class.</div>
         </div>
       </div>
     </div>
 
-    <div class="q" id="q25">
-      <div class="q-head"><span class="q-num">25.</span><div class="q-body"><b>Sensitivity to k.</b></div><span class="pts">4 pts</span></div>
+    <div class="q" id="q24">
+      <div class="q-head"><span class="q-num">24.</span><div class="q-body"><b>Sensitivity to k.</b></div><span class="pts">4 pts</span></div>
       <div class="q-body">
-        <p>Four held-out cadets were classified at each k. Carry your three predictions for cadet Q down from Question 24, mark them correct or incorrect, then fill in the three accuracies.</p>
+        <p>Four held-out cadets were classified at each k. Carry your three predictions for cadet Q down from Question 23, mark them correct or incorrect, then fill in the three accuracies.</p>
         <div class="tw">
           <table class="data-mono">
             <thead><tr><th>Test cadet</th><th>mi/wk</th><th>2-mi run</th><th>True class</th><th><span class="var">k</span>=1</th><th><span class="var">k</span>=3</th><th><span class="var">k</span>=5</th></tr></thead>
             <tbody>
-              <tr><td>Q</td><td>30</td><td>12.0</td><td>GO</td><td class="fill"><em>Q24</em></td><td class="fill"><em>Q24</em></td><td class="fill"><em>Q24</em></td></tr>
+              <tr><td>Q</td><td>30</td><td>12.0</td><td>GO</td><td class="fill"><em>Q23</em></td><td class="fill"><em>Q23</em></td><td class="fill"><em>Q23</em></td></tr>
               <tr><td>T2</td><td>12</td><td>17.0</td><td>NO-GO</td><td>NO-GO &#10003;</td><td>NO-GO &#10003;</td><td>NO-GO &#10003;</td></tr>
               <tr><td>T3</td><td>28</td><td>13.0</td><td>GO</td><td>GO &#10003;</td><td>GO &#10003;</td><td>NO-GO &#10007;</td></tr>
               <tr><td>T4</td><td>32</td><td>16.0</td><td>NO-GO</td><td>GO &#10007;</td><td>NO-GO &#10003;</td><td>NO-GO &#10003;</td></tr>
@@ -1223,7 +1185,7 @@
           <p><b class="ans">Use k = 3.</b> It has the highest test accuracy, and it is also what the &radic;<span class="var">n</span><sub>train</sub> rule produced independently &mdash; the rule and the evidence agree.</p>
           <p><b>What goes wrong at k = 1:</b> the prediction rests entirely on one neighbor, so a single atypical training record decides the answer. Cadet T4 is the demonstration &mdash; its nearest neighbor is F, a GO, so k = 1 calls it GO, but T4 is really a NO-GO. This is <b>overfitting</b>: k = 1 reproduces the training data perfectly (each point is its own nearest neighbor, so training error is always 0) while generalizing worse.</p>
           <p><b>What goes wrong at k = 5:</b> the neighborhood grows so large it stops being local &mdash; it reaches across the whole feature space and washes out the structure near the target. Worse, the training set holds only <b>2 GO cadets out of 6</b>, so at k = 5 a GO majority is <b>arithmetically impossible</b>: at most 2 of any 5 neighbors can be GO. The model can no longer predict the minority class at all, which is why it misses both true GO cadets.</p>
-          <p>Extending that: at <b>k = 6 = n</b> every cadet gets the same answer &mdash; NO-GO, the majority class &mdash; regardless of their features. That is the classification analogue of the mean-baseline model in Question 26.</p>
+          <p>Extending that: at <b>k = 6 = n</b> every cadet gets the same answer &mdash; NO-GO, the majority class &mdash; regardless of their features. That is the classification analogue of the mean-baseline model in Question 25.</p>
           <div class="rubric">2 pts accuracies (all three). 2 pts explanation, 1 for k = 1 overfitting and 1 for k = 5 over-smoothing. A cadet who notes the minority-class impossibility at k = 5 has earned the point outright.</div>
         </div>
       </div>
@@ -1237,8 +1199,8 @@
       <p class="scope">Lessons 8, 16, 19&ndash;21. Comparing models on the right metric and knowing what each family actually assumes.</p>
     </div>
 
-    <div class="q" id="q26">
-      <div class="q-head"><span class="q-num">26.</span><div class="q-body"><b>Compare all models.</b></div><span class="pts">5 pts</span></div>
+    <div class="q" id="q25">
+      <div class="q-head"><span class="q-num">25.</span><div class="q-body"><b>Compare all models.</b></div><span class="pts">5 pts</span></div>
       <div class="q-body">
         <p>Complete the summary table. Write <b>N/A</b> where a metric does not apply, and be prepared to say why.</p>
         <div class="tw">
@@ -1246,9 +1208,9 @@
             <thead><tr><th>Model</th><th>R<sup>2</sup></th><th>Train MAE</th><th>Test MAE</th><th>Test accuracy</th></tr></thead>
             <tbody>
               <tr><td>Baseline &mdash; predict the training mean (189 min)</td><td>N/A</td><td>9.00</td><td>9.67</td><td class="fill"></td></tr>
-              <tr><td>Linear regression, <span class="var">y&#770;</span> = 210 &minus; 1.2<span class="var">x</span></td><td>0.854</td><td class="fill"><em>Q17</em></td><td class="fill"><em>Q20</em></td><td class="fill"></td></tr>
+              <tr><td>Linear regression, <span class="var">y&#770;</span> = 210 &minus; 1.2<span class="var">x</span></td><td>0.854</td><td class="fill"><em>Q16</em></td><td class="fill"><em>Q19</em></td><td class="fill"></td></tr>
               <tr><td>Degree-5 polynomial through all six training points</td><td>1.000</td><td>0.00</td><td>14.50</td><td class="fill"></td></tr>
-              <tr><td>KNN classification at your chosen k</td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"><em>Q25</em></td></tr>
+              <tr><td>KNN classification at your chosen k</td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"><em>Q24</em></td></tr>
             </tbody>
           </table>
         </div>
@@ -1273,8 +1235,8 @@
       </div>
     </div>
 
-    <div class="q" id="q27">
-      <div class="q-head"><span class="q-num">27.</span><div class="q-body"><b>Contrast the two model families.</b></div><span class="pts">3 pts</span></div>
+    <div class="q" id="q26">
+      <div class="q-head"><span class="q-num">26.</span><div class="q-body"><b>Contrast the two model families.</b></div><span class="pts">3 pts</span></div>
       <div class="q-body">
         <p>In two to three sentences, describe one fundamental difference between the way <b>linear regression</b> makes a prediction and the way <b>KNN</b> makes a prediction. What does each assume, or not assume, about the relationship between the inputs and the output?</p>
         <div class="write" style="--n:5"></div>
@@ -1291,24 +1253,27 @@
   <section class="facil noprint">
     
 
-    <h3 style="font-family:var(--serif);font-size:19px;margin:28px 0 10px">The seven things that actually cost points</h3>
-    <div class="miss"><b>1 &mdash; Dividing by n</b>Sample standard deviation divides by <span class="var">n</span> &minus; 1. On Q7 that is 21.75 versus 20.34, and every z-score downstream is then wrong.</div>
-    <div class="miss"><b>2 &mdash; Flagging 236 as an outlier</b>Q9 is a trap. z = 2.34 does not clear the course's |z| &gt; 2.5 screen (HW1 Q16). Cadets who pattern-match "biggest number = outlier" lose it.</div>
+    <h3 style="font-family:var(--serif);font-size:19px;margin:28px 0 10px">What actually costs points</h3>
+    <p style="font-size:13.5px;color:var(--ink-soft);margin-bottom:12px">The first two are not predictions. They are the two most-missed items on <b>Gate 2</b>, where the caption alone carried 10 of the 25 points.</p>
+    <div class="miss"><b>1 &mdash; The caption</b>Cadets describe the axes and stop, or write for a statistician instead of the decision-maker. A caption needs a title, a description, and a takeaway that answers the question the reader actually has. On a residual plot, name the <em>equal-variance</em> problem precisely &mdash; a fan means the model is both over- and under-predicting, not just one of them.</div>
+    <div class="miss"><b>2 &mdash; Extrapolation</b>Cadets compute the prediction correctly, then defend using it. Being able to evaluate the equation at <span class="var">x</span> = 60 says nothing about whether the answer means anything. Full credit requires the words: outside the training range, no evidence the relationship holds there.</div>
+    <div class="miss"><b>3 &mdash; Dividing by n</b>Sample standard deviation divides by <span class="var">n</span> &minus; 1. On Q6 that is 21.75 versus 20.34, and every z-score downstream is then wrong.</div>
+    <div class="miss"><b>2 &mdash; Flagging 236 as an outlier</b>Q7 is a trap. z = 2.34 does not clear the course's |z| &gt; 2.5 screen (HW1 Q16). Cadets who pattern-match "biggest number = outlier" lose it.</div>
     <div class="miss"><b>3 &mdash; Interpretation with no context or units</b>"The slope is &minus;1.2" is not an interpretation. Every interpretation item requires the number, both units, the direction, and association rather than causation language.</div>
-    <div class="miss"><b>4 &mdash; Reading residual size instead of residual pattern</b>Small residuals do not make a model correct. The U-shape in Q18 is the finding &mdash; and the plot is against <em>fitted values</em>, per HW2 Q11.</div>
-    <div class="miss"><b>5 &mdash; Treating training error as the model's accuracy</b>Q20 and Q26 both turn on this. A training MAE of 0.00 is a warning sign, not a result.</div>
-    <div class="miss"><b>6 &mdash; Averaging in KNN</b>KNN here is <em>classification</em>: the prediction is the majority class of the k neighbors, not an average of their values. A cadet who averages is answering a question the course does not ask.</div>
-    <div class="miss"><b>7 &mdash; Standardizing the test set with test statistics</b>Q21(b). The training mean and SD define the scale; recomputing on the test set moves the yardstick and leaks test information into the model.</div>
+    <div class="miss"><b>4 &mdash; Reading residual size instead of residual pattern</b>Small residuals do not make a model correct. The U-shape in Q17 is the finding &mdash; and the plot is against <em>fitted values</em>, per HW2 Q11.</div>
+    <div class="miss"><b>5 &mdash; Treating training error as the model's accuracy</b>Q19 and Q25 both turn on this. A training MAE of 0.00 is a warning sign, not a result.</div>
+    <div class="miss"><b>8 &mdash; Averaging in KNN</b>KNN here is <em>classification</em>: the prediction is the majority class of the k neighbors, not an average of their values. A cadet who averages is answering a question the course does not ask.</div>
+    <div class="miss"><b>7 &mdash; Standardizing the test set with test statistics</b>Q20(b). The training mean and SD define the scale; recomputing on the test set moves the yardstick and leaks test information into the model.</div>
 
     <h3 style="font-family:var(--serif);font-size:19px;margin:28px 0 10px">If you are short on time</h3>
-    <p style="font-size:13.5px;color:var(--ink-soft)">Cut to a <b>50-minute core</b>: Questions 6, 7, 8, 9, 14, 17, 20, 22, 23, 24 &mdash; 74 points covering every computation the class has flagged as likely. Assign the interpretation items as overnight work; those are the points cadets most often leave on the table and they need no calculator.</p>
+    <p style="font-size:13.5px;color:var(--ink-soft)">Cut to a <b>55-minute core</b>: Questions <b>5, 6, 7, 11, 12, 14, 16, 19, 21, 22, 23</b> &mdash; 84 points. That keeps every computation the class flagged as likely (mean, standard deviation, z-scores, line of best fit, residuals, train-versus-test MAE, and the full KNN chain) <em>and</em> both items Gate 2 proved were the hardest: the caption (11) and extrapolation (14). Assign the remaining interpretation items as overnight work &mdash; they need no calculator.</p>
 
     <h3 style="font-family:var(--serif);font-size:19px;margin:28px 0 10px">Overnight reps &mdash; from HW1 and HW2, not on this test</h3>
     <p style="font-size:13.5px;color:var(--ink-soft)">Work these straight out of the homeworks using Penguins, Ames Housing, or the Happiness Report:</p>
     <ul style="font-size:13.5px;color:var(--ink-soft);padding-left:22px">
       <li><b>Composite z-scores</b> (HW1 Q18) &mdash; standardize on two variables and sum, negating the z of any variable where lower is better. Ruck time versus weekly mileage is the natural pair.</li>
       <li><b>Correlation assumptions</b> (HW1 Q22) &mdash; both numerical, scatterplot supports a linear form, no outliers distorting <span class="var">r</span>.</li>
-      <li><b>Nonlinear trendlines</b> (HW2 &sect;4) &mdash; the U-shaped residuals in Q18 say fit a quadratic and compare on test MAE. The single best use of an evening.</li>
+      <li><b>Nonlinear trendlines</b> (HW2 &sect;4) &mdash; the U-shaped residuals in Q17 say fit a quadratic and compare on test MAE. The single best use of an evening.</li>
       <li><b>The 80/20 partition and the frozen random column</b> (HW2 Q3) &mdash; why the random numbers must be frozen before the split.</li>
       <li><b>Out-of-sample prediction at a chosen x</b> (HW2 Q10c), and whether that prediction is practically reasonable.</li>
     </ul>
@@ -1318,15 +1283,16 @@
       <table>
         <thead><tr><th>Item</th><th>Answer</th><th>Item</th><th>Answer</th></tr></thead>
         <tbody>
-          <tr><td>6. Mean / median</td><td>185 / 177.5 min</td><td>17b. Training MAE</td><td>4.00 min</td></tr>
-          <tr><td>7. <span class="var">s</span></td><td>21.75 min</td><td>18. Residual pattern</td><td>U-shaped, linearity fails</td></tr>
-          <tr><td>8. Q1 / Q3 / IQR / range</td><td>173.5 / 187 / 13.5 / 68</td><td>19. Residual mean / sd</td><td>0.00 / 4.65 min</td></tr>
-          <tr><td>9a. z(236) / z(168)</td><td>2.34 / &minus;0.78</td><td>20. Test MAE</td><td>7.20 min</td></tr>
-          <tr><td>9b. |z| &gt; 2.5 screen</td><td><b>Neither flagged</b></td><td>22. mileage mean / <span class="var">s</span></td><td>20 / 8 mi/wk</td></tr>
-          <tr><td>10. Measure of center</td><td>Median (right-skewed)</td><td>22b. Q standardized</td><td>(1.25, &minus;1.00)</td></tr>
-          <tr><td>14. Line of best fit</td><td><span class="var">y&#770;</span> = 210 &minus; 1.2<span class="var">x</span></td><td>23. Neighbor order</td><td>E, F, D, B, C, A</td></tr>
-          <tr><td>15a. Slope</td><td>&minus;1.2 min per mi/wk</td><td>24. k = 1 / 3 / 5</td><td>GO / GO / NO-GO</td></tr>
-          <tr><td>16. R<sup>2</sup></td><td>85.4% of variation</td><td>25. Accuracy 1 / 3 / 5</td><td>75% / 100% / 50%</td></tr>
+          <tr><td>5. Mean / median</td><td>185 / 177.5 min</td><td>16b. Training MAE</td><td>4.00 min</td></tr>
+          <tr><td>6. <span class='var'>s</span></td><td>21.75 min</td><td>17. Residual pattern</td><td>U-shaped, linearity fails</td></tr>
+          <tr><td>7a. z(236) / z(168)</td><td>2.34 / &minus;0.78</td><td>18. Residual mean / sd</td><td>0.00 / 4.65 min</td></tr>
+          <tr><td>7b. |z| &gt; 2.5 screen</td><td><b>Neither flagged</b></td><td>19. Test MAE</td><td>7.20 min</td></tr>
+          <tr><td>8. Measure of center</td><td>Median (right-skewed)</td><td>21. mileage mean / <span class='var'>s</span></td><td>20 / 8 mi/wk</td></tr>
+          <tr><td>9. Boxplot summary</td><td>173.5 / 177.5 / 187, IQR 13.5</td><td>21b. Q standardized</td><td>(1.25, &minus;1.00)</td></tr>
+          <tr><td>12. Line of best fit</td><td><span class='var'>y&#770;</span> = 210 &minus; 1.2<span class='var'>x</span></td><td>22. Neighbor order</td><td>E, F, D, B, C, A</td></tr>
+          <tr><td>13a. Slope</td><td>&minus;1.2 min per mi/wk</td><td>23. k = 1 / 3 / 5</td><td>GO / GO / NO-GO</td></tr>
+          <tr><td><b>14. Extrapolation</b></td><td><b>138 min &mdash; inappropriate</b></td><td>24. Accuracy 1 / 3 / 5</td><td>75% / 100% / 50%</td></tr>
+          <tr><td>15. R<sup>2</sup></td><td>85.4% of variation</td><td>25. Recommend</td><td>Linear regression</td></tr>
         </tbody>
       </table>
     </div>
