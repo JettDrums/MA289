@@ -67,15 +67,6 @@
       text-transform: uppercase; color: var(--dim); margin-right: auto;
       padding-left: 14px; border-left: 1px solid var(--rule);
     }
-    .clock {
-      display: flex; align-items: center; gap: 8px;
-      border: 1px solid var(--rule); padding: 4px 6px 4px 12px;
-    }
-    .clock time {
-      font-family: var(--mono); font-variant-numeric: tabular-nums;
-      font-size: 15px; font-weight: 500; min-width: 62px; color: var(--black);
-    }
-    .clock.low time { color: #9a3412; }
     button { font: inherit; color: inherit; cursor: pointer; }
     .btn {
       background: none; border: 1px solid var(--rule); padding: 4px 11px;
@@ -280,11 +271,6 @@
   <div class="bar-in">
     <a class="bar-home" href="index.html">&#8592; Dennis Pezan</a>
     <div class="bar-id">MA103 &middot; WPR 1 Practice &middot; 170 pts</div>
-    <div class="clock" id="clock">
-      <time id="tdisp" datetime="PT105M">105:00</time>
-      <button class="btn" id="tstart" type="button">Start</button>
-      <button class="btn" id="treset" type="button">Reset</button>
-    </div>
     <button class="switch" id="keytog" type="button" aria-pressed="false"><span class="dot"></span>Answer key</button>
     <button class="btn" id="pbtn" type="button">Print</button>
   </div>
@@ -1369,40 +1355,6 @@
   var saved = '0';
   try { saved = localStorage.getItem('ma103.key') || '0'; } catch(e){}
   setKeys(saved === '1');
-
-  /* ---- 95 minute timer ---- */
-  var TOTAL = 105 * 60;
-  var left = TOTAL, running = false, tick = null;
-  var disp = document.getElementById('tdisp');
-  var startBtn = document.getElementById('tstart');
-  var resetBtn = document.getElementById('treset');
-  var clock = document.getElementById('clock');
-
-  function render(){
-    var m = Math.floor(left / 60), s = left % 60;
-    disp.textContent = m + ':' + (s < 10 ? '0' : '') + s;
-    disp.setAttribute('datetime', 'PT' + m + 'M' + s + 'S');
-    clock.classList.toggle('low', left <= 600);
-  }
-  function stop(){
-    running = false;
-    if (tick) { clearInterval(tick); tick = null; }
-    startBtn.textContent = left === TOTAL ? 'Start' : 'Resume';
-  }
-  startBtn.addEventListener('click', function(){
-    if (running) { stop(); return; }
-    running = true;
-    startBtn.textContent = 'Pause';
-    tick = setInterval(function(){
-      left--;
-      if (left <= 0) { left = 0; render(); stop(); startBtn.textContent = 'Time'; return; }
-      render();
-    }, 1000);
-  });
-  resetBtn.addEventListener('click', function(){
-    stop(); left = TOTAL; render(); startBtn.textContent = 'Start';
-  });
-  render();
 
   document.getElementById('pbtn').addEventListener('click', function(){ window.print(); });
 })();
