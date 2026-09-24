@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MA103 Tutoring &mdash; WPR 2 Practice | Dennis Pezan</title>
+  <meta name="description" content="A 180-point practice examination with full answer key and scoring rubrics for MA103 WPR 2, covering vectors, cosine similarity, matrices, determinants, inverses, and row reduction.">
+  <link rel="canonical" href="https://dennis-pezan.com/ma103-wpr2.html">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://dennis-pezan.com/ma103-wpr2.html">
+  <meta property="og:title" content="MA103 Tutoring &mdash; WPR 2 Practice | Dennis Pezan">
+  <meta property="og:description" content="A practice examination and answer key for the MA103 linear algebra block at West Point.">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="MA103 Tutoring &mdash; WPR 2 Practice | Dennis Pezan">
+  <meta name="twitter:description" content="A practice examination and answer key for the MA103 linear algebra block at West Point.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' fill='%230d0d0d'/><text x='32' y='45' font-family='Georgia,serif' font-size='34' fill='%23ffffff' text-anchor='middle'>DP</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:  #0d0d0d;
+      --ink:    #1a1a1a;
+      --mid:    #4a4a4a;
+      --dim:    #767676;
+      --faint:  #9a9a9a;
+      --rule:   #d8d8d8;
+      --rule-lt:#ececea;
+      --bg:     #ffffff;
+      --bg-off: #f7f7f5;
+      --serif:  'EB Garamond', Georgia, serif;
+      --sans:   'Inter', -apple-system, 'Segoe UI', sans-serif;
+      --mono:   ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 15px;
+      font-weight: 300;
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+    }
+    .wrap { width: min(880px, 100%); margin: 0 auto; padding: 0 32px 96px; }
+
+    /* ── sticky control bar ──────────────────────────── */
+    .bar {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(255,255,255,0.96);
+      border-bottom: 1px solid var(--rule);
+      backdrop-filter: blur(8px);
+    }
+    .bar-in {
+      width: min(1080px, 100%); margin: 0 auto;
+      padding: 0 32px; min-height: 56px;
+      display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+    }
+    .bar-home {
+      font-family: var(--serif); font-size: 17px; color: var(--black);
+      text-decoration: none; white-space: nowrap;
+    }
+    .bar-id {
+      font-size: 11px; font-weight: 500; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--dim); margin-right: auto;
+      padding-left: 14px; border-left: 1px solid var(--rule);
+    }
+    .bar-links { display: flex; gap: 16px; }
+    .bar-links a {
+      font-size: 10.5px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--dim); text-decoration: none; border-bottom: 1px solid transparent;
+      padding-bottom: 2px; white-space: nowrap;
+    }
+    .bar-links a:hover { color: var(--black); border-bottom-color: var(--black); }
+    button { font: inherit; color: inherit; cursor: pointer; }
+    .btn {
+      background: none; border: 1px solid var(--rule); padding: 4px 11px;
+      font-size: 10.5px; font-weight: 500; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--mid); transition: .15s;
+    }
+    .btn:hover { border-color: var(--black); color: var(--black); }
+    .btn:focus-visible, .switch:focus-visible { outline: 2px solid var(--black); outline-offset: 2px; }
+    .switch {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: none; border: 1px solid var(--rule); padding: 5px 12px;
+      font-size: 10.5px; font-weight: 500; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--mid); transition: .15s;
+    }
+    .switch .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--rule); flex: none; }
+    .switch[aria-pressed="true"] { background: var(--black); border-color: var(--black); color: #fff; }
+    .switch[aria-pressed="true"] .dot { background: #fff; }
+
+
+    /* ── document body ───────────────────────────────── */
+    .exam-head { padding-top: 64px; }
+    h1 {
+      font-family: var(--serif); font-weight: 400;
+      font-size: clamp(30px, 4.6vw, 42px); line-height: 1.1;
+      color: var(--black); margin-bottom: 8px; text-wrap: balance;
+    }
+    .sub { font-family: var(--serif); font-style: italic; font-size: 19px; color: var(--mid); margin-bottom: 22px; }
+
+    .callout {
+      background: var(--bg-off); border: 1px solid var(--rule);
+      border-left: 2px solid var(--black); padding: 16px 20px; margin: 0 0 24px; font-size: 14px;
+    }
+    .callout p { margin: 0; }
+    .callout p + p { margin-top: 10px; }
+
+    .meta {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(150px,1fr));
+      border: 1px solid var(--rule); margin-bottom: 28px;
+    }
+    .meta div { padding: 12px 16px; border-right: 1px solid var(--rule); }
+    .meta div:last-child { border-right: 0; }
+    .meta dt {
+      font-size: 10px; font-weight: 500; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--faint); margin-bottom: 3px;
+    }
+    .meta dd { font-size: 16px; font-family: var(--serif); color: var(--black); font-variant-numeric: tabular-nums; }
+
+    ol.instr { margin: 0 0 28px; padding-left: 22px; font-size: 14px; }
+    ol.instr li { margin-bottom: 8px; padding-left: 4px; }
+
+    .sheet { border: 1px solid var(--rule); padding: 20px 22px; margin: 0 0 28px; }
+    .sheet h3 {
+      font-size: 10px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase;
+      color: var(--faint); margin-bottom: 16px;
+    }
+    .sheet-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 16px 28px; }
+    .sheet-item .cap {
+      font-size: 10px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase;
+      color: var(--faint); display: block; margin-bottom: 3px;
+    }
+    .sheet-item .formula { margin: 0; font-size: 16px; justify-content: flex-start; }
+
+    .part-head { border-top: 2px solid var(--black); padding-top: 16px; margin: 64px 0 30px; }
+    .part-head .tags {
+      display: flex; gap: 9px; flex-wrap: wrap; align-items: baseline;
+      font-size: 10.5px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--faint);
+    }
+    .part-head .tags b { color: var(--black); font-weight: 600; }
+    h2.part { font-family: var(--serif); font-size: 30px; font-weight: 400; color: var(--black); margin: 6px 0 0; }
+    .part-head p.scope { margin: 10px 0 0; font-size: 13.5px; color: var(--dim); }
+
+    .q { margin: 0 0 34px; scroll-margin-top: 72px; }
+    .q-head { display: flex; gap: 12px; align-items: baseline; margin-bottom: 10px; }
+    .q-num { font-family: var(--mono); font-size: 13px; font-weight: 500; color: var(--black); flex: none; min-width: 28px; }
+    .q-body { flex: 1; min-width: 0; }
+    .flag {
+      font-size: 9.5px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--bg); background: var(--black); padding: 2px 8px; margin-left: 8px;
+      white-space: nowrap; vertical-align: 2px;
+    }
+    .pts {
+      font-size: 10px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--faint); white-space: nowrap; border: 1px solid var(--rule); padding: 2px 7px; flex: none; align-self: flex-start;
+    }
+    .q p { margin: 0 0 11px; }
+    .q ol.sub { margin: 12px 0 0; padding-left: 24px; }
+    .q ol.sub > li { margin-bottom: 14px; }
+    .q ul { margin: 11px 0; padding-left: 22px; }
+    .q li { margin-bottom: 5px; }
+
+    .write {
+      background-image: repeating-linear-gradient(to bottom, transparent 0, transparent 27px, var(--rule-lt) 27px, var(--rule-lt) 28px);
+      height: calc(28px * var(--n, 3)); margin: 12px 0 4px;
+    }
+    .blank { display: inline-block; min-width: 110px; border-bottom: 1px solid var(--rule); height: 1.15em; vertical-align: -.2em; }
+    .circle-pick { display: flex; gap: 40px; justify-content: center; margin: 18px 0; font-family: var(--serif); font-size: 21px; }
+    .circle-pick span { border: 1px solid var(--rule); border-radius: 40px; padding: 6px 30px; }
+
+    .tw { overflow-x: auto; margin: 16px 0; }
+    table { border-collapse: collapse; width: 100%; font-size: 13.5px; font-variant-numeric: tabular-nums; }
+    caption {
+      caption-side: top; text-align: left; font-size: 10.5px; font-weight: 500;
+      letter-spacing: .09em; text-transform: uppercase; color: var(--faint); padding-bottom: 8px;
+    }
+    th, td { border: 1px solid var(--rule); padding: 8px 11px; text-align: right; }
+    th:first-child, td:first-child { text-align: left; }
+    thead th { background: var(--bg-off); font-weight: 500; font-size: 12.5px; white-space: nowrap; color: var(--ink); }
+    td.fill { background: #fcfcfb; height: 34px; }
+    tfoot td { background: var(--bg-off); font-weight: 500; }
+    .data-mono td, .data-mono th { font-family: var(--mono); font-size: 12.5px; }
+
+    figure { margin: 22px 0; border: 1px solid var(--rule); padding: 18px 14px 12px; }
+    figure svg { display: block; width: 100%; height: auto; max-width: 100%; }
+    figcaption { font-size: 11px; letter-spacing: .04em; color: var(--faint); margin-top: 10px; padding: 0 4px; }
+
+    .ax { stroke: var(--mid); stroke-width: 1.1; fill: none; }
+    .grid { stroke: var(--rule); stroke-width: 1; fill: none; }
+    .grid-min { stroke: var(--rule-lt); stroke-width: .8; fill: none; }
+    .tick { stroke: var(--mid); stroke-width: 1; fill: none; }
+    .lbl { fill: var(--dim); font-family: var(--sans); font-size: 11px; }
+    .lbl-ax { fill: var(--ink); font-family: var(--sans); font-size: 12px; font-weight: 500; }
+    .bar-f { fill: #e6e6e2; stroke: var(--ink); stroke-width: 1; }
+    .pt { fill: var(--black); stroke: #fff; stroke-width: 1.5; }
+    .pt-test { fill: var(--mid); stroke: #fff; stroke-width: 1.5; }
+    .fitline { stroke: var(--black); stroke-width: 1.8; fill: none; }
+    .zeroline { stroke: var(--mid); stroke-width: 1.2; fill: none; }
+    .dash { stroke: var(--dim); stroke-width: 1.5; fill: none; stroke-dasharray: 5 4; }
+    .ring { fill: none; stroke: var(--dim); stroke-width: 1.4; stroke-dasharray: 4 4; }
+    .qpt, .mk-q { fill: var(--black); stroke: #fff; stroke-width: 1.5; }
+    .mk-go { fill: var(--black); stroke: #fff; stroke-width: 1.5; }
+    .mk-no { fill: #fff; stroke: var(--black); stroke-width: 1.8; }
+    .boxb { fill: var(--bg-off); stroke: var(--ink); stroke-width: 1.3; }
+    .whk { stroke: var(--ink); stroke-width: 1.3; fill: none; }
+
+    .var { font-family: var(--serif); font-style: italic; }
+    .formula {
+      font-family: var(--serif); font-size: 18px; margin: 16px 0;
+      display: flex; justify-content: center; align-items: center; gap: 8px; flex-wrap: wrap;
+    }
+    .frac { display: inline-flex; flex-direction: column; text-align: center; vertical-align: middle; font-size: .92em; }
+    .frac .num { border-bottom: 1px solid currentColor; padding: 0 .4em .12em; }
+    .frac .den { padding: .12em .4em 0; }
+    .radical { display: inline-flex; align-items: stretch; gap: 1px; }
+    .radical .sign { font-size: 1.5em; line-height: 1; align-self: center; }
+    .radical .rad-body { border-top: 1px solid currentColor; padding: 4px 4px 0; }
+
+    /* ── answer key ──────────────────────────────────── */
+    .keybox {
+      background: var(--bg-off); border: 1px solid var(--rule);
+      border-left: 2px solid var(--black); padding: 16px 20px; margin: 16px 0 0; font-size: 13.5px;
+    }
+    .keybox > :first-child { margin-top: 0; }
+    .keybox > :last-child { margin-bottom: 0; }
+    .keybox h4 {
+      font-size: 10px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase;
+      color: var(--black); margin: 0 0 11px;
+    }
+    .keybox p { margin: 0 0 10px; }
+    .keybox ul { margin: 0 0 10px; padding-left: 20px; }
+    .keybox li { margin-bottom: 5px; }
+    .keybox b.ans { font-family: var(--mono); font-size: 12.5px; background: #fff; border: 1px solid var(--rule); padding: 1px 7px; white-space: nowrap; }
+    .keybox figure { background: #fff; margin: 14px 0; }
+    .keybox table { font-size: 12.5px; }
+    .keybox thead th { background: #fff; }
+    .keybox tbody td, .keybox tfoot td { background: #fff; }
+    .rubric { font-size: 12px; color: var(--mid); border-top: 1px dashed var(--rule); padding-top: 10px; margin-top: 12px; }
+    .miss { border-left: 2px solid var(--black); padding-left: 13px; margin: 12px 0; font-size: 13px; color: var(--mid); }
+    .miss b {
+      color: var(--black); font-size: 10px; letter-spacing: .12em; text-transform: uppercase;
+      display: block; margin-bottom: 3px; font-weight: 600;
+    }
+
+    /* ── facilitator ─────────────────────────────────── */
+    .facil { margin-top: 72px; border-top: 2px solid var(--black); padding-top: 18px; }
+    .facil h2 { font-family: var(--serif); font-size: 30px; font-weight: 400; color: var(--black); margin: 6px 0 0; }
+    .facil h3 { font-family: var(--serif); font-weight: 400; color: var(--black); }
+
+    footer {
+      margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--rule);
+      font-size: 12px; color: var(--faint); line-height: 1.8;
+    }
+    footer a { color: var(--mid); }
+    .byline { font-family: var(--serif); font-size: 16px; margin-bottom: 8px; }
+    .byline a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--rule); }
+    .byline a:hover { border-bottom-color: var(--black); }
+
+    @media (max-width: 620px) {
+      .wrap { padding: 0 20px 72px; }
+      .bar-in { padding: 8px 20px; gap: 9px; }
+      .bar-id { display: none; }
+    }
+    @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+
+    @media print {
+      .bar, .noprint { display: none !important; }
+      body { font-size: 11pt; }
+      .wrap { width: auto; padding: 0; }
+      .part-head { break-before: page; break-after: avoid; }
+      .q, figure, .keybox, table { break-inside: avoid; }
+      a { color: inherit; text-decoration: none; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="bar noprint">
+  <div class="bar-in">
+    <a class="bar-home" href="index.html">&#8592; Dennis Pezan</a>
+    <div class="bar-id">MA103 &middot; WPR 2 Practice &middot; 180 pts</div>
+    <nav class="bar-links"><a href="ma103.html">WPR 1</a><a href="ma103-wpr2-reference.html">Reference</a></nav>
+    <button class="switch" id="keytog" type="button" aria-pressed="false"><span class="dot"></span>Answer key</button>
+    <button class="btn" id="pbtn" type="button">Print</button>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <header class="exam-head">
+    <h1>WPR 2 Practice Examination</h1>
+    <p class="sub">Modeling with linear algebra &mdash; the platoon assignment problem</p>
+
+    <div class="callout">
+      <p><b>This is unofficial review material</b> prepared by the course CIC for the study session. It is <em>not</em> the WPR and is not drawn from any secured assessment. Coverage follows the published lesson objectives for <b>Lessons 23&ndash;32</b> &mdash; the Mini Block, Modeling with Linear Algebra &mdash; and the conventions of Homework 3, PSL 3, and TL 4.</p>
+      <p>Per the course director, study your gate and work the homework problems. The application sections here use <b>platoon_roomate_data</b>, the synthetic dataset she provided, so the practice lines up with the homework you are already doing.</p>
+      <p><b>Assumption worth knowing:</b> WPR 1 provided no formula sheet, so none is provided here. Unlike WPR 1, this block is computation-heavy &mdash; you are expected to know the magnitude, dot product, cosine, determinant and inverse formulas cold. The <a href="ma103-wpr2-reference.html">reference card</a> is the list to memorize.</p>
+    </div>
+
+    <dl class="meta">
+      <div><dt>Total points</dt><dd>180</dd></div>
+      <div><dt>Authorized</dt><dd>Calculator only</dd></div>
+      <div><dt>Coverage</dt><dd>Lessons 23&ndash;32</dd></div>
+    </dl>
+
+    <ol class="instr">
+      <li><b>Show your work.</b> Component-by-component for vector arithmetic, entry-by-entry for matrix products. A bare answer earns partial credit at best.</li>
+      <li>Give exact values where they are exact (&radic;36 = 6, not 6.00). Round only when the question says to, and then to <b>four decimal places</b> for cosine similarity, two elsewhere.</li>
+      <li>Every interpretation must be written <b>in context</b>. "The dot product is 8" is not an interpretation.</li>
+      <li>Before computing any product, <b>check that it is defined</b> and state the dimensions of the result. Several questions award points for that check alone.</li>
+      <li>Several questions ask you to carry a value forward. If you could not get the earlier value, state your assumption and continue &mdash; follow-on credit applies.</li>
+    </ol>
+
+    <div class="callout">
+      <p><b>Situation.</b> You are the executive officer of a 30-soldier platoon preparing for a field problem. The commander must (1) assign roommates by pairing soldiers with similar profiles, and (2) rank the platoon for a limited number of school slots using a weighted score. Every soldier is on record with three measures: <b>AFT score</b> (max 600), <b>weapons qualification</b> (hits out of 40), and <b>high school GPA</b> (max 4.00). The roster is <b>platoon_roomate_data.xlsx</b>, 30 soldiers, C01&ndash;C30.</p>
+    </div>
+  </header>
+
+  <section>
+    <div class="part-head">
+      <div class="tags"><b>Part I</b> <span>&middot;</span> <span>36 points</span></div>
+      <h2 class="part">Vector Mechanics</h2>
+      <p class="scope">Lessons 23&ndash;24. Component arithmetic, magnitude, the dot product, and the tests for orthogonal and parallel.</p>
+    </div>
+
+    <p>Use these vectors for all of Part I:</p>
+    <div class="formula" style="font-size:19px">
+      <span class="var">u&#8407;</span> = &lang;4, &minus;2, 4&rang; &nbsp;&nbsp;
+      <span class="var">v&#8407;</span> = &lang;2, 2, &minus;1&rang; &nbsp;&nbsp;
+      <span class="var">w&#8407;</span> = &lang;&minus;8, 4, &minus;8&rang; &nbsp;&nbsp;
+      <span class="var">t&#8407;</span> = &lang;0, 3, 4&rang;
+    </div>
+
+    <div class="q" id="q1">
+      <div class="q-head"><span class="q-num">1.</span><div class="q-body"><b>Vector arithmetic.</b></div><span class="pts">6 pts</span></div>
+      <div class="q-body">
+        <p>Compute each by hand, component by component.</p>
+        <ol class="sub" type="a">
+          <li><span class="var">u&#8407;</span> + <span class="var">v&#8407;</span> = <span class="blank"></span></li>
+          <li><span class="var">v&#8407;</span> &minus; <span class="var">u&#8407;</span> = <span class="blank"></span></li>
+          <li>3<span class="var">u&#8407;</span> = <span class="blank"></span></li>
+          <li>2<span class="var">u&#8407;</span> &minus; <span class="var">v&#8407;</span> = <span class="blank"></span></li>
+        </ol>
+        <div class="write" style="--n:3"></div>
+        <div class="keybox" hidden>
+          <h4>Answer &amp; scoring</h4>
+          <p>(a) <b class="ans">&lang;6, 0, 3&rang;</b> &nbsp; (b) <b class="ans">&lang;&minus;2, 4, &minus;5&rang;</b> &nbsp; (c) <b class="ans">&lang;12, &minus;6, 12&rang;</b> &nbsp; (d) <b class="ans">&lang;6, &minus;6, 9&rang;</b></p>
+          <p>For (d): 2<span class="var">u&#8407;</span> = &lang;8, &minus;4, 8&rang;, then subtract <span class="var">v&#8407;</span> component by component: &lang;8&minus;2, &minus;4&minus;2, 8&minus;(&minus;1)&rang; = &lang;6, &minus;6, 9&rang;. The third component is the one cadets miss &mdash; subtracting a negative.</p>
+          <div class="rubric">1.5 pts each. Order matters in (b): <span class="var">v&#8407;</span> &minus; <span class="var">u&#8407;</span>, not <span class="var">u&#8407;</span> &minus; <span class="var">v&#8407;</span>.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="q" id="q2">
+      <div class="q-head"><span class="q-num">2.</span><div class="q-body"><b>Magnitude.</b></div><span class="pts">6 pts</span></div>
+      <div class="q-body">
+        <p>Compute the magnitude of each vector. Show the work for at least one.</p>
+        <p>|<span class="var">u&#8407;</span>| = <span class="blank"></span> &nbsp;&nbsp; |<span class="var">v&#8407;</span>| = <span class="blank"></span> &nbsp;&nbsp; |<span class="var">w&#8407;</span>| = <span class="blank"></span> &nbsp;&nbsp; |<span class="var">t&#8407;</span>| = <span class="blank"></span></p>
+        <div class="write" style="--n:4"></div>
+        <div class="keybox" hidden>
+          <h4>Answer &amp; scoring</h4>
+          <p>|<span class="var">u&#8407;</span>| = &radic;(16+4+16) = &radic;36 = <b class="ans">6</b> &nbsp;&nbsp; |<span class="var">v&#8407;</span>| = &radic;(4+4+1) = &radic;9 = <b class="ans">3</b></p>
+          <p>|<span class="var">w&#8407;</span>| = &radic;(64+16+64) = &radic;144 = <b class="ans">12</b> &nbsp;&nbsp; |<span class="var">t&#8407;</span>| = &radic;(0+9+16) = &radic;25 = <b class="ans">5</b></p>
+          <p>All four are exact integers &mdash; if you are getting decimals, check your squaring. Note that squaring kills the sign: the negative components of <span class="var">u&#8407;</span> and <span class="var">w&#8407;</span> contribute the same as positive ones.</p>
+          <div class="rubric">1.5 pts each. Full credit requires the radical form or the exact integer, not a rounded decimal.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="q" id="q3">
+      <div class="q-head"><span class="q-num">3.</span><div class="q-body"><b>Dot product.</b></div><span class="pts">6 pts</span></div>
+      <div class="q-body">
+        <p>Compute each dot product algebraically. Show your work.</p>
+        <p>(a) <span class="var">u&#8407;</span>&middot;<span class="var">v&#8407;</span> = <span class="blank"></span> &nbsp;&nbsp; (b) <span class="var">u&#8407;</span>&middot;<span class="var">w&#8407;</span> = <span class="blank"></span> &nbsp;&nbsp; (c) <span class="var">u&#8407;</span>&middot;<span class="var">t&#8407;</span> = <span class="blank"></span></p>
+        <div class="write" style="--n:4"></div>
+        <div class="keybox" hidden>
+          <h4>Answer &amp; scoring</h4>
+          <p>(a) 4(2) + (&minus;2)(2) + 4(&minus;1) = 8 &minus; 4 &minus; 4 = <b class="ans">0</b></p>
+          <p>(b) 4(&minus;8) + (&minus;2)(4) + 4(&minus;8) = &minus;32 &minus; 8 &minus; 32 = <b class="ans">&minus;72</b></p>
+          <p>(c) 4(0) + (&minus;2)(3) + 4(4) = 0 &minus; 6 + 16 = <b class="ans">10</b></p>
+          <p>The dot product is a <b>scalar</b>, not a vector. A cadet who writes &lang;8, &minus;4, &minus;4&rang; for (a) has computed the component-wise product and stopped one step early.</p>
+          <div class="rubric">2 pts each. A vector answer earns 0 &mdash; the output type is the point.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="q" id="q4">
+      <div class="q-head"><span class="q-num">4.</span><div class="q-body"><b>Orthogonality and parallelism.</b></div><span class="pts">8 pts</span></div>
+      <div class="q-body">
+        <p>Use your results from Questions 2 and 3.</p>
+        <ol class="sub" type="a">
+          <li>Are <span class="var">u&#8407;</span> and <span class="var">v&#8407;</span> orthogonal? State the test you used and your conclusion.<div class="write" style="--n:2"></div></li>
+          <li>Are <span class="var">u&#8407;</span> and <span class="var">w&#8407;</span> parallel? State the test you used and your conclusion.<div class="write" style="--n:3"></div></li>
+          <li>Can two vectors be both orthogonal and parallel? Explain.<div class="write" style="--n:2"></div></li>
+        </ol>
+        <div class="keybox" hidden>
+          <h4>Answer &amp; scoring</h4>
+          <p>(a) <b class="ans">Yes, orthogonal.</b> Test: two vectors are orthogonal exactly when their <b>dot product is zero</b>. <span class="var">u&#8407;</span>&middot;<span class="var">v&#8407;</span> = 0, so the angle between them is 90&deg;.</p>
+          <p>(b) <b class="ans">Yes, parallel</b> &mdash; specifically <b>antiparallel</b>. Test: two vectors are parallel when one is a <b>scalar multiple</b> of the other. Here <span class="var">w&#8407;</span> = &minus;2<span class="var">u&#8407;</span>, checked component by component: &minus;2(4) = &minus;8 &#10003;, &minus;2(&minus;2) = 4 &#10003;, &minus;2(4) = &minus;8 &#10003;.</p>
+          <p>Equivalent check by angle: cos&thinsp;&theta; = <span class="var">u&#8407;</span>&middot;<span class="var">w&#8407;</span> / (|<span class="var">u&#8407;</span>||<span class="var">w&#8407;</span>|) = &minus;72 / (6 &times; 12) = &minus;72/72 = <b>&minus;1</b>, so &theta; = 180&deg;. A cosine of exactly &plusmn;1 <em>is</em> the parallel condition.</p>
+          <p>(c) <b>No</b> &mdash; not for nonzero vectors. Parallel means cos&thinsp;&theta; = &plusmn;1 (&theta; = 0&deg; or 180&deg;); orthogonal means cos&thinsp;&theta; = 0 (&theta; = 90&deg;). A single angle cannot be both. The zero vector is the degenerate exception, since it is trivially orthogonal to everything and has no direction to be parallel to.</p>
+          <div class="rubric">3 pts (a), 3 pts (b), 2 pts (c). Each of (a) and (b) needs the <em>named test</em> plus the conclusion; a correct yes/no with no test earns 1 of 3.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="q" id="q5">
+      <div class="q-head"><span class="q-num">5.</span><div class="q-body"><b>Angle between vectors.</b></div><span class="pts">4 pts</span></div>
+      <div class="q-body">
+        <p>Compute the angle &theta; between <span class="var">u&#8407;</span> and <span class="var">t&#8407;</span>. Give cos&thinsp;&theta; exactly and &theta; to one decimal place.</p>
+        <div class="write" style="--n:4"></div>
+        <p>cos&thinsp;&theta; = <span class="blank"></span> &nbsp;&nbsp; &theta; = <span class="blank"></span></p>
+        <div class="keybox" hidden>
+          <h4>Answer &amp; scoring</h4>
+          <p>cos&thinsp;&theta; = <span class="var">u&#8407;</span>&middot;<span class="var">t&#8407;</span> / (|<span class="var">u&#8407;</span>||<span class="var">t&#8407;</span>|) = 10 / (6 &times; 5) = 10/30 = <b class="ans">1/3 &asymp; 0.3333</b></p>
+          <p>&theta; = cos<sup>&minus;1</sup>(1/3) = <b class="ans">70.5&deg;</b></p>
+          <p>Sanity check the sign: a positive dot product means an acute angle, so anything above 90&deg; here is an arithmetic error.</p>
+          <div class="rubric">2 pts cos&thinsp;&theta;, 2 pts &theta;. Answers in radians (1.231 rad) accepted if labeled.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="q" id="q6">
+      <div class="q-head"><span class="q-num">6.</span><div class="q-body"><b>Defined or undefined.</b></div><span class="pts">6 pts</span></div>
+      <div class="q-body">
+        <p>For each expression, state whether it is <b>defined</b> or <b>undefined</b>. If defined, give the type of the result (scalar or vector). If undefined, say why.</p>
+        <ol class="sub" type="a">
+          <li><span class="var">u&#8407;</span> &middot; (<span class="var">v&#8407;</span> + <span class="var">w&#8407;</span>) &nbsp;<span class="blank"></span></li>
+          <li>|<span class="var">u&#8407;</span>| + <span class="var">v&#8407;</span> &nbsp;<span class="blank"></span></li>
+          <li>(<span class="var">u&#8407;</span> &middot; <span class="var">v&#8407;</span>) &middot; <span class="var">w&#8407;</span> &nbsp;<span class="blank"></span></li>
+        </ol>
+        <div class="write" style="--n:4"></div>
+        <div class="keybox" hidden>
+          <h4>Answer &amp; scoring</h4>
+          <p>(a) <b class="ans">Defined &mdash; scalar.</b> <span class="var">v&#8407;</span> + <span class="var">w&#8407;</span> is a vector in &#8477;<sup>3</sup>, and the dot product of two &#8477;<sup>3</sup> vectors is a scalar. (Value: <span class="var">v&#8407;</span>+<span class="var">w&#8407;</span> = &lang;&minus;6, 6, &minus;9&rang;, so <span class="var">u&#8407;</span>&middot;(<span class="var">v&#8407;</span>+<span class="var">w&#8407;</span>) = &minus;24 &minus; 12 &minus; 36 = &minus;72.)</p>
+          <p>(b) <b class="ans">Undefined.</b> |<span class="var">u&#8407;</span>| is a <b>scalar</b> (6) and <span class="var">v&#8407;</span> is a <b>vector</b>. Addition requires both operands to be the same kind of object with the same dimensions; you cannot add a scalar to a vector.</p>
+          <p>(c) <b class="ans">Undefined.</b> (<span class="var">u&#8407;</span>&middot;<span class="var">v&#8407;</span>) is a scalar (0 here), and the dot product is an operation between two <em>vectors</em>. Scalar &middot; vector is not a dot product. Note that <em>scalar multiplication</em> 0<span class="var">w&#8407;</span> would be defined &mdash; the dot symbol is what makes this illegal.</p>
+          <div class="rubric">2 pts each: 1 for the verdict, 1 for the reason or result type. Watch (c) &mdash; cadets who compute 0&lang;&minus;8,4,&minus;8&rang; = &lang;0,0,0&rang; have answered a different question.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section>
+    <div class="part-head">
+      <div class="tags"><b>Part II</b> <span>&middot;</span> <span>44 points</span></div>
+      <h2 class="part">Vectors as Data</h2>
+      <p class="scope">Lessons 25&ndash;26. Soldiers as feature vectors, why scale matters, and cosine similarity as a matching score.</p>
+    </div>
+
+    <p>Three soldiers are drawn from the roster. Each is represented in &#8477;<sup>3</sup> by <b>normalizing</b> every measure onto a 0&ndash;1 scale &mdash; AFT &divide; 600, weapons qualification &divide; 40, GPA &divide; 4.00 &mdash; rounded to two decimals, exactly as the Spotify features were scaled in PSL 3.</p>
+    <div class="tw">
+      <table class="data-mono">
+        <caption>Three soldiers, raw and normalized</caption>
+        <thead><tr><th>Soldier</th><th>AFT</th><th>Weapons</th><th>GPA</th><th>Normalized vector</th></tr></thead>
+        <tbody>
+          <tr><td>C05 Evans &nbsp;<span class="var">e&#8407;</span></td><td>462</td><td>28</td><td>4.00</td><td>&lang;0.77, 0.70, 1.00&rang;</td></tr>
+          <tr><td>C12 Lewis &nbsp;<span class="var">l&#8407;</span></td><td>450</td><td>26</td><td>3.96</td><td>&lang;0.75, 0.65, 0.99&rang;</td></tr>
+          <tr><td>C03 Carter &nbsp;<span class="var">c&#8407;</span></td><td>388</td><td>40</td><td>3.03</td><td>&lang;0.65, 1.00, 0.76&rang;</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="q" id="q7">
+      <div class="q-head"><span class="q-num">7.</span><div class="q-body"><b>Reading the representation.</b></div><span class="pts">5 pts</span></div>
+      <div class="q-body">
+        <ol class="sub" type="a">
+          <li>In what space do these vectors live, and what does the <b>dimension</b> of the space correspond to in this problem?<div class="write" style="--n:2"></div></li>
+          <li>Without computing anything: which single measure separates Carter from the other two most dramatically, and which measure are Evans and Lewis closest on?<div class="write" style="--n:2"></div></li>
+        </ol>
+        <div class="keybox" hidden>
+          <h4>Answer &amp; scoring</h4>
+          <p>(a) <b class="ans">&#8477;<sup>3</sup></b>. The dimension is the <b>number of measured features</b> &mdash; three &mdash; not the number of soldiers. Each soldier is one point (one vector) in that three-dimensional feature space; adding a fourth measure would move every soldier into &#8477;<sup>4</sup>.</p>
+          <p>(b) <b>Weapons qualification</b> separates Carter most: 1.00 against 0.70 and 0.65, a gap of roughly a third of the scale. Carter is also lowest on GPA (0.76 vs 1.00 and 0.99). Evans and Lewis are nearly identical on <b>GPA</b> (1.00 vs 0.99) &mdash; and in fact close on all three.</p>
+          <div class="rubric">3 pts (a) &mdash; 1 for &#8477;<sup>3</sup>, 2 for tying dimension to features rather than observations. 2 pts (b).</div>
+          <div class="miss"><b>Watch for</b>Cadets who answer "&#8477;<sup>30</sup>, because there are 30 soldiers." Rows are observations; columns are dimensions.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="q" id="q8">
+      <div class="q-head"><span class="q-num">8.</span><div class="q-body"><b>Why normalize at all?</b></div><span class="pts">8 pts</span></div>
+      <div class="q-body">
+        <p>A cadet argues the normalization step is busywork and computes similarity directly on the <b>raw</b> numbers instead &mdash; Evans as &lang;462, 28, 4.00&rang;, and so on.</p>
+        <ol class="sub" type="a">
+          <li>Compute |&lang;462, 28, 4.00&rang;| and state, to the nearest percent, how much of the value under the square root comes from the AFT component alone.<div class="write" style="--n:3"></div></li>
+          <li>Explain what goes wrong with raw-scale similarity, and why normalizing fixes it.<div class="write" style="--n:4"></div></li>
+        </ol>
+        <div class="keybox" hidden>
+          <h4>Answer &amp; scoring</h4>
+          <p>(a) 462<sup>2</sup> = 213,444; 28<sup>2</sup> = 784; 4.00<sup>2</sup> = 16. Sum = 214,244, so the magnitude is &radic;214,244 = <b class="ans">462.87</b>.</p>
+          <p>AFT's share: 213,444 / 214,244 = <b class="ans">99.6%</b>. Weapons qualification and GPA together contribute <b>four tenths of one percent</b>.</p>
+          <p>(b) On the raw scale the three measures are not comparable: AFT runs to 600, weapons qualification to 40, GPA to 4. Because every one of these operations &mdash; magnitude, dot product, cosine &mdash; squares or multiplies the components, <b>the variable with the largest numeric range dominates completely</b>. Two soldiers with identical AFT scores would look nearly identical no matter how far apart their marksmanship and academics were. The "similarity" would really just be a comparison of AFT scores wearing a disguise.</p>
+          <p>Normalizing divides each measure by its own maximum, putting all three on a common 0&ndash;1 scale. Now a 0.1 difference means the same amount of difference in any feature, and each one gets a real vote.</p>
+          <p>This is the same principle as standardizing before KNN on WPR 1: <b>distance and similarity are only meaningful when the axes are comparable.</b></p>
+          <div class="rubric">4 pts (a) &mdash; 2 magnitude, 2 the percentage. 4 pts (b): full credit names the range mismatch AND says the dominant variable swamps the others. "It makes the numbers smaller" earns 1.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="q" id="q9">
+      <div class="q-head"><span class="q-num">9.</span><div class="q-body"><b>Magnitude in context.</b></div><span class="pts">6 pts</span></div>
+      <div class="q-body">
+        <p>Compute the three magnitudes to four decimal places.</p>
+        <p>|<span class="var">e&#8407;</span>| = <span class="blank"></span> &nbsp;&nbsp; |<span class="var">l&#8407;</span>| = <span class="blank"></span> &nbsp;&nbsp; |<span class="var">c&#8407;</span>| = <span class="blank"></span></p>
+        <div class="write" style="--n:3"></div>
+        <p>A squad leader says: "Evans has the largest magnitude, so Evans is the best soldier of the three." Is that a valid reading? Explain what magnitude does and does not measure here.</p>
+        <div class="write" style="--n:4"></div>
+        <div class="keybox" hidden>
+          <h4>Answer &amp; scoring</h4>
+          <p>|<span class="var">e&#8407;</span>| = &radic;(0.5929 + 0.4900 + 1.0000) = &radic;2.0829 = <b class="ans">1.4432</b></p>
+          <p>|<span class="var">l&#8407;</span>| = &radic;(0.5625 + 0.4225 + 0.9801) = &radic;1.9651 = <b class="ans">1.4018</b></p>
+          <p>|<span class="var">c&#8407;</span>| = &radic;(0.4225 + 1.0000 + 0.5776) = &radic;2.0001 = <b class="ans">1.4142</b></p>
+          <p><b>Not valid.</b> Magnitude measures the <b>overall size of the profile</b> &mdash; how far the soldier sits from the origin once all three features are combined. It says nothing about <em>which</em> features are large, and nothing about quality. Carter (1.4142) edges out Lewis (1.4018) purely on the strength of a perfect weapons score, while being well behind on both other measures.</p>
+          <p>Magnitude also cannot compare soldiers to each other in any directional sense. Two soldiers with very different strengths can have nearly equal magnitudes &mdash; as Carter and Lewis do here, differing by about 0.012 while being obviously different profiles. <b>Direction, not length, carries the similarity information</b>, which is exactly what cosine similarity extracts.</p>
+          <div class="rubric">3 pts computation (1 each). 3 pts interpretation: full credit says magnitude is overall size and is not a ranking of quality, ideally citing the Carter/Lewis near-tie.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="q" id="q10">
+      <div class="q-head"><span class="q-num">10.</span><div class="q-body"><b>Cosine similarity as a roommate match.</b></div><span class="pts">10 pts</span></div>
+      <div class="q-body">
+        <p>The commander pairs roommates by profile similarity. Evans needs a roommate: the candidates are Lewis and Carter.</p>
+        <ol class="sub" type="a">
+          <li>Compute <span class="var">e&#8407;</span>&middot;<span class="var">l&#8407;</span> and <span class="var">e&#8407;</span>&middot;<span class="var">c&#8407;</span>.<div class="write" style="--n:3"></div></li>
+          <li>Compute both cosine similarities to four decimal places.<div class="write" style="--n:4"></div>
+          cos(<span class="var">e&#8407;</span>, <span class="var">l&#8407;</span>) = <span class="blank"></span> &nbsp;&nbsp; cos(<span class="var">e&#8407;</span>, <span class="var">c&#8407;</span>) = <span class="blank"></span></li>
+          <li>Which soldier do you assign as Evans' roommate? Justify with the numbers <em>and</em> with the feature values.<div class="write" style="--n:4"></div></li>
+        </ol>
+        <div class="keybox" hidden>
+          <h4>Answer &amp; scoring</h4>
+          <p>(a) <span class="var">e&#8407;</span>&middot;<span class="var">l&#8407;</span> = 0.77(0.75) + 0.70(0.65) + 1.00(0.99) = 0.5775 + 0.4550 + 0.9900 = <b class="ans">2.0225</b></p>
+          <p><span class="var">e&#8407;</span>&middot;<span class="var">c&#8407;</span> = 0.77(0.65) + 0.70(1.00) + 1.00(0.76) = 0.5005 + 0.7000 + 0.7600 = <b class="ans">1.9605</b></p>
+          <p>(b) cos(<span class="var">e&#8407;</span>, <span class="var">l&#8407;</span>) = 2.0225 / (1.4432 &times; 1.4018) = 2.0225 / 2.0231 = <b class="ans">0.9997</b></p>
+          <p>cos(<span class="var">e&#8407;</span>, <span class="var">c&#8407;</span>) = 1.9605 / (1.4432 &times; 1.4142) = 1.9605 / 2.0412 = <b class="ans">0.9605</b></p>
+          <p>(c) <b class="ans">Lewis.</b> The cosine is 0.9997 against 0.9605 &mdash; Evans and Lewis point in almost exactly the same direction in feature space, meaning they have the same <em>shape</em> of profile: strong academics, strong-to-moderate fitness, weak marksmanship. Feature by feature they are within 0.02, 0.05 and 0.01 of each other. Carter is the opposite type &mdash; a perfect weapons score carrying a weaker AFT and GPA &mdash; so the angle between Evans and Carter is visibly wider.</p>
+          <div class="rubric">3 pts (a), 4 pts (b), 3 pts (c). Follow-on credit: a wrong magnitude from Question 9 carried correctly into (b) still earns the cosine points. Selecting Lewis on the numbers alone, with no reference to the features, earns 2 of 3 on (c).</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="q" id="q11">
+      <div class="q-head"><span class="q-num">11.</span><div class="q-body"><b>Scaling a preference vector.</b></div><span class="pts">6 pts</span></div>
+      <div class="q-body">
+        <p>The commander keeps a <b>priority vector</b> <span class="var">p&#8407;</span> = &lang;0.5, 0.3, 0.2&rang; describing what the platoon values, and ranks soldiers by their cosine similarity to it. A staff officer proposes replacing it with 2<span class="var">p&#8407;</span> = &lang;1.0, 0.6, 0.4&rang; "to make the priorities count for more."</p>
+        <p>Would this change any soldier's cosine similarity? Would it change the <b>ranking</b>? Justify using the definition of cosine similarity.</p>
+        <div class="write" style="--n:6"></div>
+        <div class="keybox" hidden>
+          <h4>Answer &amp; scoring</h4>
+          <p><b class="ans">No to both. Nothing changes at all.</b></p>
+          <p>Doubling <span class="var">p&#8407;</span> doubles every dot product <span class="var">s&#8407;</span>&middot;<span class="var">p&#8407;</span>, <em>and</em> doubles |<span class="var">p&#8407;</span>| in the denominator. The two factors of 2 cancel:</p>
+          <div class="formula">cos(<span class="var">s&#8407;</span>, 2<span class="var">p&#8407;</span>) = <span class="frac"><span class="num"><span class="var">s&#8407;</span> &middot; 2<span class="var">p&#8407;</span></span><span class="den">|<span class="var">s&#8407;</span>| &middot; |2<span class="var">p&#8407;</span>|</span></span> = <span class="frac"><span class="num">2(<span class="var">s&#8407;</span> &middot; <span class="var">p&#8407;</span>)</span><span class="den">2|<span class="var">s&#8407;</span>||<span class="var">p&#8407;</span>|</span></span> = cos(<span class="var">s&#8407;</span>, <span class="var">p&#8407;</span>)</div>
+          <p>Geometrically: scaling a vector by a positive number stretches its <b>length</b> but leaves its <b>direction</b> untouched. <span class="var">p&#8407;</span> and 2<span class="var">p&#8407;</span> are parallel &mdash; the angle between a soldier and either one is identical. Cosine similarity measures angle only, so it is blind to length by construction. This is the same reason normalizing to unit vectors changes nothing about cosine rankings.</p>
+          <p>The staff officer's instinct &mdash; that bigger numbers mean stronger priorities &mdash; would be right for a <b>raw dot product</b> score, which is not scale-invariant. It is wrong for cosine.</p>
+          <div class="rubric">6 pts: 2 for "no change", 2 for showing the cancellation algebraically, 2 for the geometric statement that scaling changes length and not direction. An answer that says "no because cosine is normalized" without demonstrating why earns 3.</div>
+          <div class="miss"><b>Why this one matters</b>PSL 3 asks this exact question about a listener's preference vector. It is the single most likely conceptual item to reappear.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="q" id="q12">
+      <div class="q-head"><span class="q-num">12.</span><div class="q-body"><b>Reading small cosine differences.</b></div><span class="pts">4 pts</span></div>
+      <div class="q-body">
+        <p>Every cosine similarity in Question 10 came out above 0.95, even for two soldiers with clearly different profiles. Explain why the values cluster so close to 1 in this dataset, and what that means for how you should read them.</p>
+        <div class="write" style="--n:5"></div>
+        <div class="keybox" hidden>
+          <h4>Answer &amp; scoring</h4>
+          <p>Every feature here is <b>non-negative</b> &mdash; all three normalized measures fall in [0, 1]. That confines every soldier vector to the positive octant of &#8477;<sup>3</sup>, a single corner of the space. The largest angle possible between two vectors in that corner is 90&deg;, and that only happens in the extreme case where each soldier scores zero wherever the other scores anything. Real soldiers are nowhere near that, so the achievable range of cosine values is squeezed into a narrow band just below 1.</p>
+          <p>What it means practically: <b>do not read 0.96 as "very similar" on an absolute scale.</b> These scores are only meaningful <em>relative to each other</em>. The gap between 0.9997 and 0.9605 is small in absolute terms but is the entire signal &mdash; it is the difference between a near-twin and a clearly different profile. Rank the candidates and compare; do not set an absolute threshold like "0.9 means a good match."</p>
+          <p>Cosine similarity only spans its full range of &minus;1 to 1 when features can be negative, as with z-scores.</p>
+          <div class="rubric">4 pts: 2 for identifying non-negative features restricting vectors to one octant, 2 for the practical consequence that the scores must be read comparatively. Either half alone earns 2.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="q" id="q13">
+      <div class="q-head"><span class="q-num">13.</span><div class="q-body"><b>Linear combination.</b></div><span class="pts">5 pts</span></div>
+      <div class="q-body">
+        <p>The commander wants a description of the "average" of a fire team built 60% from Evans' profile and 40% from Carter's.</p>
+        <ol class="sub" type="a">
+          <li>Compute <span class="var">b&#8407;</span> = 0.6<span class="var">e&#8407;</span> + 0.4<span class="var">c&#8407;</span>, component by component.<div class="write" style="--n:3"></div></li>
+          <li>Before computing anything further: will <span class="var">b&#8407;</span> be closer to <span class="var">e&#8407;</span> or to <span class="var">c&#8407;</span> in cosine similarity? Explain your reasoning.<div class="write" style="--n:3"></div></li>
+        </ol>
+        <div class="keybox" hidden>
+          <h4>Answer &amp; scoring</h4>
+          <p>(a) 0.6<span class="var">e&#8407;</span> = &lang;0.462, 0.420, 0.600&rang;, 0.4<span class="var">c&#8407;</span> = &lang;0.260, 0.400, 0.304&rang;</p>
+          <p><span class="var">b&#8407;</span> = <b class="ans">&lang;0.722, 0.820, 0.904&rang;</b></p>
+          <p>(b) <b class="ans">Closer to <span class="var">e&#8407;</span></b>, because Evans carries the larger weight. A linear combination lands between the two source vectors, positioned proportionally to the weights &mdash; at 60/40 the blend sits nearer the 60% end. Had the weights been 50/50 the blend would sit symmetrically between them, and its cosine similarity to each would depend only on the geometry, not the weights.</p>
+          <p>Note what the blend inherits: Evans' high GPA component (0.904 is close to Evans' 1.00) but a weapons component of 0.820, pulled well up from Evans' 0.70 by Carter's perfect 1.00. The blend is not "mostly Evans" in every feature &mdash; it is a weighted average feature by feature.</p>
+          <div class="rubric">3 pts (a), 2 pts (b). Full credit on (b) requires tying the position of the blend to the weights, not just naming Evans.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section>
+    <div class="part-head">
+      <div class="tags"><b>Part III</b> <span>&middot;</span> <span>28 points</span></div>
+      <h2 class="part">Matrix Mechanics</h2>
+      <p class="scope">Lessons 27&ndash;28. Dimensions, transpose, the arithmetic, and when a product is legal at all.</p>
+    </div>
+
+    <p>Use these for all of Part III:</p>
+    <div class="tw">
+      <table class="data-mono" style="width:auto">
+        <tbody>
+          <tr><td style="border:0"><b>A</b> = </td><td style="border:0">[ 3&nbsp;&nbsp;1 ]<br>[ 2&nbsp;&nbsp;4 ]</td>
+              <td style="border:0;padding-left:28px"><b>B</b> = </td><td style="border:0">[ 1&nbsp;&nbsp;2 ]<br>[ 0&nbsp;&nbsp;5 ]</td>
+              <td style="border:0;padding-left:28px"><b>C</b> = </td><td style="border:0">[ 1&nbsp;&nbsp;0&nbsp;&nbsp;2 ]<br>[ 3&nbsp;&nbsp;1&nbsp;&nbsp;4 ]</td>
+              <td style="border:0;padding-left:28px"><span class="var">p&#8407;</span> = </td><td style="border:0">[ 2 ]<br>[ 1 ]</td>
+              <td style="border:0;padding-left:28px"><span class="var">q&#8407;</span> = </td><td style="border:0">[ 1 ]<br>[ 0 ]<br>[ 3 ]</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="q" id="q14">
+      <div class="q-head"><span class="q-num">14.</span><div class="q-body"><b>Dimensions and transpose.</b></div><span class="pts">6 pts</span></div>
+      <div class="q-body">
+        <ol class="sub" type="a">
+          <li>State the dimensions of <b>A</b>, <b>C</b>, <span class="var">p&#8407;</span> and <span class="var">q&#8407;</span>. &nbsp;<span class="blank" style="min-width:230px"></span></li>
+          <li>Write <b>C</b><sup>T</sup> and give its dimensions.<div class="write" style="--n:4"></div></li>
+          <li>The platoon roster is a 30 &times; 3 matrix <b>F</b>. What does a <b>row</b> of <b>F</b><sup>T</sup> represent? What does a <b>column</b> represent?<div class="write" style="--n:3"></div></li>
+        </ol>
+        <div class="keybox" hidden>
+          <h4>Answer &amp; scoring</h4>
+          <p>(a) <b>A</b> is <b class="ans">2&times;2</b>, <b>C</b> is <b class="ans">2&times;3</b>, <span class="var">p&#8407;</span> is <b class="ans">2&times;1</b>, <span class="var">q&#8407;</span> is <b class="ans">3&times;1</b>. Rows first, always.</p>
+          <p>(b) <b>C</b><sup>T</sup> = <b class="ans">3&times;2</b>:</p>
+          <p style="font-family:var(--mono);margin-left:16px">[ 1&nbsp;&nbsp;3 ]<br>[ 0&nbsp;&nbsp;1 ]<br>[ 2&nbsp;&nbsp;4 ]</p>
+          <p>Transposing swaps rows and columns, so an <span class="var">m</span>&times;<span class="var">n</span> matrix becomes <span class="var">n</span>&times;<span class="var">m</span>. The entry at (1,3) of <b>C</b> lands at (3,1) of <b>C</b><sup>T</sup>.</p>
+          <p>(c) <b>F</b> is 30&times;3 &mdash; one row per soldier, one column per feature &mdash; so <b>F</b><sup>T</sup> is 3&times;30. A <b>row</b> of <b>F</b><sup>T</sup> is <b>one feature measured across all 30 soldiers</b> (every AFT score, say). A <b>column</b> of <b>F</b><sup>T</sup> is <b>one soldier's complete profile</b>. Transposing switches the question from "tell me about this soldier" to "tell me about this measure."</p>
+          <div class="rubric">2 pts (a) &mdash; all four correct, rows&times;columns. 2 pts (b). 2 pts (c), 1 per direction.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="q" id="q15">
+      <div class="q-head"><span class="q-num">15.</span><div class="q-body"><b>Addition and scalar multiplication.</b></div><span class="pts">8 pts</span></div>
+      <div class="q-body">
+        <p>Compute each. Show your work.</p>
+        <p>(a) <b>A</b> + <b>B</b> &nbsp;&nbsp; (b) <b>A</b> &minus; <b>B</b> &nbsp;&nbsp; (c) 4<b>A</b> &nbsp;&nbsp; (d) 2<b>A</b> &minus; 3<b>B</b></p>
+        <div class="write" style="--n:7"></div>
+        <div class="keybox" hidden>
+          <h4>Answer &amp; scoring</h4>
+          <p style="font-family:var(--mono)">(a) <b class="ans">[ 4&nbsp;&nbsp;3 ; 2&nbsp;&nbsp;9 ]</b> &nbsp;&nbsp;&nbsp; (b) <b class="ans">[ 2&nbsp;&nbsp;&minus;1 ; 2&nbsp;&nbsp;&minus;1 ]</b></p>
+          <p style="font-family:var(--mono)">(c) <b class="ans">[ 12&nbsp;&nbsp;4 ; 8&nbsp;&nbsp;16 ]</b> &nbsp;&nbsp;&nbsp; (d) <b class="ans">[ 3&nbsp;&nbsp;&minus;4 ; 4&nbsp;&nbsp;&minus;7 ]</b></p>
+          <p>For (d): 2<b>A</b> = [6 2; 4 8] and 3<b>B</b> = [3 6; 0 15], so the difference is [6&minus;3, 2&minus;6; 4&minus;0, 8&minus;15] = [3, &minus;4; 4, &minus;7].</p>
+          <p>All of these are <b>entry-by-entry</b> operations, and all require the matrices to have identical dimensions. That is what makes them easy &mdash; and what makes multiplication, which is not entry-by-entry, the place where people lose points.</p>
+          <div class="rubric">2 pts each. One arithmetic slip inside an otherwise correct matrix costs 1, not the whole item.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="q" id="q16">
+      <div class="q-head"><span class="q-num">16.</span><div class="q-body"><b>Is the product defined?</b></div><span class="pts">6 pts</span></div>
+      <div class="q-body">
+        <p>For each product: state whether it is <b>defined</b>, give the <b>dimensions</b> of the result, and if defined, compute it.</p>
+        <ol class="sub" type="a">
+          <li><b>A</b><span class="var">p&#8407;</span><div class="write" style="--n:2"></div></li>
+          <li><b>C</b><span class="var">q&#8407;</span><div class="write" style="--n:2"></div></li>
+          <li><span class="var">p&#8407;</span><sup>T</sup><b>A</b><div class="write" style="--n:2"></div></li>
+          <li><b>A</b><span class="var">q&#8407;</span><div class="write" style="--n:2"></div></li>
+        </ol>
+        <div class="keybox" hidden>
+          <h4>Answer &amp; scoring</h4>
+          <p>The rule: (<span class="var">m</span>&times;<span class="var">n</span>)(<span class="var">n</span>&times;<span class="var">k</span>) is defined only when the <b>inner dimensions match</b>, and the result is <span class="var">m</span>&times;<span class="var">k</span>.</p>
+          <p>(a) 2&times;2 times 2&times;1 &rarr; <b class="ans">defined, 2&times;1</b>. <b>A</b><span class="var">p&#8407;</span> = [3(2)+1(1); 2(2)+4(1)] = <b class="ans">[7; 8]</b></p>
+          <p>(b) 2&times;3 times 3&times;1 &rarr; <b class="ans">defined, 2&times;1</b>. <b>C</b><span class="var">q&#8407;</span> = [1(1)+0(0)+2(3); 3(1)+1(0)+4(3)] = <b class="ans">[7; 15]</b></p>
+          <p>(c) 1&times;2 times 2&times;2 &rarr; <b class="ans">defined, 1&times;2</b>. <span class="var">p&#8407;</span><sup>T</sup><b>A</b> = [2(3)+1(2), 2(1)+1(4)] = <b class="ans">[8, 6]</b></p>
+          <p>(d) 2&times;2 times 3&times;1 &rarr; <b class="ans">UNDEFINED.</b> The inner dimensions are 2 and 3; they do not match. <b>A</b> expects a vector with two components and <span class="var">q&#8407;</span> has three.</p>
+          <p>Notice (a) and (c): the same matrix and the same vector, but transposing <span class="var">p&#8407;</span> and switching the order produces a different shape <em>and</em> different numbers. <b>Order is part of the operation.</b></p>
+          <div class="rubric">1.5 pts each: 0.5 verdict, 0.5 dimensions, 0.5 value. Full credit on (d) requires naming the mismatched inner dimensions, not just "you can't."</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="q" id="q17">
+      <div class="q-head"><span class="q-num">17.</span><div class="q-body"><b>Matrix multiplication and commutativity.</b></div><span class="pts">8 pts</span></div>
+      <div class="q-body">
+        <ol class="sub" type="a">
+          <li>Compute <b>AB</b>. Show at least one entry as an explicit row-times-column dot product.<div class="write" style="--n:4"></div></li>
+          <li>Compute <b>BA</b>.<div class="write" style="--n:4"></div></li>
+          <li>Is <b>AB</b> = <b>BA</b>? What does your answer tell you about matrix multiplication?<div class="write" style="--n:3"></div></li>
+        </ol>
+        <div class="keybox" hidden>
+          <h4>Answer &amp; scoring</h4>
+          <p>(a) <b class="ans">AB = [ 3&nbsp;&nbsp;11 ; 2&nbsp;&nbsp;24 ]</b></p>
+          <p>Entry (1,2) worked out: row 1 of <b>A</b> dotted with column 2 of <b>B</b> = &lang;3, 1&rang; &middot; &lang;2, 5&rang; = 6 + 5 = 11.</p>
+          <p>(b) <b class="ans">BA = [ 7&nbsp;&nbsp;9 ; 10&nbsp;&nbsp;20 ]</b></p>
+          <p>(c) <b class="ans">No &mdash; AB &ne; BA.</b> Matrix multiplication is <b>not commutative</b>. Order changes the answer, and here it changes every single entry.</p>
+          <p>This is not an edge case, it is the normal situation: for most pairs of matrices the two products differ, and for non-square matrices one of the two orders is usually not even defined. Every entry of a product is a <b>row of the left matrix dotted with a column of the right</b> &mdash; swap the operands and you are dotting entirely different vectors together.</p>
+          <div class="rubric">3 pts (a) including the shown dot product, 3 pts (b), 2 pts (c). Stating "no" without the word commutative or an equivalent explanation earns 1 of 2.</div>
+          <div class="miss"><b>Watch for</b>Multiplying entry-by-entry ([3&times;1, 1&times;2; 2&times;0, 4&times;5] = [3, 2; 0, 20]). That is not matrix multiplication &mdash; it is what addition looks like, applied to the wrong operation.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="part-head">
+      <div class="tags"><b>Part IV</b> <span>&middot;</span> <span>46 points</span></div>
+      <h2 class="part">Determinants, Inverses &amp; Systems</h2>
+      <p class="scope">Lessons 29&ndash;31. Invertibility, the inverse method, row reduction, and what a singular system is telling you.</p>
+    </div>
+
+    <p>Continue with <b>A</b> = [ 3&nbsp;1 ; 2&nbsp;4 ] and <b>B</b> = [ 1&nbsp;2 ; 0&nbsp;5 ], and add <b>D</b> = [ 2&nbsp;4 ; 3&nbsp;6 ].</p>
+
+    <div class="q" id="q18">
+      <div class="q-head"><span class="q-num">18.</span><div class="q-body"><b>Determinants and invertibility.</b></div><span class="pts">6 pts</span></div>
+      <div class="q-body">
+        <p>Compute det(<b>A</b>), det(<b>B</b>), det(<b>D</b>). For each, state whether the matrix has an inverse.</p>
+        <div class="write" style="--n:4"></div>
+        <div class="keybox" hidden>
+          <h4>Answer &amp; scoring</h4>
+          <p>det = <span class="var">a</span><sub>11</sub><span class="var">a</span><sub>22</sub> &minus; <span class="var">a</span><sub>12</sub><span class="var">a</span><sub>21</sub></p>
+          <p>det(<b>A</b>) = 3(4) &minus; 1(2) = <b class="ans">10</b> &rarr; nonzero, <b>invertible</b></p>
+          <p>det(<b>B</b>) = 1(5) &minus; 2(0) = <b class="ans">5</b> &rarr; nonzero, <b>invertible</b></p>
+          <p>det(<b>D</b>) = 2(6) &minus; 4(3) = 12 &minus; 12 = <b class="ans">0</b> &rarr; <b>singular, no inverse</b></p>
+          <p>The determinant is the single test: a square matrix is invertible exactly when its determinant is nonzero. The <em>size</em> of a nonzero determinant does not matter for this question &mdash; det = 5 and det = 10 are equally invertible.</p>
+          <div class="rubric">1 pt per determinant, 1 pt per invertibility verdict.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="q" id="q19">
+      <div class="q-head"><span class="q-num">19.</span><div class="q-body"><b>The inverse.</b></div><span class="pts">8 pts</span></div>
+      <div class="q-body">
+        <ol class="sub" type="a">
+          <li>Compute <b>A</b><sup>&minus;1</sup>.<div class="write" style="--n:4"></div></li>
+          <li>Verify by computing <b>AA</b><sup>&minus;1</sup> and confirming you get the identity. Show the multiplication.<div class="write" style="--n:5"></div></li>
+        </ol>
+        <div class="keybox" hidden>
+          <h4>Answer &amp; scoring</h4>
+          <p>For a 2&times;2, <b>A</b><sup>&minus;1</sup> = (1/det) [ <span class="var">a</span><sub>22</sub>&nbsp;&nbsp;&minus;<span class="var">a</span><sub>12</sub> ; &minus;<span class="var">a</span><sub>21</sub>&nbsp;&nbsp;<span class="var">a</span><sub>11</sub> ] &mdash; swap the diagonal, negate the off-diagonal, divide by the determinant.</p>
+          <p>(a) <b class="ans">A<sup>&minus;1</sup> = (1/10) [ 4&nbsp;&nbsp;&minus;1 ; &minus;2&nbsp;&nbsp;3 ] = [ 0.4&nbsp;&nbsp;&minus;0.1 ; &minus;0.2&nbsp;&nbsp;0.3 ]</b></p>
+          <p>(b) <b>AA</b><sup>&minus;1</sup> = [3, 1; 2, 4][0.4, &minus;0.1; &minus;0.2, 0.3]</p>
+          <p style="margin-left:16px">(1,1): 3(0.4) + 1(&minus;0.2) = 1.2 &minus; 0.2 = <b>1</b><br>
+             (1,2): 3(&minus;0.1) + 1(0.3) = &minus;0.3 + 0.3 = <b>0</b><br>
+             (2,1): 2(0.4) + 4(&minus;0.2) = 0.8 &minus; 0.8 = <b>0</b><br>
+             (2,2): 2(&minus;0.1) + 4(0.3) = &minus;0.2 + 1.2 = <b>1</b></p>
+          <p>= <b class="ans">[ 1&nbsp;&nbsp;0 ; 0&nbsp;&nbsp;1 ] = I</b> &#10003;</p>
+          <div class="rubric">4 pts (a) &mdash; 1 for the determinant, 2 for the swap-and-negate pattern, 1 for dividing through. 4 pts (b), which requires the four entries shown, not just "= I".</div>
+          <div class="miss"><b>Watch for</b>Negating the diagonal instead of the off-diagonal. The entries that move are 3 and 4 (they swap); the entries that change sign are 1 and 2 (they stay put).</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="q" id="q20">
+      <div class="q-head"><span class="q-num">20.</span><div class="q-body"><b>Solving a system by the inverse method.</b></div><span class="pts">8 pts</span></div>
+      <div class="q-body">
+        <p>The commander budgets weekly training hours across two activities. Let <span class="var">x</span><sub>1</sub> be hours of physical training and <span class="var">x</span><sub>2</sub> be hours on the range. Two readiness requirements must be met exactly:</p>
+        <div class="formula" style="font-size:16px">3<span class="var">x</span><sub>1</sub> + <span class="var">x</span><sub>2</sub> = 11 &nbsp;&nbsp;&nbsp;&nbsp; 2<span class="var">x</span><sub>1</sub> + 4<span class="var">x</span><sub>2</sub> = 14</div>
+        <ol class="sub" type="a">
+          <li>Write the system in the form <b>A</b><span class="var">x&#8407;</span> = <span class="var">b&#8407;</span>, identifying <b>A</b>, <span class="var">x&#8407;</span> and <span class="var">b&#8407;</span>.<div class="write" style="--n:3"></div></li>
+          <li>Solve using <span class="var">x&#8407;</span> = <b>A</b><sup>&minus;1</sup><span class="var">b&#8407;</span>. Show the multiplication.<div class="write" style="--n:4"></div></li>
+          <li>Verify by substitution, and state the answer in context.<div class="write" style="--n:3"></div></li>
+        </ol>
+        <div class="keybox" hidden>
+          <h4>Answer &amp; scoring</h4>
+          <p>(a) <b>A</b> = [3, 1; 2, 4] &mdash; the same matrix from Question 19 &mdash; with <span class="var">x&#8407;</span> = [<span class="var">x</span><sub>1</sub>; <span class="var">x</span><sub>2</sub>] and <span class="var">b&#8407;</span> = <b class="ans">[11; 14]</b>. The coefficients become the rows of <b>A</b>; the constants become <span class="var">b&#8407;</span>.</p>
+          <p>(b) <span class="var">x&#8407;</span> = (1/10)[4, &minus;1; &minus;2, 3][11; 14]</p>
+          <p style="margin-left:16px">first entry: (1/10)(4&middot;11 &minus; 1&middot;14) = (1/10)(44 &minus; 14) = 30/10 = <b>3</b><br>
+             second entry: (1/10)(&minus;2&middot;11 + 3&middot;14) = (1/10)(&minus;22 + 42) = 20/10 = <b>2</b></p>
+          <p><b class="ans">x&#8407; = [3; 2]</b></p>
+          <p>(c) Check both equations: 3(3) + 2 = 11 &#10003; and 2(3) + 4(2) = 6 + 8 = 14 &#10003;</p>
+          <p>In context: the platoon should schedule <b class="ans">3 hours of physical training and 2 hours on the range</b> each week to meet both readiness requirements exactly. Because det(<b>A</b>) = 10 &ne; 0, this solution is <b>unique</b> &mdash; there is no other pair of hours that satisfies both.</p>
+          <div class="rubric">2 pts (a), 4 pts (b), 2 pts (c). The contextual statement with units is required for full credit on (c); "x = 3, y = 2" alone earns 1.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="q" id="q21">
+      <div class="q-head"><span class="q-num">21.</span><div class="q-body"><b>A singular matrix.</b></div><span class="pts">8 pts</span></div>
+      <div class="q-body">
+        <p>Consider <b>D</b> = [ 2&nbsp;&nbsp;4 ; 3&nbsp;&nbsp;6 ].</p>
+        <ol class="sub" type="a">
+          <li>You found det(<b>D</b>) = 0. What does that tell you about <b>D</b><sup>&minus;1</sup>?<div class="write" style="--n:2"></div></li>
+          <li>The rows of <b>D</b> are related. Describe the relationship, and connect it to the determinant.<div class="write" style="--n:3"></div></li>
+          <li>Treat each row as a line in the plane. Describe what a singular system looks like geometrically, and what that means for the number of solutions.<div class="write" style="--n:4"></div></li>
+        </ol>
+        <div class="keybox" hidden>
+          <h4>Answer &amp; scoring</h4>
+          <p>(a) <b class="ans">D<sup>&minus;1</sup> does not exist.</b> The inverse formula divides by the determinant, and division by zero is undefined. <b>D</b> is <b>singular</b>.</p>
+          <p>(b) <b>Row 2 is 1.5 times row 1</b>: 1.5(2) = 3 and 1.5(4) = 6. The rows are <b>scalar multiples</b> of one another &mdash; in vector language, parallel, or linearly dependent. Row 2 carries no information that row 1 did not already supply. A 2&times;2 determinant is zero exactly when its rows (equivalently, its columns) are scalar multiples of each other, so the dependence and the zero determinant are the same fact stated two ways.</p>
+          <p>(c) Each row is a line. Because the rows are proportional, the two lines have the <b>same slope</b> &mdash; they are parallel. Two outcomes follow, and which one you get depends on <span class="var">b&#8407;</span>:</p>
+          <ul>
+            <li>If the constants are <em>not</em> in the same proportion, the lines are <b>parallel and distinct</b> &mdash; they never meet, and the system has <b>no solution</b>.</li>
+            <li>If the constants <em>are</em> in the same proportion, the two equations describe the <b>same line</b> &mdash; every point on it works, and the system has <b>infinitely many solutions</b>.</li>
+          </ul>
+          <p>What a singular matrix rules out is the third case: a <b>unique</b> solution is impossible. That is exactly why row reduction tells you more than the determinant alone &mdash; det(<b>D</b>) = 0 says "not unique," but only reducing the augmented system reveals which of the other two you have.</p>
+          <div class="rubric">2 pts (a), 3 pts (b) &mdash; must name the scalar multiple explicitly &mdash; 3 pts (c), which needs parallel lines AND both possible outcomes. Answering only "no solution" earns 2 of 3.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="q" id="q22">
+      <div class="q-head"><span class="q-num">22.</span><div class="q-body"><b>Row reduction.</b></div><span class="pts">10 pts</span></div>
+      <div class="q-body">
+        <p>Solve the following system by row reduction. Write the augmented matrix first, then show each row operation you apply and name it.</p>
+        <div class="formula" style="font-size:16px">
+          <span class="var">x</span> + <span class="var">y</span> + <span class="var">z</span> = 6 &nbsp;&nbsp;&nbsp;
+          2<span class="var">x</span> &minus; <span class="var">y</span> + <span class="var">z</span> = 3 &nbsp;&nbsp;&nbsp;
+          <span class="var">x</span> + 2<span class="var">y</span> &minus; <span class="var">z</span> = 2
+        </div>
+        <div class="write" style="--n:10"></div>
+        <p><span class="var">x</span> = <span class="blank"></span> &nbsp;&nbsp; <span class="var">y</span> = <span class="blank"></span> &nbsp;&nbsp; <span class="var">z</span> = <span class="blank"></span></p>
+        <div class="keybox" hidden>
+          <h4>Answer &amp; scoring</h4>
+          <p>Augmented matrix:</p>
+          <p style="font-family:var(--mono);margin-left:16px">[ 1&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;1&nbsp;|&nbsp;6 ]<br>[ 2&nbsp;&nbsp;&minus;1&nbsp;&nbsp;1&nbsp;|&nbsp;3 ]<br>[ 1&nbsp;&nbsp;2&nbsp;&nbsp;&minus;1&nbsp;|&nbsp;2 ]</p>
+          <p><b>R2 &larr; R2 &minus; 2R1</b> and <b>R3 &larr; R3 &minus; R1</b>:</p>
+          <p style="font-family:var(--mono);margin-left:16px">[ 1&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;1&nbsp;|&nbsp;&nbsp;&nbsp;6 ]<br>[ 0&nbsp;&nbsp;&minus;3&nbsp;&nbsp;&minus;1&nbsp;|&nbsp;&minus;9 ]<br>[ 0&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&minus;2&nbsp;|&nbsp;&minus;4 ]</p>
+          <p><b>R2 &harr; R3</b> (swap, to get a leading 1):</p>
+          <p style="font-family:var(--mono);margin-left:16px">[ 1&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;1&nbsp;|&nbsp;&nbsp;&nbsp;6 ]<br>[ 0&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&minus;2&nbsp;|&nbsp;&minus;4 ]<br>[ 0&nbsp;&nbsp;&minus;3&nbsp;&nbsp;&minus;1&nbsp;|&nbsp;&minus;9 ]</p>
+          <p><b>R3 &larr; R3 + 3R2</b>:</p>
+          <p style="font-family:var(--mono);margin-left:16px">[ 1&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;1&nbsp;|&nbsp;&nbsp;&nbsp;6 ]<br>[ 0&nbsp;&nbsp;1&nbsp;&nbsp;&minus;2&nbsp;|&nbsp;&minus;4 ]<br>[ 0&nbsp;&nbsp;0&nbsp;&nbsp;&minus;7&nbsp;|&nbsp;&minus;21 ]</p>
+          <p><b>R3 &larr; &minus;(1/7)R3</b> gives <span class="var">z</span> = <b>3</b>. Back-substitute into row 2: <span class="var">y</span> &minus; 2(3) = &minus;4, so <span class="var">y</span> = <b>2</b>. Into row 1: <span class="var">x</span> + 2 + 3 = 6, so <span class="var">x</span> = <b>1</b>.</p>
+          <p><b class="ans">(x, y, z) = (1, 2, 3)</b></p>
+          <p>Check all three: 1+2+3 = 6 &#10003;, 2&minus;2+3 = 3 &#10003;, 1+4&minus;3 = 2 &#10003;</p>
+          <div class="rubric">3 pts augmented matrix, 5 pts row operations (named, and legal &mdash; only the three elementary operations), 2 pts solution with a check. Any correct sequence of operations earns full credit; there is no single required path.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="q" id="q23">
+      <div class="q-head"><span class="q-num">23.</span><div class="q-body"><b>Classifying the solution set.</b></div><span class="pts">6 pts</span></div>
+      <div class="q-body">
+        <p>Each matrix below is already in row echelon form. Classify the system as having a <b>unique solution</b>, <b>no solution</b>, or <b>infinitely many solutions</b>, and say how you can tell.</p>
+        <ol class="sub" type="a">
+          <li style="font-family:var(--mono)">[ 1&nbsp;&nbsp;2&nbsp;|&nbsp;3 ; 0&nbsp;&nbsp;1&nbsp;|&nbsp;4 ] &nbsp;&nbsp;<span class="blank"></span></li>
+          <li style="font-family:var(--mono)">[ 1&nbsp;&nbsp;2&nbsp;|&nbsp;3 ; 0&nbsp;&nbsp;0&nbsp;|&nbsp;5 ] &nbsp;&nbsp;<span class="blank"></span></li>
+          <li style="font-family:var(--mono)">[ 1&nbsp;&nbsp;2&nbsp;|&nbsp;3 ; 0&nbsp;&nbsp;0&nbsp;|&nbsp;0 ] &nbsp;&nbsp;<span class="blank"></span></li>
+        </ol>
+        <div class="write" style="--n:4"></div>
+        <div class="keybox" hidden>
+          <h4>Answer &amp; scoring</h4>
+          <p>(a) <b class="ans">Unique solution.</b> Every variable has a leading 1 (a pivot) and there is no contradictory row. Back-substitution: <span class="var">y</span> = 4, then <span class="var">x</span> + 8 = 3 so <span class="var">x</span> = &minus;5.</p>
+          <p>(b) <b class="ans">No solution.</b> The second row reads 0<span class="var">x</span> + 0<span class="var">y</span> = 5, that is <b>0 = 5</b> &mdash; a contradiction. Any row of the form [0 0 &hellip; 0 | nonzero] kills the system outright.</p>
+          <p>(c) <b class="ans">Infinitely many solutions.</b> The second row reads 0 = 0, which is true but empty. Only one real equation remains for two unknowns, so <span class="var">y</span> is a <b>free variable</b>: pick any <span class="var">y</span> and <span class="var">x</span> = 3 &minus; 2<span class="var">y</span> follows.</p>
+          <p>The rule of thumb: a zero row with a nonzero constant means <b>no solution</b>; a fully zero row means a <b>free variable</b> and infinitely many; a pivot in every column of coefficients means <b>unique</b>.</p>
+          <div class="rubric">2 pts each: 1 classification, 1 reason. The reason must cite the specific row, not just restate the classification.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section>
+    <div class="part-head">
+      <div class="tags"><b>Part V</b> <span>&middot;</span> <span>26 points</span></div>
+      <h2 class="part">Matrices as Data</h2>
+      <p class="scope">Lesson 32 and synthesis. One matrix&ndash;vector product replacing thirty dot products, and why that is the whole point of the block.</p>
+    </div>
+
+    <p>The commander must rank soldiers for a limited number of school slots. She assigns <b>importance weights</b> to the three measures and scores every soldier as a weighted sum. Using the same three soldiers, the feature matrix and weight vector are:</p>
+    <div class="tw">
+      <table class="data-mono" style="width:auto">
+        <tbody><tr>
+          <td style="border:0"><b>F</b> = </td>
+          <td style="border:0">[ 0.77&nbsp;&nbsp;0.70&nbsp;&nbsp;1.00 ]&nbsp;&nbsp;Evans<br>[ 0.75&nbsp;&nbsp;0.65&nbsp;&nbsp;0.99 ]&nbsp;&nbsp;Lewis<br>[ 0.65&nbsp;&nbsp;1.00&nbsp;&nbsp;0.76 ]&nbsp;&nbsp;Carter</td>
+          <td style="border:0;padding-left:40px"><span class="var">w&#8407;</span> = </td>
+          <td style="border:0">[ 0.5 ]&nbsp;&nbsp;AFT<br>[ 0.3 ]&nbsp;&nbsp;weapons<br>[ 0.2 ]&nbsp;&nbsp;GPA</td>
+        </tr></tbody>
+      </table>
+    </div>
+
+    <div class="q" id="q24">
+      <div class="q-head"><span class="q-num">24.</span><div class="q-body"><b>Scoring by matrix&ndash;vector multiplication.</b></div><span class="pts">10 pts</span></div>
+      <div class="q-body">
+        <ol class="sub" type="a">
+          <li>Check that <b>F</b><span class="var">w&#8407;</span> is defined and state the dimensions of the result. &nbsp;<span class="blank"></span></li>
+          <li>Compute <b>F</b><span class="var">w&#8407;</span>. Show each entry.<div class="write" style="--n:5"></div></li>
+          <li>What does each <b>entry</b> of the result represent? Who ranks first?<div class="write" style="--n:3"></div></li>
+          <li>The full roster is 30&times;3. If the commander scored all 30 soldiers this way, what would the dimensions of <b>F</b><span class="var">w&#8407;</span> be, and how many dot products would that single product be performing?<div class="write" style="--n:2"></div></li>
+        </ol>
+        <div class="keybox" hidden>
+          <h4>Answer &amp; scoring</h4>
+          <p>(a) 3&times;3 times 3&times;1: inner dimensions match, so it is <b class="ans">defined, result 3&times;1</b>.</p>
+          <p>(b) Each entry is a row of <b>F</b> dotted with <span class="var">w&#8407;</span>:</p>
+          <p style="margin-left:16px">Evans: 0.77(0.5) + 0.70(0.3) + 1.00(0.2) = 0.385 + 0.210 + 0.200 = <b class="ans">0.795</b><br>
+             Lewis: 0.75(0.5) + 0.65(0.3) + 0.99(0.2) = 0.375 + 0.195 + 0.198 = <b class="ans">0.768</b><br>
+             Carter: 0.65(0.5) + 1.00(0.3) + 0.76(0.2) = 0.325 + 0.300 + 0.152 = <b class="ans">0.777</b></p>
+          <p>(c) Each entry is <b>one soldier's weighted readiness score</b> under the commander's priorities &mdash; a single number summarizing that soldier's whole profile. Ranking: <b class="ans">Evans (0.795), Carter (0.777), Lewis (0.768)</b>. Evans gets the slot.</p>
+          <p>Note how close Carter and Lewis are (0.009 apart) despite completely different profiles &mdash; Carter's perfect weapons score almost exactly offsets Lewis' stronger AFT and GPA. A weighted score compresses three numbers into one, and information is lost in the compression.</p>
+          <p>(d) 30&times;3 times 3&times;1 &rarr; <b class="ans">30&times;1</b>, and it performs <b class="ans">30 dot products</b> &mdash; one per soldier &mdash; in a single operation. <b>This is the payoff of the whole block:</b> matrix&ndash;vector multiplication is simultaneous dot products. What you did by hand for three soldiers, Excel's <code>MMULT</code> does for the entire platoon at once.</p>
+          <div class="rubric">2 pts (a), 4 pts (b), 2 pts (c), 2 pts (d). Full credit on (c) requires naming what an entry <em>is</em>, not just listing the ranking.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="q" id="q25">
+      <div class="q-head"><span class="q-num">25.</span><div class="q-body"><b>What the weights control.</b></div><span class="pts">8 pts</span></div>
+      <div class="q-body">
+        <ol class="sub" type="a">
+          <li>A new commander cares far more about marksmanship: <span class="var">w&#8407;</span><sub>2</sub> = &lang;0.2, 0.6, 0.2&rang;. Recompute the three scores and give the new ranking.<div class="write" style="--n:5"></div></li>
+          <li>Compare to your answer in Question 24. What does this tell you about weighted scoring?<div class="write" style="--n:3"></div></li>
+          <li>A third officer proposes <span class="var">w&#8407;</span><sub>3</sub> = &lang;1.0, 0.6, 0.4&rang;, "to weight everything more heavily." What happens to the scores, and what happens to the ranking?<div class="write" style="--n:3"></div></li>
+        </ol>
+        <div class="keybox" hidden>
+          <h4>Answer &amp; scoring</h4>
+          <p>(a) Evans: 0.154 + 0.420 + 0.200 = <b class="ans">0.774</b><br>
+             Lewis: 0.150 + 0.390 + 0.198 = <b class="ans">0.738</b><br>
+             Carter: 0.130 + 0.600 + 0.152 = <b class="ans">0.882</b></p>
+          <p>New ranking: <b class="ans">Carter, Evans, Lewis</b>.</p>
+          <p>(b) <b>The ranking flipped.</b> Carter went from second to a commanding first &mdash; same soldiers, same data, different priorities. The weight vector is not a technicality; it <b>is</b> the commander's judgment about what matters, and it determines the answer. A weighted score is only as defensible as the weights behind it, which is why they must be stated openly rather than buried in a spreadsheet.</p>
+          <p>(c) <span class="var">w&#8407;</span><sub>3</sub> = 2<span class="var">w&#8407;</span>. Every score <b>doubles</b>: 1.590, 1.536, 1.554. The <b class="ans">ranking is completely unchanged</b> &mdash; Evans, Carter, Lewis, exactly as before.</p>
+          <p>Scaling every weight by the same positive constant scales every score by that constant, and scaling preserves order. The officer has changed the units of the score and nothing else. Compare Question 11: cosine similarity is immune to this by construction, while a raw weighted score does change &mdash; but only in a way that cancels out the moment you rank.</p>
+          <p>What <em>would</em> change the ranking is altering the weights <b>relative to each other</b>, as in part (a).</p>
+          <div class="rubric">4 pts (a), 2 pts (b), 2 pts (c). Full credit on (c) requires both halves: scores double AND ranking is unchanged.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="q" id="q26">
+      <div class="q-head"><span class="q-num">26.</span><div class="q-body"><b>Connecting to predictive modeling.</b></div><span class="pts">4 pts</span></div>
+      <div class="q-body">
+        <p>On WPR 1 you fit a linear regression &#375;<sub>i</sub> = <span class="var">b</span><sub>0</sub> + <span class="var">b</span><sub>1</sub><span class="var">x</span><sub>i</sub>. Suppose you build a matrix <b>X</b> whose first column is all 1s and whose second column holds the <span class="var">x</span> values, and a vector <span class="var">&beta;&#8407;</span> = [<span class="var">b</span><sub>0</sub>; <span class="var">b</span><sub>1</sub>].</p>
+        <p>What does each row of the product <b>X</b><span class="var">&beta;&#8407;</span> compute? Why must the number of columns of <b>X</b> equal the number of rows of <span class="var">&beta;&#8407;</span>?</p>
+        <div class="write" style="--n:5"></div>
+        <div class="keybox" hidden>
+          <h4>Answer &amp; scoring</h4>
+          <p>Each row of <b>X</b><span class="var">&beta;&#8407;</span> computes <b>one fitted value</b>: row <span class="var">i</span> is &lang;1, <span class="var">x</span><sub>i</sub>&rang; &middot; &lang;<span class="var">b</span><sub>0</sub>, <span class="var">b</span><sub>1</sub>&rang; = <span class="var">b</span><sub>0</sub>(1) + <span class="var">b</span><sub>1</sub><span class="var">x</span><sub>i</sub> = <b class="ans">&#375;<sub>i</sub></b>. The column of 1s is what lets the intercept ride along as just another weight.</p>
+          <p>So <b>X</b><span class="var">&beta;&#8407;</span> produces the entire vector of predictions in one operation &mdash; the same structure as scoring the platoon in Question 24. A regression model <em>is</em> a weighted sum of features, and <span class="var">&beta;&#8407;</span> is its weight vector.</p>
+          <p>The dimensions must match because each entry of the product is a <b>dot product between a row of X and the vector</b> <span class="var">&beta;&#8407;</span>, and a dot product is only defined between vectors with the same number of components. One weight per feature, no more and no less &mdash; if <b>X</b> has a column with no matching coefficient, there is nothing to multiply it by.</p>
+          <div class="rubric">2 pts for identifying the row as the fitted value &#375;<sub>i</sub>, 2 pts for the dimension argument in terms of dot products. Answers that only restate the rule "inner dimensions must match" without saying why earn 1 of 2.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="q" id="q27">
+      <div class="q-head"><span class="q-num">27.</span><div class="q-body"><b>One language.</b></div><span class="pts">4 pts</span></div>
+      <div class="q-body">
+        <p>In two to three sentences, explain how the dot product, cosine similarity, and matrix&ndash;vector multiplication are all the same operation wearing different clothes. Refer to at least two of the problems you worked in this exam.</p>
+        <div class="write" style="--n:6"></div>
+        <div class="keybox" hidden>
+          <h4>Answer &amp; scoring</h4>
+          <p><b>The dot product is the atom.</b> Everything else is built from it.</p>
+          <ul>
+            <li><b>Cosine similarity</b> is a dot product divided by two magnitudes &mdash; the same number, normalized so that only direction survives. That is why Question 11's doubled priority vector changed nothing.</li>
+            <li><b>Matrix&ndash;vector multiplication</b> is a stack of dot products: each entry of <b>F</b><span class="var">w&#8407;</span> in Question 24 is one row of <b>F</b> dotted with <span class="var">w&#8407;</span>. Thirty soldiers means thirty dot products, executed as one product.</li>
+            <li><b>Matrix&ndash;matrix multiplication</b> is a grid of them &mdash; every entry of <b>AB</b> in Question 17 is a row of <b>A</b> dotted with a column of <b>B</b>.</li>
+          </ul>
+          <p>This is why the dimension rule takes the form it does: the inner dimensions must match because <b>a dot product needs two vectors of equal length</b>. Every "is this defined?" question in this exam reduces to that one requirement.</p>
+          <div class="rubric">4 pts: 2 for identifying the dot product as the common operation, 2 for correctly describing at least two of the three constructions with reference to specific questions. A vague "they are all related" earns 1.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="facil noprint">
+    <h2>Study guidance</h2>
+    <p style="color:var(--ink-soft);margin-top:6px">The course director's recommendation: work your gate and the homework problems. This exam is built to sit alongside them, on her dataset.</p>
+
+    <h3 style="font-family:var(--serif);font-size:19px;margin:28px 0 10px">Where points go</h3>
+    <p style="font-size:13.5px;color:var(--ink-soft);margin-bottom:12px">Unlike the WPR 1 sheet, these are <b>predictions</b>, not confirmed misses &mdash; Gate 3 has not been graded yet. They come from the shape of HW3, PSL 3 and TL 4, and from the two patterns that actually burned people on Gates 1 and 2.</p>
+    <div class="miss"><b>1 &mdash; Scale before similarity</b>Question 8. Raw AFT scores account for <b>99.6%</b> of a raw magnitude. Any similarity computed on unnormalized features is just an AFT comparison in disguise. Same logic as standardizing before KNN.</div>
+    <div class="miss"><b>2 &mdash; Scaling a vector changes nothing about cosine</b>Question 11. PSL 3 asks this exact question. Doubling a preference vector doubles the dot product and the magnitude; they cancel. Cosine sees angle only.</div>
+    <div class="miss"><b>3 &mdash; Magnitude is not quality</b>Question 9. A big magnitude means a big overall profile, not a better soldier, and two very different soldiers can have nearly identical magnitudes.</div>
+    <div class="miss"><b>4 &mdash; The dot product is a scalar</b>Question 3. Stopping at the component-wise products and reporting a vector is the most common mechanical error in the block.</div>
+    <div class="miss"><b>5 &mdash; Checking that a product is defined</b>Questions 16 and 24. Inner dimensions must match; the result takes the outer ones. Points are awarded for the check itself, so never skip it.</div>
+    <div class="miss"><b>6 &mdash; AB &ne; BA</b>Question 17. And entry-by-entry multiplication is not matrix multiplication at all.</div>
+    <div class="miss"><b>7 &mdash; det = 0 means "not unique", not "no solution"</b>Question 21. A singular system is either inconsistent or has infinitely many solutions, and only row reduction tells you which.</div>
+    <div class="miss"><b>8 &mdash; Interpreting in context</b>Every application item. This is what cost the most points on Gates 1 and 2, in a block where it is tempting to stop at the arithmetic. Name the soldier, name the units, say what the commander should do.</div>
+
+    <h3 style="font-family:var(--serif);font-size:19px;margin:28px 0 10px">If you are short on time</h3>
+    <p style="font-size:13.5px;color:var(--ink-soft)">Work Questions <b>2, 3, 4, 8, 10, 11, 16, 19, 20, 22, 24</b> &mdash; 84 points covering every mechanic that is likely to be tested (magnitude, dot product, the orthogonal and parallel tests, cosine similarity, defined-or-not, the inverse, the inverse method, row reduction, and matrix&ndash;vector scoring) plus the two conceptual traps most likely to appear. Leave the synthesis items for a second pass.</p>
+
+    <h3 style="font-family:var(--serif);font-size:19px;margin:28px 0 10px">Work these alongside it</h3>
+    <ul style="font-size:13.5px;color:var(--ink-soft);padding-left:22px">
+      <li><b>HW3</b> &mdash; the spine. Sections 1 and 3 are pure mechanics; Sections 2 and 5 are the same applications as Parts II and V here, on your own dataset.</li>
+      <li><b>PSL 3</b> (songs) &mdash; the best source for cosine similarity intuition. Q4c is Question 11 of this exam in different clothing.</li>
+      <li><b>TL 4</b> (matrices in Excel) &mdash; the <code>MMULT</code> and <code>TRANSPOSE</code> practice, and where Question 24(d) comes from.</li>
+      <li><b>platoon_roomate_data.xlsx</b> &mdash; 30 soldiers. Try the full 30&times;3 scoring in Excel, then re-rank with different weights and watch the order move.</li>
+      <li><b><a href="ma103-wpr2-reference.html">The reference card</a></b> &mdash; every formula and test in this block on one page, plus rapid drills.</li>
+    </ul>
+
+    <h3 style="font-family:var(--serif);font-size:19px;margin:28px 0 10px">Answer key at a glance</h3>
+    <div class="tw">
+      <table>
+        <thead><tr><th>Item</th><th>Answer</th><th>Item</th><th>Answer</th></tr></thead>
+        <tbody>
+          <tr><td>2. Magnitudes</td><td>6, 3, 12, 5</td><td>16. Undefined one</td><td>(d) A<span class="var">q&#8407;</span>, 2&ne;3</td></tr>
+          <tr><td>3. Dot products</td><td>0, &minus;72, 10</td><td>17. AB / BA</td><td>[3 11; 2 24] / [7 9; 10 20]</td></tr>
+          <tr><td>4. Relationships</td><td><span class="var">u&#8407;</span>&perp;<span class="var">v&#8407;</span>, <span class="var">w&#8407;</span> = &minus;2<span class="var">u&#8407;</span></td><td>18. Determinants</td><td>10, 5, 0</td></tr>
+          <tr><td>5. Angle</td><td>cos&thinsp;&theta; = 1/3, 70.5&deg;</td><td>19. A<sup>&minus;1</sup></td><td>(1/10)[4 &minus;1; &minus;2 3]</td></tr>
+          <tr><td><b>8. AFT share of raw</b></td><td><b>99.6%</b></td><td>20. Training hours</td><td>3 PT, 2 range</td></tr>
+          <tr><td>9. Magnitudes</td><td>1.4432 / 1.4018 / 1.4142</td><td>21. det(D) = 0</td><td>rows: R2 = 1.5&middot;R1</td></tr>
+          <tr><td>10. Cosines</td><td>0.9997 / 0.9605 &rarr; Lewis</td><td>22. Row reduction</td><td>(1, 2, 3)</td></tr>
+          <tr><td><b>11. Doubling <span class="var">p&#8407;</span></b></td><td><b>No change at all</b></td><td>23. Classify</td><td>unique / none / infinite</td></tr>
+          <tr><td>13. Blend</td><td>&lang;0.722, 0.820, 0.904&rang;</td><td>24. F<span class="var">w&#8407;</span></td><td>0.795 / 0.768 / 0.777</td></tr>
+          <tr><td>14. C<sup>T</sup></td><td>3&times;2</td><td>25. New weights</td><td>Carter wins, 0.882</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer>
+    <p class="byline"><a href="index.html">Dennis Pezan</a></p>
+    MA103 Data-Driven Modeling &middot; AY27-1 &middot; Unofficial practice material prepared for the WPR 2 study session. Coverage drawn from the published lesson objectives for Lessons 23&ndash;32 and from Homework 3, PSL 3 and TL 4. It is not the examination and does not reproduce any secured assessment.
+  </footer>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---- answer key toggle ---- */
+  var tog = document.getElementById('keytog');
+  var keys = Array.prototype.slice.call(document.querySelectorAll('.keybox'));
+  function setKeys(on){
+    tog.setAttribute('aria-pressed', on ? 'true' : 'false');
+    keys.forEach(function(k){ k.hidden = !on; });
+    try { localStorage.setItem('ma103.key', on ? '1' : '0'); } catch(e){}
+  }
+  tog.addEventListener('click', function(){
+    setKeys(tog.getAttribute('aria-pressed') !== 'true');
+  });
+  var saved = '0';
+  try { saved = localStorage.getItem('ma103.key') || '0'; } catch(e){}
+  setKeys(saved === '1');
+
+  document.getElementById('pbtn').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+</body>
+</html>

@@ -67,6 +67,13 @@
       text-transform: uppercase; color: var(--dim); margin-right: auto;
       padding-left: 14px; border-left: 1px solid var(--rule);
     }
+    .bar-links { display: flex; gap: 16px; }
+    .bar-links a {
+      font-size: 10.5px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--dim); text-decoration: none; border-bottom: 1px solid transparent;
+      padding-bottom: 2px; white-space: nowrap;
+    }
+    .bar-links a:hover { color: var(--black); border-bottom-color: var(--black); }
     button { font: inherit; color: inherit; cursor: pointer; }
     .btn {
       background: none; border: 1px solid var(--rule); padding: 4px 11px;
@@ -276,6 +283,7 @@
   <div class="bar-in">
     <a class="bar-home" href="index.html">&#8592; Dennis Pezan</a>
     <div class="bar-id">MA103 &middot; WPR 1 Practice &middot; 164 pts</div>
+    <nav class="bar-links"><a href="ma103-wpr2.html">WPR 2 Practice</a><a href="ma103-wpr2-reference.html">Reference</a></nav>
     <button class="switch" id="keytog" type="button" aria-pressed="false"><span class="dot"></span>Answer key</button>
     <button class="btn" id="pbtn" type="button">Print</button>
   </div>
