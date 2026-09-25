@@ -306,8 +306,9 @@
     <p class="sub">Everything in the MA103 mini block on one page &mdash; and thirty drills to make it automatic</p>
 
     <div class="callout">
-      <p>WPR 1 provided no formula sheet, so assume WPR 2 will not either. <b>This is the list to memorize.</b> Print it, cover the right-hand side, and see how much you can reproduce from the name alone.</p>
-      <p>The drills at the bottom are deliberately mechanical. Speed on these is what buys you time for the interpretation questions, which is where the points actually go.</p>
+      <p><b>The course director has said WPR 2 will be "much more computational than WPR 1,"</b> and that cadets will have to "demonstrate their computational ability with vector and matrix operations" on top of interpreting their results. That makes this page the highest-leverage thing you can work.</p>
+      <p>WPR 1 provided no formula sheet, so assume WPR 2 will not either. <b>The cards below are the list to memorize.</b> Print the page, cover the right-hand side, and see how much you can reproduce from the name alone.</p>
+      <p>The 54 drills below are deliberately mechanical. Speed there is what buys you time for the interpretation questions &mdash; and this time the arithmetic is worth points in its own right.</p>
     </div>
   </header>
 
@@ -435,49 +436,86 @@
 
   <section>
     <div class="part-head">
-      <div class="tags"><b>Drills</b> <span>&middot;</span> <span>30 items</span></div>
+      <div class="tags"><b>Drills</b> <span>&middot;</span> <span>54 items</span></div>
       <h2 class="part">Rapid Drills</h2>
-      <p class="scope">Cover the answers. Aim for under five seconds each. Use the <b>Drill answers</b> switch in the bar above to check.</p>
+      <p class="scope">Groups A&ndash;F are arithmetic; G&ndash;J are recognition. Do the arithmetic ones with pencil and paper, not a calculator. Use the <b>Drill answers</b> switch in the bar above to check.</p>
     </div>
 
-    <h3 style="font-family:var(--serif);font-size:20px;margin:26px 0 6px">A &middot; Is the product defined?</h3>
+    <h3 style="font-family:var(--serif);font-size:20px;margin:26px 0 6px">A &middot; Magnitude</h3>
+    <p style="font-size:13.5px;color:var(--ink-soft);margin-bottom:6px">Every one of these comes out a whole number. If you get a decimal, check your squaring.</p>
+    <div class="drill"><span class="n">1</span><span class="q2">|&lang;3, 4&rang;|</span><span class="a keybox" hidden>5</span></div>
+    <div class="drill"><span class="n">2</span><span class="q2">|&lang;1, 2, 2&rang;|</span><span class="a keybox" hidden>3</span></div>
+    <div class="drill"><span class="n">3</span><span class="q2">|&lang;2, &minus;3, 6&rang;|</span><span class="a keybox" hidden>7</span></div>
+    <div class="drill"><span class="n">4</span><span class="q2">|&lang;0, 5, 12&rang;|</span><span class="a keybox" hidden>13</span></div>
+    <div class="drill"><span class="n">5</span><span class="q2">|&lang;1, 1, 1, 1&rang;|</span><span class="a keybox" hidden>2</span></div>
+
+    <h3 style="font-family:var(--serif);font-size:20px;margin:30px 0 6px">B &middot; Dot product</h3>
+    <div class="drill"><span class="n">6</span><span class="q2">&lang;1, 2, 3&rang; &middot; &lang;4, 5, 6&rang;</span><span class="a keybox" hidden>32</span></div>
+    <div class="drill"><span class="n">7</span><span class="q2">&lang;2, &minus;1, 3&rang; &middot; &lang;1, 4, &minus;2&rang;</span><span class="a keybox" hidden>&minus;8</span></div>
+    <div class="drill"><span class="n">8</span><span class="q2">&lang;5, 0, 0&rang; &middot; &lang;0, 5, 0&rang;</span><span class="a keybox" hidden>0 &middot; orthogonal</span></div>
+    <div class="drill"><span class="n">9</span><span class="q2">&lang;&minus;2, 3, 1&rang; &middot; &lang;4, 1, &minus;5&rang;</span><span class="a keybox" hidden>&minus;10</span></div>
+    <div class="drill"><span class="n">10</span><span class="q2">&lang;0.5, 0.2, 0.3&rang; &middot; &lang;0.4, 0.6, 0.8&rang;</span><span class="a keybox" hidden>0.56</span></div>
+
+    <h3 style="font-family:var(--serif);font-size:20px;margin:30px 0 6px">C &middot; Cosine similarity</h3>
+    <div class="drill"><span class="n">11</span><span class="q2">&lang;1, 0&rang; and &lang;1, 1&rang;</span><span class="a keybox" hidden>1/&radic;2 = 0.7071</span></div>
+    <div class="drill"><span class="n">12</span><span class="q2">&lang;3, 4&rang; and &lang;6, 8&rang;</span><span class="a keybox" hidden>1 &middot; parallel</span></div>
+    <div class="drill"><span class="n">13</span><span class="q2">&lang;1, 2, 2&rang; and &lang;2, &minus;1, 2&rang;</span><span class="a keybox" hidden>4/9 = 0.4444</span></div>
+
+    <h3 style="font-family:var(--serif);font-size:20px;margin:30px 0 6px">D &middot; Determinant and inverse</h3>
+    <div class="drill"><span class="n">14</span><span class="q2">det [ 4&nbsp;&nbsp;3 ; 2&nbsp;&nbsp;1 ]</span><span class="a keybox" hidden>&minus;2</span></div>
+    <div class="drill"><span class="n">15</span><span class="q2">det [ 7&nbsp;&nbsp;2 ; 3&nbsp;&nbsp;1 ]</span><span class="a keybox" hidden>1</span></div>
+    <div class="drill"><span class="n">16</span><span class="q2">inverse of [ 2&nbsp;&nbsp;0 ; 0&nbsp;&nbsp;4 ]</span><span class="a keybox" hidden>[ 1/2&nbsp;&nbsp;0 ; 0&nbsp;&nbsp;1/4 ]</span></div>
+    <div class="drill"><span class="n">17</span><span class="q2">inverse of [ 1&nbsp;&nbsp;2 ; 3&nbsp;&nbsp;7 ]</span><span class="a keybox" hidden>[ 7&nbsp;&nbsp;&minus;2 ; &minus;3&nbsp;&nbsp;1 ]</span></div>
+
+    <h3 style="font-family:var(--serif);font-size:20px;margin:30px 0 6px">E &middot; Matrix products</h3>
+    <div class="drill"><span class="n">18</span><span class="q2">[ 1&nbsp;&nbsp;2 ; 3&nbsp;&nbsp;4 ][ 5&nbsp;&nbsp;6 ; 7&nbsp;&nbsp;8 ]</span><span class="a keybox" hidden>[ 19&nbsp;&nbsp;22 ; 43&nbsp;&nbsp;50 ]</span></div>
+    <div class="drill"><span class="n">19</span><span class="q2">[ 2&nbsp;&nbsp;0 ; 1&nbsp;&nbsp;3 ][ 1 ; 4 ]</span><span class="a keybox" hidden>[ 2 ; 13 ]</span></div>
+    <div class="drill"><span class="n">20</span><span class="q2">[ 1&nbsp;&nbsp;2&nbsp;&nbsp;3 ][ 4 ; 5 ; 6 ]</span><span class="a keybox" hidden>[ 32 ] &middot; 1&times;1</span></div>
+    <div class="drill"><span class="n">21</span><span class="q2">[ 1&nbsp;&nbsp;0 ; 0&nbsp;&nbsp;1 ][ <span class="var">a</span>&nbsp;&nbsp;<span class="var">b</span> ; <span class="var">c</span>&nbsp;&nbsp;<span class="var">d</span> ]</span><span class="a keybox" hidden>[ <span class="var">a</span>&nbsp;<span class="var">b</span> ; <span class="var">c</span>&nbsp;<span class="var">d</span> ] &middot; identity</span></div>
+
+    <h3 style="font-family:var(--serif);font-size:20px;margin:30px 0 6px">F &middot; Scalar multiples and blends</h3>
+    <div class="drill"><span class="n">22</span><span class="q2">2&lang;1, &minus;2, 3&rang; + 3&lang;0, 1, &minus;1&rang;</span><span class="a keybox" hidden>&lang;2, &minus;1, 3&rang;</span></div>
+    <div class="drill"><span class="n">23</span><span class="q2">0.6&lang;1, 0, 1&rang; + 0.4&lang;0, 1, 0&rang;</span><span class="a keybox" hidden>&lang;0.6, 0.4, 0.6&rang;</span></div>
+    <div class="drill"><span class="n">24</span><span class="q2">&minus;1&lang;3, &minus;1, 2&rang;</span><span class="a keybox" hidden>&lang;&minus;3, 1, &minus;2&rang;</span></div>
+
+    <h3 style="font-family:var(--serif);font-size:20px;margin:30px 0 6px">G &middot; Is the product defined?</h3>
     <p style="font-size:13.5px;color:var(--ink-soft);margin-bottom:6px">Given <b>A</b> 2&times;2, <b>B</b> 2&times;3, <b>C</b> 3&times;2, <b>D</b> 3&times;3, <span class="var">u&#8407;</span> 2&times;1, <span class="var">v&#8407;</span> 3&times;1. State defined or undefined, and the dimensions.</p>
-    <div class="drill"><span class="n">1</span><span class="q2"><b>AB</b></span><span class="a keybox" hidden>defined &mdash; 2&times;3</span></div>
-    <div class="drill"><span class="n">2</span><span class="q2"><b>BA</b></span><span class="a keybox" hidden>undefined &mdash; 3 &ne; 2</span></div>
-    <div class="drill"><span class="n">3</span><span class="q2"><b>BC</b></span><span class="a keybox" hidden>defined &mdash; 2&times;2</span></div>
-    <div class="drill"><span class="n">4</span><span class="q2"><b>CB</b></span><span class="a keybox" hidden>defined &mdash; 3&times;3</span></div>
-    <div class="drill"><span class="n">5</span><span class="q2"><b>A</b><span class="var">u&#8407;</span></span><span class="a keybox" hidden>defined &mdash; 2&times;1</span></div>
-    <div class="drill"><span class="n">6</span><span class="q2"><b>A</b><span class="var">v&#8407;</span></span><span class="a keybox" hidden>undefined &mdash; 2 &ne; 3</span></div>
-    <div class="drill"><span class="n">7</span><span class="q2"><b>B</b><span class="var">v&#8407;</span></span><span class="a keybox" hidden>defined &mdash; 2&times;1</span></div>
-    <div class="drill"><span class="n">8</span><span class="q2"><span class="var">u&#8407;</span><sup>T</sup><b>A</b></span><span class="a keybox" hidden>defined &mdash; 1&times;2</span></div>
-    <div class="drill"><span class="n">9</span><span class="q2"><b>C</b><sup>T</sup><b>A</b></span><span class="a keybox" hidden>undefined &mdash; 3 &ne; 2</span></div>
-    <div class="drill"><span class="n">10</span><span class="q2"><b>DC</b></span><span class="a keybox" hidden>defined &mdash; 3&times;2</span></div>
+    <div class="drill"><span class="n">25</span><span class="q2"><b>AB</b></span><span class="a keybox" hidden>defined &mdash; 2&times;3</span></div>
+    <div class="drill"><span class="n">26</span><span class="q2"><b>BA</b></span><span class="a keybox" hidden>undefined &mdash; 3 &ne; 2</span></div>
+    <div class="drill"><span class="n">27</span><span class="q2"><b>BC</b></span><span class="a keybox" hidden>defined &mdash; 2&times;2</span></div>
+    <div class="drill"><span class="n">28</span><span class="q2"><b>CB</b></span><span class="a keybox" hidden>defined &mdash; 3&times;3</span></div>
+    <div class="drill"><span class="n">29</span><span class="q2"><b>A</b><span class="var">u&#8407;</span></span><span class="a keybox" hidden>defined &mdash; 2&times;1</span></div>
+    <div class="drill"><span class="n">30</span><span class="q2"><b>A</b><span class="var">v&#8407;</span></span><span class="a keybox" hidden>undefined &mdash; 2 &ne; 3</span></div>
+    <div class="drill"><span class="n">31</span><span class="q2"><b>B</b><span class="var">v&#8407;</span></span><span class="a keybox" hidden>defined &mdash; 2&times;1</span></div>
+    <div class="drill"><span class="n">32</span><span class="q2"><span class="var">u&#8407;</span><sup>T</sup><b>A</b></span><span class="a keybox" hidden>defined &mdash; 1&times;2</span></div>
+    <div class="drill"><span class="n">33</span><span class="q2"><b>C</b><sup>T</sup><b>A</b></span><span class="a keybox" hidden>undefined &mdash; 3 &ne; 2</span></div>
+    <div class="drill"><span class="n">34</span><span class="q2"><b>DC</b></span><span class="a keybox" hidden>defined &mdash; 3&times;2</span></div>
 
-    <h3 style="font-family:var(--serif);font-size:20px;margin:30px 0 6px">B &middot; Determinant and invertibility</h3>
-    <div class="drill"><span class="n">11</span><span class="q2">[ 1&nbsp;&nbsp;2 ; 3&nbsp;&nbsp;4 ]</span><span class="a keybox" hidden>det = &minus;2 &middot; invertible</span></div>
-    <div class="drill"><span class="n">12</span><span class="q2">[ 2&nbsp;&nbsp;6 ; 1&nbsp;&nbsp;3 ]</span><span class="a keybox" hidden>det = 0 &middot; singular</span></div>
-    <div class="drill"><span class="n">13</span><span class="q2">[ 5&nbsp;&nbsp;0 ; 0&nbsp;&nbsp;5 ]</span><span class="a keybox" hidden>det = 25 &middot; invertible</span></div>
-    <div class="drill"><span class="n">14</span><span class="q2">[ 3&nbsp;&nbsp;&minus;1 ; &minus;6&nbsp;&nbsp;2 ]</span><span class="a keybox" hidden>det = 0 &middot; singular</span></div>
-    <div class="drill"><span class="n">15</span><span class="q2">[ 0&nbsp;&nbsp;1 ; 1&nbsp;&nbsp;0 ]</span><span class="a keybox" hidden>det = &minus;1 &middot; invertible</span></div>
+    <h3 style="font-family:var(--serif);font-size:20px;margin:30px 0 6px">H &middot; Determinant and invertibility</h3>
+    <div class="drill"><span class="n">35</span><span class="q2">[ 1&nbsp;&nbsp;2 ; 3&nbsp;&nbsp;4 ]</span><span class="a keybox" hidden>det = &minus;2 &middot; invertible</span></div>
+    <div class="drill"><span class="n">36</span><span class="q2">[ 2&nbsp;&nbsp;6 ; 1&nbsp;&nbsp;3 ]</span><span class="a keybox" hidden>det = 0 &middot; singular</span></div>
+    <div class="drill"><span class="n">37</span><span class="q2">[ 5&nbsp;&nbsp;0 ; 0&nbsp;&nbsp;5 ]</span><span class="a keybox" hidden>det = 25 &middot; invertible</span></div>
+    <div class="drill"><span class="n">38</span><span class="q2">[ 3&nbsp;&nbsp;&minus;1 ; &minus;6&nbsp;&nbsp;2 ]</span><span class="a keybox" hidden>det = 0 &middot; singular</span></div>
+    <div class="drill"><span class="n">39</span><span class="q2">[ 0&nbsp;&nbsp;1 ; 1&nbsp;&nbsp;0 ]</span><span class="a keybox" hidden>det = &minus;1 &middot; invertible</span></div>
 
-    <h3 style="font-family:var(--serif);font-size:20px;margin:30px 0 6px">C &middot; Orthogonal, parallel, or neither?</h3>
-    <div class="drill"><span class="n">16</span><span class="q2">&lang;1, 0, 0&rang; and &lang;0, 1, 0&rang;</span><span class="a keybox" hidden>orthogonal &middot; dot = 0</span></div>
-    <div class="drill"><span class="n">17</span><span class="q2">&lang;2, 4, 6&rang; and &lang;1, 2, 3&rang;</span><span class="a keybox" hidden>parallel &middot; <span class="var">k</span> = 2</span></div>
-    <div class="drill"><span class="n">18</span><span class="q2">&lang;1, 1, 0&rang; and &lang;1, &minus;1, 0&rang;</span><span class="a keybox" hidden>orthogonal &middot; dot = 0</span></div>
-    <div class="drill"><span class="n">19</span><span class="q2">&lang;3, 0, 4&rang; and &lang;&minus;6, 0, &minus;8&rang;</span><span class="a keybox" hidden>parallel &middot; <span class="var">k</span> = &minus;2</span></div>
-    <div class="drill"><span class="n">20</span><span class="q2">&lang;1, 2, 3&rang; and &lang;4, 5, 6&rang;</span><span class="a keybox" hidden>neither &middot; dot = 32</span></div>
+    <h3 style="font-family:var(--serif);font-size:20px;margin:30px 0 6px">I &middot; Orthogonal, parallel, or neither?</h3>
+    <div class="drill"><span class="n">40</span><span class="q2">&lang;1, 0, 0&rang; and &lang;0, 1, 0&rang;</span><span class="a keybox" hidden>orthogonal &middot; dot = 0</span></div>
+    <div class="drill"><span class="n">41</span><span class="q2">&lang;2, 4, 6&rang; and &lang;1, 2, 3&rang;</span><span class="a keybox" hidden>parallel &middot; <span class="var">k</span> = 2</span></div>
+    <div class="drill"><span class="n">42</span><span class="q2">&lang;1, 1, 0&rang; and &lang;1, &minus;1, 0&rang;</span><span class="a keybox" hidden>orthogonal &middot; dot = 0</span></div>
+    <div class="drill"><span class="n">43</span><span class="q2">&lang;3, 0, 4&rang; and &lang;&minus;6, 0, &minus;8&rang;</span><span class="a keybox" hidden>parallel &middot; <span class="var">k</span> = &minus;2</span></div>
+    <div class="drill"><span class="n">44</span><span class="q2">&lang;1, 2, 3&rang; and &lang;4, 5, 6&rang;</span><span class="a keybox" hidden>neither &middot; dot = 32</span></div>
 
-    <h3 style="font-family:var(--serif);font-size:20px;margin:30px 0 6px">D &middot; True or false?</h3>
-    <div class="drill"><span class="n">21</span><span class="q2">The dot product of two vectors is a vector.</span><span class="a keybox" hidden>FALSE &mdash; scalar</span></div>
-    <div class="drill"><span class="n">22</span><span class="q2">If <span class="var">u&#8407;</span>&middot;<span class="var">v&#8407;</span> = 0, the vectors are perpendicular.</span><span class="a keybox" hidden>TRUE (nonzero vectors)</span></div>
-    <div class="drill"><span class="n">23</span><span class="q2">A magnitude can be negative.</span><span class="a keybox" hidden>FALSE &mdash; always &ge; 0</span></div>
-    <div class="drill"><span class="n">24</span><span class="q2"><b>AB</b> = <b>BA</b> for all square matrices.</span><span class="a keybox" hidden>FALSE</span></div>
-    <div class="drill"><span class="n">25</span><span class="q2">det = 0 means no inverse exists.</span><span class="a keybox" hidden>TRUE</span></div>
-    <div class="drill"><span class="n">26</span><span class="q2">Cosine similarity can exceed 1.</span><span class="a keybox" hidden>FALSE &mdash; range [&minus;1, 1]</span></div>
-    <div class="drill"><span class="n">27</span><span class="q2">Doubling one vector changes the cosine similarity.</span><span class="a keybox" hidden>FALSE &mdash; direction unchanged</span></div>
-    <div class="drill"><span class="n">28</span><span class="q2">An <span class="var">m</span>&times;<span class="var">n</span> matrix transposed is <span class="var">n</span>&times;<span class="var">m</span>.</span><span class="a keybox" hidden>TRUE</span></div>
-    <div class="drill"><span class="n">29</span><span class="q2">det = 0 means the system has no solution.</span><span class="a keybox" hidden>FALSE &mdash; none <em>or</em> infinitely many</span></div>
-    <div class="drill"><span class="n">30</span><span class="q2">Matrix addition requires identical dimensions.</span><span class="a keybox" hidden>TRUE</span></div>
+    <h3 style="font-family:var(--serif);font-size:20px;margin:30px 0 6px">J &middot; True or false?</h3>
+    <div class="drill"><span class="n">45</span><span class="q2">The dot product of two vectors is a vector.</span><span class="a keybox" hidden>FALSE &mdash; scalar</span></div>
+    <div class="drill"><span class="n">46</span><span class="q2">If <span class="var">u&#8407;</span>&middot;<span class="var">v&#8407;</span> = 0, the vectors are perpendicular.</span><span class="a keybox" hidden>TRUE (nonzero vectors)</span></div>
+    <div class="drill"><span class="n">47</span><span class="q2">A magnitude can be negative.</span><span class="a keybox" hidden>FALSE &mdash; always &ge; 0</span></div>
+    <div class="drill"><span class="n">48</span><span class="q2"><b>AB</b> = <b>BA</b> for all square matrices.</span><span class="a keybox" hidden>FALSE</span></div>
+    <div class="drill"><span class="n">49</span><span class="q2">det = 0 means no inverse exists.</span><span class="a keybox" hidden>TRUE</span></div>
+    <div class="drill"><span class="n">50</span><span class="q2">Cosine similarity can exceed 1.</span><span class="a keybox" hidden>FALSE &mdash; range [&minus;1, 1]</span></div>
+    <div class="drill"><span class="n">51</span><span class="q2">Doubling one vector changes the cosine similarity.</span><span class="a keybox" hidden>FALSE &mdash; direction unchanged</span></div>
+    <div class="drill"><span class="n">52</span><span class="q2">An <span class="var">m</span>&times;<span class="var">n</span> matrix transposed is <span class="var">n</span>&times;<span class="var">m</span>.</span><span class="a keybox" hidden>TRUE</span></div>
+    <div class="drill"><span class="n">53</span><span class="q2">det = 0 means the system has no solution.</span><span class="a keybox" hidden>FALSE &mdash; none <em>or</em> infinitely many</span></div>
+    <div class="drill"><span class="n">54</span><span class="q2">Matrix addition requires identical dimensions.</span><span class="a keybox" hidden>TRUE</span></div>
   </section>
 
   <footer>
