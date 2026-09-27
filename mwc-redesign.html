@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mounger Writing Center Redesign | Dennis Pezan</title>
+  <meta name="description" content="A redesign of West Point's Mounger Writing Center website, built around the act of writing: paper, fountain-pen ink, and a consultant's red pencil, with a custom WebGL ink shader.">
+  <link rel="canonical" href="https://dennis-pezan.com/mwc-redesign.html">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://dennis-pezan.com/mwc-redesign.html">
+  <meta property="og:title" content="Mounger Writing Center Redesign | Dennis Pezan">
+  <meta property="og:description" content="Redesigning West Point's writing center website around the act of writing.">
+  <meta property="og:image" content="https://dennis-pezan.com/img/mwc_home.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Mounger Writing Center Redesign | Dennis Pezan">
+  <meta name="twitter:description" content="Redesigning West Point's writing center website around the act of writing.">
+  <meta name="twitter:image" content="https://dennis-pezan.com/img/mwc_home.jpg">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' fill='%230d0d0d'/><text x='32' y='45' font-family='Georgia,serif' font-size='34' fill='%23ffffff' text-anchor='middle'>DP</text></svg>">
+  <style>
+    @font-face{font-family:'Mazius';src:url('fonts/MaziusDisplay-Regular.woff2') format('woff2');font-weight:400;font-display:swap;}
+    @font-face{font-family:'Mazius';src:url('fonts/MaziusDisplay-Bold.woff2') format('woff2');font-weight:700;font-display:swap;}
+    @font-face{font-family:'Literata';src:url('fonts/Literata-Variable.woff2') format('woff2');font-weight:200 900;font-style:normal;font-display:swap;}
+    @font-face{font-family:'Literata';src:url('fonts/Literata-Italic-Variable.woff2') format('woff2');font-weight:200 900;font-style:italic;font-display:swap;}
+  </style>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #14202c;
+      --paper: #ffffff;
+      --raised: #f4f1eb;
+      --line: #ddd8ce;
+      --muted: #5c6472;
+      --navy: #1d1d1b;
+      --navy-deep: #111110;
+      --gold: #8a1c1c;
+      --gold-bright: #c2410c;
+      --good: #2f6b4f;
+      --bad: #9a4a3a;
+      --serif: 'Mazius', Georgia, serif;
+      --sans: 'Literata', Georgia, serif;
+      --display: 'Literata', Georgia, serif;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--serif);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ---------------- NAV ---------------- */
+    .site-nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(17,17,16,0.96);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .site-nav-inner {
+      max-width: 1080px; margin: 0 auto; padding: 0 24px;
+      height: 52px; display: flex; align-items: center; justify-content: space-between;
+    }
+    .site-nav-logo {
+      font-family: var(--sans); font-size: 13px; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: #f2efe6; text-decoration: none;
+    }
+    .site-nav-links { display: flex; gap: 22px; align-items: center; }
+    .site-nav-link {
+      font-family: var(--sans); font-size: 11px; font-weight: 500;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: #b7bdca; text-decoration: none;
+      padding-bottom: 2px; border-bottom: 1px solid transparent;
+      transition: color .18s ease, border-color .18s ease;
+    }
+    .site-nav-link:hover { color: var(--gold-bright); border-color: var(--gold); }
+    .site-nav-link:focus-visible { outline: 2px solid var(--gold-bright); outline-offset: 3px; }
+
+    .nav-hamburger {
+      display: none; flex-direction: column; gap: 4px;
+      background: none; border: 0; cursor: pointer; padding: 6px;
+    }
+    .nav-hamburger span {
+      display: block; width: 20px; height: 2px; background: #f2efe6;
+      transition: transform .2s ease, opacity .2s ease;
+    }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+    @media (max-width: 720px) {
+      .nav-hamburger { display: flex; }
+      .site-nav-links {
+        display: none; position: absolute; top: 52px; left: 0; right: 0;
+        flex-direction: column; gap: 0;
+        background: rgba(17,17,16,0.99); padding: 8px 24px 16px;
+        border-bottom: 1px solid rgba(255,255,255,0.08);
+      }
+      .site-nav-links.open { display: flex; }
+      .site-nav-link { padding: 11px 0; width: 100%; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    }
+
+    /* ---------------- HERO ---------------- */
+    .hero {
+      background: var(--navy-deep);
+      color: #f2efe6;
+      padding: 122px 24px 66px;
+    }
+    .hero-inner { max-width: 840px; margin: 0 auto; }
+    .eyebrow {
+      font-family: var(--sans); text-transform: uppercase;
+      letter-spacing: 0.13em; font-size: 11px; font-weight: 600;
+      color: #d8b4a0;
+    }
+    .hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(2.05rem, 5vw, 3.3rem);
+      line-height: 1.06; font-weight: 700; letter-spacing: -0.012em;
+      margin: 14px 0 18px; text-wrap: balance;
+    }
+    .hero .lede {
+      font-family: var(--sans); font-size: 1.09rem; font-weight: 400;
+      line-height: 1.6; color: #cfcbc4; max-width: 620px; margin-bottom: 26px;
+    }
+    .byline {
+      font-family: var(--sans); font-size: 0.88rem; color: #aab1bf;
+      display: flex; flex-wrap: wrap; gap: 6px 12px; margin-bottom: 30px;
+    }
+    .byline strong { color: #f2efe6; font-weight: 600; }
+    .byline .sep { opacity: .38; }
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn {
+      font-family: var(--sans); font-size: 0.86rem; font-weight: 600;
+      letter-spacing: .02em; padding: 11px 20px; border-radius: 3px;
+      text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+      border: 1px solid transparent; cursor: pointer;
+      transition: transform .15s ease, background .15s ease;
+    }
+    .btn:focus-visible { outline: 2px solid var(--gold-bright); outline-offset: 3px; }
+    .btn-primary { background: var(--gold-bright); color: #ffffff; }
+    .btn-primary:hover { transform: translateY(-1px); }
+    .btn-ghost { border-color: rgba(242,239,230,.34); color: #f2efe6; }
+    .btn-ghost:hover { background: rgba(242,239,230,.08); }
+
+    /* ---------------- STATS ---------------- */
+    .stats { background: var(--raised); border-bottom: 1px solid var(--line); }
+    .stats-inner {
+      max-width: 1000px; margin: 0 auto; padding: 30px 24px;
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 26px;
+    }
+    @media (max-width: 720px) { .stats-inner { grid-template-columns: repeat(2, 1fr); gap: 22px; } }
+    .stat .num {
+      font-family: var(--sans); font-size: clamp(1.4rem, 2.7vw, 1.85rem);
+      font-weight: 700; color: var(--navy);
+      font-variant-numeric: lining-nums tabular-nums;
+      font-feature-settings: 'lnum' 1, 'tnum' 1;
+      letter-spacing: -0.005em;
+    }
+    .stat .label {
+      font-family: var(--sans); font-size: .82rem; font-weight: 300;
+      color: var(--muted); line-height: 1.38; margin-top: 3px;
+    }
+
+    /* ---------------- CONTENT ---------------- */
+    .wrap { max-width: 660px; margin: 0 auto; padding: 0 24px; }
+    section.block { padding: 54px 0; border-bottom: 1px solid var(--line); }
+    section.block:last-of-type { border-bottom: none; }
+    h2.section-title {
+      font-family: var(--serif); font-size: clamp(1.5rem, 3.1vw, 1.95rem);
+      font-weight: 700; margin: 12px 0 16px; text-wrap: balance; line-height: 1.22;
+    }
+    p {
+      font-family: var(--sans); font-size: 1.03rem; font-weight: 400;
+      line-height: 1.68; margin-bottom: 16px; max-width: 66ch;
+    }
+    p:last-child { margin-bottom: 0; }
+    .muted { color: var(--muted); }
+
+    ul.plain { list-style: none; display: grid; gap: 12px; margin: 16px 0; }
+    ul.plain li {
+      font-family: var(--sans); font-size: 1rem; font-weight: 300;
+      line-height: 1.58; padding-left: 19px; position: relative; max-width: 63ch;
+    }
+    ul.plain li::before {
+      content: "\2013"; position: absolute; left: 0; color: var(--gold);
+    }
+
+    .pairs { display: grid; gap: 14px; margin: 22px 0; }
+    .pair {
+      display: grid; grid-template-columns: 1fr 1fr;
+      border: 1px solid var(--line); border-radius: 5px;
+      overflow: hidden; background: var(--raised);
+    }
+    @media (max-width: 640px) { .pair { grid-template-columns: 1fr; } }
+    .pair > div { padding: 15px 17px; }
+    .pair .fault { border-right: 1px solid var(--line); }
+    @media (max-width: 640px) {
+      .pair .fault { border-right: none; border-bottom: 1px solid var(--line); }
+    }
+    .tag {
+      font-family: var(--sans); font-size: .66rem; text-transform: uppercase;
+      letter-spacing: .11em; font-weight: 700; display: block; margin-bottom: 6px;
+    }
+    .tag.f { color: var(--bad); }
+    .tag.g { color: var(--good); }
+    .pair h3 { font-family: var(--serif); font-size: 1.03rem; font-weight: 600; margin-bottom: 5px; }
+    .pair p { font-size: .91rem; line-height: 1.5; color: var(--muted); margin: 0; }
+
+    figure { margin: 26px 0; }
+    figure img {
+      width: 100%; height: auto; display: block;
+      border: 1px solid var(--line); border-radius: 5px; background: var(--raised);
+    }
+    figcaption {
+      font-family: var(--sans); font-size: .82rem; font-weight: 300;
+      color: var(--muted); margin-top: 9px; line-height: 1.48;
+    }
+
+    figure.phone { max-width: 320px; margin-left: auto; margin-right: auto; }
+
+    .callout {
+      border-left: 3px solid var(--gold); background: var(--raised);
+      padding: 17px 20px; border-radius: 0 5px 5px 0; margin: 24px 0;
+    }
+    .callout .eyebrow { color: var(--navy); display: block; margin-bottom: 7px; }
+    .callout p { margin: 0; font-size: .97rem; }
+
+    .closing { font-family: var(--serif); font-size: 1.13rem; line-height: 1.66; font-style: italic; max-width: 62ch; }
+
+    footer {
+      background: var(--navy-deep); color: #cdd2dc; padding: 40px 24px 46px; margin-top: 0;
+    }
+    footer .wrap { max-width: 660px; }
+    footer .name { font-family: var(--serif); color: #f2efe6; font-weight: 600; font-size: 1.06rem; }
+    footer p { color: #a7aebc; font-size: .84rem; margin-top: 5px; }
+    footer .disclaimer {
+      margin-top: 17px; padding-top: 15px;
+      border-top: 1px solid rgba(255,255,255,.12); font-size: .79rem; color: #8d94a3;
+    }
+    footer a { color: var(--gold-bright); }
+
+    ::selection { background: var(--gold); color: #1a1204; }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      * { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="site-nav" id="siteNav">
+    <div class="site-nav-inner">
+      <a class="site-nav-logo" href="index.html">Dennis Pezan</a>
+      <button class="nav-hamburger" id="navHamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="site-nav-links" id="navLinks">
+        <a class="site-nav-link" href="index.html">&#8592; Home</a>
+        <a class="site-nav-link" href="#problem">Starting Point</a>
+        <a class="site-nav-link" href="#concept">Concept</a>
+        <a class="site-nav-link" href="#screens">Screens</a>
+        <a class="site-nav-link" href="#build">Build</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-inner">
+      <span class="eyebrow">Web Design &middot; Next.js &middot; WebGL</span>
+      <h1>Redesigning West Point&rsquo;s Writing Center Around the Act of Writing</h1>
+      <p class="lede">
+        The Mounger Writing Center helps cadets with every kind of writing, but its web presence was a single long
+        page on the Academy site. As a Stokes Writing Fellow at the center, I rebuilt it as a four-page site that looks
+        and behaves like a draft on a consultant&rsquo;s desk: paper, fountain-pen ink, and a red pencil.
+      </p>
+      <div class="byline">
+        <span><strong>Dennis Pezan</strong></span>
+        <span class="sep">&middot;</span>
+        <span>Cadet, United States Military Academy at West Point</span>
+      </div>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#screens">See the screens</a>
+        <a class="btn btn-ghost" href="#build">How it&rsquo;s built</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="stats">
+    <div class="stats-inner">
+      <div class="stat">
+        <div class="num">4</div>
+        <div class="label">Pages, split out of one long page</div>
+      </div>
+      <div class="stat">
+        <div class="num">15</div>
+        <div class="label">FAQs moved to the pages they belong on</div>
+      </div>
+      <div class="stat">
+        <div class="num">16</div>
+        <div class="label">Kinds of writing, indexed like the back of a book</div>
+      </div>
+      <div class="stat">
+        <div class="num">1</div>
+        <div class="label">Custom WebGL ink shader, written from scratch</div>
+      </div>
+    </div>
+  </div>
+
+  <main class="wrap">
+
+    <section class="block" id="problem">
+      <span class="eyebrow">The Starting Point</span>
+      <h2 class="section-title">Everything cadets needed, in one long scroll</h2>
+      <p>
+        The center&rsquo;s official page covers a lot: the mission, what a session looks like, eight cadet FAQs, the
+        Stokes Fellows Program, seven more FAQs about the program, and two faculty bios. Booking happens on a separate
+        system.
+      </p>
+      <p>
+        The most practical details were the hardest to find. The rules a cadet needs before booking (one appointment
+        per day, two per assignment, no same-day sessions for due work, five to seven pages per visit) were tucked
+        inside collapsed FAQ answers. So were the steps to apply as a Fellow and the 1 March priority deadline.
+      </p>
+      <p>
+        My goal was to put each piece of information where a cadet would look for it, and to give the center a visual
+        identity of its own.
+      </p>
+    </section>
+
+    <section class="block" id="concept">
+      <span class="eyebrow">The Concept</span>
+      <h2 class="section-title">A draft on a consultant&rsquo;s desk</h2>
+      <p>
+        My first version used the familiar black and gold look of a military academy site. It was clean, but it looked
+        like every other template. So I started over from what the center actually does: cadets bring drafts, and
+        Fellows read them with a pencil in hand.
+      </p>
+      <p>
+        The site is set on warm paper with blue-black fountain-pen ink and red-pencil marks. Headlines get underlined
+        and circled by hand as you scroll. Each kind of content is set in a format cadets already know:
+      </p>
+      <div class="pairs">
+        <div class="pair">
+          <div class="fault">
+            <span class="tag f">Before</span>
+            <h3>Rules inside a collapsed FAQ</h3>
+            <p>The booking limits sat in the answer to &ldquo;How many appointments can I schedule?&rdquo;</p>
+          </div>
+          <div>
+            <span class="tag g">After</span>
+            <h3>An Army memorandum</h3>
+            <p>The rules open the Sessions page as a typed memo, a format cadets read and write every week.</p>
+          </div>
+        </div>
+        <div class="pair">
+          <div class="fault">
+            <span class="tag f">Before</span>
+            <h3>Basics scattered across paragraphs</h3>
+            <p>Location, hours, limits, and page counts appeared in different sections.</p>
+          </div>
+          <div>
+            <span class="tag g">After</span>
+            <h3>A library appointment card</h3>
+            <p>All of it typed on one catalog card on the home page, fitting for a center in the Jefferson Library.</p>
+          </div>
+        </div>
+        <div class="pair">
+          <div class="fault">
+            <span class="tag f">Before</span>
+            <h3>Writing types listed in prose</h3>
+            <p>Sixteen kinds of writing were spread through several FAQ answers.</p>
+          </div>
+          <div>
+            <span class="tag g">After</span>
+            <h3>A book index</h3>
+            <p>Every kind of writing, alphabetized with dotted leaders, like the back of a textbook.</p>
+          </div>
+        </div>
+        <div class="pair">
+          <div class="fault">
+            <span class="tag f">Before</span>
+            <h3>Application steps inside an FAQ</h3>
+            <p>What to send and when to send it were buried under &ldquo;How do I apply?&rdquo;</p>
+          </div>
+          <div>
+            <span class="tag g">After</span>
+            <h3>An application packet</h3>
+            <p>A checklist of what to send, with the 1 March deadline landing as a red rubber stamp.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="screens">
+      <span class="eyebrow">The Screens</span>
+      <h2 class="section-title">Four pages, one visual language</h2>
+      <figure>
+        <img src="img/mwc_home.jpg" alt="Home page of the redesigned Mounger Writing Center site: the headline Write Stronger, Think Sharper, Lead with Impact with red pencil marks, blue-black ink spreading from the right, and a typed library appointment card" loading="lazy">
+        <figcaption>
+          The home page. The ink is a live WebGL shader that drifts slowly and blooms where the cursor moves. The red
+          pencil marks draw themselves as the page loads.
+        </figcaption>
+      </figure>
+      <figure>
+        <img src="img/mwc_memo.jpg" alt="Booking rules typed as an Army memorandum for all cadets, with one rule underlined in red and a handwritten note reading book early" loading="lazy">
+        <figcaption>Booking rules, set as an Army memorandum on the Sessions page.</figcaption>
+      </figure>
+      <figure>
+        <img src="img/mwc_index.jpg" alt="A book-style index of writing types such as abstracts, briefings, memoranda, and white papers, each with a dotted leader to its category" loading="lazy">
+        <figcaption>
+          Kinds of writing, set as a book index. A red legal-pad margin line and typewritten section marks run through
+          every page.
+        </figcaption>
+      </figure>
+      <figure>
+        <img src="img/mwc_stokes.jpg" alt="Stokes Fellows page with a dark ink hero, the headline Cadets serving cadets, and the program's pen-nib crest" loading="lazy">
+        <figcaption>The Stokes Fellows page, with the program&rsquo;s crest redrawn as a vector graphic.</figcaption>
+      </figure>
+      <figure>
+        <img src="img/mwc_apply.jpg" alt="Application section listing who should apply and an application packet checklist, with a red rubber stamp reading priority deadline 1 March" loading="lazy">
+        <figcaption>The application section. The priority deadline lands as a rubber stamp when it scrolls into view.</figcaption>
+      </figure>
+      <figure class="phone">
+        <img src="img/mwc_mobile.jpg" alt="The redesigned home page on a phone" loading="lazy">
+        <figcaption>The home page on a phone.</figcaption>
+      </figure>
+    </section>
+
+    <section class="block" id="build">
+      <span class="eyebrow">Under the Hood</span>
+      <h2 class="section-title">Built to be fast, accessible, and easy to edit</h2>
+      <ul class="plain">
+        <li>Next.js 16, TypeScript, and Tailwind CSS 4. Every page is prerendered as static HTML.</li>
+        <li>
+          A custom WebGL fragment shader simulates ink spreading through water using domain-warped noise, with darker
+          pooled edges like drying watercolor. It pauses when off screen or in a background tab, and shows a single
+          still frame to visitors who prefer reduced motion.
+        </li>
+        <li>
+          rough-notation draws the red-pencil underlines, circles, and strike-throughs. Paper Shaders prints archival
+          photos as ink halftone. Motion animates the appointment card and the stamp.
+        </li>
+        <li>
+          All text lives in plain data files, separate from the layouts, so the center&rsquo;s staff can update
+          wording without touching the design.
+        </li>
+        <li>
+          Checked at desktop and phone widths with no horizontal scrolling, with semantic landmarks, visible keyboard
+          focus, and a skip link.
+        </li>
+      </ul>
+      <div class="callout">
+        <span class="eyebrow">A Note on Content</span>
+        <p>
+          All program information comes from the Mounger Writing Center&rsquo;s official page on westpoint.edu and the
+          West Point Association of Graduates. This is an independent student redesign, not the official West Point
+          website.
+        </p>
+      </div>
+    </section>
+
+    <section class="block" id="status">
+      <span class="eyebrow">Status</span>
+      <h2 class="section-title">In progress</h2>
+      <p>
+        The site is built and working. Next steps are adding archival and current photos of the center, confirming the
+        booking system, reviewing the copy with the center&rsquo;s directors, and deploying it.
+      </p>
+    </section>
+
+    <section class="block">
+      <span class="eyebrow">Conclusion</span>
+      <h2 class="section-title">Start from the subject, not the template</h2>
+      <p class="closing">
+        The most useful design decision was to stop starting from a template and start from the subject. A writing
+        center is about drafts, feedback, and revision, so the site is too: every format on it is something a cadet has
+        already held in their hands.
+      </p>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="name">Dennis Pezan</div>
+      <p>Cadet, United States Military Academy at West Point. <a href="index.html">Back to home</a></p>
+      <p class="disclaimer">
+        This is an independent student redesign concept, not the official website of the Mounger Writing Center or the
+        United States Military Academy. Program information is drawn from public West Point sources. The views
+        expressed are the author&rsquo;s own and do not reflect the official position of the United States Military
+        Academy, Department of the Army, or Department of Defense.
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var btn = document.getElementById('navHamburger');
+      var links = document.getElementById('navLinks');
+      if (!btn || !links) return;
+      btn.addEventListener('click', function () {
+        var open = links.classList.toggle('open');
+        btn.classList.toggle('open', open);
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      links.addEventListener('click', function (e) {
+        if (e.target.tagName === 'A') {
+          links.classList.remove('open');
+          btn.classList.remove('open');
+          btn.setAttribute('aria-expanded', 'false');
+        }
+      });
+    })();
+  </script>
+
+</body>
+</html>
