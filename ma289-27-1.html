@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Interdicting Taiwan&rsquo;s Crude Oil Supply | Dennis Pezan</title>
+  <meta name="description" content="MA289-27-1 independent study: adapting a threat-adaptive reinforcement-learning network interdiction model to the sea lanes that carry Taiwan's crude oil. Proposal, current model, assumptions and sources.">
+  <link rel="canonical" href="https://dennis-pezan.com/ma289-27-1.html">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://dennis-pezan.com/ma289-27-1.html">
+  <meta property="og:title" content="Interdicting Taiwan&rsquo;s Crude Oil Supply | Dennis Pezan">
+  <meta property="og:description" content="Research in progress: a network interdiction model of Taiwan's crude oil imports.">
+  <meta property="og:image" content="https://dennis-pezan.com/img/ma289-27-1/fig9_oil_network.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://dennis-pezan.com/img/ma289-27-1/fig9_oil_network.png">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' fill='%230d0d0d'/><text x='32' y='45' font-family='Georgia,serif' font-size='34' fill='%23ffffff' text-anchor='middle'>DP</text></svg>">
+  <style>
+    @font-face{font-family:'Mazius';src:url('fonts/MaziusDisplay-Regular.woff2') format('woff2');font-weight:400;font-display:swap;}
+    @font-face{font-family:'Mazius';src:url('fonts/MaziusDisplay-Bold.woff2') format('woff2');font-weight:700;font-display:swap;}
+    @font-face{font-family:'Literata';src:url('fonts/Literata-Variable.woff2') format('woff2');font-weight:200 900;font-style:normal;font-display:swap;}
+    @font-face{font-family:'Literata';src:url('fonts/Literata-Italic-Variable.woff2') format('woff2');font-weight:200 900;font-style:italic;font-display:swap;}
+  </style><style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #14202c;
+      --paper: #ffffff;
+      --raised: #f4f1eb;
+      --line: #ddd8ce;
+      --muted: #5c6472;
+      --navy: #1d1d1b;
+      --navy-deep: #111110;
+      --gold: #8a1c1c;
+      --gold-bright: #c2410c;
+      --good: #2f6b4f;
+      --bad: #9a4a3a;
+      --serif: 'Mazius', Georgia, serif;
+      --sans: 'Literata', Georgia, serif;
+      --display: 'Literata', Georgia, serif;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--serif);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ---------------- NAV ---------------- */
+    .site-nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(17,17,16,0.96);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .site-nav-inner {
+      max-width: 1080px; margin: 0 auto; padding: 0 24px;
+      height: 52px; display: flex; align-items: center; justify-content: space-between;
+    }
+    .site-nav-logo {
+      font-family: var(--sans); font-size: 13px; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: #f2efe6; text-decoration: none;
+    }
+    .site-nav-links { display: flex; gap: 22px; align-items: center; }
+    .site-nav-link {
+      font-family: var(--sans); font-size: 11px; font-weight: 500;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: #b7bdca; text-decoration: none;
+      padding-bottom: 2px; border-bottom: 1px solid transparent;
+      transition: color .18s ease, border-color .18s ease;
+    }
+    .site-nav-link:hover { color: var(--gold-bright); border-color: var(--gold); }
+    .site-nav-link:focus-visible { outline: 2px solid var(--gold-bright); outline-offset: 3px; }
+
+    .nav-hamburger {
+      display: none; flex-direction: column; gap: 4px;
+      background: none; border: 0; cursor: pointer; padding: 6px;
+    }
+    .nav-hamburger span {
+      display: block; width: 20px; height: 2px; background: #f2efe6;
+      transition: transform .2s ease, opacity .2s ease;
+    }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+    @media (max-width: 720px) {
+      .nav-hamburger { display: flex; }
+      .site-nav-links {
+        display: none; position: absolute; top: 52px; left: 0; right: 0;
+        flex-direction: column; gap: 0;
+        background: rgba(17,17,16,0.99); padding: 8px 24px 16px;
+        border-bottom: 1px solid rgba(255,255,255,0.08);
+      }
+      .site-nav-links.open { display: flex; }
+      .site-nav-link { padding: 11px 0; width: 100%; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    }
+
+    /* ---------------- HERO ---------------- */
+    .hero {
+      background: var(--navy-deep);
+      color: #f2efe6;
+      padding: 122px 24px 66px;
+    }
+    .hero-inner { max-width: 840px; margin: 0 auto; }
+    .eyebrow {
+      font-family: var(--sans); text-transform: uppercase;
+      letter-spacing: 0.13em; font-size: 11px; font-weight: 600;
+      color: #d8b4a0;
+    }
+    .hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(2.05rem, 5vw, 3.3rem);
+      line-height: 1.06; font-weight: 700; letter-spacing: -0.012em;
+      margin: 14px 0 18px; text-wrap: balance;
+    }
+    .hero .lede {
+      font-family: var(--sans); font-size: 1.09rem; font-weight: 400;
+      line-height: 1.6; color: #cfcbc4; max-width: 620px; margin-bottom: 26px;
+    }
+    .byline {
+      font-family: var(--sans); font-size: 0.88rem; color: #aab1bf;
+      display: flex; flex-wrap: wrap; gap: 6px 12px; margin-bottom: 30px;
+    }
+    .byline strong { color: #f2efe6; font-weight: 600; }
+    .byline .sep { opacity: .38; }
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn {
+      font-family: var(--sans); font-size: 0.86rem; font-weight: 600;
+      letter-spacing: .02em; padding: 11px 20px; border-radius: 3px;
+      text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+      border: 1px solid transparent; cursor: pointer;
+      transition: transform .15s ease, background .15s ease;
+    }
+    .btn:focus-visible { outline: 2px solid var(--gold-bright); outline-offset: 3px; }
+    .btn-primary { background: var(--gold-bright); color: #ffffff; }
+    .btn-primary:hover { transform: translateY(-1px); }
+    .btn-ghost { border-color: rgba(242,239,230,.34); color: #f2efe6; }
+    .btn-ghost:hover { background: rgba(242,239,230,.08); }
+
+    /* ---------------- STATS ---------------- */
+    .stats { background: var(--raised); border-bottom: 1px solid var(--line); }
+    .stats-inner {
+      max-width: 1000px; margin: 0 auto; padding: 30px 24px;
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 26px;
+    }
+    @media (max-width: 720px) { .stats-inner { grid-template-columns: repeat(2, 1fr); gap: 22px; } }
+    .stat .num {
+      font-family: var(--sans); font-size: clamp(1.4rem, 2.7vw, 1.85rem);
+      font-weight: 700; color: var(--navy);
+      font-variant-numeric: lining-nums tabular-nums;
+      font-feature-settings: 'lnum' 1, 'tnum' 1;
+      letter-spacing: -0.005em;
+    }
+    .stat .label {
+      font-family: var(--sans); font-size: .82rem; font-weight: 300;
+      color: var(--muted); line-height: 1.38; margin-top: 3px;
+    }
+
+    /* ---------------- CONTENT ---------------- */
+    .wrap { max-width: 660px; margin: 0 auto; padding: 0 24px; }
+    section.block { padding: 54px 0; border-bottom: 1px solid var(--line); }
+    section.block:last-of-type { border-bottom: none; }
+    h2.section-title {
+      font-family: var(--serif); font-size: clamp(1.5rem, 3.1vw, 1.95rem);
+      font-weight: 700; margin: 12px 0 16px; text-wrap: balance; line-height: 1.22;
+    }
+    p {
+      font-family: var(--sans); font-size: 1.03rem; font-weight: 400;
+      line-height: 1.68; margin-bottom: 16px; max-width: 66ch;
+    }
+    p:last-child { margin-bottom: 0; }
+    .muted { color: var(--muted); }
+
+    ul.plain { list-style: none; display: grid; gap: 12px; margin: 16px 0; }
+    ul.plain li {
+      font-family: var(--sans); font-size: 1rem; font-weight: 300;
+      line-height: 1.58; padding-left: 19px; position: relative; max-width: 63ch;
+    }
+    ul.plain li::before {
+      content: "\2013"; position: absolute; left: 0; color: var(--gold);
+    }
+
+    .pairs { display: grid; gap: 14px; margin: 22px 0; }
+    .pair {
+      display: grid; grid-template-columns: 1fr 1fr;
+      border: 1px solid var(--line); border-radius: 5px;
+      overflow: hidden; background: var(--raised);
+    }
+    @media (max-width: 640px) { .pair { grid-template-columns: 1fr; } }
+    .pair > div { padding: 15px 17px; }
+    .pair .fault { border-right: 1px solid var(--line); }
+    @media (max-width: 640px) {
+      .pair .fault { border-right: none; border-bottom: 1px solid var(--line); }
+    }
+    .tag {
+      font-family: var(--sans); font-size: .66rem; text-transform: uppercase;
+      letter-spacing: .11em; font-weight: 700; display: block; margin-bottom: 6px;
+    }
+    .tag.f { color: var(--bad); }
+    .tag.g { color: var(--good); }
+    .pair h3 { font-family: var(--serif); font-size: 1.03rem; font-weight: 600; margin-bottom: 5px; }
+    .pair p { font-size: .91rem; line-height: 1.5; color: var(--muted); margin: 0; }
+
+    figure { margin: 26px 0; }
+    figure img {
+      width: 100%; height: auto; display: block;
+      border: 1px solid var(--line); border-radius: 5px; background: var(--raised);
+    }
+    figcaption {
+      font-family: var(--sans); font-size: .82rem; font-weight: 300;
+      color: var(--muted); margin-top: 9px; line-height: 1.48;
+    }
+
+    .callout {
+      border-left: 3px solid var(--gold); background: var(--raised);
+      padding: 17px 20px; border-radius: 0 5px 5px 0; margin: 24px 0;
+    }
+    .callout .eyebrow { color: var(--navy); display: block; margin-bottom: 7px; }
+    .callout p { margin: 0; font-size: .97rem; }
+
+    .closing { font-family: var(--serif); font-size: 1.13rem; line-height: 1.66; font-style: italic; max-width: 62ch; }
+
+    footer {
+      background: var(--navy-deep); color: #cdd2dc; padding: 40px 24px 46px; margin-top: 0;
+    }
+    footer .wrap { max-width: 660px; }
+    footer .name { font-family: var(--serif); color: #f2efe6; font-weight: 600; font-size: 1.06rem; }
+    footer p { color: #a7aebc; font-size: .84rem; margin-top: 5px; }
+    footer .disclaimer {
+      margin-top: 17px; padding-top: 15px;
+      border-top: 1px solid rgba(255,255,255,.12); font-size: .79rem; color: #8d94a3;
+    }
+    footer a { color: var(--gold-bright); }
+
+    ::selection { background: var(--gold); color: #1a1204; }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      * { transition: none !important; }
+    }
+  </style>
+  <style>
+    table.grid { width: 100%; border-collapse: collapse; margin: 20px 0 8px; font-family: var(--sans); }
+    table.grid th, table.grid td {
+      text-align: left; padding: 9px 10px; border-bottom: 1px solid var(--line);
+      font-size: .88rem; line-height: 1.42; vertical-align: top;
+    }
+    table.grid th {
+      font-size: .68rem; text-transform: uppercase; letter-spacing: .1em; font-weight: 700;
+      color: var(--muted); border-bottom: 1px solid var(--ink);
+    }
+    table.grid td.n { text-align: center; font-variant-numeric: tabular-nums; white-space: nowrap; }
+    table.grid td.src { color: var(--muted); font-weight: 300; }
+    .table-wrap { overflow-x: auto; }
+    .wide { max-width: 1000px; margin: 0 auto; padding: 0 24px; }
+    .wide figure img { border-radius: 4px; }
+    .status {
+      display: inline-flex; align-items: center; gap: 8px; margin-bottom: 22px;
+      font-family: var(--sans); font-size: .8rem; color: #f2efe6;
+      border: 1px solid rgba(242,239,230,.3); padding: 6px 12px; border-radius: 3px;
+    }
+    .status::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: #d8b4a0; }
+    ol.plain { display: grid; gap: 12px; margin: 16px 0; padding-left: 22px; }
+    ol.plain li { font-family: var(--sans); font-size: 1rem; font-weight: 300; line-height: 1.58; max-width: 63ch; }
+    ul.plain li strong, ol.plain li strong { font-weight: 600; }
+    ul.sources { list-style: none; display: grid; gap: 10px; margin: 14px 0; }
+    ul.sources li { font-family: var(--sans); font-size: .9rem; font-weight: 300; line-height: 1.5; }
+    ul.sources li strong { font-weight: 600; }
+    ul.sources a, p a, td a { color: var(--gold); text-underline-offset: 2px; }
+    h3.sub { font-family: var(--serif); font-size: 1.12rem; font-weight: 700; margin: 26px 0 8px; }
+    .files { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1px;
+      background: var(--line); border: 1px solid var(--line); margin: 18px 0; }
+    .file { background: var(--paper); padding: 16px 18px; text-decoration: none; color: var(--ink);
+      font-family: var(--sans); display: block; transition: background .15s ease; }
+    .file:hover { background: var(--raised); }
+    .file .fname { font-weight: 600; font-size: .92rem; display: block; margin-bottom: 4px; }
+    .file .fdesc { font-weight: 300; font-size: .82rem; color: var(--muted); line-height: 1.45; }
+  </style>
+</head>
+<body>
+  <nav class="site-nav" id="siteNav">
+    <div class="site-nav-inner">
+      <a class="site-nav-logo" href="index.html">Dennis Pezan</a>
+      <button class="nav-hamburger" id="navHamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="site-nav-links" id="navLinks">
+        <a class="site-nav-link" href="index.html">&#8592; Home</a>
+        <a class="site-nav-link" href="#question">Question</a>
+        <a class="site-nav-link" href="#model">Model</a>
+        <a class="site-nav-link" href="#effort">Effort budget</a>
+        <a class="site-nav-link" href="#assumptions">Assumptions</a>
+        <a class="site-nav-link" href="#sources">Sources</a>
+        <a class="site-nav-link" href="#files">Files</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-inner">
+      <span class="eyebrow">Research in progress &middot; MA289-27-1 Independent Study</span>
+      <h1>Interdicting Taiwan&rsquo;s Crude Oil Supply</h1>
+      <p class="lede">
+        Taiwan imports nearly all of its crude oil, and every barrel passes a handful of named straits.
+        This project turns those sea lanes into a network and asks where an attacker with a limited effort
+        budget would act to cut the supply: at distant chokepoints, or on Taiwan&rsquo;s own approaches.
+      </p>
+      <div class="byline">
+        <span><strong>Dennis Pezan</strong></span>
+        <span class="sep">&middot;</span>
+        <span>Advisor: LTC Matthew Webb</span>
+        <span class="sep">&middot;</span>
+        <span>Updated 27 September 2026</span>
+      </div>
+      <div class="status">Network built &middot; nothing simulated yet</div>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="ma289-27-1-proposal.pdf" target="_blank" rel="noopener">Read the proposal (PDF)</a>
+        <a class="btn btn-ghost" href="https://github.com/JettDrums/MA289-27-1" target="_blank" rel="noopener">Project repository</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="stats">
+    <div class="stats-inner">
+      <div class="stat"><div class="num">55 / 78</div><div class="label">Nodes and edges in the network</div></div>
+      <div class="stat"><div class="num">59</div><div class="label">Edges an attacker can act on</div></div>
+      <div class="stat"><div class="num">11.9</div><div class="label">VLCC loads of crude Taiwan needs a month</div></div>
+      <div class="stat"><div class="num">61%</div><div class="label">Of 2025 crude came through Hormuz</div></div>
+    </div>
+  </div>
+
+  <main>
+    <div class="wrap">
+      <section class="block" id="question">
+        <span class="eyebrow">The Question</span>
+        <h2 class="section-title">Does a learned interdiction policy transfer from rail to the sea?</h2>
+        <p>
+          LTC Webb&rsquo;s threat-adaptive reinforcement-learning agent learns attacker strategies for
+          maximum-flow network interdiction on the Ukrainian/Russian rail network. This project builds a second,
+          structurally different network, the sea delivery of crude oil to Taiwan&rsquo;s refineries, and tests
+          whether the agent still finds sound strategies there.
+        </p>
+        <div class="callout">
+          <span class="eyebrow">Research question</span>
+          <p>Given one effort budget spread across different kinds of action, which sea lanes does an attacker act
+          on to minimize the crude reaching Taiwan, and are they distant chokepoints or Taiwan&rsquo;s own approaches?</p>
+        </div>
+        <p>
+          <strong>Why this network.</strong> In 2025, 61% of Taiwan&rsquo;s crude came from Persian Gulf producers
+          through the Strait of Hormuz, 27% from the U.S. Gulf Coast, and 8% from Oman (EIA, 2026). Because every
+          barrel must pass a few named straits, the open ocean reduces to a finite, closed graph. The structure is
+          real: Hormuz has been largely closed since February 2026, and Taiwan reportedly rerouted through the Saudi
+          Red Sea port of Yanbu, a route this network already contains.
+        </p>
+      </section>
+    </div>
+
+    <div class="wide">
+      <section class="block" id="model">
+        <span class="eyebrow">The Current Model</span>
+        <h2 class="section-title">55 nodes, 78 edges, every lane on a real sea route</h2>
+        <figure>
+          <img src="img/ma289-27-1/fig10_oil_schematic.png" alt="Schematic of the oil network: numbered nodes from the super-source on the left through the Middle East, Cape and Pacific corridors to the Taiwan approaches and the super-sink on the right, with edges shaded by effort cost" loading="lazy">
+          <figcaption>The network as the model sees it, numbered with the IDs the environment reads. Left to right follows
+          the voyage; the super-sink (Taiwan&rsquo;s demand) sits inside the Taiwan ring. Edge shade is the effort cost of
+          the action available there; grey dashed edges cannot be interdicted.</figcaption>
+        </figure>
+        <figure>
+          <img src="img/ma289-27-1/fig9_oil_network.png" alt="World map of the routed sea lanes from the Persian Gulf, the U.S. Gulf Coast and West Africa to Taiwan, with a detail panel of the Taiwan approaches" loading="lazy">
+          <figcaption>The same network on the map. Long-haul lanes follow real sea lanes; lanes near Taiwan run on waypoints
+          12 nautical miles offshore, the territorial-sea limit. All three crude ports are on the west coast.</figcaption>
+        </figure>
+      </section>
+    </div>
+
+    <div class="wrap">
+      <section class="block">
+        <span class="eyebrow">How It Is Built</span>
+        <h2 class="section-title">Four rules that make the network defensible</h2>
+        <ul class="plain">
+          <li><strong>Sources and sinks from EIA data.</strong> Four origin regions weighted by 2025 import shares; three
+          ports weighted by refinery capacity (Kaohsiung 670, Mailiao 540, Shalung 200 thousand barrels a day). Demand
+          is 11.9 VLCC loads a month: 783 thousand barrels a day of throughput, divided by 2 million barrels a load.</li>
+          <li><strong>Straits are edges.</strong> Every strait and canal runs from its entrance node to its exit node, so an
+          action against it shuts the transit, and there is a node at every junction where routes meet or separate.</li>
+          <li><strong>Every interdiction point has an alternative.</strong> Checked automatically on every build. Hormuz has
+          no sea alternative, so its alternatives are the two real bypass pipelines (Saudi East-West, UAE ADCOP).</li>
+          <li><strong>Real geometry.</strong> Lanes are routed on the scgraph sea-lane network, which is too coarse around
+          Taiwan (14 nodes in the whole theater), so the Taiwan lanes use coastline-derived waypoints. No lane crosses land.</li>
+        </ul>
+        <figure>
+          <img src="img/ma289-27-1/fig11_marnet_edges.png" alt="Every edge of the scgraph sea-lane network worldwide, with the oil network's lanes on top, and a zoom showing the network has only one arc through the Taiwan Strait" loading="lazy">
+          <figcaption>Why the Taiwan lanes are hand-derived: the sea-lane network (grey) has a single arc down the Taiwan
+          Strait (bottom left); the oil network&rsquo;s lanes (bottom right) run 12 nm offshore.</figcaption>
+        </figure>
+      </section>
+
+      <section class="block" id="effort">
+        <span class="eyebrow">How Interdiction Works</span>
+        <h2 class="section-title">One effort budget, a different action on each kind of lane</h2>
+        <p>
+          The attacker spends a single effort budget. Each edge carries the one action that fits where it is, with an
+          <strong>effort cost</strong> and a probability <strong>p</strong> that the action shuts the edge, read as the
+          expected share of the month it is closed. That is the same per-edge cost and probability the environment
+          already uses. p is anchored on real disruptions; costs are ordinal, ordered by the legal threshold crossed and
+          the distance from PRC bases.
+        </p>
+      </section>
+    </div>
+    <div class="wide">
+      <div class="table-wrap">
+        <table class="grid">
+          <thead><tr><th>Action</th><th>Where it is allowed</th><th>Cost</th><th>p</th><th>What p is anchored on</th></tr></thead>
+          <tbody>
+          <tr><td>Cyber on a canal or port</td><td>Panama Canal, the Suez route, the three port entries</td><td class="n">1</td><td class="n">0.10</td><td class="src">Nagoya and DP World Australia port shutdowns, 2023 (about 3 days)</td></tr>
+          <tr><td>Cyber on an open strait</td><td>Hormuz, Malacca, Sunda, Lombok, the Sulu route, Miyako</td><td class="n">1</td><td class="n">0.05</td><td class="src">GPS jamming in Hormuz, 2025: collisions, but traffic kept moving</td></tr>
+          <tr><td>Quarantine (variant A)</td><td>Taiwan approaches</td><td class="n">2</td><td class="n">0.80</td><td class="src">CSIS quarantine scenarios; Iran&rsquo;s 2026 Hormuz permit regime</td></tr>
+          <tr><td>Blockade (variant B)</td><td>Taiwan approaches</td><td class="n">4</td><td class="n">0.95</td><td class="src">Hormuz 2026: mines, attacks and permits cut traffic about 95%</td></tr>
+          <tr><td>Proxy disruption</td><td>Bab el-Mandeb</td><td class="n">2</td><td class="n">0.60</td><td class="src">Houthi campaign since 2023: Red Sea traffic down 50&ndash;67%</td></tr>
+          <tr><td>Kinetic (naval)</td><td>South China Sea only</td><td class="n">3</td><td class="n">0.90</td><td class="src">CSIS <em>Lights Out?</em> blockade wargames, 26 games (2025)</td></tr>
+          <tr><td>Economic pressure</td><td>The four supplier arcs</td><td class="n">3</td><td class="n">0.20</td><td class="src">Sanctions succeed in 34% of 116 cases (Hufbauer, Schott &amp; Elliott, 1990); 4% on Pape&rsquo;s recount</td></tr>
+          <tr><td>Naval presence (carrier group)</td><td>Indian Ocean, western Pacific</td><td class="n">4</td><td class="n">0.20</td><td class="src"><strong>Assumption</strong>, between the Tanker War (about 2%) and the Houthis (about 60%)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="wrap">
+      <section class="block" style="padding-top: 22px;">
+        <p class="muted">
+          The other 19 edges cannot be interdicted, each with a stated reason: the demand arcs, loading inside the Gulf,
+          the pipelines, the Atlantic, eastern Pacific and Red Sea legs, and Indonesian archipelagic waters.
+        </p>
+        <div class="callout">
+          <span class="eyebrow">First baseline (a graph calculation, not a simulation)</span>
+          <p>Counting p, the cheapest way to cut off all of Taiwan&rsquo;s crude is a <strong>five-lane cordon around the west
+          coast</strong> (effort 12.5), because all three crude ports sit on that coast. Ignoring p would pick three cyber
+          attacks on the ports instead, which is why p has to stay in the model. This is the number the agent has to beat.</p>
+        </div>
+      </section>
+
+      <section class="block" id="assumptions">
+        <span class="eyebrow">Assumptions and Limits</span>
+        <h2 class="section-title">What the model holds fixed, stated up front</h2>
+        <h3 class="sub">Kept from LTC Webb&rsquo;s framework</h3>
+        <ul class="plain">
+          <li>Two players, attacker leading and defender following (Stackelberg).</li>
+          <li>Full information, zero-sum, one round.</li>
+          <li>Outcomes: the meeting notes say deterministic; the training code runs stochastic. To confirm.</li>
+        </ul>
+        <h3 class="sub">Added by this network</h3>
+        <ul class="plain">
+          <li>The 2025 supplier mix is held fixed; no spot-market substitution.</li>
+          <li>One month, one commodity: no stock drawdown, rationing, or switch to coal or LNG.</li>
+          <li>No escorts or defender counter-force; the defender re-routes but does not fight back.</li>
+          <li>One action per edge; quarantine and blockade are run as two variants.</li>
+          <li>Effort costs are ordinal and the carrier group&rsquo;s p is assumed; both are swept for sensitivity.</li>
+          <li>Similar nodes are merged: one node per origin region, Kaohsiung and Dalin as one port, Oman and Fujairah as one terminal.</li>
+          <li>Open, unclassified sources only. A proof of concept, not a targeting model.</li>
+        </ul>
+        <h3 class="sub">Still open</h3>
+        <ul class="plain">
+          <li>Capacities for the nine straits and canals, pending the EIA <em>World Oil Transit Chokepoints</em> report and canal-authority vessel limits.</li>
+          <li>Shalung&rsquo;s exact position, which appears in neither PortWatch nor Natural Earth.</li>
+        </ul>
+      </section>
+
+      <section class="block" id="next">
+        <span class="eyebrow">Next</span>
+        <h2 class="section-title">Method and deliverables</h2>
+        <ol class="plain">
+          <li><strong>Baselines on the graph</strong> (exact min-cut, greedy), with sourced capacities.</li>
+          <li><strong>Agent evaluation on MIT SuperCloud</strong> (LTC Webb): zero-sum and canalize strategies, quarantine and blockade variants.</li>
+          <li><strong>Transfer test:</strong> the rail-trained agent on this network without retraining. If it transfers, it learned
+          interdiction rather than a map; if it does not, that is also a result.</li>
+        </ol>
+        <p><strong>Products:</strong> an effort&ndash;flow frontier (budget against crude delivered, for min-cut, greedy and the
+        agent), a map of where the agent acts at low, medium and high budget, the transfer result, and a poster.</p>
+      </section>
+
+      <section class="block" id="sources">
+        <span class="eyebrow">Sources</span>
+        <h2 class="section-title">Where every number comes from</h2>
+        <h3 class="sub">Method</h3>
+        <ul class="sources">
+          <li>Wood, R. K. (1993). Deterministic network interdiction. <em>Mathematical and Computer Modelling</em>, 17(2), 1&ndash;18.</li>
+          <li>Cormican, K. J., Morton, D. P., &amp; Wood, R. K. (1998). Stochastic network interdiction. <em>Operations Research</em>, 46(2), 184&ndash;197.</li>
+          <li>Smith, J. C., &amp; Song, Y. (2020). A survey of network interdiction models and algorithms. <em>European Journal of Operational Research</em>, 283(3), 797&ndash;811.</li>
+          <li>Webb, M., &amp; Caplice, C. (2025). <em>Solving maximum flow network interdiction using reinforcement learning.</em> SSRN 5392397.</li>
+        </ul>
+        <h3 class="sub">Data</h3>
+        <ul class="sources">
+          <li><strong>U.S. Energy Information Administration</strong>, <em>Taiwan</em> country analysis brief (April 2026): import shares by origin (Figure 9) and refinery capacity (Table 2). <a href="https://www.eia.gov/international/analysis/country/TWN" target="_blank" rel="noopener">eia.gov</a></li>
+          <li><strong>IMF PortWatch</strong>: daily port calls and chokepoint transits from satellite AIS. <a href="https://portwatch.imf.org" target="_blank" rel="noopener">portwatch.imf.org</a></li>
+          <li><strong>Natural Earth</strong>: 10m coastline, public domain. <a href="https://github.com/nvkelso/natural-earth-vector" target="_blank" rel="noopener">github.com/nvkelso/natural-earth-vector</a></li>
+          <li><strong>scgraph</strong> 3.5.0 (Makowski), with the <code>marnet</code> sea-lane network from searoute-py. <a href="https://github.com/connor-makowski/scgraph" target="_blank" rel="noopener">github.com/connor-makowski/scgraph</a></li>
+        </ul>
+        <h3 class="sub">Effort values and current events</h3>
+        <ul class="sources">
+          <li>CSIS, <a href="https://www.csis.org/analysis/how-china-could-quarantine-taiwan-mapping-out-two-possible-scenarios" target="_blank" rel="noopener">How China Could Quarantine Taiwan</a>.</li>
+          <li>CSIS, <a href="https://www.csis.org/analysis/lights-out-wargaming-chinese-blockade-taiwan" target="_blank" rel="noopener">Lights Out? Wargaming a Chinese Blockade of Taiwan</a> (Cancian, Cancian &amp; Heginbotham, 2025).</li>
+          <li>UN General Assembly <a href="https://legal.un.org/avl/ha/da/da.html" target="_blank" rel="noopener">Resolution 3314 (1974)</a>, Definition of Aggression, Art. 3(c): blockade of a state&rsquo;s ports by armed forces.</li>
+          <li>Hufbauer, Schott &amp; Elliott, <em>Economic Sanctions Reconsidered</em>, 2nd ed. (1990); Pape, &ldquo;Why Economic Sanctions Do Not Work,&rdquo; <em>International Security</em> (1997).</li>
+          <li>Port cyber incidents: <a href="https://www.dragos.com/blog/ot-cybersecurity-breach-disrupts-operations-at-the-port-of-nagoya-japan" target="_blank" rel="noopener">Nagoya, 2023</a>; <a href="https://www.dpworld.com/en/news/releases/australia/media-statement-update-on-cybersecurity-incident" target="_blank" rel="noopener">DP World Australia, 2023</a>; <a href="https://www.cfr.org/cyber-operations/disruption-of-operations-at-shahid-rajaee-port" target="_blank" rel="noopener">Shahid Rajaee, 2020</a>.</li>
+          <li>GPS jamming in Hormuz: <a href="https://gcaptain.com/gps-jamming-in-strait-of-hormuz-raises-maritime-safety-concerns-after-tanker-collision/" target="_blank" rel="noopener">gCaptain, 2025</a>.</li>
+          <li>Tanker War statistics: <a href="https://www.strausscenter.org/strait-of-hormuz-tanker-war/" target="_blank" rel="noopener">Strauss Center</a>; <a href="https://digital-commons.usnwc.edu/cgi/viewcontent.cgi?article=1444&amp;context=ils" target="_blank" rel="noopener">U.S. Naval War College</a>.</li>
+          <li>Houthi campaign: <a href="https://www.maritime.dot.gov/msci/2026-006-red-sea-bab-el-mandeb-strait-gulf-aden-arabian-sea-and-somali-basin-houthi-attacks" target="_blank" rel="noopener">MARAD advisory 2026-006</a>; <a href="https://www.securitycouncilreport.org/monthly-forecast/2026-07/the-red-sea.php" target="_blank" rel="noopener">Security Council Report, July 2026</a>.</li>
+          <li>2026 Hormuz closure: <a href="https://www.aljazeera.com/news/2026/8/27/how-a-95-percent-drop-in-hormuz-traffic-changed-global-shipping" target="_blank" rel="noopener">Al Jazeera, August 2026</a>; <a href="https://www.congress.gov/crs-product/R45281" target="_blank" rel="noopener">CRS R45281</a>. Taiwan&rsquo;s reroute: <a href="https://www.malaymail.com/news/money/2026/04/06/taiwan-to-ship-oil-from-saudi-red-sea-ports/215351" target="_blank" rel="noopener">Malay Mail, April 2026</a>.</li>
+          <li>Hormuz bypass pipelines: <a href="https://www.iea.org/about/oil-security-and-emergency-response/strait-of-hormuz" target="_blank" rel="noopener">IEA</a>.</li>
+        </ul>
+      </section>
+
+      <section class="block" id="files">
+        <span class="eyebrow">Files</span>
+        <h2 class="section-title">The documents behind this page</h2>
+        <p class="muted">Everything is kept in the project repository on GitHub; this page is a compact view of the parts that matter.</p>
+      </section>
+    </div>
+    <div class="wide">
+      <div class="files">
+        <a class="file" href="ma289-27-1-proposal.pdf" target="_blank" rel="noopener"><span class="fname">Proposal (PDF)</span><span class="fdesc">One-page proposal for LTC Webb, with figures.</span></a>
+        <a class="file" href="ma289-27-1-proposal.docx" target="_blank" rel="noopener"><span class="fname">Proposal (Word)</span><span class="fdesc">The same proposal, editable.</span></a>
+        <a class="file" href="https://github.com/JettDrums/MA289-27-1/blob/claude/ma289-27-1-ljmxoy/docs/oil-brief.md" target="_blank" rel="noopener"><span class="fname">Scenario brief</span><span class="fdesc">Every design choice, assumption and baseline, in 16 sections. <em>(GitHub, private)</em></span></a>
+        <a class="file" href="https://github.com/JettDrums/MA289-27-1/blob/claude/ma289-27-1-ljmxoy/docs/oil-network-tables.md" target="_blank" rel="noopener"><span class="fname">Every node and edge</span><span class="fdesc">All 55 nodes and 78 edges with action, cost, p, capacity and source. <em>(GitHub, private)</em></span></a>
+        <a class="file" href="https://github.com/JettDrums/MA289-27-1/blob/claude/ma289-27-1-ljmxoy/docs/effort-values.md" target="_blank" rel="noopener"><span class="fname">Effort values</span><span class="fdesc">How each action&rsquo;s cost and probability was set, with sources. <em>(GitHub, private)</em></span></a>
+        <a class="file" href="https://github.com/JettDrums/MA289-27-1/blob/claude/ma289-27-1-ljmxoy/data/OIL_Nodes.csv" target="_blank" rel="noopener"><span class="fname">Model input: nodes</span><span class="fdesc">OIL_Nodes.csv, in the environment&rsquo;s format. <em>(GitHub, private)</em></span></a>
+        <a class="file" href="https://github.com/JettDrums/MA289-27-1/blob/claude/ma289-27-1-ljmxoy/data/OIL_Edges.csv" target="_blank" rel="noopener"><span class="fname">Model input: edges</span><span class="fdesc">OIL_Edges.csv, in the environment&rsquo;s format. <em>(GitHub, private)</em></span></a>
+        <a class="file" href="https://github.com/JettDrums/MA289-27-1/blob/claude/ma289-27-1-ljmxoy/scripts/build_oil_graph.py" target="_blank" rel="noopener"><span class="fname">Network builder</span><span class="fdesc">Rebuilds the network from its sources and runs every check. <em>(GitHub, private)</em></span></a>
+        <a class="file" href="https://github.com/JettDrums/MA289-27-1/tree/claude/ma289-27-1-ljmxoy/figures" target="_blank" rel="noopener"><span class="fname">Figures</span><span class="fdesc">Full-resolution versions of every figure on this page. <em>(GitHub, private)</em></span></a>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="name">Dennis Pezan</div>
+      <p>Cadet, United States Military Academy at West Point. <a href="index.html">Back to home</a></p>
+      <p class="disclaimer">
+        Research in progress for the MA289-27-1 independent study. Built entirely from open, unclassified
+        sources; a proof of concept, not a targeting model. No simulation results are shown yet. The views
+        expressed are the author's own and do not reflect the official position of the United States Military
+        Academy, Department of the Army, or Department of Defense.
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var btn = document.getElementById('navHamburger');
+      var links = document.getElementById('navLinks');
+      if (!btn || !links) return;
+      btn.addEventListener('click', function () {
+        var open = links.classList.toggle('open');
+        btn.classList.toggle('open', open);
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      links.addEventListener('click', function (e) {
+        if (e.target.tagName === 'A') {
+          links.classList.remove('open');
+          btn.classList.remove('open');
+          btn.setAttribute('aria-expanded', 'false');
+        }
+      });
+    })();
+  </script>
+
+</body>
+</html>
