@@ -1,0 +1,22 @@
+1:"$Sreact.fragment"
+2:I[80648,["/mwc/_next/static/chunks/2rwl75ykk0fbz.js","/mwc/_next/static/chunks/37kzr359t3d4h.js"],"Mark"]
+3:I[22016,["/mwc/_next/static/chunks/2rwl75ykk0fbz.js","/mwc/_next/static/chunks/37kzr359t3d4h.js"],""]
+4:I[97367,["/mwc/_next/static/chunks/2rwl75ykk0fbz.js"],"OutletBoundary"]
+5:"$Sreact.suspense"
+9:I[97367,["/mwc/_next/static/chunks/2rwl75ykk0fbz.js"],"ViewportBoundary"]
+a:I[97367,["/mwc/_next/static/chunks/2rwl75ykk0fbz.js"],"MetadataBoundary"]
+b:I[27201,["/mwc/_next/static/chunks/2rwl75ykk0fbz.js"],"IconMark"]
+d:I[39756,["/mwc/_next/static/chunks/2rwl75ykk0fbz.js"],"default"]
+e:I[37457,["/mwc/_next/static/chunks/2rwl75ykk0fbz.js"],"default"]
+8:X
+10:X
+10:C
+0:{"buildId":"q4LwuZsbEydjzRnZb-rVQ","data":[{"rsc":["$","$1","c",{"children":[["$","section",null,{"className":"border-b border-rule","children":["$","div",null,{"className":"mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8 py-28 sm:py-36","children":[["$","p",null,{"className":"font-mono text-[0.78rem] tracking-[0.14em] uppercase text-muted ","children":["$undefined","Error 404"]}],["$","h1",null,{"className":"mt-6 max-w-3xl font-serif text-5xl leading-[1] font-medium tracking-[-0.03em] sm:text-7xl","children":["This page needs a ",["$","$L2",null,{"type":"circle","padding":[2,10],"children":"revision"}],"."]}],["$","p",null,{"className":"font-hand text-[1.35rem] leading-snug text-red mt-6 -rotate-2","children":"missing source?"}],["$","p",null,{"className":"mt-6 max-w-xl text-lg text-muted","children":"The page you’re looking for doesn’t exist or has moved."}],["$","div",null,{"className":"mt-10","children":["$","$L3",null,{"href":"/","className":"inline-flex items-center justify-center gap-3 px-6 py-3.5 text-[0.95rem] font-semibold transition-colors bg-ink text-paper-light hover:bg-red ","children":"Back to home"}]}]]}]}],[["$","script","script-0",{"src":"/mwc/_next/static/chunks/37kzr359t3d4h.js","async":true}]],["$","$L4",null,{"children":["$","$5",null,{"name":"Next.MetadataOutlet","children":"$@6"}]}]]}],"isPartial":"$@7","staleTime":"$8","varyParams":null},{"rsc":["$","$1","h",{"children":[["$","meta",null,{"name":"robots","content":"noindex"}],["$","$L9",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]}],["$","div",null,{"hidden":true,"children":["$","$La",null,{"children":["$","$5",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"Mounger Writing Center · West Point"}],["$","meta","1",{"name":"description","content":"The Mounger Writing Center at West Point: one-on-one writing and communication consultations with trained Stokes Fellows, for every cadet, at every stage, on every assignment."}],["$","meta","2",{"name":"robots","content":"noindex, follow"}],["$","link","3",{"rel":"icon","href":"/mwc/icon.svg?icon.2-b_fsfn3yksc.svg","sizes":"any","type":"image/svg+xml"}],["$","$Lb","4",{}]]}]}]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}],"isPartial":"$@c","staleTime":"$8","varyParams":null},{"rsc":["$","$1","c",{"children":[null,["$","$Ld",null,{"parallelRouterKey":"children","template":["$","$Le",null,{}]}]]}],"isPartial":"$@f","staleTime":"$8","varyParams":"$10"}],"isUpgradeableISRFallback":false,"a":"$@11","rootVaryParams":null,"needsRuntimeRequest":"$@12"}
+6:null
+12:true
+8:300
+8:C
+11:0
+c:"$undefined"
+f:"$undefined"
+7:"$undefined"
