@@ -290,7 +290,7 @@
       </button>
       <div class="site-nav-links" id="navLinks">
         <a class="site-nav-link" href="index.html">&#8592; Home</a>
-        <a class="site-nav-link" href="#question">Question</a>
+        <a class="site-nav-link" href="#summary">Summary</a>
         <a class="site-nav-link" href="#model">Model</a>
         <a class="site-nav-link" href="#effort">Effort budget</a>
         <a class="site-nav-link" href="#assumptions">Assumptions</a>
@@ -314,11 +314,12 @@
         <span class="sep">&middot;</span>
         <span>Advisor: LTC Matthew Webb</span>
         <span class="sep">&middot;</span>
-        <span>Updated 27 September 2026</span>
+        <span>Updated 30 September 2026</span>
       </div>
       <div class="status">Network built &middot; nothing simulated yet</div>
       <div class="hero-actions">
-        <a class="btn btn-primary" href="ma289-27-1-proposal.pdf" target="_blank" rel="noopener">Read the proposal (PDF)</a>
+        <a class="btn btn-primary" href="ma289-27-1-summary.pdf" target="_blank" rel="noopener">One-page summary (PDF)</a>
+        <a class="btn btn-ghost" href="ma289-27-1-proposal.pdf" target="_blank" rel="noopener">Proposal (PDF)</a>
         <a class="btn btn-ghost" href="https://github.com/JettDrums/MA289-27-1" target="_blank" rel="noopener">Project repository</a>
       </div>
     </div>
@@ -335,27 +336,56 @@
 
   <main>
     <div class="wrap">
-      <section class="block" id="question">
-        <span class="eyebrow">The Question</span>
-        <h2 class="section-title">Does a learned interdiction policy transfer from rail to the sea?</h2>
+      <section class="block" id="summary">
+        <span class="eyebrow">The Pitch</span>
+        <h2 class="section-title">Where would an adversary cut Taiwan&rsquo;s oil, and can an AI trained on rail tell us?</h2>
         <p>
-          LTC Webb&rsquo;s threat-adaptive reinforcement-learning agent learns attacker strategies for
-          maximum-flow network interdiction on the Ukrainian/Russian rail network. This project builds a second,
-          structurally different network, the sea delivery of crude oil to Taiwan&rsquo;s refineries, and tests
-          whether the agent still finds sound strategies there.
+          Taiwan imports nearly all of its crude oil by sea, and every barrel passes through a handful of straits.
+          I am turning those shipping routes into a network model, and using LTC Webb&rsquo;s reinforcement-learning
+          interdiction agent to ask two things: where would an adversary with limited resources act to cut
+          Taiwan&rsquo;s oil supply, and can an AI trained on one kind of network reason about a very different one?
         </p>
-        <div class="callout">
-          <span class="eyebrow">Research question</span>
-          <p>Given one effort budget spread across different kinds of action, which sea lanes does an attacker act
-          on to minimize the crude reaching Taiwan, and are they distant chokepoints or Taiwan&rsquo;s own approaches?</p>
-        </div>
+        <h3 class="sub">Why it matters</h3>
         <p>
-          <strong>Why this network.</strong> In 2025, 61% of Taiwan&rsquo;s crude came from Persian Gulf producers
-          through the Strait of Hormuz, 27% from the U.S. Gulf Coast, and 8% from Oman (EIA, 2026). Because every
-          barrel must pass a few named straits, the open ocean reduces to a finite, closed graph. The structure is
-          real: Hormuz has been largely closed since February 2026, and Taiwan reportedly rerouted through the Saudi
-          Red Sea port of Yanbu, a route this network already contains.
+          Energy is widely identified as Taiwan&rsquo;s sharpest vulnerability in a blockade or quarantine. The
+          chokepoints are not hypothetical: the Strait of Hormuz, which carried 61% of Taiwan&rsquo;s crude in 2025,
+          has been largely closed since February 2026, and Taiwan has had to reroute supply. Most open analysis of a
+          Taiwan blockade comes from wargames; this project brings an optimization model to the same question.
         </p>
+        <h3 class="sub">Scope</h3>
+        <ul class="plain">
+          <li><strong>In:</strong> crude oil only; the four regions that supply it (Persian Gulf, U.S. Gulf Coast, Oman,
+          West Africa); the straits and canals it must pass; Taiwan&rsquo;s three refinery ports; one month of supply.</li>
+          <li><strong>Out:</strong> LNG and coal, detailed military campaigns, escorts and counter-attacks, and anything
+          classified. A proof of concept built from open sources, not a targeting tool.</li>
+        </ul>
+        <h3 class="sub">What I am looking to find</h3>
+        <ol class="plain">
+          <li><strong>Where the attacker acts.</strong> Does a budget-limited attacker go after distant chokepoints such
+          as Hormuz and Malacca, or Taiwan&rsquo;s own approaches?</li>
+          <li><strong>Quarantine versus blockade.</strong> How does the answer change between a lower-cost coast-guard
+          quarantine and a higher-cost naval blockade?</li>
+          <li><strong>Transfer.</strong> Does an agent trained on the Ukrainian rail network still find sound strategies
+          on a maritime network without retraining?</li>
+        </ol>
+        <h3 class="sub">Previous work it builds on</h3>
+        <ul class="plain">
+          <li><strong>Network interdiction:</strong> the classic optimization models of Wood (1993) and Cormican, Morton
+          and Wood (1998), surveyed in Smith and Song (2020).</li>
+          <li><strong>LTC Webb&rsquo;s reinforcement-learning approach:</strong> Webb and Caplice (2025), which trains an
+          agent to find attacker strategies (defeat, isolate, canalize, divert) on the Ukrainian rail network.</li>
+          <li><strong>Taiwan blockade analysis:</strong> CSIS&rsquo;s quarantine scenarios and its 2025
+          <em>Lights Out?</em> blockade wargames, which identify energy shipping as the critical factor.</li>
+          <li><strong>Data:</strong> the EIA&rsquo;s Taiwan brief (2026) for import sources and refinery capacity, and
+          IMF PortWatch for shipping traffic.</li>
+        </ul>
+        <h3 class="sub">Goals</h3>
+        <ul class="plain">
+          <li>An open-source, defensible model of Taiwan&rsquo;s crude oil supply network (built; shown below).</li>
+          <li>A clear picture of where interdiction is most effective at low, medium and high effort.</li>
+          <li>An answer on whether the agent&rsquo;s learned strategy transfers from rail to sea.</li>
+          <li>A poster presenting the results at the end of the semester.</li>
+        </ul>
       </section>
     </div>
 
@@ -470,7 +500,7 @@
 
       <section class="block" id="next">
         <span class="eyebrow">Next</span>
-        <h2 class="section-title">Method and deliverables</h2>
+        <h2 class="section-title">How the questions get answered</h2>
         <ol class="plain">
           <li><strong>Baselines on the graph</strong> (exact min-cut, greedy), with sourced capacities.</li>
           <li><strong>Agent evaluation on MIT SuperCloud</strong> (LTC Webb): zero-sum and canalize strategies, quarantine and blockade variants.</li>
@@ -522,7 +552,7 @@
     <div class="wide">
       <div class="files">
         <a class="file" href="ma289-27-1-proposal.pdf" target="_blank" rel="noopener"><span class="fname">Proposal (PDF)</span><span class="fdesc">One-page proposal for LTC Webb, with figures.</span></a>
-        <a class="file" href="ma289-27-1-proposal.docx" target="_blank" rel="noopener"><span class="fname">Proposal (Word)</span><span class="fdesc">The same proposal, editable.</span></a>
+        <a class="file" href="ma289-27-1-summary.pdf" target="_blank" rel="noopener"><span class="fname">One-page summary (PDF)</span><span class="fdesc">The project pitch: scope, questions, previous work, goals.</span></a>
         <a class="file" href="https://github.com/JettDrums/MA289-27-1/blob/claude/ma289-27-1-ljmxoy/docs/oil-brief.md" target="_blank" rel="noopener"><span class="fname">Scenario brief</span><span class="fdesc">Every design choice, assumption and baseline, in 16 sections. <em>(GitHub, private)</em></span></a>
         <a class="file" href="https://github.com/JettDrums/MA289-27-1/blob/claude/ma289-27-1-ljmxoy/docs/oil-network-tables.md" target="_blank" rel="noopener"><span class="fname">Every node and edge</span><span class="fdesc">All 55 nodes and 78 edges with action, cost, p, capacity and source. <em>(GitHub, private)</em></span></a>
         <a class="file" href="https://github.com/JettDrums/MA289-27-1/blob/claude/ma289-27-1-ljmxoy/docs/effort-values.md" target="_blank" rel="noopener"><span class="fname">Effort values</span><span class="fdesc">How each action&rsquo;s cost and probability was set, with sources. <em>(GitHub, private)</em></span></a>
