@@ -209,6 +209,20 @@
     .whk { stroke: var(--ink); stroke-width: 1.3; fill: none; }
 
     .var { font-family: var(--serif); font-style: italic; }
+
+    /* vector arrow drawn in CSS: U+20D7 has no glyph in EB Garamond */
+    .vec { position: relative; display: inline-block; line-height: 1; }
+    .vec::before, .vec::after { content: ''; position: absolute; pointer-events: none; }
+    .vec::before {
+      left: .05em; right: .05em; top: .02em;
+      border-top: .05em solid currentColor;
+    }
+    .vec::after {
+      right: .04em; top: .02em; width: .2em; height: .2em;
+      border-top: .05em solid currentColor;
+      border-right: .05em solid currentColor;
+      transform: translateY(-50%) rotate(45deg);
+    }
     .formula {
       font-family: var(--serif); font-size: 18px; margin: 16px 0;
       display: flex; justify-content: center; align-items: center; gap: 8px; flex-wrap: wrap;
@@ -331,10 +345,10 @@
 
     <p>Use these vectors for all of Part I:</p>
     <div class="formula" style="font-size:19px">
-      <span class="var">u&#8407;</span> = &lang;4, &minus;2, 4&rang; &nbsp;&nbsp;
-      <span class="var">v&#8407;</span> = &lang;2, 2, &minus;1&rang; &nbsp;&nbsp;
-      <span class="var">w&#8407;</span> = &lang;&minus;8, 4, &minus;8&rang; &nbsp;&nbsp;
-      <span class="var">t&#8407;</span> = &lang;0, 3, 4&rang;
+      <span class="var vec">u</span> = &lang;4, &minus;2, 4&rang; &nbsp;&nbsp;
+      <span class="var vec">v</span> = &lang;2, 2, &minus;1&rang; &nbsp;&nbsp;
+      <span class="var vec">w</span> = &lang;&minus;8, 4, &minus;8&rang; &nbsp;&nbsp;
+      <span class="var vec">t</span> = &lang;0, 3, 4&rang;
     </div>
 
     <div class="q" id="q1">
@@ -342,17 +356,17 @@
       <div class="q-body">
         <p>Compute each by hand, component by component.</p>
         <ol class="sub" type="a">
-          <li><span class="var">u&#8407;</span> + <span class="var">v&#8407;</span> = <span class="blank"></span></li>
-          <li><span class="var">v&#8407;</span> &minus; <span class="var">u&#8407;</span> = <span class="blank"></span></li>
-          <li>3<span class="var">u&#8407;</span> = <span class="blank"></span></li>
-          <li>2<span class="var">u&#8407;</span> &minus; <span class="var">v&#8407;</span> = <span class="blank"></span></li>
+          <li><span class="var vec">u</span> + <span class="var vec">v</span> = <span class="blank"></span></li>
+          <li><span class="var vec">v</span> &minus; <span class="var vec">u</span> = <span class="blank"></span></li>
+          <li>3<span class="var vec">u</span> = <span class="blank"></span></li>
+          <li>2<span class="var vec">u</span> &minus; <span class="var vec">v</span> = <span class="blank"></span></li>
         </ol>
         <div class="write" style="--n:3"></div>
         <div class="keybox" hidden>
           <h4>Answer &amp; scoring</h4>
           <p>(a) <b class="ans">&lang;6, 0, 3&rang;</b> &nbsp; (b) <b class="ans">&lang;&minus;2, 4, &minus;5&rang;</b> &nbsp; (c) <b class="ans">&lang;12, &minus;6, 12&rang;</b> &nbsp; (d) <b class="ans">&lang;6, &minus;6, 9&rang;</b></p>
-          <p>For (d): 2<span class="var">u&#8407;</span> = &lang;8, &minus;4, 8&rang;, then subtract <span class="var">v&#8407;</span> component by component: &lang;8&minus;2, &minus;4&minus;2, 8&minus;(&minus;1)&rang; = &lang;6, &minus;6, 9&rang;. The third component is the one cadets miss &mdash; subtracting a negative.</p>
-          <div class="rubric">1.5 pts each. Order matters in (b): <span class="var">v&#8407;</span> &minus; <span class="var">u&#8407;</span>, not <span class="var">u&#8407;</span> &minus; <span class="var">v&#8407;</span>.</div>
+          <p>For (d): 2<span class="var vec">u</span> = &lang;8, &minus;4, 8&rang;, then subtract <span class="var vec">v</span> component by component: &lang;8&minus;2, &minus;4&minus;2, 8&minus;(&minus;1)&rang; = &lang;6, &minus;6, 9&rang;. The third component is the one cadets miss &mdash; subtracting a negative.</p>
+          <div class="rubric">1.5 pts each. Order matters in (b): <span class="var vec">v</span> &minus; <span class="var vec">u</span>, not <span class="var vec">u</span> &minus; <span class="var vec">v</span>.</div>
         </div>
       </div>
     </div>
@@ -361,16 +375,16 @@
       <div class="q-head"><span class="q-num">2.</span><div class="q-body"><b>Magnitude and unit vectors.</b> <span class="flag">On Gate 3</span></div><span class="pts">10 pts</span></div>
       <div class="q-body">
         <p>(a) Compute the magnitude of each vector. Show the work for at least one.</p>
-        <p>|<span class="var">u&#8407;</span>| = <span class="blank"></span> &nbsp;&nbsp; |<span class="var">v&#8407;</span>| = <span class="blank"></span> &nbsp;&nbsp; |<span class="var">w&#8407;</span>| = <span class="blank"></span> &nbsp;&nbsp; |<span class="var">t&#8407;</span>| = <span class="blank"></span></p>
+        <p>|<span class="var vec">u</span>| = <span class="blank"></span> &nbsp;&nbsp; |<span class="var vec">v</span>| = <span class="blank"></span> &nbsp;&nbsp; |<span class="var vec">w</span>| = <span class="blank"></span> &nbsp;&nbsp; |<span class="var vec">t</span>| = <span class="blank"></span></p>
         <div class="write" style="--n:4"></div>
-        <p>(b) Find the unit vector in the direction of <span class="var">u&#8407;</span>, and the unit vector in the direction of <span class="var">t&#8407;</span>. Give <b>exact</b> values &mdash; fractions, not decimals.</p>
+        <p>(b) Find the unit vector in the direction of <span class="var vec">u</span>, and the unit vector in the direction of <span class="var vec">t</span>. Give <b>exact</b> values &mdash; fractions, not decimals.</p>
         <div class="write" style="--n:4"></div>
         <p><span class="var">u&#770;</span> = <span class="blank w"></span> &nbsp;&nbsp; <span class="var">t&#770;</span> = <span class="blank w"></span></p>
         <p>(c) How can you check a unit vector is correct without redoing the division?</p>
         <div class="write" style="--n:2"></div>
         <div class="keybox" hidden>
           <h4>Answer &amp; scoring</h4>
-          <p>(a) |<span class="var">u&#8407;</span>| = &radic;(16+4+16) = &radic;36 = <b class="ans">6</b> &nbsp;&nbsp; |<span class="var">v&#8407;</span>| = &radic;(4+4+1) = &radic;9 = <b class="ans">3</b> &nbsp;&nbsp; |<span class="var">w&#8407;</span>| = &radic;144 = <b class="ans">12</b> &nbsp;&nbsp; |<span class="var">t&#8407;</span>| = &radic;25 = <b class="ans">5</b></p>
+          <p>(a) |<span class="var vec">u</span>| = &radic;(16+4+16) = &radic;36 = <b class="ans">6</b> &nbsp;&nbsp; |<span class="var vec">v</span>| = &radic;(4+4+1) = &radic;9 = <b class="ans">3</b> &nbsp;&nbsp; |<span class="var vec">w</span>| = &radic;144 = <b class="ans">12</b> &nbsp;&nbsp; |<span class="var vec">t</span>| = &radic;25 = <b class="ans">5</b></p>
           <p>All four are exact integers. Squaring kills the sign, so the negative components contribute just as much as positive ones.</p>
           <p>(b) A unit vector is the original divided by its own magnitude &mdash; <b>every component</b>, same divisor:</p>
           <p><span class="var">u&#770;</span> = <span class="frac"><span class="num">&lang;4, &minus;2, 4&rang;</span><span class="den">6</span></span> = <b class="ans">&lang;2/3, &minus;1/3, 2/3&rang;</b> &nbsp;&nbsp;&nbsp; <span class="var">t&#770;</span> = <span class="frac"><span class="num">&lang;0, 3, 4&rang;</span><span class="den">5</span></span> = <b class="ans">&lang;0, 3/5, 4/5&rang;</b></p>
@@ -386,7 +400,7 @@
       <div class="q-head"><span class="q-num">3.</span><div class="q-body"><b>Dot product.</b></div><span class="pts">6 pts</span></div>
       <div class="q-body">
         <p>Compute each dot product algebraically. Show your work.</p>
-        <p>(a) <span class="var">u&#8407;</span>&middot;<span class="var">v&#8407;</span> = <span class="blank"></span> &nbsp;&nbsp; (b) <span class="var">u&#8407;</span>&middot;<span class="var">w&#8407;</span> = <span class="blank"></span> &nbsp;&nbsp; (c) <span class="var">u&#8407;</span>&middot;<span class="var">t&#8407;</span> = <span class="blank"></span></p>
+        <p>(a) <span class="var vec">u</span>&middot;<span class="var vec">v</span> = <span class="blank"></span> &nbsp;&nbsp; (b) <span class="var vec">u</span>&middot;<span class="var vec">w</span> = <span class="blank"></span> &nbsp;&nbsp; (c) <span class="var vec">u</span>&middot;<span class="var vec">t</span> = <span class="blank"></span></p>
         <div class="write" style="--n:4"></div>
         <div class="keybox" hidden>
           <h4>Answer &amp; scoring</h4>
@@ -404,15 +418,15 @@
       <div class="q-body">
         <p>Use your results from Questions 2 and 3.</p>
         <ol class="sub" type="a">
-          <li>Are <span class="var">u&#8407;</span> and <span class="var">v&#8407;</span> orthogonal? State the test you used and your conclusion.<div class="write" style="--n:2"></div></li>
-          <li>Are <span class="var">u&#8407;</span> and <span class="var">w&#8407;</span> parallel? State the test you used and your conclusion.<div class="write" style="--n:3"></div></li>
+          <li>Are <span class="var vec">u</span> and <span class="var vec">v</span> orthogonal? State the test you used and your conclusion.<div class="write" style="--n:2"></div></li>
+          <li>Are <span class="var vec">u</span> and <span class="var vec">w</span> parallel? State the test you used and your conclusion.<div class="write" style="--n:3"></div></li>
           <li>Can two vectors be both orthogonal and parallel? Explain.<div class="write" style="--n:2"></div></li>
         </ol>
         <div class="keybox" hidden>
           <h4>Answer &amp; scoring</h4>
-          <p>(a) <b class="ans">Yes, orthogonal.</b> Test: two vectors are orthogonal exactly when their <b>dot product is zero</b>. <span class="var">u&#8407;</span>&middot;<span class="var">v&#8407;</span> = 0, so the angle between them is 90&deg;.</p>
-          <p>(b) <b class="ans">Yes, parallel</b> &mdash; specifically <b>antiparallel</b>. Test: two vectors are parallel when one is a <b>scalar multiple</b> of the other. Here <span class="var">w&#8407;</span> = &minus;2<span class="var">u&#8407;</span>, checked component by component: &minus;2(4) = &minus;8 &#10003;, &minus;2(&minus;2) = 4 &#10003;, &minus;2(4) = &minus;8 &#10003;.</p>
-          <p>Equivalent check by angle: cos&thinsp;&theta; = <span class="var">u&#8407;</span>&middot;<span class="var">w&#8407;</span> / (|<span class="var">u&#8407;</span>||<span class="var">w&#8407;</span>|) = &minus;72 / (6 &times; 12) = &minus;72/72 = <b>&minus;1</b>, so &theta; = 180&deg;. A cosine of exactly &plusmn;1 <em>is</em> the parallel condition.</p>
+          <p>(a) <b class="ans">Yes, orthogonal.</b> Test: two vectors are orthogonal exactly when their <b>dot product is zero</b>. <span class="var vec">u</span>&middot;<span class="var vec">v</span> = 0, so the angle between them is 90&deg;.</p>
+          <p>(b) <b class="ans">Yes, parallel</b> &mdash; specifically <b>antiparallel</b>. Test: two vectors are parallel when one is a <b>scalar multiple</b> of the other. Here <span class="var vec">w</span> = &minus;2<span class="var vec">u</span>, checked component by component: &minus;2(4) = &minus;8 &#10003;, &minus;2(&minus;2) = 4 &#10003;, &minus;2(4) = &minus;8 &#10003;.</p>
+          <p>Equivalent check by angle: cos&thinsp;&theta; = <span class="var vec">u</span>&middot;<span class="var vec">w</span> / (|<span class="var vec">u</span>||<span class="var vec">w</span>|) = &minus;72 / (6 &times; 12) = &minus;72/72 = <b>&minus;1</b>, so &theta; = 180&deg;. A cosine of exactly &plusmn;1 <em>is</em> the parallel condition.</p>
           <p>(c) <b>No</b> &mdash; not for nonzero vectors. Parallel means cos&thinsp;&theta; = &plusmn;1 (&theta; = 0&deg; or 180&deg;); orthogonal means cos&thinsp;&theta; = 0 (&theta; = 90&deg;). A single angle cannot be both. The zero vector is the degenerate exception, since it is trivially orthogonal to everything and has no direction to be parallel to.</p>
           <div class="rubric">3 pts (a), 3 pts (b), 2 pts (c). Each of (a) and (b) needs the <em>named test</em> plus the conclusion; a correct yes/no with no test earns 1 of 3.</div>
         </div>
@@ -422,12 +436,12 @@
     <div class="q" id="q5">
       <div class="q-head"><span class="q-num">5.</span><div class="q-body"><b>Angle between vectors.</b> <span class="flag">On Gate 3</span></div><span class="pts">4 pts</span></div>
       <div class="q-body">
-        <p>Compute the angle &theta; between <span class="var">u&#8407;</span> and <span class="var">t&#8407;</span>. Give cos&thinsp;&theta; exactly and &theta; to one decimal place.</p>
+        <p>Compute the angle &theta; between <span class="var vec">u</span> and <span class="var vec">t</span>. Give cos&thinsp;&theta; exactly and &theta; to one decimal place.</p>
         <div class="write" style="--n:4"></div>
         <p>cos&thinsp;&theta; = <span class="blank"></span> &nbsp;&nbsp; &theta; = <span class="blank"></span></p>
         <div class="keybox" hidden>
           <h4>Answer &amp; scoring</h4>
-          <p>cos&thinsp;&theta; = <span class="var">u&#8407;</span>&middot;<span class="var">t&#8407;</span> / (|<span class="var">u&#8407;</span>||<span class="var">t&#8407;</span>|) = 10 / (6 &times; 5) = 10/30 = <b class="ans">1/3 &asymp; 0.3333</b></p>
+          <p>cos&thinsp;&theta; = <span class="var vec">u</span>&middot;<span class="var vec">t</span> / (|<span class="var vec">u</span>||<span class="var vec">t</span>|) = 10 / (6 &times; 5) = 10/30 = <b class="ans">1/3 &asymp; 0.3333</b></p>
           <p>&theta; = cos<sup>&minus;1</sup>(1/3) = <b class="ans">70.5&deg;</b></p>
           <p>Sanity check the sign: a positive dot product means an acute angle, so anything above 90&deg; here is an arithmetic error.</p>
           <div class="rubric">2 pts cos&thinsp;&theta;, 2 pts &theta;. Gate 3 gave 3 of 4 for an answer left in radians, and <b>2 of 4 for stopping at the cosine</b>.</div>
@@ -441,16 +455,16 @@
       <div class="q-body">
         <p>For each expression, state whether it is <b>defined</b> or <b>undefined</b>. If defined, give the type of the result (scalar or vector). If undefined, say why.</p>
         <ol class="sub" type="a">
-          <li><span class="var">u&#8407;</span> &middot; (<span class="var">v&#8407;</span> + <span class="var">w&#8407;</span>) &nbsp;<span class="blank"></span></li>
-          <li>|<span class="var">u&#8407;</span>| + <span class="var">v&#8407;</span> &nbsp;<span class="blank"></span></li>
-          <li>(<span class="var">u&#8407;</span> &middot; <span class="var">v&#8407;</span>) &middot; <span class="var">w&#8407;</span> &nbsp;<span class="blank"></span></li>
+          <li><span class="var vec">u</span> &middot; (<span class="var vec">v</span> + <span class="var vec">w</span>) &nbsp;<span class="blank"></span></li>
+          <li>|<span class="var vec">u</span>| + <span class="var vec">v</span> &nbsp;<span class="blank"></span></li>
+          <li>(<span class="var vec">u</span> &middot; <span class="var vec">v</span>) &middot; <span class="var vec">w</span> &nbsp;<span class="blank"></span></li>
         </ol>
         <div class="write" style="--n:4"></div>
         <div class="keybox" hidden>
           <h4>Answer &amp; scoring</h4>
-          <p>(a) <b class="ans">Defined &mdash; scalar.</b> <span class="var">v&#8407;</span> + <span class="var">w&#8407;</span> is a vector in &#8477;<sup>3</sup>, and the dot product of two &#8477;<sup>3</sup> vectors is a scalar. (Value: <span class="var">v&#8407;</span>+<span class="var">w&#8407;</span> = &lang;&minus;6, 6, &minus;9&rang;, so <span class="var">u&#8407;</span>&middot;(<span class="var">v&#8407;</span>+<span class="var">w&#8407;</span>) = &minus;24 &minus; 12 &minus; 36 = &minus;72.)</p>
-          <p>(b) <b class="ans">Undefined.</b> |<span class="var">u&#8407;</span>| is a <b>scalar</b> (6) and <span class="var">v&#8407;</span> is a <b>vector</b>. Addition requires both operands to be the same kind of object with the same dimensions; you cannot add a scalar to a vector.</p>
-          <p>(c) <b class="ans">Undefined.</b> (<span class="var">u&#8407;</span>&middot;<span class="var">v&#8407;</span>) is a scalar (0 here), and the dot product is an operation between two <em>vectors</em>. Scalar &middot; vector is not a dot product. Note that <em>scalar multiplication</em> 0<span class="var">w&#8407;</span> would be defined &mdash; the dot symbol is what makes this illegal.</p>
+          <p>(a) <b class="ans">Defined &mdash; scalar.</b> <span class="var vec">v</span> + <span class="var vec">w</span> is a vector in &#8477;<sup>3</sup>, and the dot product of two &#8477;<sup>3</sup> vectors is a scalar. (Value: <span class="var vec">v</span>+<span class="var vec">w</span> = &lang;&minus;6, 6, &minus;9&rang;, so <span class="var vec">u</span>&middot;(<span class="var vec">v</span>+<span class="var vec">w</span>) = &minus;24 &minus; 12 &minus; 36 = &minus;72.)</p>
+          <p>(b) <b class="ans">Undefined.</b> |<span class="var vec">u</span>| is a <b>scalar</b> (6) and <span class="var vec">v</span> is a <b>vector</b>. Addition requires both operands to be the same kind of object with the same dimensions; you cannot add a scalar to a vector.</p>
+          <p>(c) <b class="ans">Undefined.</b> (<span class="var vec">u</span>&middot;<span class="var vec">v</span>) is a scalar (0 here), and the dot product is an operation between two <em>vectors</em>. Scalar &middot; vector is not a dot product. Note that <em>scalar multiplication</em> 0<span class="var vec">w</span> would be defined &mdash; the dot symbol is what makes this illegal.</p>
           <div class="rubric">2 pts each: 1 for the verdict, 1 for the reason or result type. Watch (c) &mdash; cadets who compute 0&lang;&minus;8,4,&minus;8&rang; = &lang;0,0,0&rang; have answered a different question.</div>
         </div>
       </div>
@@ -469,9 +483,9 @@
         <caption>Three soldiers, raw and normalized</caption>
         <thead><tr><th>Soldier</th><th>AFT</th><th>Weapons</th><th>GPA</th><th>Normalized vector</th></tr></thead>
         <tbody>
-          <tr><td>C05 Evans &nbsp;<span class="var">e&#8407;</span></td><td>462</td><td>28</td><td>4.00</td><td>&lang;0.77, 0.70, 1.00&rang;</td></tr>
-          <tr><td>C12 Lewis &nbsp;<span class="var">l&#8407;</span></td><td>450</td><td>26</td><td>3.96</td><td>&lang;0.75, 0.65, 0.99&rang;</td></tr>
-          <tr><td>C03 Carter &nbsp;<span class="var">c&#8407;</span></td><td>388</td><td>40</td><td>3.03</td><td>&lang;0.65, 1.00, 0.76&rang;</td></tr>
+          <tr><td>C05 Evans &nbsp;<span class="var vec">e</span></td><td>462</td><td>28</td><td>4.00</td><td>&lang;0.77, 0.70, 1.00&rang;</td></tr>
+          <tr><td>C12 Lewis &nbsp;<span class="var vec">l</span></td><td>450</td><td>26</td><td>3.96</td><td>&lang;0.75, 0.65, 0.99&rang;</td></tr>
+          <tr><td>C03 Carter &nbsp;<span class="var vec">c</span></td><td>388</td><td>40</td><td>3.03</td><td>&lang;0.65, 1.00, 0.76&rang;</td></tr>
         </tbody>
       </table>
     </div>
@@ -517,15 +531,15 @@
       <div class="q-head"><span class="q-num">9.</span><div class="q-body"><b>Magnitude in context.</b></div><span class="pts">6 pts</span></div>
       <div class="q-body">
         <p>Compute the three magnitudes to four decimal places.</p>
-        <p>|<span class="var">e&#8407;</span>| = <span class="blank"></span> &nbsp;&nbsp; |<span class="var">l&#8407;</span>| = <span class="blank"></span> &nbsp;&nbsp; |<span class="var">c&#8407;</span>| = <span class="blank"></span></p>
+        <p>|<span class="var vec">e</span>| = <span class="blank"></span> &nbsp;&nbsp; |<span class="var vec">l</span>| = <span class="blank"></span> &nbsp;&nbsp; |<span class="var vec">c</span>| = <span class="blank"></span></p>
         <div class="write" style="--n:3"></div>
         <p>A squad leader says: "Evans has the largest magnitude, so Evans is the best soldier of the three." Is that a valid reading? Explain what magnitude does and does not measure here.</p>
         <div class="write" style="--n:4"></div>
         <div class="keybox" hidden>
           <h4>Answer &amp; scoring</h4>
-          <p>|<span class="var">e&#8407;</span>| = &radic;(0.5929 + 0.4900 + 1.0000) = &radic;2.0829 = <b class="ans">1.4432</b></p>
-          <p>|<span class="var">l&#8407;</span>| = &radic;(0.5625 + 0.4225 + 0.9801) = &radic;1.9651 = <b class="ans">1.4018</b></p>
-          <p>|<span class="var">c&#8407;</span>| = &radic;(0.4225 + 1.0000 + 0.5776) = &radic;2.0001 = <b class="ans">1.4142</b></p>
+          <p>|<span class="var vec">e</span>| = &radic;(0.5929 + 0.4900 + 1.0000) = &radic;2.0829 = <b class="ans">1.4432</b></p>
+          <p>|<span class="var vec">l</span>| = &radic;(0.5625 + 0.4225 + 0.9801) = &radic;1.9651 = <b class="ans">1.4018</b></p>
+          <p>|<span class="var vec">c</span>| = &radic;(0.4225 + 1.0000 + 0.5776) = &radic;2.0001 = <b class="ans">1.4142</b></p>
           <p><b>Not valid.</b> Magnitude measures the <b>overall size of the profile</b> &mdash; how far the soldier sits from the origin once all three features are combined. It says nothing about <em>which</em> features are large, and nothing about quality. Carter (1.4142) edges out Lewis (1.4018) purely on the strength of a perfect weapons score, while being well behind on both other measures.</p>
           <p>Magnitude also cannot compare soldiers to each other in any directional sense. Two soldiers with very different strengths can have nearly equal magnitudes &mdash; as Carter and Lewis do here, differing by about 0.012 while being obviously different profiles. <b>Direction, not length, carries the similarity information</b>, which is exactly what cosine similarity extracts.</p>
           <div class="rubric">3 pts computation (1 each). 3 pts interpretation: full credit says magnitude is overall size and is not a ranking of quality, ideally citing the Carter/Lewis near-tie.</div>
@@ -538,17 +552,17 @@
       <div class="q-body">
         <p>The commander pairs roommates by profile similarity. Evans needs a roommate: the candidates are Lewis and Carter.</p>
         <ol class="sub" type="a">
-          <li>Compute <span class="var">e&#8407;</span>&middot;<span class="var">l&#8407;</span> and <span class="var">e&#8407;</span>&middot;<span class="var">c&#8407;</span>.<div class="write" style="--n:3"></div></li>
+          <li>Compute <span class="var vec">e</span>&middot;<span class="var vec">l</span> and <span class="var vec">e</span>&middot;<span class="var vec">c</span>.<div class="write" style="--n:3"></div></li>
           <li>Compute both cosine similarities to four decimal places.<div class="write" style="--n:4"></div>
-          cos(<span class="var">e&#8407;</span>, <span class="var">l&#8407;</span>) = <span class="blank"></span> &nbsp;&nbsp; cos(<span class="var">e&#8407;</span>, <span class="var">c&#8407;</span>) = <span class="blank"></span></li>
+          cos(<span class="var vec">e</span>, <span class="var vec">l</span>) = <span class="blank"></span> &nbsp;&nbsp; cos(<span class="var vec">e</span>, <span class="var vec">c</span>) = <span class="blank"></span></li>
           <li>Which soldier do you assign as Evans' roommate? Justify with the numbers <em>and</em> with the feature values.<div class="write" style="--n:4"></div></li>
         </ol>
         <div class="keybox" hidden>
           <h4>Answer &amp; scoring</h4>
-          <p>(a) <span class="var">e&#8407;</span>&middot;<span class="var">l&#8407;</span> = 0.77(0.75) + 0.70(0.65) + 1.00(0.99) = 0.5775 + 0.4550 + 0.9900 = <b class="ans">2.0225</b></p>
-          <p><span class="var">e&#8407;</span>&middot;<span class="var">c&#8407;</span> = 0.77(0.65) + 0.70(1.00) + 1.00(0.76) = 0.5005 + 0.7000 + 0.7600 = <b class="ans">1.9605</b></p>
-          <p>(b) cos(<span class="var">e&#8407;</span>, <span class="var">l&#8407;</span>) = 2.0225 / (1.4432 &times; 1.4018) = 2.0225 / 2.0231 = <b class="ans">0.9997</b></p>
-          <p>cos(<span class="var">e&#8407;</span>, <span class="var">c&#8407;</span>) = 1.9605 / (1.4432 &times; 1.4142) = 1.9605 / 2.0412 = <b class="ans">0.9605</b></p>
+          <p>(a) <span class="var vec">e</span>&middot;<span class="var vec">l</span> = 0.77(0.75) + 0.70(0.65) + 1.00(0.99) = 0.5775 + 0.4550 + 0.9900 = <b class="ans">2.0225</b></p>
+          <p><span class="var vec">e</span>&middot;<span class="var vec">c</span> = 0.77(0.65) + 0.70(1.00) + 1.00(0.76) = 0.5005 + 0.7000 + 0.7600 = <b class="ans">1.9605</b></p>
+          <p>(b) cos(<span class="var vec">e</span>, <span class="var vec">l</span>) = 2.0225 / (1.4432 &times; 1.4018) = 2.0225 / 2.0231 = <b class="ans">0.9997</b></p>
+          <p>cos(<span class="var vec">e</span>, <span class="var vec">c</span>) = 1.9605 / (1.4432 &times; 1.4142) = 1.9605 / 2.0412 = <b class="ans">0.9605</b></p>
           <p>(c) <b class="ans">Lewis.</b> The cosine is 0.9997 against 0.9605 &mdash; Evans and Lewis point in almost exactly the same direction in feature space, meaning they have the same <em>shape</em> of profile: strong academics, strong-to-moderate fitness, weak marksmanship. Feature by feature they are within 0.02, 0.05 and 0.01 of each other. Carter is the opposite type &mdash; a perfect weapons score carrying a weaker AFT and GPA &mdash; so the angle between Evans and Carter is visibly wider.</p>
           <div class="rubric">3 pts (a), 4 pts (b), 3 pts (c). Follow-on credit: a wrong magnitude from Question 9 carried correctly into (b) still earns the cosine points. Selecting Lewis on the numbers alone, with no reference to the features, earns 2 of 3 on (c).</div>
         </div>
@@ -558,15 +572,15 @@
     <div class="q" id="q11">
       <div class="q-head"><span class="q-num">11.</span><div class="q-body"><b>Scaling a preference vector.</b></div><span class="pts">6 pts</span></div>
       <div class="q-body">
-        <p>The commander keeps a <b>priority vector</b> <span class="var">p&#8407;</span> = &lang;0.5, 0.3, 0.2&rang; describing what the platoon values, and ranks soldiers by their cosine similarity to it. A staff officer proposes replacing it with 2<span class="var">p&#8407;</span> = &lang;1.0, 0.6, 0.4&rang; "to make the priorities count for more."</p>
+        <p>The commander keeps a <b>priority vector</b> <span class="var vec">p</span> = &lang;0.5, 0.3, 0.2&rang; describing what the platoon values, and ranks soldiers by their cosine similarity to it. A staff officer proposes replacing it with 2<span class="var vec">p</span> = &lang;1.0, 0.6, 0.4&rang; "to make the priorities count for more."</p>
         <p>Would this change any soldier's cosine similarity? Would it change the <b>ranking</b>? Justify using the definition of cosine similarity.</p>
         <div class="write" style="--n:6"></div>
         <div class="keybox" hidden>
           <h4>Answer &amp; scoring</h4>
           <p><b class="ans">No to both. Nothing changes at all.</b></p>
-          <p>Doubling <span class="var">p&#8407;</span> doubles every dot product <span class="var">s&#8407;</span>&middot;<span class="var">p&#8407;</span>, <em>and</em> doubles |<span class="var">p&#8407;</span>| in the denominator. The two factors of 2 cancel:</p>
-          <div class="formula">cos(<span class="var">s&#8407;</span>, 2<span class="var">p&#8407;</span>) = <span class="frac"><span class="num"><span class="var">s&#8407;</span> &middot; 2<span class="var">p&#8407;</span></span><span class="den">|<span class="var">s&#8407;</span>| &middot; |2<span class="var">p&#8407;</span>|</span></span> = <span class="frac"><span class="num">2(<span class="var">s&#8407;</span> &middot; <span class="var">p&#8407;</span>)</span><span class="den">2|<span class="var">s&#8407;</span>||<span class="var">p&#8407;</span>|</span></span> = cos(<span class="var">s&#8407;</span>, <span class="var">p&#8407;</span>)</div>
-          <p>Geometrically: scaling a vector by a positive number stretches its <b>length</b> but leaves its <b>direction</b> untouched. <span class="var">p&#8407;</span> and 2<span class="var">p&#8407;</span> are parallel &mdash; the angle between a soldier and either one is identical. Cosine similarity measures angle only, so it is blind to length by construction. This is the same reason normalizing to unit vectors changes nothing about cosine rankings.</p>
+          <p>Doubling <span class="var vec">p</span> doubles every dot product <span class="var vec">s</span>&middot;<span class="var vec">p</span>, <em>and</em> doubles |<span class="var vec">p</span>| in the denominator. The two factors of 2 cancel:</p>
+          <div class="formula">cos(<span class="var vec">s</span>, 2<span class="var vec">p</span>) = <span class="frac"><span class="num"><span class="var vec">s</span> &middot; 2<span class="var vec">p</span></span><span class="den">|<span class="var vec">s</span>| &middot; |2<span class="var vec">p</span>|</span></span> = <span class="frac"><span class="num">2(<span class="var vec">s</span> &middot; <span class="var vec">p</span>)</span><span class="den">2|<span class="var vec">s</span>||<span class="var vec">p</span>|</span></span> = cos(<span class="var vec">s</span>, <span class="var vec">p</span>)</div>
+          <p>Geometrically: scaling a vector by a positive number stretches its <b>length</b> but leaves its <b>direction</b> untouched. <span class="var vec">p</span> and 2<span class="var vec">p</span> are parallel &mdash; the angle between a soldier and either one is identical. Cosine similarity measures angle only, so it is blind to length by construction. This is the same reason normalizing to unit vectors changes nothing about cosine rankings.</p>
           <p>The staff officer's instinct &mdash; that bigger numbers mean stronger priorities &mdash; would be right for a <b>raw dot product</b> score, which is not scale-invariant. It is wrong for cosine.</p>
           <div class="rubric">6 pts: 2 for "no change", 2 for showing the cancellation algebraically, 2 for the geometric statement that scaling changes length and not direction. An answer that says "no because cosine is normalized" without demonstrating why earns 3.</div>
           <div class="miss"><b>Why this one matters</b>PSL 3 asks this exact question about a listener's preference vector. It is the single most likely conceptual item to reappear.</div>
@@ -594,14 +608,14 @@
       <div class="q-body">
         <p>The commander wants a description of the "average" of a fire team built 60% from Evans' profile and 40% from Carter's.</p>
         <ol class="sub" type="a">
-          <li>Compute <span class="var">b&#8407;</span> = 0.6<span class="var">e&#8407;</span> + 0.4<span class="var">c&#8407;</span>, component by component.<div class="write" style="--n:3"></div></li>
-          <li>Before computing anything further: will <span class="var">b&#8407;</span> be closer to <span class="var">e&#8407;</span> or to <span class="var">c&#8407;</span> in cosine similarity? Explain your reasoning.<div class="write" style="--n:3"></div></li>
+          <li>Compute <span class="var vec">b</span> = 0.6<span class="var vec">e</span> + 0.4<span class="var vec">c</span>, component by component.<div class="write" style="--n:3"></div></li>
+          <li>Before computing anything further: will <span class="var vec">b</span> be closer to <span class="var vec">e</span> or to <span class="var vec">c</span> in cosine similarity? Explain your reasoning.<div class="write" style="--n:3"></div></li>
         </ol>
         <div class="keybox" hidden>
           <h4>Answer &amp; scoring</h4>
-          <p>(a) 0.6<span class="var">e&#8407;</span> = &lang;0.462, 0.420, 0.600&rang;, 0.4<span class="var">c&#8407;</span> = &lang;0.260, 0.400, 0.304&rang;</p>
-          <p><span class="var">b&#8407;</span> = <b class="ans">&lang;0.722, 0.820, 0.904&rang;</b></p>
-          <p>(b) <b class="ans">Closer to <span class="var">e&#8407;</span></b>, because Evans carries the larger weight. A linear combination lands between the two source vectors, positioned proportionally to the weights &mdash; at 60/40 the blend sits nearer the 60% end. Had the weights been 50/50 the blend would sit symmetrically between them, and its cosine similarity to each would depend only on the geometry, not the weights.</p>
+          <p>(a) 0.6<span class="var vec">e</span> = &lang;0.462, 0.420, 0.600&rang;, 0.4<span class="var vec">c</span> = &lang;0.260, 0.400, 0.304&rang;</p>
+          <p><span class="var vec">b</span> = <b class="ans">&lang;0.722, 0.820, 0.904&rang;</b></p>
+          <p>(b) <b class="ans">Closer to <span class="var vec">e</span></b>, because Evans carries the larger weight. A linear combination lands between the two source vectors, positioned proportionally to the weights &mdash; at 60/40 the blend sits nearer the 60% end. Had the weights been 50/50 the blend would sit symmetrically between them, and its cosine similarity to each would depend only on the geometry, not the weights.</p>
           <p>Note what the blend inherits: Evans' high GPA component (0.904 is close to Evans' 1.00) but a weapons component of 0.820, pulled well up from Evans' 0.70 by Carter's perfect 1.00. The blend is not "mostly Evans" in every feature &mdash; it is a weighted average feature by feature.</p>
           <div class="rubric">3 pts (a), 2 pts (b). Full credit on (b) requires tying the position of the blend to the weights, not just naming Evans.</div>
         </div>
@@ -622,8 +636,8 @@
           <tr><td style="border:0"><b>A</b> = </td><td style="border:0">[ 3&nbsp;&nbsp;1 ]<br>[ 2&nbsp;&nbsp;4 ]</td>
               <td style="border:0;padding-left:28px"><b>B</b> = </td><td style="border:0">[ 1&nbsp;&nbsp;2 ]<br>[ 0&nbsp;&nbsp;5 ]</td>
               <td style="border:0;padding-left:28px"><b>C</b> = </td><td style="border:0">[ 1&nbsp;&nbsp;0&nbsp;&nbsp;2 ]<br>[ 3&nbsp;&nbsp;1&nbsp;&nbsp;4 ]</td>
-              <td style="border:0;padding-left:28px"><span class="var">p&#8407;</span> = </td><td style="border:0">[ 2 ]<br>[ 1 ]</td>
-              <td style="border:0;padding-left:28px"><span class="var">q&#8407;</span> = </td><td style="border:0">[ 1 ]<br>[ 0 ]<br>[ 3 ]</td></tr>
+              <td style="border:0;padding-left:28px"><span class="var vec">p</span> = </td><td style="border:0">[ 2 ]<br>[ 1 ]</td>
+              <td style="border:0;padding-left:28px"><span class="var vec">q</span> = </td><td style="border:0">[ 1 ]<br>[ 0 ]<br>[ 3 ]</td></tr>
         </tbody>
       </table>
     </div>
@@ -632,13 +646,13 @@
       <div class="q-head"><span class="q-num">14.</span><div class="q-body"><b>Dimensions and transpose.</b></div><span class="pts">6 pts</span></div>
       <div class="q-body">
         <ol class="sub" type="a">
-          <li>State the dimensions of <b>A</b>, <b>C</b>, <span class="var">p&#8407;</span> and <span class="var">q&#8407;</span>. &nbsp;<span class="blank" style="min-width:230px"></span></li>
+          <li>State the dimensions of <b>A</b>, <b>C</b>, <span class="var vec">p</span> and <span class="var vec">q</span>. &nbsp;<span class="blank" style="min-width:230px"></span></li>
           <li>Write <b>C</b><sup>T</sup> and give its dimensions.<div class="write" style="--n:4"></div></li>
           <li>The platoon roster is a 30 &times; 3 matrix <b>F</b>. What does a <b>row</b> of <b>F</b><sup>T</sup> represent? What does a <b>column</b> represent?<div class="write" style="--n:3"></div></li>
         </ol>
         <div class="keybox" hidden>
           <h4>Answer &amp; scoring</h4>
-          <p>(a) <b>A</b> is <b class="ans">2&times;2</b>, <b>C</b> is <b class="ans">2&times;3</b>, <span class="var">p&#8407;</span> is <b class="ans">2&times;1</b>, <span class="var">q&#8407;</span> is <b class="ans">3&times;1</b>. Rows first, always.</p>
+          <p>(a) <b>A</b> is <b class="ans">2&times;2</b>, <b>C</b> is <b class="ans">2&times;3</b>, <span class="var vec">p</span> is <b class="ans">2&times;1</b>, <span class="var vec">q</span> is <b class="ans">3&times;1</b>. Rows first, always.</p>
           <p>(b) <b>C</b><sup>T</sup> = <b class="ans">3&times;2</b>:</p>
           <p style="font-family:var(--mono);margin-left:16px">[ 1&nbsp;&nbsp;3 ]<br>[ 0&nbsp;&nbsp;1 ]<br>[ 2&nbsp;&nbsp;4 ]</p>
           <p>Transposing swaps rows and columns, so an <span class="var">m</span>&times;<span class="var">n</span> matrix becomes <span class="var">n</span>&times;<span class="var">m</span>. The entry at (1,3) of <b>C</b> lands at (3,1) of <b>C</b><sup>T</sup>.</p>
@@ -670,19 +684,19 @@
       <div class="q-body">
         <p>For each product: state whether it is <b>defined</b>, give the <b>dimensions</b> of the result, and if defined, compute it.</p>
         <ol class="sub" type="a">
-          <li><b>A</b><span class="var">p&#8407;</span><div class="write" style="--n:2"></div></li>
-          <li><b>C</b><span class="var">q&#8407;</span><div class="write" style="--n:2"></div></li>
-          <li><span class="var">p&#8407;</span><sup>T</sup><b>A</b><div class="write" style="--n:2"></div></li>
-          <li><b>A</b><span class="var">q&#8407;</span><div class="write" style="--n:2"></div></li>
+          <li><b>A</b><span class="var vec">p</span><div class="write" style="--n:2"></div></li>
+          <li><b>C</b><span class="var vec">q</span><div class="write" style="--n:2"></div></li>
+          <li><span class="var vec">p</span><sup>T</sup><b>A</b><div class="write" style="--n:2"></div></li>
+          <li><b>A</b><span class="var vec">q</span><div class="write" style="--n:2"></div></li>
         </ol>
         <div class="keybox" hidden>
           <h4>Answer &amp; scoring</h4>
           <p>The rule: (<span class="var">m</span>&times;<span class="var">n</span>)(<span class="var">n</span>&times;<span class="var">k</span>) is defined only when the <b>inner dimensions match</b>, and the result is <span class="var">m</span>&times;<span class="var">k</span>.</p>
-          <p>(a) 2&times;2 times 2&times;1 &rarr; <b class="ans">defined, 2&times;1</b>. <b>A</b><span class="var">p&#8407;</span> = [3(2)+1(1); 2(2)+4(1)] = <b class="ans">[7; 8]</b></p>
-          <p>(b) 2&times;3 times 3&times;1 &rarr; <b class="ans">defined, 2&times;1</b>. <b>C</b><span class="var">q&#8407;</span> = [1(1)+0(0)+2(3); 3(1)+1(0)+4(3)] = <b class="ans">[7; 15]</b></p>
-          <p>(c) 1&times;2 times 2&times;2 &rarr; <b class="ans">defined, 1&times;2</b>. <span class="var">p&#8407;</span><sup>T</sup><b>A</b> = [2(3)+1(2), 2(1)+1(4)] = <b class="ans">[8, 6]</b></p>
-          <p>(d) 2&times;2 times 3&times;1 &rarr; <b class="ans">UNDEFINED.</b> The inner dimensions are 2 and 3; they do not match. <b>A</b> expects a vector with two components and <span class="var">q&#8407;</span> has three.</p>
-          <p>Notice (a) and (c): the same matrix and the same vector, but transposing <span class="var">p&#8407;</span> and switching the order produces a different shape <em>and</em> different numbers. <b>Order is part of the operation.</b></p>
+          <p>(a) 2&times;2 times 2&times;1 &rarr; <b class="ans">defined, 2&times;1</b>. <b>A</b><span class="var vec">p</span> = [3(2)+1(1); 2(2)+4(1)] = <b class="ans">[7; 8]</b></p>
+          <p>(b) 2&times;3 times 3&times;1 &rarr; <b class="ans">defined, 2&times;1</b>. <b>C</b><span class="var vec">q</span> = [1(1)+0(0)+2(3); 3(1)+1(0)+4(3)] = <b class="ans">[7; 15]</b></p>
+          <p>(c) 1&times;2 times 2&times;2 &rarr; <b class="ans">defined, 1&times;2</b>. <span class="var vec">p</span><sup>T</sup><b>A</b> = [2(3)+1(2), 2(1)+1(4)] = <b class="ans">[8, 6]</b></p>
+          <p>(d) 2&times;2 times 3&times;1 &rarr; <b class="ans">UNDEFINED.</b> The inner dimensions are 2 and 3; they do not match. <b>A</b> expects a vector with two components and <span class="var vec">q</span> has three.</p>
+          <p>Notice (a) and (c): the same matrix and the same vector, but transposing <span class="var vec">p</span> and switching the order produces a different shape <em>and</em> different numbers. <b>Order is part of the operation.</b></p>
           <div class="rubric">1.5 pts each: 0.5 verdict, 0.5 dimensions, 0.5 value. Full credit on (d) requires naming the mismatched inner dimensions, not just "you can't."</div>
         </div>
       </div>
@@ -765,17 +779,17 @@
         <p>The commander budgets weekly training hours across two activities. Let <span class="var">x</span><sub>1</sub> be hours of physical training and <span class="var">x</span><sub>2</sub> be hours on the range. Two readiness requirements must be met exactly:</p>
         <div class="formula" style="font-size:16px">3<span class="var">x</span><sub>1</sub> + <span class="var">x</span><sub>2</sub> = 11 &nbsp;&nbsp;&nbsp;&nbsp; 2<span class="var">x</span><sub>1</sub> + 4<span class="var">x</span><sub>2</sub> = 14</div>
         <ol class="sub" type="a">
-          <li>Write the system in the form <b>A</b><span class="var">x&#8407;</span> = <span class="var">b&#8407;</span>, identifying <b>A</b>, <span class="var">x&#8407;</span> and <span class="var">b&#8407;</span>.<div class="write" style="--n:3"></div></li>
-          <li>Solve using <span class="var">x&#8407;</span> = <b>A</b><sup>&minus;1</sup><span class="var">b&#8407;</span>. Show the multiplication.<div class="write" style="--n:4"></div></li>
+          <li>Write the system in the form <b>A</b><span class="var vec">x</span> = <span class="var vec">b</span>, identifying <b>A</b>, <span class="var vec">x</span> and <span class="var vec">b</span>.<div class="write" style="--n:3"></div></li>
+          <li>Solve using <span class="var vec">x</span> = <b>A</b><sup>&minus;1</sup><span class="var vec">b</span>. Show the multiplication.<div class="write" style="--n:4"></div></li>
           <li>Verify by substitution, and state the answer in context.<div class="write" style="--n:3"></div></li>
         </ol>
         <div class="keybox" hidden>
           <h4>Answer &amp; scoring</h4>
-          <p>(a) <b>A</b> = [3, 1; 2, 4] &mdash; the same matrix from Question 19 &mdash; with <span class="var">x&#8407;</span> = [<span class="var">x</span><sub>1</sub>; <span class="var">x</span><sub>2</sub>] and <span class="var">b&#8407;</span> = <b class="ans">[11; 14]</b>. The coefficients become the rows of <b>A</b>; the constants become <span class="var">b&#8407;</span>.</p>
-          <p>(b) <span class="var">x&#8407;</span> = (1/10)[4, &minus;1; &minus;2, 3][11; 14]</p>
+          <p>(a) <b>A</b> = [3, 1; 2, 4] &mdash; the same matrix from Question 19 &mdash; with <span class="var vec">x</span> = [<span class="var">x</span><sub>1</sub>; <span class="var">x</span><sub>2</sub>] and <span class="var vec">b</span> = <b class="ans">[11; 14]</b>. The coefficients become the rows of <b>A</b>; the constants become <span class="var vec">b</span>.</p>
+          <p>(b) <span class="var vec">x</span> = (1/10)[4, &minus;1; &minus;2, 3][11; 14]</p>
           <p style="margin-left:16px">first entry: (1/10)(4&middot;11 &minus; 1&middot;14) = (1/10)(44 &minus; 14) = 30/10 = <b>3</b><br>
              second entry: (1/10)(&minus;2&middot;11 + 3&middot;14) = (1/10)(&minus;22 + 42) = 20/10 = <b>2</b></p>
-          <p><b class="ans">x&#8407; = [3; 2]</b></p>
+          <p><b class="ans"><span class="vec">x</span> = [3; 2]</b></p>
           <p>(c) Check both equations: 3(3) + 2 = 11 &#10003; and 2(3) + 4(2) = 6 + 8 = 14 &#10003;</p>
           <p>In context: the platoon should schedule <b class="ans">3 hours of physical training and 2 hours on the range</b> each week to meet both readiness requirements exactly. Because det(<b>A</b>) = 10 &ne; 0, this solution is <b>unique</b> &mdash; there is no other pair of hours that satisfies both.</p>
           <div class="rubric">2 pts (a), 4 pts (b), 2 pts (c). The contextual statement with units is required for full credit on (c); "x = 3, y = 2" alone earns 1.</div>
@@ -796,7 +810,7 @@
           <h4>Answer &amp; scoring</h4>
           <p>(a) <b class="ans">D<sup>&minus;1</sup> does not exist.</b> The inverse formula divides by the determinant, and division by zero is undefined. <b>D</b> is <b>singular</b>.</p>
           <p>(b) <b>Row 2 is 1.5 times row 1</b>: 1.5(2) = 3 and 1.5(4) = 6. The rows are <b>scalar multiples</b> of one another &mdash; in vector language, parallel, or linearly dependent. Row 2 carries no information that row 1 did not already supply. A 2&times;2 determinant is zero exactly when its rows (equivalently, its columns) are scalar multiples of each other, so the dependence and the zero determinant are the same fact stated two ways.</p>
-          <p>(c) Each row is a line. Because the rows are proportional, the two lines have the <b>same slope</b> &mdash; they are parallel. Two outcomes follow, and which one you get depends on <span class="var">b&#8407;</span>:</p>
+          <p>(c) Each row is a line. Because the rows are proportional, the two lines have the <b>same slope</b> &mdash; they are parallel. Two outcomes follow, and which one you get depends on <span class="var vec">b</span>:</p>
           <ul>
             <li>If the constants are <em>not</em> in the same proportion, the lines are <b>parallel and distinct</b> &mdash; they never meet, and the system has <b>no solution</b>.</li>
             <li>If the constants <em>are</em> in the same proportion, the two equations describe the <b>same line</b> &mdash; every point on it works, and the system has <b>infinitely many solutions</b>.</li>
@@ -870,7 +884,7 @@
         <tbody><tr>
           <td style="border:0"><b>F</b> = </td>
           <td style="border:0">[ 0.77&nbsp;&nbsp;0.70&nbsp;&nbsp;1.00 ]&nbsp;&nbsp;Evans<br>[ 0.75&nbsp;&nbsp;0.65&nbsp;&nbsp;0.99 ]&nbsp;&nbsp;Lewis<br>[ 0.65&nbsp;&nbsp;1.00&nbsp;&nbsp;0.76 ]&nbsp;&nbsp;Carter</td>
-          <td style="border:0;padding-left:40px"><span class="var">w&#8407;</span> = </td>
+          <td style="border:0;padding-left:40px"><span class="var vec">w</span> = </td>
           <td style="border:0">[ 0.5 ]&nbsp;&nbsp;AFT<br>[ 0.3 ]&nbsp;&nbsp;weapons<br>[ 0.2 ]&nbsp;&nbsp;GPA</td>
         </tr></tbody>
       </table>
@@ -880,15 +894,15 @@
       <div class="q-head"><span class="q-num">24.</span><div class="q-body"><b>Scoring by matrix&ndash;vector multiplication.</b></div><span class="pts">10 pts</span></div>
       <div class="q-body">
         <ol class="sub" type="a">
-          <li>Check that <b>F</b><span class="var">w&#8407;</span> is defined and state the dimensions of the result. &nbsp;<span class="blank"></span></li>
-          <li>Compute <b>F</b><span class="var">w&#8407;</span>. Show each entry.<div class="write" style="--n:5"></div></li>
+          <li>Check that <b>F</b><span class="var vec">w</span> is defined and state the dimensions of the result. &nbsp;<span class="blank"></span></li>
+          <li>Compute <b>F</b><span class="var vec">w</span>. Show each entry.<div class="write" style="--n:5"></div></li>
           <li>What does each <b>entry</b> of the result represent? Who ranks first?<div class="write" style="--n:3"></div></li>
-          <li>The full roster is 30&times;3. If the commander scored all 30 soldiers this way, what would the dimensions of <b>F</b><span class="var">w&#8407;</span> be, and how many dot products would that single product be performing?<div class="write" style="--n:2"></div></li>
+          <li>The full roster is 30&times;3. If the commander scored all 30 soldiers this way, what would the dimensions of <b>F</b><span class="var vec">w</span> be, and how many dot products would that single product be performing?<div class="write" style="--n:2"></div></li>
         </ol>
         <div class="keybox" hidden>
           <h4>Answer &amp; scoring</h4>
           <p>(a) 3&times;3 times 3&times;1: inner dimensions match, so it is <b class="ans">defined, result 3&times;1</b>.</p>
-          <p>(b) Each entry is a row of <b>F</b> dotted with <span class="var">w&#8407;</span>:</p>
+          <p>(b) Each entry is a row of <b>F</b> dotted with <span class="var vec">w</span>:</p>
           <p style="margin-left:16px">Evans: 0.77(0.5) + 0.70(0.3) + 1.00(0.2) = 0.385 + 0.210 + 0.200 = <b class="ans">0.795</b><br>
              Lewis: 0.75(0.5) + 0.65(0.3) + 0.99(0.2) = 0.375 + 0.195 + 0.198 = <b class="ans">0.768</b><br>
              Carter: 0.65(0.5) + 1.00(0.3) + 0.76(0.2) = 0.325 + 0.300 + 0.152 = <b class="ans">0.777</b></p>
@@ -904,9 +918,9 @@
       <div class="q-head"><span class="q-num">25.</span><div class="q-body"><b>What the weights control.</b></div><span class="pts">8 pts</span></div>
       <div class="q-body">
         <ol class="sub" type="a">
-          <li>A new commander cares far more about marksmanship: <span class="var">w&#8407;</span><sub>2</sub> = &lang;0.2, 0.6, 0.2&rang;. Recompute the three scores and give the new ranking.<div class="write" style="--n:5"></div></li>
+          <li>A new commander cares far more about marksmanship: <span class="var vec">w</span><sub>2</sub> = &lang;0.2, 0.6, 0.2&rang;. Recompute the three scores and give the new ranking.<div class="write" style="--n:5"></div></li>
           <li>Compare to your answer in Question 24. What does this tell you about weighted scoring?<div class="write" style="--n:3"></div></li>
-          <li>A third officer proposes <span class="var">w&#8407;</span><sub>3</sub> = &lang;1.0, 0.6, 0.4&rang;, "to weight everything more heavily." What happens to the scores, and what happens to the ranking?<div class="write" style="--n:3"></div></li>
+          <li>A third officer proposes <span class="var vec">w</span><sub>3</sub> = &lang;1.0, 0.6, 0.4&rang;, "to weight everything more heavily." What happens to the scores, and what happens to the ranking?<div class="write" style="--n:3"></div></li>
         </ol>
         <div class="keybox" hidden>
           <h4>Answer &amp; scoring</h4>
@@ -915,7 +929,7 @@
              Carter: 0.130 + 0.600 + 0.152 = <b class="ans">0.882</b></p>
           <p>New ranking: <b class="ans">Carter, Evans, Lewis</b>.</p>
           <p>(b) <b>The ranking flipped.</b> Carter went from second to a commanding first &mdash; same soldiers, same data, different priorities. The weight vector is not a technicality; it <b>is</b> the commander's judgment about what matters, and it determines the answer. A weighted score is only as defensible as the weights behind it, which is why they must be stated openly rather than buried in a spreadsheet.</p>
-          <p>(c) <span class="var">w&#8407;</span><sub>3</sub> = 2<span class="var">w&#8407;</span>. Every score <b>doubles</b>: 1.590, 1.536, 1.554. The <b class="ans">ranking is completely unchanged</b> &mdash; Evans, Carter, Lewis, exactly as before.</p>
+          <p>(c) <span class="var vec">w</span><sub>3</sub> = 2<span class="var vec">w</span>. Every score <b>doubles</b>: 1.590, 1.536, 1.554. The <b class="ans">ranking is completely unchanged</b> &mdash; Evans, Carter, Lewis, exactly as before.</p>
           <p>Scaling every weight by the same positive constant scales every score by that constant, and scaling preserves order. The officer has changed the units of the score and nothing else. Compare Question 11: cosine similarity is immune to this by construction, while a raw weighted score does change &mdash; but only in a way that cancels out the moment you rank.</p>
           <p>What <em>would</em> change the ranking is altering the weights <b>relative to each other</b>, as in part (a).</p>
           <div class="rubric">4 pts (a), 2 pts (b), 2 pts (c). Full credit on (c) requires both halves: scores double AND ranking is unchanged.</div>
@@ -926,14 +940,14 @@
     <div class="q" id="q26">
       <div class="q-head"><span class="q-num">26.</span><div class="q-body"><b>Connecting to predictive modeling.</b></div><span class="pts">4 pts</span></div>
       <div class="q-body">
-        <p>On WPR 1 you fit a linear regression &#375;<sub>i</sub> = <span class="var">b</span><sub>0</sub> + <span class="var">b</span><sub>1</sub><span class="var">x</span><sub>i</sub>. Suppose you build a matrix <b>X</b> whose first column is all 1s and whose second column holds the <span class="var">x</span> values, and a vector <span class="var">&beta;&#8407;</span> = [<span class="var">b</span><sub>0</sub>; <span class="var">b</span><sub>1</sub>].</p>
-        <p>What does each row of the product <b>X</b><span class="var">&beta;&#8407;</span> compute? Why must the number of columns of <b>X</b> equal the number of rows of <span class="var">&beta;&#8407;</span>?</p>
+        <p>On WPR 1 you fit a linear regression &#375;<sub>i</sub> = <span class="var">b</span><sub>0</sub> + <span class="var">b</span><sub>1</sub><span class="var">x</span><sub>i</sub>. Suppose you build a matrix <b>X</b> whose first column is all 1s and whose second column holds the <span class="var">x</span> values, and a vector <span class="var vec">&beta;</span> = [<span class="var">b</span><sub>0</sub>; <span class="var">b</span><sub>1</sub>].</p>
+        <p>What does each row of the product <b>X</b><span class="var vec">&beta;</span> compute? Why must the number of columns of <b>X</b> equal the number of rows of <span class="var vec">&beta;</span>?</p>
         <div class="write" style="--n:5"></div>
         <div class="keybox" hidden>
           <h4>Answer &amp; scoring</h4>
-          <p>Each row of <b>X</b><span class="var">&beta;&#8407;</span> computes <b>one fitted value</b>: row <span class="var">i</span> is &lang;1, <span class="var">x</span><sub>i</sub>&rang; &middot; &lang;<span class="var">b</span><sub>0</sub>, <span class="var">b</span><sub>1</sub>&rang; = <span class="var">b</span><sub>0</sub>(1) + <span class="var">b</span><sub>1</sub><span class="var">x</span><sub>i</sub> = <b class="ans">&#375;<sub>i</sub></b>. The column of 1s is what lets the intercept ride along as just another weight.</p>
-          <p>So <b>X</b><span class="var">&beta;&#8407;</span> produces the entire vector of predictions in one operation &mdash; the same structure as scoring the platoon in Question 24. A regression model <em>is</em> a weighted sum of features, and <span class="var">&beta;&#8407;</span> is its weight vector.</p>
-          <p>The dimensions must match because each entry of the product is a <b>dot product between a row of X and the vector</b> <span class="var">&beta;&#8407;</span>, and a dot product is only defined between vectors with the same number of components. One weight per feature, no more and no less &mdash; if <b>X</b> has a column with no matching coefficient, there is nothing to multiply it by.</p>
+          <p>Each row of <b>X</b><span class="var vec">&beta;</span> computes <b>one fitted value</b>: row <span class="var">i</span> is &lang;1, <span class="var">x</span><sub>i</sub>&rang; &middot; &lang;<span class="var">b</span><sub>0</sub>, <span class="var">b</span><sub>1</sub>&rang; = <span class="var">b</span><sub>0</sub>(1) + <span class="var">b</span><sub>1</sub><span class="var">x</span><sub>i</sub> = <b class="ans">&#375;<sub>i</sub></b>. The column of 1s is what lets the intercept ride along as just another weight.</p>
+          <p>So <b>X</b><span class="var vec">&beta;</span> produces the entire vector of predictions in one operation &mdash; the same structure as scoring the platoon in Question 24. A regression model <em>is</em> a weighted sum of features, and <span class="var vec">&beta;</span> is its weight vector.</p>
+          <p>The dimensions must match because each entry of the product is a <b>dot product between a row of X and the vector</b> <span class="var vec">&beta;</span>, and a dot product is only defined between vectors with the same number of components. One weight per feature, no more and no less &mdash; if <b>X</b> has a column with no matching coefficient, there is nothing to multiply it by.</p>
           <div class="rubric">2 pts for identifying the row as the fitted value &#375;<sub>i</sub>, 2 pts for the dimension argument in terms of dot products. Answers that only restate the rule "inner dimensions must match" without saying why earn 1 of 2.</div>
         </div>
       </div>
@@ -949,7 +963,7 @@
           <p><b>The dot product is the atom.</b> Everything else is built from it.</p>
           <ul>
             <li><b>Cosine similarity</b> is a dot product divided by two magnitudes &mdash; the same number, normalized so that only direction survives. That is why Question 11's doubled priority vector changed nothing.</li>
-            <li><b>Matrix&ndash;vector multiplication</b> is a stack of dot products: each entry of <b>F</b><span class="var">w&#8407;</span> in Question 24 is one row of <b>F</b> dotted with <span class="var">w&#8407;</span>. Thirty soldiers means thirty dot products, executed as one product.</li>
+            <li><b>Matrix&ndash;vector multiplication</b> is a stack of dot products: each entry of <b>F</b><span class="var vec">w</span> in Question 24 is one row of <b>F</b> dotted with <span class="var vec">w</span>. Thirty soldiers means thirty dot products, executed as one product.</li>
             <li><b>Matrix&ndash;matrix multiplication</b> is a grid of them &mdash; every entry of <b>AB</b> in Question 17 is a row of <b>A</b> dotted with a column of <b>B</b>.</li>
           </ul>
           <p>This is why the dimension rule takes the form it does: the inner dimensions must match because <b>a dot product needs two vectors of equal length</b>. Every "is this defined?" question in this exam reduces to that one requirement.</p>
@@ -991,15 +1005,15 @@
       <table>
         <thead><tr><th>Item</th><th>Answer</th><th>Item</th><th>Answer</th></tr></thead>
         <tbody>
-          <tr><td>2. Magnitudes</td><td>6, 3, 12, 5</td><td>16. Undefined one</td><td>(d) A<span class="var">q&#8407;</span>, 2&ne;3</td></tr>
+          <tr><td>2. Magnitudes</td><td>6, 3, 12, 5</td><td>16. Undefined one</td><td>(d) A<span class="var vec">q</span>, 2&ne;3</td></tr>
           <tr><td>3. Dot products</td><td>0, &minus;72, 10</td><td>17. AB / BA</td><td>[3 11; 2 24] / [7 9; 10 20]</td></tr>
-          <tr><td>4. Relationships</td><td><span class="var">u&#8407;</span>&perp;<span class="var">v&#8407;</span>, <span class="var">w&#8407;</span> = &minus;2<span class="var">u&#8407;</span></td><td>18. Determinants</td><td>10, 5, 0</td></tr>
+          <tr><td>4. Relationships</td><td><span class="var vec">u</span>&perp;<span class="var vec">v</span>, <span class="var vec">w</span> = &minus;2<span class="var vec">u</span></td><td>18. Determinants</td><td>10, 5, 0</td></tr>
           <tr><td>5. Angle</td><td>cos&thinsp;&theta; = 1/3, 70.5&deg;</td><td>19. A<sup>&minus;1</sup></td><td>(1/10)[4 &minus;1; &minus;2 3]</td></tr>
           <tr><td><b>8. AFT share of raw</b></td><td><b>99.6%</b></td><td>20. Training hours</td><td>3 PT, 2 range</td></tr>
           <tr><td>9. Magnitudes</td><td>1.4432 / 1.4018 / 1.4142</td><td>21. det(D) = 0</td><td>rows: R2 = 1.5&middot;R1</td></tr>
           <tr><td>10. Cosines</td><td>0.9997 / 0.9605 &rarr; Lewis</td><td>22. Row reduction</td><td>(1, 2, 3)</td></tr>
-          <tr><td><b>11. Doubling <span class="var">p&#8407;</span></b></td><td><b>No change at all</b></td><td>23. Classify</td><td>unique / none / infinite</td></tr>
-          <tr><td>13. Blend</td><td>&lang;0.722, 0.820, 0.904&rang;</td><td>24. F<span class="var">w&#8407;</span></td><td>0.795 / 0.768 / 0.777</td></tr>
+          <tr><td><b>11. Doubling <span class="var vec">p</span></b></td><td><b>No change at all</b></td><td>23. Classify</td><td>unique / none / infinite</td></tr>
+          <tr><td>13. Blend</td><td>&lang;0.722, 0.820, 0.904&rang;</td><td>24. F<span class="var vec">w</span></td><td>0.795 / 0.768 / 0.777</td></tr>
           <tr><td>14. C<sup>T</sup></td><td>3&times;2</td><td>25. New weights</td><td>Carter wins, 0.882</td></tr>
         </tbody>
       </table>

@@ -219,6 +219,20 @@
     .whk { stroke: var(--ink); stroke-width: 1.3; fill: none; }
 
     .var { font-family: var(--serif); font-style: italic; }
+
+    /* vector arrow drawn in CSS: U+20D7 has no glyph in EB Garamond */
+    .vec { position: relative; display: inline-block; line-height: 1; }
+    .vec::before, .vec::after { content: ''; position: absolute; pointer-events: none; }
+    .vec::before {
+      left: .05em; right: .05em; top: .02em;
+      border-top: .05em solid currentColor;
+    }
+    .vec::after {
+      right: .04em; top: .02em; width: .2em; height: .2em;
+      border-top: .05em solid currentColor;
+      border-right: .05em solid currentColor;
+      transform: translateY(-50%) rotate(45deg);
+    }
     .formula {
       font-family: var(--serif); font-size: 18px; margin: 16px 0;
       display: flex; justify-content: center; align-items: center; gap: 8px; flex-wrap: wrap;
@@ -322,42 +336,42 @@
     <div class="cards">
       <div class="card">
         <h4>Magnitude (length)</h4>
-        <div class="formula">|<span class="var">v&#8407;</span>| = <span class="radical"><span class="sign">&radic;</span><span class="rad-body"><span class="var">v</span><sub>1</sub><sup>2</sup> + <span class="var">v</span><sub>2</sub><sup>2</sup> + &hellip; + <span class="var">v</span><sub>n</sub><sup>2</sup></span></span></div>
+        <div class="formula">|<span class="var vec">v</span>| = <span class="radical"><span class="sign">&radic;</span><span class="rad-body"><span class="var">v</span><sub>1</sub><sup>2</sup> + <span class="var">v</span><sub>2</sub><sup>2</sup> + &hellip; + <span class="var">v</span><sub>n</sub><sup>2</sup></span></span></div>
         <p>Always &ge; 0. Squaring destroys sign, so negative components help exactly as much as positive ones.</p>
       </div>
       <div class="card">
         <h4>Unit vector &middot; on Gate 3</h4>
-        <div class="formula"><span class="var">v&#770;</span> = <span class="frac"><span class="num"><span class="var">v&#8407;</span></span><span class="den">|<span class="var">v&#8407;</span>|</span></span></div>
+        <div class="formula"><span class="var">v&#770;</span> = <span class="frac"><span class="num"><span class="var vec">v</span></span><span class="den">|<span class="var vec">v</span>|</span></span></div>
         <p>Divide <b>every</b> component by the magnitude. Keep it in fractions. Check: |<span class="var">v&#770;</span>| = 1. Same direction, length thrown away.</p>
       </div>
       <div class="card">
         <h4>Dot product</h4>
-        <div class="formula"><span class="var">u&#8407;</span> &middot; <span class="var">v&#8407;</span> = <span class="var">u</span><sub>1</sub><span class="var">v</span><sub>1</sub> + <span class="var">u</span><sub>2</sub><span class="var">v</span><sub>2</sub> + &hellip; + <span class="var">u</span><sub>n</sub><span class="var">v</span><sub>n</sub></div>
+        <div class="formula"><span class="var vec">u</span> &middot; <span class="var vec">v</span> = <span class="var">u</span><sub>1</sub><span class="var">v</span><sub>1</sub> + <span class="var">u</span><sub>2</sub><span class="var">v</span><sub>2</sub> + &hellip; + <span class="var">u</span><sub>n</sub><span class="var">v</span><sub>n</sub></div>
         <p>The result is a <b>scalar</b>. Both vectors must have the same number of components.</p>
       </div>
       <div class="card">
         <h4>Cosine similarity</h4>
-        <div class="formula">cos&thinsp;&theta; = <span class="frac"><span class="num"><span class="var">u&#8407;</span> &middot; <span class="var">v&#8407;</span></span><span class="den">|<span class="var">u&#8407;</span>| |<span class="var">v&#8407;</span>|</span></span></div>
+        <div class="formula">cos&thinsp;&theta; = <span class="frac"><span class="num"><span class="var vec">u</span> &middot; <span class="var vec">v</span></span><span class="den">|<span class="var vec">u</span>| |<span class="var vec">v</span>|</span></span></div>
         <p>Range &minus;1 to 1. Measures <b>direction only</b> &mdash; immune to scaling either vector by a positive number.</p>
       </div>
       <div class="card">
         <h4>Angle</h4>
-        <div class="formula">&theta; = cos<sup>&minus;1</sup><span style="font-size:1.2em">(</span><span class="frac"><span class="num"><span class="var">u&#8407;</span> &middot; <span class="var">v&#8407;</span></span><span class="den">|<span class="var">u&#8407;</span>| |<span class="var">v&#8407;</span>|</span></span><span style="font-size:1.2em">)</span></div>
+        <div class="formula">&theta; = cos<sup>&minus;1</sup><span style="font-size:1.2em">(</span><span class="frac"><span class="num"><span class="var vec">u</span> &middot; <span class="var vec">v</span></span><span class="den">|<span class="var vec">u</span>| |<span class="var vec">v</span>|</span></span><span style="font-size:1.2em">)</span></div>
         <p>Positive dot product &rarr; acute. Negative &rarr; obtuse. Zero &rarr; exactly 90&deg;. <b>cos&thinsp;&theta; is not &theta;</b> &mdash; Gate 3 scored stopping at the cosine as a major error.</p>
       </div>
       <div class="card">
         <h4>Orthogonal test</h4>
-        <div class="formula"><span class="var">u&#8407;</span> &perp; <span class="var">v&#8407;</span> &nbsp;&hArr;&nbsp; <span class="var">u&#8407;</span> &middot; <span class="var">v&#8407;</span> = 0</div>
+        <div class="formula"><span class="var vec">u</span> &perp; <span class="var vec">v</span> &nbsp;&hArr;&nbsp; <span class="var vec">u</span> &middot; <span class="var vec">v</span> = 0</div>
         <p>Perpendicular, 90&deg;, cos&thinsp;&theta; = 0. One computation settles it.</p>
       </div>
       <div class="card">
         <h4>Parallel test</h4>
-        <div class="formula"><span class="var">u&#8407;</span> &parallel; <span class="var">v&#8407;</span> &nbsp;&hArr;&nbsp; <span class="var">v&#8407;</span> = <span class="var">k</span><span class="var">u&#8407;</span></div>
+        <div class="formula"><span class="var vec">u</span> &parallel; <span class="var vec">v</span> &nbsp;&hArr;&nbsp; <span class="var vec">v</span> = <span class="var">k</span><span class="var vec">u</span></div>
         <p>One is a scalar multiple of the other. Equivalently cos&thinsp;&theta; = &plusmn;1. Negative <span class="var">k</span> means antiparallel.</p>
       </div>
       <div class="card">
         <h4>Linear combination</h4>
-        <div class="formula"><span class="var">t&#8407;</span> = <span class="var">a</span><span class="var">u&#8407;</span> + <span class="var">b</span><span class="var">v&#8407;</span></div>
+        <div class="formula"><span class="var vec">t</span> = <span class="var">a</span><span class="var vec">u</span> + <span class="var">b</span><span class="var vec">v</span></div>
         <p>A weighted blend, computed component by component. It lands between the two vectors, nearer the heavier weight.</p>
       </div>
       <div class="card">
@@ -413,8 +427,8 @@
       </div>
       <div class="card">
         <h4>Solving a system</h4>
-        <div class="formula"><b>A</b><span class="var">x&#8407;</span> = <span class="var">b&#8407;</span> &nbsp;&rarr;&nbsp; <span class="var">x&#8407;</span> = <b>A</b><sup>&minus;1</sup><span class="var">b&#8407;</span></div>
-        <p>Only when det &ne; 0. Coefficients become <b>A</b>, constants become <span class="var">b&#8407;</span>.</p>
+        <div class="formula"><b>A</b><span class="var vec">x</span> = <span class="var vec">b</span> &nbsp;&rarr;&nbsp; <span class="var vec">x</span> = <b>A</b><sup>&minus;1</sup><span class="var vec">b</span></div>
+        <p>Only when det &ne; 0. Coefficients become <b>A</b>, constants become <span class="var vec">b</span>.</p>
       </div>
       <div class="card">
         <h4>Elementary row operations</h4>
@@ -433,8 +447,8 @@
       </div>
       <div class="card">
         <h4>Scoring with a data matrix</h4>
-        <div class="formula"><b>F</b><span class="var">w&#8407;</span> &nbsp;&middot;&nbsp; (<span class="var">n</span>&times;<span class="var">k</span>)(<span class="var">k</span>&times;1) = <span class="var">n</span>&times;1</div>
-        <p><b>Simultaneous dot products</b> &mdash; one weighted score per observation, all at once. Scaling <span class="var">w&#8407;</span> scales every score and never changes the ranking.</p>
+        <div class="formula"><b>F</b><span class="var vec">w</span> &nbsp;&middot;&nbsp; (<span class="var">n</span>&times;<span class="var">k</span>)(<span class="var">k</span>&times;1) = <span class="var">n</span>&times;1</div>
+        <p><b>Simultaneous dot products</b> &mdash; one weighted score per observation, all at once. Scaling <span class="var vec">w</span> scales every score and never changes the ranking.</p>
       </div>
     </div>
   </section>
@@ -492,15 +506,15 @@
     <div class="drill"><span class="n">29</span><span class="q2">&minus;1&lang;3, &minus;1, 2&rang;</span><span class="a keybox" hidden>&lang;&minus;3, 1, &minus;2&rang;</span></div>
 
     <h3 style="font-family:var(--serif);font-size:20px;margin:30px 0 6px">G &middot; Is the product defined?</h3>
-    <p style="font-size:13.5px;color:var(--ink-soft);margin-bottom:6px">Given <b>A</b> 2&times;2, <b>B</b> 2&times;3, <b>C</b> 3&times;2, <b>D</b> 3&times;3, <span class="var">u&#8407;</span> 2&times;1, <span class="var">v&#8407;</span> 3&times;1. State defined or undefined, and the dimensions.</p>
+    <p style="font-size:13.5px;color:var(--ink-soft);margin-bottom:6px">Given <b>A</b> 2&times;2, <b>B</b> 2&times;3, <b>C</b> 3&times;2, <b>D</b> 3&times;3, <span class="var vec">u</span> 2&times;1, <span class="var vec">v</span> 3&times;1. State defined or undefined, and the dimensions.</p>
     <div class="drill"><span class="n">30</span><span class="q2"><b>AB</b></span><span class="a keybox" hidden>defined &mdash; 2&times;3</span></div>
     <div class="drill"><span class="n">31</span><span class="q2"><b>BA</b></span><span class="a keybox" hidden>undefined &mdash; 3 &ne; 2</span></div>
     <div class="drill"><span class="n">32</span><span class="q2"><b>BC</b></span><span class="a keybox" hidden>defined &mdash; 2&times;2</span></div>
     <div class="drill"><span class="n">33</span><span class="q2"><b>CB</b></span><span class="a keybox" hidden>defined &mdash; 3&times;3</span></div>
-    <div class="drill"><span class="n">34</span><span class="q2"><b>A</b><span class="var">u&#8407;</span></span><span class="a keybox" hidden>defined &mdash; 2&times;1</span></div>
-    <div class="drill"><span class="n">35</span><span class="q2"><b>A</b><span class="var">v&#8407;</span></span><span class="a keybox" hidden>undefined &mdash; 2 &ne; 3</span></div>
-    <div class="drill"><span class="n">36</span><span class="q2"><b>B</b><span class="var">v&#8407;</span></span><span class="a keybox" hidden>defined &mdash; 2&times;1</span></div>
-    <div class="drill"><span class="n">37</span><span class="q2"><span class="var">u&#8407;</span><sup>T</sup><b>A</b></span><span class="a keybox" hidden>defined &mdash; 1&times;2</span></div>
+    <div class="drill"><span class="n">34</span><span class="q2"><b>A</b><span class="var vec">u</span></span><span class="a keybox" hidden>defined &mdash; 2&times;1</span></div>
+    <div class="drill"><span class="n">35</span><span class="q2"><b>A</b><span class="var vec">v</span></span><span class="a keybox" hidden>undefined &mdash; 2 &ne; 3</span></div>
+    <div class="drill"><span class="n">36</span><span class="q2"><b>B</b><span class="var vec">v</span></span><span class="a keybox" hidden>defined &mdash; 2&times;1</span></div>
+    <div class="drill"><span class="n">37</span><span class="q2"><span class="var vec">u</span><sup>T</sup><b>A</b></span><span class="a keybox" hidden>defined &mdash; 1&times;2</span></div>
     <div class="drill"><span class="n">38</span><span class="q2"><b>C</b><sup>T</sup><b>A</b></span><span class="a keybox" hidden>undefined &mdash; 3 &ne; 2</span></div>
     <div class="drill"><span class="n">39</span><span class="q2"><b>DC</b></span><span class="a keybox" hidden>defined &mdash; 3&times;2</span></div>
 
@@ -520,7 +534,7 @@
 
     <h3 style="font-family:var(--serif);font-size:20px;margin:30px 0 6px">J &middot; True or false?</h3>
     <div class="drill"><span class="n">50</span><span class="q2">The dot product of two vectors is a vector.</span><span class="a keybox" hidden>FALSE &mdash; scalar</span></div>
-    <div class="drill"><span class="n">51</span><span class="q2">If <span class="var">u&#8407;</span>&middot;<span class="var">v&#8407;</span> = 0, the vectors are perpendicular.</span><span class="a keybox" hidden>TRUE (nonzero vectors)</span></div>
+    <div class="drill"><span class="n">51</span><span class="q2">If <span class="var vec">u</span>&middot;<span class="var vec">v</span> = 0, the vectors are perpendicular.</span><span class="a keybox" hidden>TRUE (nonzero vectors)</span></div>
     <div class="drill"><span class="n">52</span><span class="q2">A magnitude can be negative.</span><span class="a keybox" hidden>FALSE &mdash; always &ge; 0</span></div>
     <div class="drill"><span class="n">53</span><span class="q2"><b>AB</b> = <b>BA</b> for all square matrices.</span><span class="a keybox" hidden>FALSE</span></div>
     <div class="drill"><span class="n">54</span><span class="q2">det = 0 means no inverse exists.</span><span class="a keybox" hidden>TRUE</span></div>
