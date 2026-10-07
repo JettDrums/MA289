@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>MA103 Tutoring &mdash; WPR 2 Practice | Dennis Pezan</title>
+  <title>MA103 Tutoring &middot; WPR 2 Practice | Dennis Pezan</title>
   <meta name="description" content="A 184-point practice examination with full answer key and scoring rubrics for MA103 WPR 2, covering vectors, cosine similarity, matrices, determinants, inverses, and row reduction.">
   <link rel="canonical" href="https://dennis-pezan.com/ma103-wpr2.html">
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://dennis-pezan.com/ma103-wpr2.html">
-  <meta property="og:title" content="MA103 Tutoring &mdash; WPR 2 Practice | Dennis Pezan">
+  <meta property="og:title" content="MA103 Tutoring &middot; WPR 2 Practice | Dennis Pezan">
   <meta property="og:description" content="A practice examination and answer key for the MA103 linear algebra block at West Point.">
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="MA103 Tutoring &mdash; WPR 2 Practice | Dennis Pezan">
+  <meta name="twitter:title" content="MA103 Tutoring &middot; WPR 2 Practice | Dennis Pezan">
   <meta name="twitter:description" content="A practice examination and answer key for the MA103 linear algebra block at West Point.">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' fill='%230d0d0d'/><text x='32' y='45' font-family='Georgia,serif' font-size='34' fill='%23ffffff' text-anchor='middle'>DP</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -307,13 +307,13 @@
 
   <header class="exam-head">
     <h1>WPR 2 Practice Examination</h1>
-    <p class="sub">Modeling with linear algebra &mdash; the platoon assignment problem</p>
+    <p class="sub">Modeling with linear algebra: the platoon assignment problem</p>
 
     <div class="callout">
-      <p><b>This is unofficial review material</b> prepared by the course CIC for the study session. It is <em>not</em> the WPR and is not drawn from any secured assessment. Coverage follows the published lesson objectives for <b>Lessons 23&ndash;32</b> &mdash; the Mini Block, Modeling with Linear Algebra &mdash; and the conventions of Homework 3, PSL 3, and TL 4.</p>
+      <p><b>This is unofficial review material</b> prepared by the course CIC for the study session. It is <em>not</em> the WPR and is not drawn from any secured assessment. Coverage follows the published lesson objectives for <b>Lessons 23&ndash;32</b> (the Mini Block, Modeling with Linear Algebra) and the conventions of Homework 3, PSL 3, and TL 4.</p>
       <p>Per the course director, study your gate and work the homework problems. The application sections here use <b>platoon_roomate_data</b>, the synthetic dataset she provided, so the practice lines up with the homework you are already doing.</p>
       <p><b>From the course director:</b> WPR 2 "will be much more computational than WPR 1. Students will still have to understand and interpret their results, but they will also have to demonstrate their computational ability with vector and matrix operations."</p>
-      <p>Plan accordingly. WPR 1 rewarded interpretation and asked for very little arithmetic; this one asks for both. No formula sheet is provided here, on the assumption WPR 2 follows WPR 1 in not providing one &mdash; you are expected to know the magnitude, dot product, cosine, determinant and inverse formulas cold. The <a href="ma103-wpr2-reference.html">reference card</a> is the list to memorize, and its drills are where you build speed.</p>
+      <p>Plan accordingly. WPR 1 rewarded interpretation and asked for very little arithmetic; this one asks for both. No formula sheet is provided here, on the assumption WPR 2 follows WPR 1 in not providing one. You are expected to know the magnitude, dot product, cosine, determinant and inverse formulas cold. The <a href="ma103-wpr2-reference.html">reference card</a> is the list to memorize, and its drills are where you build speed.</p>
       <p><b>Start with the <a href="ma103-gate3-mirror.html">Gate 3 mirror</a>.</b> Gate 3 has been returned: 25 points, seven questions, all computation. That page rebuilds it question for question with new numbers, and it is the closest thing to a preview of WPR 2 that exists.</p>
     </div>
 
@@ -328,7 +328,7 @@
       <li>Give exact values where they are exact (&radic;36 = 6, not 6.00). Round only when the question says to, and then to <b>four decimal places</b> for cosine similarity, two elsewhere.</li>
       <li>Every interpretation must be written <b>in context</b>. "The dot product is 8" is not an interpretation.</li>
       <li>Before computing any product, <b>check that it is defined</b> and state the dimensions of the result. Several questions award points for that check alone.</li>
-      <li>Several questions ask you to carry a value forward. If you could not get the earlier value, state your assumption and continue &mdash; follow-on credit applies.</li>
+      <li>Several questions ask you to carry a value forward. If you could not get the earlier value, state your assumption and continue. Follow-on credit applies.</li>
     </ol>
 
     <div class="callout">
@@ -365,7 +365,7 @@
         <div class="keybox" hidden>
           <h4>Answer &amp; scoring</h4>
           <p>(a) <b class="ans">&lang;6, 0, 3&rang;</b> &nbsp; (b) <b class="ans">&lang;&minus;2, 4, &minus;5&rang;</b> &nbsp; (c) <b class="ans">&lang;12, &minus;6, 12&rang;</b> &nbsp; (d) <b class="ans">&lang;6, &minus;6, 9&rang;</b></p>
-          <p>For (d): 2<span class="var vec">u</span> = &lang;8, &minus;4, 8&rang;, then subtract <span class="var vec">v</span> component by component: &lang;8&minus;2, &minus;4&minus;2, 8&minus;(&minus;1)&rang; = &lang;6, &minus;6, 9&rang;. The third component is the one cadets miss &mdash; subtracting a negative.</p>
+          <p>For (d): 2<span class="var vec">u</span> = &lang;8, &minus;4, 8&rang;, then subtract <span class="var vec">v</span> component by component: &lang;8&minus;2, &minus;4&minus;2, 8&minus;(&minus;1)&rang; = &lang;6, &minus;6, 9&rang;. The third component is the one cadets miss: subtracting a negative.</p>
           <div class="rubric">1.5 pts each. Order matters in (b): <span class="var vec">v</span> &minus; <span class="var vec">u</span>, not <span class="var vec">u</span> &minus; <span class="var vec">v</span>.</div>
         </div>
       </div>
@@ -377,7 +377,7 @@
         <p>(a) Compute the magnitude of each vector. Show the work for at least one.</p>
         <p>|<span class="var vec">u</span>| = <span class="blank"></span> &nbsp;&nbsp; |<span class="var vec">v</span>| = <span class="blank"></span> &nbsp;&nbsp; |<span class="var vec">w</span>| = <span class="blank"></span> &nbsp;&nbsp; |<span class="var vec">t</span>| = <span class="blank"></span></p>
         <div class="write" style="--n:4"></div>
-        <p>(b) Find the unit vector in the direction of <span class="var vec">u</span>, and the unit vector in the direction of <span class="var vec">t</span>. Give <b>exact</b> values &mdash; fractions, not decimals.</p>
+        <p>(b) Find the unit vector in the direction of <span class="var vec">u</span>, and the unit vector in the direction of <span class="var vec">t</span>. Give <b>exact</b> values: fractions, not decimals.</p>
         <div class="write" style="--n:4"></div>
         <p><span class="var">u&#770;</span> = <span class="blank w"></span> &nbsp;&nbsp; <span class="var">t&#770;</span> = <span class="blank w"></span></p>
         <p>(c) How can you check a unit vector is correct without redoing the division?</p>
@@ -386,11 +386,11 @@
           <h4>Answer &amp; scoring</h4>
           <p>(a) |<span class="var vec">u</span>| = &radic;(16+4+16) = &radic;36 = <b class="ans">6</b> &nbsp;&nbsp; |<span class="var vec">v</span>| = &radic;(4+4+1) = &radic;9 = <b class="ans">3</b> &nbsp;&nbsp; |<span class="var vec">w</span>| = &radic;144 = <b class="ans">12</b> &nbsp;&nbsp; |<span class="var vec">t</span>| = &radic;25 = <b class="ans">5</b></p>
           <p>All four are exact integers. Squaring kills the sign, so the negative components contribute just as much as positive ones.</p>
-          <p>(b) A unit vector is the original divided by its own magnitude &mdash; <b>every component</b>, same divisor:</p>
+          <p>(b) A unit vector is the original divided by its own magnitude: <b>every component</b>, same divisor:</p>
           <p><span class="var">u&#770;</span> = <span class="frac"><span class="num">&lang;4, &minus;2, 4&rang;</span><span class="den">6</span></span> = <b class="ans">&lang;2/3, &minus;1/3, 2/3&rang;</b> &nbsp;&nbsp;&nbsp; <span class="var">t&#770;</span> = <span class="frac"><span class="num">&lang;0, 3, 4&rang;</span><span class="den">5</span></span> = <b class="ans">&lang;0, 3/5, 4/5&rang;</b></p>
           <p>Leave them as fractions. Gate 3 asked for "exact values" and marked decimals down.</p>
           <p>(c) <b>Its magnitude must be 1.</b> Check <span class="var">u&#770;</span>: (2/3)<sup>2</sup> + (&minus;1/3)<sup>2</sup> + (2/3)<sup>2</sup> = (4 + 1 + 4)/9 = 9/9 = 1 &#10003;. A unit vector keeps the <b>direction</b> of the original and throws away its length, which is why normalizing a preference vector never changes a cosine ranking.</p>
-          <div class="rubric">4 pts (a), 1 each. 4 pts (b), 2 per unit vector &mdash; <b>follow-on credit applies</b>, so a wrong magnitude carried correctly through still earns the points, exactly as Gate 3 scored it. 2 pts (c).</div>
+          <div class="rubric">4 pts (a), 1 each. 4 pts (b), 2 per unit vector. <b>Follow-on credit applies</b>, so a wrong magnitude carried correctly through still earns the points, exactly as Gate 3 scored it. 2 pts (c).</div>
           <div class="miss"><b>Why this is here</b>Unit vectors carried 3 of 25 points on Gate 3 and appear nowhere in HW3's Section 1 problem list. They are the easiest points on the test to lose by never having practised them.</div>
         </div>
       </div>
@@ -408,7 +408,7 @@
           <p>(b) 4(&minus;8) + (&minus;2)(4) + 4(&minus;8) = &minus;32 &minus; 8 &minus; 32 = <b class="ans">&minus;72</b></p>
           <p>(c) 4(0) + (&minus;2)(3) + 4(4) = 0 &minus; 6 + 16 = <b class="ans">10</b></p>
           <p>The dot product is a <b>scalar</b>, not a vector. A cadet who writes &lang;8, &minus;4, &minus;4&rang; for (a) has computed the component-wise product and stopped one step early.</p>
-          <div class="rubric">2 pts each. A vector answer earns 0 &mdash; the output type is the point.</div>
+          <div class="rubric">2 pts each. A vector answer earns 0: the output type is the point.</div>
         </div>
       </div>
     </div>
@@ -425,9 +425,9 @@
         <div class="keybox" hidden>
           <h4>Answer &amp; scoring</h4>
           <p>(a) <b class="ans">Yes, orthogonal.</b> Test: two vectors are orthogonal exactly when their <b>dot product is zero</b>. <span class="var vec">u</span>&middot;<span class="var vec">v</span> = 0, so the angle between them is 90&deg;.</p>
-          <p>(b) <b class="ans">Yes, parallel</b> &mdash; specifically <b>antiparallel</b>. Test: two vectors are parallel when one is a <b>scalar multiple</b> of the other. Here <span class="var vec">w</span> = &minus;2<span class="var vec">u</span>, checked component by component: &minus;2(4) = &minus;8 &#10003;, &minus;2(&minus;2) = 4 &#10003;, &minus;2(4) = &minus;8 &#10003;.</p>
+          <p>(b) <b class="ans">Yes, parallel</b>, specifically <b>antiparallel</b>. Test: two vectors are parallel when one is a <b>scalar multiple</b> of the other. Here <span class="var vec">w</span> = &minus;2<span class="var vec">u</span>, checked component by component: &minus;2(4) = &minus;8 &#10003;, &minus;2(&minus;2) = 4 &#10003;, &minus;2(4) = &minus;8 &#10003;.</p>
           <p>Equivalent check by angle: cos&thinsp;&theta; = <span class="var vec">u</span>&middot;<span class="var vec">w</span> / (|<span class="var vec">u</span>||<span class="var vec">w</span>|) = &minus;72 / (6 &times; 12) = &minus;72/72 = <b>&minus;1</b>, so &theta; = 180&deg;. A cosine of exactly &plusmn;1 <em>is</em> the parallel condition.</p>
-          <p>(c) <b>No</b> &mdash; not for nonzero vectors. Parallel means cos&thinsp;&theta; = &plusmn;1 (&theta; = 0&deg; or 180&deg;); orthogonal means cos&thinsp;&theta; = 0 (&theta; = 90&deg;). A single angle cannot be both. The zero vector is the degenerate exception, since it is trivially orthogonal to everything and has no direction to be parallel to.</p>
+          <p>(c) <b>No</b>, not for nonzero vectors. Parallel means cos&thinsp;&theta; = &plusmn;1 (&theta; = 0&deg; or 180&deg;); orthogonal means cos&thinsp;&theta; = 0 (&theta; = 90&deg;). A single angle cannot be both. The zero vector is the degenerate exception, since it is trivially orthogonal to everything and has no direction to be parallel to.</p>
           <div class="rubric">3 pts (a), 3 pts (b), 2 pts (c). Each of (a) and (b) needs the <em>named test</em> plus the conclusion; a correct yes/no with no test earns 1 of 3.</div>
         </div>
       </div>
@@ -462,10 +462,10 @@
         <div class="write" style="--n:4"></div>
         <div class="keybox" hidden>
           <h4>Answer &amp; scoring</h4>
-          <p>(a) <b class="ans">Defined &mdash; scalar.</b> <span class="var vec">v</span> + <span class="var vec">w</span> is a vector in &#8477;<sup>3</sup>, and the dot product of two &#8477;<sup>3</sup> vectors is a scalar. (Value: <span class="var vec">v</span>+<span class="var vec">w</span> = &lang;&minus;6, 6, &minus;9&rang;, so <span class="var vec">u</span>&middot;(<span class="var vec">v</span>+<span class="var vec">w</span>) = &minus;24 &minus; 12 &minus; 36 = &minus;72.)</p>
+          <p>(a) <b class="ans">Defined: scalar.</b> <span class="var vec">v</span> + <span class="var vec">w</span> is a vector in &#8477;<sup>3</sup>, and the dot product of two &#8477;<sup>3</sup> vectors is a scalar. (Value: <span class="var vec">v</span>+<span class="var vec">w</span> = &lang;&minus;6, 6, &minus;9&rang;, so <span class="var vec">u</span>&middot;(<span class="var vec">v</span>+<span class="var vec">w</span>) = &minus;24 &minus; 12 &minus; 36 = &minus;72.)</p>
           <p>(b) <b class="ans">Undefined.</b> |<span class="var vec">u</span>| is a <b>scalar</b> (6) and <span class="var vec">v</span> is a <b>vector</b>. Addition requires both operands to be the same kind of object with the same dimensions; you cannot add a scalar to a vector.</p>
-          <p>(c) <b class="ans">Undefined.</b> (<span class="var vec">u</span>&middot;<span class="var vec">v</span>) is a scalar (0 here), and the dot product is an operation between two <em>vectors</em>. Scalar &middot; vector is not a dot product. Note that <em>scalar multiplication</em> 0<span class="var vec">w</span> would be defined &mdash; the dot symbol is what makes this illegal.</p>
-          <div class="rubric">2 pts each: 1 for the verdict, 1 for the reason or result type. Watch (c) &mdash; cadets who compute 0&lang;&minus;8,4,&minus;8&rang; = &lang;0,0,0&rang; have answered a different question.</div>
+          <p>(c) <b class="ans">Undefined.</b> (<span class="var vec">u</span>&middot;<span class="var vec">v</span>) is a scalar (0 here), and the dot product is an operation between two <em>vectors</em>. Scalar &middot; vector is not a dot product. Note that <em>scalar multiplication</em> 0<span class="var vec">w</span> would be defined: the dot symbol is what makes this illegal.</p>
+          <div class="rubric">2 pts each: 1 for the verdict, 1 for the reason or result type. Watch (c): cadets who compute 0&lang;&minus;8,4,&minus;8&rang; = &lang;0,0,0&rang; have answered a different question.</div>
         </div>
       </div>
     </div>
@@ -477,7 +477,7 @@
       <p class="scope">Lessons 25&ndash;26. Soldiers as feature vectors, why scale matters, and cosine similarity as a matching score.</p>
     </div>
 
-    <p>Three soldiers are drawn from the roster. Each is represented in &#8477;<sup>3</sup> by <b>normalizing</b> every measure onto a 0&ndash;1 scale &mdash; AFT &divide; 600, weapons qualification &divide; 40, GPA &divide; 4.00 &mdash; rounded to two decimals, exactly as the Spotify features were scaled in PSL 3.</p>
+    <p>Three soldiers are drawn from the roster. Each is represented in &#8477;<sup>3</sup> by <b>normalizing</b> every measure onto a 0&ndash;1 scale (AFT &divide; 600, weapons qualification &divide; 40, GPA &divide; 4.00), rounded to two decimals, exactly as the Spotify features were scaled in PSL 3.</p>
     <div class="tw">
       <table class="data-mono">
         <caption>Three soldiers, raw and normalized</caption>
@@ -499,9 +499,9 @@
         </ol>
         <div class="keybox" hidden>
           <h4>Answer &amp; scoring</h4>
-          <p>(a) <b class="ans">&#8477;<sup>3</sup></b>. The dimension is the <b>number of measured features</b> &mdash; three &mdash; not the number of soldiers. Each soldier is one point (one vector) in that three-dimensional feature space; adding a fourth measure would move every soldier into &#8477;<sup>4</sup>.</p>
-          <p>(b) <b>Weapons qualification</b> separates Carter most: 1.00 against 0.70 and 0.65, a gap of roughly a third of the scale. Carter is also lowest on GPA (0.76 vs 1.00 and 0.99). Evans and Lewis are nearly identical on <b>GPA</b> (1.00 vs 0.99) &mdash; and in fact close on all three.</p>
-          <div class="rubric">3 pts (a) &mdash; 1 for &#8477;<sup>3</sup>, 2 for tying dimension to features rather than observations. 2 pts (b).</div>
+          <p>(a) <b class="ans">&#8477;<sup>3</sup></b>. The dimension is the <b>number of measured features</b> (three), not the number of soldiers. Each soldier is one point (one vector) in that three-dimensional feature space; adding a fourth measure would move every soldier into &#8477;<sup>4</sup>.</p>
+          <p>(b) <b>Weapons qualification</b> separates Carter most: 1.00 against 0.70 and 0.65, a gap of roughly a third of the scale. Carter is also lowest on GPA (0.76 vs 1.00 and 0.99). Evans and Lewis are nearly identical on <b>GPA</b> (1.00 vs 0.99), and in fact close on all three.</p>
+          <div class="rubric">3 pts (a): 1 for &#8477;<sup>3</sup>, 2 for tying dimension to features rather than observations. 2 pts (b).</div>
           <div class="miss"><b>Watch for</b>Cadets who answer "&#8477;<sup>30</sup>, because there are 30 soldiers." Rows are observations; columns are dimensions.</div>
         </div>
       </div>
@@ -510,7 +510,7 @@
     <div class="q" id="q8">
       <div class="q-head"><span class="q-num">8.</span><div class="q-body"><b>Why normalize at all?</b></div><span class="pts">8 pts</span></div>
       <div class="q-body">
-        <p>A cadet argues the normalization step is busywork and computes similarity directly on the <b>raw</b> numbers instead &mdash; Evans as &lang;462, 28, 4.00&rang;, and so on.</p>
+        <p>A cadet argues the normalization step is busywork and computes similarity directly on the <b>raw</b> numbers instead: Evans as &lang;462, 28, 4.00&rang;, and so on.</p>
         <ol class="sub" type="a">
           <li>Compute |&lang;462, 28, 4.00&rang;| and state, to the nearest percent, how much of the value under the square root comes from the AFT component alone.<div class="write" style="--n:3"></div></li>
           <li>Explain what goes wrong with raw-scale similarity, and why normalizing fixes it.<div class="write" style="--n:4"></div></li>
@@ -519,10 +519,10 @@
           <h4>Answer &amp; scoring</h4>
           <p>(a) 462<sup>2</sup> = 213,444; 28<sup>2</sup> = 784; 4.00<sup>2</sup> = 16. Sum = 214,244, so the magnitude is &radic;214,244 = <b class="ans">462.87</b>.</p>
           <p>AFT's share: 213,444 / 214,244 = <b class="ans">99.6%</b>. Weapons qualification and GPA together contribute <b>four tenths of one percent</b>.</p>
-          <p>(b) On the raw scale the three measures are not comparable: AFT runs to 600, weapons qualification to 40, GPA to 4. Because every one of these operations &mdash; magnitude, dot product, cosine &mdash; squares or multiplies the components, <b>the variable with the largest numeric range dominates completely</b>. Two soldiers with identical AFT scores would look nearly identical no matter how far apart their marksmanship and academics were. The "similarity" would really just be a comparison of AFT scores wearing a disguise.</p>
+          <p>(b) On the raw scale the three measures are not comparable: AFT runs to 600, weapons qualification to 40, GPA to 4. Because every one of these operations (magnitude, dot product, cosine) squares or multiplies the components, <b>the variable with the largest numeric range dominates completely</b>. Two soldiers with identical AFT scores would look nearly identical no matter how far apart their marksmanship and academics were. The "similarity" would really just be a comparison of AFT scores wearing a disguise.</p>
           <p>Normalizing divides each measure by its own maximum, putting all three on a common 0&ndash;1 scale. Now a 0.1 difference means the same amount of difference in any feature, and each one gets a real vote.</p>
           <p>This is the same principle as standardizing before KNN on WPR 1: <b>distance and similarity are only meaningful when the axes are comparable.</b></p>
-          <div class="rubric">4 pts (a) &mdash; 2 magnitude, 2 the percentage. 4 pts (b): full credit names the range mismatch AND says the dominant variable swamps the others. "It makes the numbers smaller" earns 1.</div>
+          <div class="rubric">4 pts (a): 2 magnitude, 2 the percentage. 4 pts (b): full credit names the range mismatch AND says the dominant variable swamps the others. "It makes the numbers smaller" earns 1.</div>
         </div>
       </div>
     </div>
@@ -540,8 +540,8 @@
           <p>|<span class="var vec">e</span>| = &radic;(0.5929 + 0.4900 + 1.0000) = &radic;2.0829 = <b class="ans">1.4432</b></p>
           <p>|<span class="var vec">l</span>| = &radic;(0.5625 + 0.4225 + 0.9801) = &radic;1.9651 = <b class="ans">1.4018</b></p>
           <p>|<span class="var vec">c</span>| = &radic;(0.4225 + 1.0000 + 0.5776) = &radic;2.0001 = <b class="ans">1.4142</b></p>
-          <p><b>Not valid.</b> Magnitude measures the <b>overall size of the profile</b> &mdash; how far the soldier sits from the origin once all three features are combined. It says nothing about <em>which</em> features are large, and nothing about quality. Carter (1.4142) edges out Lewis (1.4018) purely on the strength of a perfect weapons score, while being well behind on both other measures.</p>
-          <p>Magnitude also cannot compare soldiers to each other in any directional sense. Two soldiers with very different strengths can have nearly equal magnitudes &mdash; as Carter and Lewis do here, differing by about 0.012 while being obviously different profiles. <b>Direction, not length, carries the similarity information</b>, which is exactly what cosine similarity extracts.</p>
+          <p><b>Not valid.</b> Magnitude measures the <b>overall size of the profile</b>, how far the soldier sits from the origin once all three features are combined. It says nothing about <em>which</em> features are large, and nothing about quality. Carter (1.4142) edges out Lewis (1.4018) purely on the strength of a perfect weapons score, while being well behind on both other measures.</p>
+          <p>Magnitude also cannot compare soldiers to each other in any directional sense. Two soldiers with very different strengths can have nearly equal magnitudes, as Carter and Lewis do here, differing by about 0.012 while being obviously different profiles. <b>Direction, not length, carries the similarity information</b>, which is exactly what cosine similarity extracts.</p>
           <div class="rubric">3 pts computation (1 each). 3 pts interpretation: full credit says magnitude is overall size and is not a ranking of quality, ideally citing the Carter/Lewis near-tie.</div>
         </div>
       </div>
@@ -563,7 +563,7 @@
           <p><span class="var vec">e</span>&middot;<span class="var vec">c</span> = 0.77(0.65) + 0.70(1.00) + 1.00(0.76) = 0.5005 + 0.7000 + 0.7600 = <b class="ans">1.9605</b></p>
           <p>(b) cos(<span class="var vec">e</span>, <span class="var vec">l</span>) = 2.0225 / (1.4432 &times; 1.4018) = 2.0225 / 2.0231 = <b class="ans">0.9997</b></p>
           <p>cos(<span class="var vec">e</span>, <span class="var vec">c</span>) = 1.9605 / (1.4432 &times; 1.4142) = 1.9605 / 2.0412 = <b class="ans">0.9605</b></p>
-          <p>(c) <b class="ans">Lewis.</b> The cosine is 0.9997 against 0.9605 &mdash; Evans and Lewis point in almost exactly the same direction in feature space, meaning they have the same <em>shape</em> of profile: strong academics, strong-to-moderate fitness, weak marksmanship. Feature by feature they are within 0.02, 0.05 and 0.01 of each other. Carter is the opposite type &mdash; a perfect weapons score carrying a weaker AFT and GPA &mdash; so the angle between Evans and Carter is visibly wider.</p>
+          <p>(c) <b class="ans">Lewis.</b> The cosine is 0.9997 against 0.9605: Evans and Lewis point in almost exactly the same direction in feature space, meaning they have the same <em>shape</em> of profile: strong academics, strong-to-moderate fitness, weak marksmanship. Feature by feature they are within 0.02, 0.05 and 0.01 of each other. Carter is the opposite type, a perfect weapons score carrying a weaker AFT and GPA, so the angle between Evans and Carter is visibly wider.</p>
           <div class="rubric">3 pts (a), 4 pts (b), 3 pts (c). Follow-on credit: a wrong magnitude from Question 9 carried correctly into (b) still earns the cosine points. Selecting Lewis on the numbers alone, with no reference to the features, earns 2 of 3 on (c).</div>
         </div>
       </div>
@@ -580,8 +580,8 @@
           <p><b class="ans">No to both. Nothing changes at all.</b></p>
           <p>Doubling <span class="var vec">p</span> doubles every dot product <span class="var vec">s</span>&middot;<span class="var vec">p</span>, <em>and</em> doubles |<span class="var vec">p</span>| in the denominator. The two factors of 2 cancel:</p>
           <div class="formula">cos(<span class="var vec">s</span>, 2<span class="var vec">p</span>) = <span class="frac"><span class="num"><span class="var vec">s</span> &middot; 2<span class="var vec">p</span></span><span class="den">|<span class="var vec">s</span>| &middot; |2<span class="var vec">p</span>|</span></span> = <span class="frac"><span class="num">2(<span class="var vec">s</span> &middot; <span class="var vec">p</span>)</span><span class="den">2|<span class="var vec">s</span>||<span class="var vec">p</span>|</span></span> = cos(<span class="var vec">s</span>, <span class="var vec">p</span>)</div>
-          <p>Geometrically: scaling a vector by a positive number stretches its <b>length</b> but leaves its <b>direction</b> untouched. <span class="var vec">p</span> and 2<span class="var vec">p</span> are parallel &mdash; the angle between a soldier and either one is identical. Cosine similarity measures angle only, so it is blind to length by construction. This is the same reason normalizing to unit vectors changes nothing about cosine rankings.</p>
-          <p>The staff officer's instinct &mdash; that bigger numbers mean stronger priorities &mdash; would be right for a <b>raw dot product</b> score, which is not scale-invariant. It is wrong for cosine.</p>
+          <p>Geometrically: scaling a vector by a positive number stretches its <b>length</b> but leaves its <b>direction</b> untouched. <span class="var vec">p</span> and 2<span class="var vec">p</span> are parallel: the angle between a soldier and either one is identical. Cosine similarity measures angle only, so it is blind to length by construction. This is the same reason normalizing to unit vectors changes nothing about cosine rankings.</p>
+          <p>The staff officer's instinct, that bigger numbers mean stronger priorities, would be right for a <b>raw dot product</b> score, which is not scale-invariant. It is wrong for cosine.</p>
           <div class="rubric">6 pts: 2 for "no change", 2 for showing the cancellation algebraically, 2 for the geometric statement that scaling changes length and not direction. An answer that says "no because cosine is normalized" without demonstrating why earns 3.</div>
           <div class="miss"><b>Why this one matters</b>PSL 3 asks this exact question about a listener's preference vector. It is the single most likely conceptual item to reappear.</div>
         </div>
@@ -595,8 +595,8 @@
         <div class="write" style="--n:5"></div>
         <div class="keybox" hidden>
           <h4>Answer &amp; scoring</h4>
-          <p>Every feature here is <b>non-negative</b> &mdash; all three normalized measures fall in [0, 1]. That confines every soldier vector to the positive octant of &#8477;<sup>3</sup>, a single corner of the space. The largest angle possible between two vectors in that corner is 90&deg;, and that only happens in the extreme case where each soldier scores zero wherever the other scores anything. Real soldiers are nowhere near that, so the achievable range of cosine values is squeezed into a narrow band just below 1.</p>
-          <p>What it means practically: <b>do not read 0.96 as "very similar" on an absolute scale.</b> These scores are only meaningful <em>relative to each other</em>. The gap between 0.9997 and 0.9605 is small in absolute terms but is the entire signal &mdash; it is the difference between a near-twin and a clearly different profile. Rank the candidates and compare; do not set an absolute threshold like "0.9 means a good match."</p>
+          <p>Every feature here is <b>non-negative</b>: all three normalized measures fall in [0, 1]. That confines every soldier vector to the positive octant of &#8477;<sup>3</sup>, a single corner of the space. The largest angle possible between two vectors in that corner is 90&deg;, and that only happens in the extreme case where each soldier scores zero wherever the other scores anything. Real soldiers are nowhere near that, so the achievable range of cosine values is squeezed into a narrow band just below 1.</p>
+          <p>What it means practically: <b>do not read 0.96 as "very similar" on an absolute scale.</b> These scores are only meaningful <em>relative to each other</em>. The gap between 0.9997 and 0.9605 is small in absolute terms but is the entire signal: it is the difference between a near-twin and a clearly different profile. Rank the candidates and compare; do not set an absolute threshold like "0.9 means a good match."</p>
           <p>Cosine similarity only spans its full range of &minus;1 to 1 when features can be negative, as with z-scores.</p>
           <div class="rubric">4 pts: 2 for identifying non-negative features restricting vectors to one octant, 2 for the practical consequence that the scores must be read comparatively. Either half alone earns 2.</div>
         </div>
@@ -615,8 +615,8 @@
           <h4>Answer &amp; scoring</h4>
           <p>(a) 0.6<span class="var vec">e</span> = &lang;0.462, 0.420, 0.600&rang;, 0.4<span class="var vec">c</span> = &lang;0.260, 0.400, 0.304&rang;</p>
           <p><span class="var vec">b</span> = <b class="ans">&lang;0.722, 0.820, 0.904&rang;</b></p>
-          <p>(b) <b class="ans">Closer to <span class="var vec">e</span></b>, because Evans carries the larger weight. A linear combination lands between the two source vectors, positioned proportionally to the weights &mdash; at 60/40 the blend sits nearer the 60% end. Had the weights been 50/50 the blend would sit symmetrically between them, and its cosine similarity to each would depend only on the geometry, not the weights.</p>
-          <p>Note what the blend inherits: Evans' high GPA component (0.904 is close to Evans' 1.00) but a weapons component of 0.820, pulled well up from Evans' 0.70 by Carter's perfect 1.00. The blend is not "mostly Evans" in every feature &mdash; it is a weighted average feature by feature.</p>
+          <p>(b) <b class="ans">Closer to <span class="var vec">e</span></b>, because Evans carries the larger weight. A linear combination lands between the two source vectors, positioned proportionally to the weights: at 60/40 the blend sits nearer the 60% end. Had the weights been 50/50 the blend would sit symmetrically between them, and its cosine similarity to each would depend only on the geometry, not the weights.</p>
+          <p>Note what the blend inherits: Evans' high GPA component (0.904 is close to Evans' 1.00) but a weapons component of 0.820, pulled well up from Evans' 0.70 by Carter's perfect 1.00. The blend is not "mostly Evans" in every feature. It is a weighted average feature by feature.</p>
           <div class="rubric">3 pts (a), 2 pts (b). Full credit on (b) requires tying the position of the blend to the weights, not just naming Evans.</div>
         </div>
       </div>
@@ -656,8 +656,8 @@
           <p>(b) <b>C</b><sup>T</sup> = <b class="ans">3&times;2</b>:</p>
           <p style="font-family:var(--mono);margin-left:16px">[ 1&nbsp;&nbsp;3 ]<br>[ 0&nbsp;&nbsp;1 ]<br>[ 2&nbsp;&nbsp;4 ]</p>
           <p>Transposing swaps rows and columns, so an <span class="var">m</span>&times;<span class="var">n</span> matrix becomes <span class="var">n</span>&times;<span class="var">m</span>. The entry at (1,3) of <b>C</b> lands at (3,1) of <b>C</b><sup>T</sup>.</p>
-          <p>(c) <b>F</b> is 30&times;3 &mdash; one row per soldier, one column per feature &mdash; so <b>F</b><sup>T</sup> is 3&times;30. A <b>row</b> of <b>F</b><sup>T</sup> is <b>one feature measured across all 30 soldiers</b> (every AFT score, say). A <b>column</b> of <b>F</b><sup>T</sup> is <b>one soldier's complete profile</b>. Transposing switches the question from "tell me about this soldier" to "tell me about this measure."</p>
-          <div class="rubric">2 pts (a) &mdash; all four correct, rows&times;columns. 2 pts (b). 2 pts (c), 1 per direction.</div>
+          <p>(c) <b>F</b> is 30&times;3 (one row per soldier, one column per feature), so <b>F</b><sup>T</sup> is 3&times;30. A <b>row</b> of <b>F</b><sup>T</sup> is <b>one feature measured across all 30 soldiers</b> (every AFT score, say). A <b>column</b> of <b>F</b><sup>T</sup> is <b>one soldier's complete profile</b>. Transposing switches the question from "tell me about this soldier" to "tell me about this measure."</p>
+          <div class="rubric">2 pts (a): all four correct, rows&times;columns. 2 pts (b). 2 pts (c), 1 per direction.</div>
         </div>
       </div>
     </div>
@@ -673,7 +673,7 @@
           <p style="font-family:var(--mono)">(a) <b class="ans">[ 4&nbsp;&nbsp;3 ; 2&nbsp;&nbsp;9 ]</b> &nbsp;&nbsp;&nbsp; (b) <b class="ans">[ 2&nbsp;&nbsp;&minus;1 ; 2&nbsp;&nbsp;&minus;1 ]</b></p>
           <p style="font-family:var(--mono)">(c) <b class="ans">[ 12&nbsp;&nbsp;4 ; 8&nbsp;&nbsp;16 ]</b> &nbsp;&nbsp;&nbsp; (d) <b class="ans">[ 3&nbsp;&nbsp;&minus;4 ; 4&nbsp;&nbsp;&minus;7 ]</b></p>
           <p>For (d): 2<b>A</b> = [6 2; 4 8] and 3<b>B</b> = [3 6; 0 15], so the difference is [6&minus;3, 2&minus;6; 4&minus;0, 8&minus;15] = [3, &minus;4; 4, &minus;7].</p>
-          <p>All of these are <b>entry-by-entry</b> operations, and all require the matrices to have identical dimensions. That is what makes them easy &mdash; and what makes multiplication, which is not entry-by-entry, the place where people lose points.</p>
+          <p>All of these are <b>entry-by-entry</b> operations, and all require the matrices to have identical dimensions. That is what makes them easy, and what makes multiplication, which is not entry-by-entry, the place where people lose points.</p>
           <div class="rubric">2 pts each. One arithmetic slip inside an otherwise correct matrix costs 1, not the whole item.</div>
         </div>
       </div>
@@ -715,10 +715,10 @@
           <p>(a) <b class="ans">AB = [ 3&nbsp;&nbsp;11 ; 2&nbsp;&nbsp;24 ]</b></p>
           <p>Entry (1,2) worked out: row 1 of <b>A</b> dotted with column 2 of <b>B</b> = &lang;3, 1&rang; &middot; &lang;2, 5&rang; = 6 + 5 = 11.</p>
           <p>(b) <b class="ans">BA = [ 7&nbsp;&nbsp;9 ; 10&nbsp;&nbsp;20 ]</b></p>
-          <p>(c) <b class="ans">No &mdash; AB &ne; BA.</b> Matrix multiplication is <b>not commutative</b>. Order changes the answer, and here it changes every single entry.</p>
-          <p>This is not an edge case, it is the normal situation: for most pairs of matrices the two products differ, and for non-square matrices one of the two orders is usually not even defined. Every entry of a product is a <b>row of the left matrix dotted with a column of the right</b> &mdash; swap the operands and you are dotting entirely different vectors together.</p>
+          <p>(c) <b class="ans">No, AB &ne; BA.</b> Matrix multiplication is <b>not commutative</b>. Order changes the answer, and here it changes every single entry.</p>
+          <p>This is not an edge case, it is the normal situation: for most pairs of matrices the two products differ, and for non-square matrices one of the two orders is usually not even defined. Every entry of a product is a <b>row of the left matrix dotted with a column of the right</b>: swap the operands and you are dotting entirely different vectors together.</p>
           <div class="rubric">3 pts (a) including the shown dot product, 3 pts (b), 2 pts (c). Stating "no" without the word commutative or an equivalent explanation earns 1 of 2.</div>
-          <div class="miss"><b>Watch for</b>Multiplying entry-by-entry ([3&times;1, 1&times;2; 2&times;0, 4&times;5] = [3, 2; 0, 20]). That is not matrix multiplication &mdash; it is what addition looks like, applied to the wrong operation.</div>
+          <div class="miss"><b>Watch for</b>Multiplying entry-by-entry ([3&times;1, 1&times;2; 2&times;0, 4&times;5] = [3, 2; 0, 20]). That is not matrix multiplication. It is what addition looks like, applied to the wrong operation.</div>
         </div>
       </div>
     </div>
@@ -744,7 +744,7 @@
           <p>det(<b>A</b>) = 3(4) &minus; 1(2) = <b class="ans">10</b> &rarr; nonzero, <b>invertible</b></p>
           <p>det(<b>B</b>) = 1(5) &minus; 2(0) = <b class="ans">5</b> &rarr; nonzero, <b>invertible</b></p>
           <p>det(<b>D</b>) = 2(6) &minus; 4(3) = 12 &minus; 12 = <b class="ans">0</b> &rarr; <b>singular, no inverse</b></p>
-          <p>The determinant is the single test: a square matrix is invertible exactly when its determinant is nonzero. The <em>size</em> of a nonzero determinant does not matter for this question &mdash; det = 5 and det = 10 are equally invertible.</p>
+          <p>The determinant is the single test: a square matrix is invertible exactly when its determinant is nonzero. The <em>size</em> of a nonzero determinant does not matter for this question: det = 5 and det = 10 are equally invertible.</p>
           <div class="rubric">1 pt per determinant, 1 pt per invertibility verdict.</div>
         </div>
       </div>
@@ -759,7 +759,7 @@
         </ol>
         <div class="keybox" hidden>
           <h4>Answer &amp; scoring</h4>
-          <p>For a 2&times;2, <b>A</b><sup>&minus;1</sup> = (1/det) [ <span class="var">a</span><sub>22</sub>&nbsp;&nbsp;&minus;<span class="var">a</span><sub>12</sub> ; &minus;<span class="var">a</span><sub>21</sub>&nbsp;&nbsp;<span class="var">a</span><sub>11</sub> ] &mdash; swap the diagonal, negate the off-diagonal, divide by the determinant.</p>
+          <p>For a 2&times;2, <b>A</b><sup>&minus;1</sup> = (1/det) [ <span class="var">a</span><sub>22</sub>&nbsp;&nbsp;&minus;<span class="var">a</span><sub>12</sub> ; &minus;<span class="var">a</span><sub>21</sub>&nbsp;&nbsp;<span class="var">a</span><sub>11</sub> ]: swap the diagonal, negate the off-diagonal, divide by the determinant.</p>
           <p>(a) <b class="ans">A<sup>&minus;1</sup> = (1/10) [ 4&nbsp;&nbsp;&minus;1 ; &minus;2&nbsp;&nbsp;3 ] = [ 0.4&nbsp;&nbsp;&minus;0.1 ; &minus;0.2&nbsp;&nbsp;0.3 ]</b></p>
           <p>(b) <b>AA</b><sup>&minus;1</sup> = [3, 1; 2, 4][0.4, &minus;0.1; &minus;0.2, 0.3]</p>
           <p style="margin-left:16px">(1,1): 3(0.4) + 1(&minus;0.2) = 1.2 &minus; 0.2 = <b>1</b><br>
@@ -767,7 +767,7 @@
              (2,1): 2(0.4) + 4(&minus;0.2) = 0.8 &minus; 0.8 = <b>0</b><br>
              (2,2): 2(&minus;0.1) + 4(0.3) = &minus;0.2 + 1.2 = <b>1</b></p>
           <p>= <b class="ans">[ 1&nbsp;&nbsp;0 ; 0&nbsp;&nbsp;1 ] = I</b> &#10003;</p>
-          <div class="rubric">4 pts (a) &mdash; 1 for the determinant, 2 for the swap-and-negate pattern, 1 for dividing through. 4 pts (b), which requires the four entries shown, not just "= I".</div>
+          <div class="rubric">4 pts (a): 1 for the determinant, 2 for the swap-and-negate pattern, 1 for dividing through. 4 pts (b), which requires the four entries shown, not just "= I".</div>
           <div class="miss"><b>Watch for</b>Negating the diagonal instead of the off-diagonal. The entries that move are 3 and 4 (they swap); the entries that change sign are 1 and 2 (they stay put).</div>
         </div>
       </div>
@@ -785,13 +785,13 @@
         </ol>
         <div class="keybox" hidden>
           <h4>Answer &amp; scoring</h4>
-          <p>(a) <b>A</b> = [3, 1; 2, 4] &mdash; the same matrix from Question 19 &mdash; with <span class="var vec">x</span> = [<span class="var">x</span><sub>1</sub>; <span class="var">x</span><sub>2</sub>] and <span class="var vec">b</span> = <b class="ans">[11; 14]</b>. The coefficients become the rows of <b>A</b>; the constants become <span class="var vec">b</span>.</p>
+          <p>(a) <b>A</b> = [3, 1; 2, 4] , the same matrix from Question 19, with <span class="var vec">x</span> = [<span class="var">x</span><sub>1</sub>; <span class="var">x</span><sub>2</sub>] and <span class="var vec">b</span> = <b class="ans">[11; 14]</b>. The coefficients become the rows of <b>A</b>; the constants become <span class="var vec">b</span>.</p>
           <p>(b) <span class="var vec">x</span> = (1/10)[4, &minus;1; &minus;2, 3][11; 14]</p>
           <p style="margin-left:16px">first entry: (1/10)(4&middot;11 &minus; 1&middot;14) = (1/10)(44 &minus; 14) = 30/10 = <b>3</b><br>
              second entry: (1/10)(&minus;2&middot;11 + 3&middot;14) = (1/10)(&minus;22 + 42) = 20/10 = <b>2</b></p>
           <p><b class="ans"><span class="vec">x</span> = [3; 2]</b></p>
           <p>(c) Check both equations: 3(3) + 2 = 11 &#10003; and 2(3) + 4(2) = 6 + 8 = 14 &#10003;</p>
-          <p>In context: the platoon should schedule <b class="ans">3 hours of physical training and 2 hours on the range</b> each week to meet both readiness requirements exactly. Because det(<b>A</b>) = 10 &ne; 0, this solution is <b>unique</b> &mdash; there is no other pair of hours that satisfies both.</p>
+          <p>In context: the platoon should schedule <b class="ans">3 hours of physical training and 2 hours on the range</b> each week to meet both readiness requirements exactly. Because det(<b>A</b>) = 10 &ne; 0, this solution is <b>unique</b>: there is no other pair of hours that satisfies both.</p>
           <div class="rubric">2 pts (a), 4 pts (b), 2 pts (c). The contextual statement with units is required for full credit on (c); "x = 3, y = 2" alone earns 1.</div>
         </div>
       </div>
@@ -809,14 +809,14 @@
         <div class="keybox" hidden>
           <h4>Answer &amp; scoring</h4>
           <p>(a) <b class="ans">D<sup>&minus;1</sup> does not exist.</b> The inverse formula divides by the determinant, and division by zero is undefined. <b>D</b> is <b>singular</b>.</p>
-          <p>(b) <b>Row 2 is 1.5 times row 1</b>: 1.5(2) = 3 and 1.5(4) = 6. The rows are <b>scalar multiples</b> of one another &mdash; in vector language, parallel, or linearly dependent. Row 2 carries no information that row 1 did not already supply. A 2&times;2 determinant is zero exactly when its rows (equivalently, its columns) are scalar multiples of each other, so the dependence and the zero determinant are the same fact stated two ways.</p>
-          <p>(c) Each row is a line. Because the rows are proportional, the two lines have the <b>same slope</b> &mdash; they are parallel. Two outcomes follow, and which one you get depends on <span class="var vec">b</span>:</p>
+          <p>(b) <b>Row 2 is 1.5 times row 1</b>: 1.5(2) = 3 and 1.5(4) = 6. The rows are <b>scalar multiples</b> of one another: in vector language, parallel, or linearly dependent. Row 2 carries no information that row 1 did not already supply. A 2&times;2 determinant is zero exactly when its rows (equivalently, its columns) are scalar multiples of each other, so the dependence and the zero determinant are the same fact stated two ways.</p>
+          <p>(c) Each row is a line. Because the rows are proportional, the two lines have the <b>same slope</b>: they are parallel. Two outcomes follow, and which one you get depends on <span class="var vec">b</span>:</p>
           <ul>
-            <li>If the constants are <em>not</em> in the same proportion, the lines are <b>parallel and distinct</b> &mdash; they never meet, and the system has <b>no solution</b>.</li>
-            <li>If the constants <em>are</em> in the same proportion, the two equations describe the <b>same line</b> &mdash; every point on it works, and the system has <b>infinitely many solutions</b>.</li>
+            <li>If the constants are <em>not</em> in the same proportion, the lines are <b>parallel and distinct</b>: they never meet, and the system has <b>no solution</b>.</li>
+            <li>If the constants <em>are</em> in the same proportion, the two equations describe the <b>same line</b>: every point on it works, and the system has <b>infinitely many solutions</b>.</li>
           </ul>
-          <p>What a singular matrix rules out is the third case: a <b>unique</b> solution is impossible. That is exactly why row reduction tells you more than the determinant alone &mdash; det(<b>D</b>) = 0 says "not unique," but only reducing the augmented system reveals which of the other two you have.</p>
-          <div class="rubric">2 pts (a), 3 pts (b) &mdash; must name the scalar multiple explicitly &mdash; 3 pts (c), which needs parallel lines AND both possible outcomes. Answering only "no solution" earns 2 of 3.</div>
+          <p>What a singular matrix rules out is the third case: a <b>unique</b> solution is impossible. That is exactly why row reduction tells you more than the determinant alone: det(<b>D</b>) = 0 says "not unique," but only reducing the augmented system reveals which of the other two you have.</p>
+          <div class="rubric">2 pts (a), 3 pts (b): must name the scalar multiple explicitly. 3 pts (c), which needs parallel lines AND both possible outcomes. Answering only "no solution" earns 2 of 3.</div>
         </div>
       </div>
     </div>
@@ -845,7 +845,7 @@
           <p><b>R3 &larr; &minus;(1/7)R3</b> gives <span class="var">z</span> = <b>3</b>. Back-substitute into row 2: <span class="var">y</span> &minus; 2(3) = &minus;4, so <span class="var">y</span> = <b>2</b>. Into row 1: <span class="var">x</span> + 2 + 3 = 6, so <span class="var">x</span> = <b>1</b>.</p>
           <p><b class="ans">(x, y, z) = (1, 2, 3)</b></p>
           <p>Check all three: 1+2+3 = 6 &#10003;, 2&minus;2+3 = 3 &#10003;, 1+4&minus;3 = 2 &#10003;</p>
-          <div class="rubric">3 pts augmented matrix, 5 pts row operations (named, and legal &mdash; only the three elementary operations), 2 pts solution with a check. Any correct sequence of operations earns full credit; there is no single required path.</div>
+          <div class="rubric">3 pts augmented matrix, 5 pts row operations (named, and legal: only the three elementary operations), 2 pts solution with a check. Any correct sequence of operations earns full credit; there is no single required path.</div>
         </div>
       </div>
     </div>
@@ -863,7 +863,7 @@
         <div class="keybox" hidden>
           <h4>Answer &amp; scoring</h4>
           <p>(a) <b class="ans">Unique solution.</b> Every variable has a leading 1 (a pivot) and there is no contradictory row. Back-substitution: <span class="var">y</span> = 4, then <span class="var">x</span> + 8 = 3 so <span class="var">x</span> = &minus;5.</p>
-          <p>(b) <b class="ans">No solution.</b> The second row reads 0<span class="var">x</span> + 0<span class="var">y</span> = 5, that is <b>0 = 5</b> &mdash; a contradiction. Any row of the form [0 0 &hellip; 0 | nonzero] kills the system outright.</p>
+          <p>(b) <b class="ans">No solution.</b> The second row reads 0<span class="var">x</span> + 0<span class="var">y</span> = 5, that is <b>0 = 5</b>, a contradiction. Any row of the form [0 0 &hellip; 0 | nonzero] kills the system outright.</p>
           <p>(c) <b class="ans">Infinitely many solutions.</b> The second row reads 0 = 0, which is true but empty. Only one real equation remains for two unknowns, so <span class="var">y</span> is a <b>free variable</b>: pick any <span class="var">y</span> and <span class="var">x</span> = 3 &minus; 2<span class="var">y</span> follows.</p>
           <p>The rule of thumb: a zero row with a nonzero constant means <b>no solution</b>; a fully zero row means a <b>free variable</b> and infinitely many; a pivot in every column of coefficients means <b>unique</b>.</p>
           <div class="rubric">2 pts each: 1 classification, 1 reason. The reason must cite the specific row, not just restate the classification.</div>
@@ -906,9 +906,9 @@
           <p style="margin-left:16px">Evans: 0.77(0.5) + 0.70(0.3) + 1.00(0.2) = 0.385 + 0.210 + 0.200 = <b class="ans">0.795</b><br>
              Lewis: 0.75(0.5) + 0.65(0.3) + 0.99(0.2) = 0.375 + 0.195 + 0.198 = <b class="ans">0.768</b><br>
              Carter: 0.65(0.5) + 1.00(0.3) + 0.76(0.2) = 0.325 + 0.300 + 0.152 = <b class="ans">0.777</b></p>
-          <p>(c) Each entry is <b>one soldier's weighted readiness score</b> under the commander's priorities &mdash; a single number summarizing that soldier's whole profile. Ranking: <b class="ans">Evans (0.795), Carter (0.777), Lewis (0.768)</b>. Evans gets the slot.</p>
-          <p>Note how close Carter and Lewis are (0.009 apart) despite completely different profiles &mdash; Carter's perfect weapons score almost exactly offsets Lewis' stronger AFT and GPA. A weighted score compresses three numbers into one, and information is lost in the compression.</p>
-          <p>(d) 30&times;3 times 3&times;1 &rarr; <b class="ans">30&times;1</b>, and it performs <b class="ans">30 dot products</b> &mdash; one per soldier &mdash; in a single operation. <b>This is the payoff of the whole block:</b> matrix&ndash;vector multiplication is simultaneous dot products. What you did by hand for three soldiers, Excel's <code>MMULT</code> does for the entire platoon at once.</p>
+          <p>(c) Each entry is <b>one soldier's weighted readiness score</b> under the commander's priorities, a single number summarizing that soldier's whole profile. Ranking: <b class="ans">Evans (0.795), Carter (0.777), Lewis (0.768)</b>. Evans gets the slot.</p>
+          <p>Note how close Carter and Lewis are (0.009 apart) despite completely different profiles: Carter's perfect weapons score almost exactly offsets Lewis' stronger AFT and GPA. A weighted score compresses three numbers into one, and information is lost in the compression.</p>
+          <p>(d) 30&times;3 times 3&times;1 &rarr; <b class="ans">30&times;1</b>, and it performs <b class="ans">30 dot products</b>, one per soldier, in a single operation. <b>This is the payoff of the whole block:</b> matrix&ndash;vector multiplication is simultaneous dot products. What you did by hand for three soldiers, Excel's <code>MMULT</code> does for the entire platoon at once.</p>
           <div class="rubric">2 pts (a), 4 pts (b), 2 pts (c), 2 pts (d). Full credit on (c) requires naming what an entry <em>is</em>, not just listing the ranking.</div>
         </div>
       </div>
@@ -928,9 +928,9 @@
              Lewis: 0.150 + 0.390 + 0.198 = <b class="ans">0.738</b><br>
              Carter: 0.130 + 0.600 + 0.152 = <b class="ans">0.882</b></p>
           <p>New ranking: <b class="ans">Carter, Evans, Lewis</b>.</p>
-          <p>(b) <b>The ranking flipped.</b> Carter went from second to a commanding first &mdash; same soldiers, same data, different priorities. The weight vector is not a technicality; it <b>is</b> the commander's judgment about what matters, and it determines the answer. A weighted score is only as defensible as the weights behind it, which is why they must be stated openly rather than buried in a spreadsheet.</p>
-          <p>(c) <span class="var vec">w</span><sub>3</sub> = 2<span class="var vec">w</span>. Every score <b>doubles</b>: 1.590, 1.536, 1.554. The <b class="ans">ranking is completely unchanged</b> &mdash; Evans, Carter, Lewis, exactly as before.</p>
-          <p>Scaling every weight by the same positive constant scales every score by that constant, and scaling preserves order. The officer has changed the units of the score and nothing else. Compare Question 11: cosine similarity is immune to this by construction, while a raw weighted score does change &mdash; but only in a way that cancels out the moment you rank.</p>
+          <p>(b) <b>The ranking flipped.</b> Carter went from second to a commanding first: same soldiers, same data, different priorities. The weight vector is not a technicality; it <b>is</b> the commander's judgment about what matters, and it determines the answer. A weighted score is only as defensible as the weights behind it, which is why they must be stated openly rather than buried in a spreadsheet.</p>
+          <p>(c) <span class="var vec">w</span><sub>3</sub> = 2<span class="var vec">w</span>. Every score <b>doubles</b>: 1.590, 1.536, 1.554. The <b class="ans">ranking is completely unchanged</b>: Evans, Carter, Lewis, exactly as before.</p>
+          <p>Scaling every weight by the same positive constant scales every score by that constant, and scaling preserves order. The officer has changed the units of the score and nothing else. Compare Question 11: cosine similarity is immune to this by construction, while a raw weighted score does change, but only in a way that cancels out the moment you rank.</p>
           <p>What <em>would</em> change the ranking is altering the weights <b>relative to each other</b>, as in part (a).</p>
           <div class="rubric">4 pts (a), 2 pts (b), 2 pts (c). Full credit on (c) requires both halves: scores double AND ranking is unchanged.</div>
         </div>
@@ -946,8 +946,8 @@
         <div class="keybox" hidden>
           <h4>Answer &amp; scoring</h4>
           <p>Each row of <b>X</b><span class="var vec">&beta;</span> computes <b>one fitted value</b>: row <span class="var">i</span> is &lang;1, <span class="var">x</span><sub>i</sub>&rang; &middot; &lang;<span class="var">b</span><sub>0</sub>, <span class="var">b</span><sub>1</sub>&rang; = <span class="var">b</span><sub>0</sub>(1) + <span class="var">b</span><sub>1</sub><span class="var">x</span><sub>i</sub> = <b class="ans">&#375;<sub>i</sub></b>. The column of 1s is what lets the intercept ride along as just another weight.</p>
-          <p>So <b>X</b><span class="var vec">&beta;</span> produces the entire vector of predictions in one operation &mdash; the same structure as scoring the platoon in Question 24. A regression model <em>is</em> a weighted sum of features, and <span class="var vec">&beta;</span> is its weight vector.</p>
-          <p>The dimensions must match because each entry of the product is a <b>dot product between a row of X and the vector</b> <span class="var vec">&beta;</span>, and a dot product is only defined between vectors with the same number of components. One weight per feature, no more and no less &mdash; if <b>X</b> has a column with no matching coefficient, there is nothing to multiply it by.</p>
+          <p>So <b>X</b><span class="var vec">&beta;</span> produces the entire vector of predictions in one operation, the same structure as scoring the platoon in Question 24. A regression model <em>is</em> a weighted sum of features, and <span class="var vec">&beta;</span> is its weight vector.</p>
+          <p>The dimensions must match because each entry of the product is a <b>dot product between a row of X and the vector</b> <span class="var vec">&beta;</span>, and a dot product is only defined between vectors with the same number of components. One weight per feature, no more and no less: if <b>X</b> has a column with no matching coefficient, there is nothing to multiply it by.</p>
           <div class="rubric">2 pts for identifying the row as the fitted value &#375;<sub>i</sub>, 2 pts for the dimension argument in terms of dot products. Answers that only restate the rule "inner dimensions must match" without saying why earn 1 of 2.</div>
         </div>
       </div>
@@ -962,9 +962,9 @@
           <h4>Answer &amp; scoring</h4>
           <p><b>The dot product is the atom.</b> Everything else is built from it.</p>
           <ul>
-            <li><b>Cosine similarity</b> is a dot product divided by two magnitudes &mdash; the same number, normalized so that only direction survives. That is why Question 11's doubled priority vector changed nothing.</li>
+            <li><b>Cosine similarity</b> is a dot product divided by two magnitudes: the same number, normalized so that only direction survives. That is why Question 11's doubled priority vector changed nothing.</li>
             <li><b>Matrix&ndash;vector multiplication</b> is a stack of dot products: each entry of <b>F</b><span class="var vec">w</span> in Question 24 is one row of <b>F</b> dotted with <span class="var vec">w</span>. Thirty soldiers means thirty dot products, executed as one product.</li>
-            <li><b>Matrix&ndash;matrix multiplication</b> is a grid of them &mdash; every entry of <b>AB</b> in Question 17 is a row of <b>A</b> dotted with a column of <b>B</b>.</li>
+            <li><b>Matrix&ndash;matrix multiplication</b> is a grid of them: every entry of <b>AB</b> in Question 17 is a row of <b>A</b> dotted with a column of <b>B</b>.</li>
           </ul>
           <p>This is why the dimension rule takes the form it does: the inner dimensions must match because <b>a dot product needs two vectors of equal length</b>. Every "is this defined?" question in this exam reduces to that one requirement.</p>
           <div class="rubric">4 pts: 2 for identifying the dot product as the common operation, 2 for correctly describing at least two of the three constructions with reference to specific questions. A vague "they are all related" earns 1.</div>
@@ -978,26 +978,26 @@
     <p style="color:var(--ink-soft);margin-top:6px">The course director's recommendation: work your gate and the homework problems. This exam is built to sit alongside them, on her dataset.</p>
 
     <h3 style="font-family:var(--serif);font-size:19px;margin:28px 0 10px">Where points go</h3>
-    <p style="font-size:13.5px;color:var(--ink-soft);margin-bottom:12px">These are no longer predictions. <b>Gate 3 has come back</b>, and it is the only graded work this block: 25 points, seven questions, <b>100% computation</b> &mdash; not one item asked for a sentence. Gates 1 and 2 put 10 of 25 points on a caption; Gate 3 put none. The <a href="ma103-gate3-mirror.html">Gate 3 mirror</a> rebuilds it question for question.</p>
-    <div class="miss"><b>1 &mdash; Unit vectors</b>3 of 25 points on Gate 3, and absent from HW3's Section 1 list. Divide every component by the magnitude, leave it in fractions, and check the result has length 1. Question 2(b) here.</div>
-    <div class="miss"><b>2 &mdash; Angle, not cosine similarity</b>Gate 3's rubric names "calculates cosine similarity instead of angle" as a major error worth 2 of 4. cos&thinsp;&theta; is an intermediate value. Question 5 here.</div>
-    <div class="miss"><b>3 &mdash; Exact values and fractions</b>Gate 3 demanded "no decimals" on the magnitude and "exact values" on the unit vector, and its row reduction came out 7/3 and 4/3. An ugly fraction is not evidence of an error.</div>
-    <div class="miss"><b>4 &mdash; Row reduction, by row reduction</b>Solving by substitution and writing the right answer scored 2 of 4. The REF must appear on the page and the solution type must be stated. RREF is <em>not</em> required &mdash; the grader noted the REF is not unique.</div>
-    <div class="miss"><b>5 &mdash; Answering both halves</b>The determinant item wanted the value <b>and</b> whether the inverse exists. Correct determinant with no existence conclusion dropped from 4 to 2.</div>
-    <div class="miss"><b>6 &mdash; Sign errors</b>The arithmetic that actually bites: (&minus;8)<sup>2</sup> = +64, (&minus;1)(&minus;2) = +2, and 10 &minus; (&minus;3) = 13. Gate 3 is almost entirely signed arithmetic.</div>
-    <div class="miss"><b>7 &mdash; Showing work</b>Every Gate 3 rubric deducts a point for a correct answer with no work shown. Free points, lost silently.</div>
-    <p style="font-size:13.5px;color:var(--ink-soft);margin:14px 0 0"><b>Still worth knowing:</b> the WPR is longer than a gate and the course director has said cadets "will still have to understand and interpret their results." The conceptual traps in Parts II and V &mdash; scale before similarity, scaling a vector leaves cosine unchanged, det = 0 means <em>not unique</em> rather than <em>no solution</em> &mdash; are the likeliest place for that to show up.</p>
+    <p style="font-size:13.5px;color:var(--ink-soft);margin-bottom:12px">These are no longer predictions. <b>Gate 3 has come back</b>, and it is the only graded work this block: 25 points, seven questions, <b>100% computation</b>: not one item asked for a sentence. Gates 1 and 2 put 10 of 25 points on a caption; Gate 3 put none. The <a href="ma103-gate3-mirror.html">Gate 3 mirror</a> rebuilds it question for question.</p>
+    <div class="miss"><b>1 &middot; Unit vectors</b>3 of 25 points on Gate 3, and absent from HW3's Section 1 list. Divide every component by the magnitude, leave it in fractions, and check the result has length 1. Question 2(b) here.</div>
+    <div class="miss"><b>2 &middot; Angle, not cosine similarity</b>Gate 3's rubric names "calculates cosine similarity instead of angle" as a major error worth 2 of 4. cos&thinsp;&theta; is an intermediate value. Question 5 here.</div>
+    <div class="miss"><b>3 &middot; Exact values and fractions</b>Gate 3 demanded "no decimals" on the magnitude and "exact values" on the unit vector, and its row reduction came out 7/3 and 4/3. An ugly fraction is not evidence of an error.</div>
+    <div class="miss"><b>4 &middot; Row reduction, by row reduction</b>Solving by substitution and writing the right answer scored 2 of 4. The REF must appear on the page and the solution type must be stated. RREF is <em>not</em> required. The grader noted the REF is not unique.</div>
+    <div class="miss"><b>5 &middot; Answering both halves</b>The determinant item wanted the value <b>and</b> whether the inverse exists. Correct determinant with no existence conclusion dropped from 4 to 2.</div>
+    <div class="miss"><b>6 &middot; Sign errors</b>The arithmetic that actually bites: (&minus;8)<sup>2</sup> = +64, (&minus;1)(&minus;2) = +2, and 10 &minus; (&minus;3) = 13. Gate 3 is almost entirely signed arithmetic.</div>
+    <div class="miss"><b>7 &middot; Showing work</b>Every Gate 3 rubric deducts a point for a correct answer with no work shown. Free points, lost silently.</div>
+    <p style="font-size:13.5px;color:var(--ink-soft);margin:14px 0 0"><b>Still worth knowing:</b> the WPR is longer than a gate and the course director has said cadets "will still have to understand and interpret their results." The conceptual traps in Parts II and V (scale before similarity, scaling a vector leaves cosine unchanged, det = 0 means <em>not unique</em> rather than <em>no solution</em>) are the likeliest place for that to show up.</p>
 
     <h3 style="font-family:var(--serif);font-size:19px;margin:28px 0 10px">If you are short on time</h3>
-    <p style="font-size:13.5px;color:var(--ink-soft)">Work the <a href="ma103-gate3-mirror.html">Gate 3 mirror</a> first &mdash; seven questions, 25 points, the exact format of the only graded work this block. Then Questions <b>2, 3, 4, 5, 16, 19, 20, 22, 24</b> here, which cover every Gate 3 shape at more length plus the matrix mechanics the gate sampled only once. If time remains, Questions 8, 10 and 11 are the conceptual items most likely to carry the interpretation points.</p>
+    <p style="font-size:13.5px;color:var(--ink-soft)">Work the <a href="ma103-gate3-mirror.html">Gate 3 mirror</a> first: seven questions, 25 points, the exact format of the only graded work this block. Then Questions <b>2, 3, 4, 5, 16, 19, 20, 22, 24</b> here, which cover every Gate 3 shape at more length plus the matrix mechanics the gate sampled only once. If time remains, Questions 8, 10 and 11 are the conceptual items most likely to carry the interpretation points.</p>
 
     <h3 style="font-family:var(--serif);font-size:19px;margin:28px 0 10px">Work these alongside it</h3>
     <ul style="font-size:13.5px;color:var(--ink-soft);padding-left:22px">
-      <li><b>HW3</b> &mdash; the spine. Sections 1 and 3 are pure mechanics; Sections 2 and 5 are the same applications as Parts II and V here, on your own dataset.</li>
-      <li><b>PSL 3</b> (songs) &mdash; the best source for cosine similarity intuition. Q4c is Question 11 of this exam in different clothing.</li>
-      <li><b>TL 4</b> (matrices in Excel) &mdash; the <code>MMULT</code> and <code>TRANSPOSE</code> practice, and where Question 24(d) comes from.</li>
-      <li><b>platoon_roomate_data.xlsx</b> &mdash; 30 soldiers. Try the full 30&times;3 scoring in Excel, then re-rank with different weights and watch the order move.</li>
-      <li><b><a href="ma103-wpr2-reference.html">The reference card</a></b> &mdash; every formula and test in this block on one page, plus rapid drills.</li>
+      <li><b>HW3</b>: the spine. Sections 1 and 3 are pure mechanics; Sections 2 and 5 are the same applications as Parts II and V here, on your own dataset.</li>
+      <li><b>PSL 3</b> (songs): the best source for cosine similarity intuition. Q4c is Question 11 of this exam in different clothing.</li>
+      <li><b>TL 4</b> (matrices in Excel): the <code>MMULT</code> and <code>TRANSPOSE</code> practice, and where Question 24(d) comes from.</li>
+      <li><b>platoon_roomate_data.xlsx</b>: 30 soldiers. Try the full 30&times;3 scoring in Excel, then re-rank with different weights and watch the order move.</li>
+      <li><b><a href="ma103-wpr2-reference.html">The reference card</a></b>: every formula and test in this block on one page, plus rapid drills.</li>
     </ul>
 
     <h3 style="font-family:var(--serif);font-size:19px;margin:28px 0 10px">Answer key at a glance</h3>
