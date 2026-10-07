@@ -82,27 +82,15 @@
       font-size: clamp(30px, 4.6vw, 42px); line-height: 1.1;
       color: var(--black); margin-bottom: 8px; text-wrap: balance;
     }
-    .sub { font-family: var(--serif); font-style: italic; font-size: 19px; color: var(--mid); margin-bottom: 22px; }
+    .sub { font-family: var(--serif); font-style: italic; font-size: 19px; color: var(--mid); margin-bottom: 20px; }
 
-    .callout {
-      background: var(--bg-off); border: 1px solid var(--rule);
-      border-left: 2px solid var(--black); padding: 16px 20px; margin: 0 0 24px; font-size: 14px;
+    .lede {
+      font-size: 14px; color: var(--mid); border-left: 2px solid var(--black);
+      padding-left: 16px; margin: 0;
     }
-    .callout p { margin: 0; }
-    .callout p + p { margin-top: 10px; }
+    .lede b { color: var(--ink); font-weight: 500; }
 
-    .meta {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(150px,1fr));
-      border: 1px solid var(--rule); margin-bottom: 28px;
-    }
-    .meta div { padding: 12px 16px; border-right: 1px solid var(--rule); }
-    .meta div:last-child { border-right: 0; }
-    .meta dt {
-      font-size: 10px; font-weight: 500; letter-spacing: .12em;
-      text-transform: uppercase; color: var(--faint); margin-bottom: 3px;
-    }
-    .meta dd { font-size: 16px; font-family: var(--serif); color: var(--black); font-variant-numeric: tabular-nums; }
-
+    section[id] { scroll-margin-top: 56px; }
     .part-head { border-top: 2px solid var(--black); padding-top: 16px; margin: 64px 0 0; }
     .part-head .tags {
       display: flex; gap: 9px; flex-wrap: wrap; align-items: baseline;
@@ -132,8 +120,8 @@
     .res:hover { background: #fafaf8; }
     .res:focus-visible { outline: 2px solid var(--black); outline-offset: -2px; }
     .res-num {
-      font-family: var(--mono); font-size: 11px; letter-spacing: .1em;
-      color: var(--faint); display: block; margin-bottom: 14px;
+      font-size: 10px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase;
+      color: var(--black); display: block; margin-bottom: 14px;
     }
     .res-name {
       font-family: var(--serif); font-weight: 400; font-size: 24px; line-height: 1.15;
@@ -152,17 +140,11 @@
     .res-go::after { content: '\2192'; }
     .res:hover .res-go { gap: 11px; }
 
-    ol.instr { margin: 0; padding-left: 22px; font-size: 14px; }
-    ol.instr li { margin-bottom: 8px; padding-left: 4px; }
-    ol.instr a { color: var(--ink); }
-
     .note { margin-top: 64px; border-top: 2px solid var(--black); padding-top: 16px; }
-    .note h2 { font-family: var(--serif); font-size: 30px; font-weight: 400; color: var(--black); margin: 6px 0 16px; }
-    .note .tags {
-      display: flex; gap: 9px; flex-wrap: wrap; align-items: baseline;
-      font-size: 10.5px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--faint);
-    }
-    .note .tags b { color: var(--black); font-weight: 600; }
+    .note h2 { font-family: var(--serif); font-size: 26px; font-weight: 400; color: var(--black); margin: 0 0 18px; }
+    .tips { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap: 20px 32px; }
+    .tip { font-size: 13.5px; color: var(--mid); }
+    .tip b { color: var(--black); font-weight: 500; display: block; }
 
     footer {
       margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--rule);
@@ -195,7 +177,7 @@
   <div class="bar-in">
     <a class="bar-home" href="index.html">&#8592; Dennis Pezan</a>
     <div class="bar-id">MA103 &middot; Study Resources</div>
-    <nav class="bar-links"><a href="ma103-wpr2.html">WPR 2 Practice</a><a href="ma103-gate3-mirror.html">Gate 3 Mirror</a><a href="ma103-wpr2-reference.html">Reference</a><a href="ma103.html">WPR 1 Practice</a></nav>
+    <nav class="bar-links"><a href="#wpr2">WPR 2</a><a href="#wpr1">WPR 1</a></nav>
   </div>
 </div>
 
@@ -203,106 +185,89 @@
 
   <header class="exam-head">
     <h1>MA103 Tutoring</h1>
-    <p class="sub">Practice examinations, gate mirrors, and drill sets for Data-Driven Modeling</p>
-
-    <div class="callout">
-      <p>Everything below is unofficial review material built as course CIC, reverse-engineered from the published lesson objectives, the homework conventions, and the returned graded gates. Nothing here is drawn from a secured assessment.</p>
-      <p><b>Pick the track you need.</b> WPR 2 is the linear algebra block &mdash; vectors and matrices, and far more computational than the first exam. WPR 1 covers descriptive and predictive modeling, and it does not expire: that material is still on the TEE, so the WPR 1 set stays up as the review for the final and for anyone who wants to patch a weak spot.</p>
-    </div>
-
-    <dl class="meta">
-      <div><dt>Course</dt><dd>MA103 &middot; AY27-1</dd></div>
-      <div><dt>Resources</dt><dd>4</dd></div>
-      <div><dt>Practice points</dt><dd>373</dd></div>
-    </dl>
+    <p class="sub">Practice exams and drills. Pick the one you need.</p>
+    <p class="lede">Every page has an <b>Answer key</b> switch and a <b>Print</b> button in the top bar. Try it closed-book first, then flip the key.</p>
   </header>
 
-  <section>
+  <section id="wpr2">
     <div class="part-head">
-      <div class="tags"><b>Track 1</b> <span>&middot;</span> <span>Block 3</span> <span>&middot;</span> <span>Vectors &amp; Matrices</span> <span>&middot;</span> <span class="flag">Up next</span></div>
-      <h2 class="part">WPR 2 &mdash; Linear Algebra</h2>
-      <p class="scope">The course director's guidance for this block: WPR 2 is <b>much more computational than WPR 1</b>. Cadets still have to understand and interpret their results, but they also have to demonstrate computational ability with vector and matrix operations. Gate 3 bore that out &mdash; 25 points, seven questions, 100% computation. Work these in order.</p>
+      <div class="tags"><span class="flag">Next exam</span> <span>&middot;</span> <span>Vectors &amp; matrices</span></div>
+      <h2 class="part">WPR 2</h2>
+      <p class="scope">Mostly computation this time. Work these three in order.</p>
     </div>
 
     <div class="res-grid">
 
       <a class="res" href="ma103-gate3-mirror.html">
-        <span class="res-num">01 &middot; Start here</span>
+        <span class="res-num">Step 1</span>
         <h3 class="res-name">Gate 3 Mirror</h3>
-        <p class="res-desc">The only graded work this block, rebuilt exactly: the same seven questions in the same order carrying the same point values, with every number changed. The closest thing to a diagnostic for WPR 2. Full worked key.</p>
+        <p class="res-desc">Your graded gate, same seven questions, new numbers. Start here to see where you stand.</p>
         <div class="res-tags">
           <span class="res-tag">25 pts</span>
           <span class="res-tag">7 questions</span>
-          <span class="res-tag">Answer key</span>
         </div>
-        <span class="res-go">Open the mirror</span>
+        <span class="res-go">Open</span>
       </a>
 
       <a class="res" href="ma103-wpr2-reference.html">
-        <span class="res-num">02 &middot; Then drill</span>
-        <h3 class="res-name">Linear Algebra Reference Card</h3>
-        <p class="res-desc">Twenty-one formula cards covering every vector and matrix operation in the block, followed by fifty-nine rapid drills in ten groups &mdash; magnitude, unit vectors, dot products, cosine, determinants and inverses, matrix products, and true/false. Built for speed and accuracy, not for reading.</p>
+        <span class="res-num">Step 2</span>
+        <h3 class="res-name">Reference Card</h3>
+        <p class="res-desc">Every formula on one page, then quick drills until the arithmetic is automatic.</p>
         <div class="res-tags">
           <span class="res-tag">21 formulas</span>
           <span class="res-tag">59 drills</span>
-          <span class="res-tag">Answer key</span>
         </div>
-        <span class="res-go">Open the reference</span>
+        <span class="res-go">Open</span>
       </a>
 
       <a class="res" href="ma103-wpr2.html">
-        <span class="res-num">03 &middot; Then the exam</span>
-        <h3 class="res-name">WPR 2 Practice Examination</h3>
-        <p class="res-desc">Twenty-seven questions across five parts: vector mechanics, vectors as data, matrix mechanics, determinants and inverses and systems, and matrices as data. Carries the application and interpretation items the WPR will have even though Gate 3 did not. Worked key with rubric notes.</p>
+        <span class="res-num">Step 3</span>
+        <h3 class="res-name">Practice Exam</h3>
+        <p class="res-desc">The full thing. Vectors, matrices, determinants, inverses, systems &mdash; plus the interpretation questions.</p>
         <div class="res-tags">
           <span class="res-tag">184 pts</span>
           <span class="res-tag">27 questions</span>
-          <span class="res-tag">Answer key</span>
         </div>
-        <span class="res-go">Open the exam</span>
+        <span class="res-go">Open</span>
       </a>
 
     </div>
   </section>
 
-  <section>
+  <section id="wpr1">
     <div class="part-head">
-      <div class="tags"><b>Track 2</b> <span>&middot;</span> <span>Blocks 1&ndash;2</span> <span>&middot;</span> <span>Lessons 1&ndash;21</span> <span>&middot;</span> <span class="flag later">Still on the TEE</span></div>
-      <h2 class="part">WPR 1 &mdash; Descriptive &amp; Predictive Modeling</h2>
-      <p class="scope">The first exam is behind you, but this material is not. Descriptive statistics, z-scores, regression, residual diagnostics, train and test error, and KNN all return on the TEE, and the two items the Gate 2 cohort missed worst &mdash; writing a caption and reasoning about extrapolation &mdash; are flagged inside the exam where they appear. Come back to this set to study for the final, or to repair one concept.</p>
+      <div class="tags"><span class="flag later">Already took it</span> <span>&middot;</span> <span>Comes back on the TEE</span></div>
+      <h2 class="part">WPR 1</h2>
+      <p class="scope">Mean, z-scores, regression, residuals, train vs. test error, KNN. All of it returns on the TEE, so this stays up.</p>
     </div>
 
     <div class="res-grid">
 
       <a class="res" href="ma103.html">
-        <span class="res-num">04 &middot; TEE review</span>
-        <h3 class="res-name">WPR 1 Practice Examination</h3>
-        <p class="res-desc">Twenty-six questions across five parts built on one running scenario, the Company B ruck march: the modeling framework and data, descriptive modeling, linear regression and residuals, k-nearest neighbors, and a synthesis item. Course conventions throughout &mdash; the outlier screen is |z| &gt; 2.5, residual plots go against fitted values, and KNN is classification by majority vote.</p>
+        <span class="res-num">TEE review</span>
+        <h3 class="res-name">Practice Exam</h3>
+        <p class="res-desc">The first-exam practice, one scenario start to finish. The two things people missed worst &mdash; writing a caption and extrapolation &mdash; are flagged inside.</p>
         <div class="res-tags">
           <span class="res-tag">164 pts</span>
           <span class="res-tag">26 questions</span>
-          <span class="res-tag">Answer key</span>
         </div>
-        <span class="res-go">Open the exam</span>
+        <span class="res-go">Open</span>
       </a>
 
     </div>
   </section>
 
   <section class="note">
-    <div class="tags"><b>How to use these</b></div>
-    <h2>Working the set</h2>
-    <ol class="instr">
-      <li><b>Closed book first, key second.</b> Every page has an <b>Answer key</b> switch in the top bar. Leave it off until you have written something in every box &mdash; a key read before the attempt teaches you nothing about what you actually know.</li>
-      <li><b>Show work even when you are alone.</b> Every MA103 rubric awards partial credit for shown work and deducts for a correct answer with none. Practicing without the work shown trains the habit that costs points.</li>
-      <li><b>Print what you want on paper.</b> Each page has a <b>Print</b> button in the top bar that lays the document out cleanly, answer key included or excluded depending on the switch.</li>
-      <li><b>Diagnose, then drill.</b> If the <a href="ma103-gate3-mirror.html">Gate 3 mirror</a> goes badly, the problem is mechanics &mdash; live in the <a href="ma103-wpr2-reference.html">reference drills</a> until they are automatic. If it goes well, go straight to the <a href="ma103-wpr2.html">full practice exam</a> for the interpretation questions.</li>
-    </ol>
+    <h2>Two things</h2>
+    <div class="tips">
+      <div class="tip"><b>Show your work.</b> Every MA103 rubric pays for it, and takes points off for a right answer with nothing under it.</div>
+      <div class="tip"><b>Key off until you are done.</b> Reading the answer first feels productive. It teaches you nothing.</div>
+    </div>
   </section>
 
   <footer>
     <p class="byline"><a href="index.html">Dennis Pezan</a></p>
-    MA103 Data-Driven Modeling &middot; AY27-1 &middot; Unofficial study material prepared by the course CIC for the tutoring sessions. Structure and rubric language are drawn from published lesson objectives and returned, graded gates; all numbers have been changed. These are not the examinations and do not reproduce any secured assessment.
+    MA103 Data-Driven Modeling &middot; AY27-1 &middot; Unofficial study material prepared by the course CIC. Built from published lesson objectives and returned, graded gates; all numbers have been changed. These are not the real exams.
   </footer>
 </div>
 
