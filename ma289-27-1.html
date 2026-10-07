@@ -392,7 +392,7 @@
     <div class="wide">
       <section class="block" id="model">
         <span class="eyebrow">The Current Model</span>
-        <h2 class="section-title">55 nodes, 78 edges, every lane on a real sea route</h2>
+        <h2 class="section-title">57 nodes, 79 edges, every lane on a real sea route</h2>
         <figure>
           <img src="img/ma289-27-1/fig10_oil_schematic.png" alt="Schematic of the oil network: numbered nodes from the super-source on the left through the Middle East, Cape and Pacific corridors to the Taiwan approaches and the super-sink on the right, with edges shaded by effort cost" loading="lazy">
           <figcaption>The network as the model sees it, numbered with the IDs the environment reads. Left to right follows
@@ -418,7 +418,8 @@
           <li><strong>Straits are edges.</strong> Every strait and canal runs from its entrance node to its exit node, so an
           action against it shuts the transit, and there is a node at every junction where routes meet or separate.</li>
           <li><strong>Every interdiction point has an alternative.</strong> Checked automatically on every build. Hormuz has
-          no sea alternative, so its alternatives are the two real bypass pipelines (Saudi East-West, UAE ADCOP).</li>
+          no sea alternative, and China cannot close it from that far away, only slow ships there. So Hormuz is two lanes:
+          80% of Gulf oil always gets through, and China can remove a 20% delayed share.</li>
           <li><strong>Real geometry.</strong> Lanes are routed on the scgraph sea-lane network, which is too coarse around
           Taiwan (14 nodes in the whole theater), so the Taiwan lanes use coastline-derived waypoints. No lane crosses land.</li>
         </ul>
@@ -447,8 +448,9 @@
         <table class="grid">
           <thead><tr><th>Action</th><th>Where it is allowed</th><th>Cost (of 100)</th><th>p</th><th>What p is anchored on</th></tr></thead>
           <tbody>
-          <tr><td>Cyber on a canal or port</td><td>Panama Canal, the Suez route, the three port entries</td><td class="n">5</td><td class="n">0.10</td><td class="src">Nagoya and DP World Australia port shutdowns, 2023 (about 3 days)</td></tr>
-          <tr><td>Cyber on an open strait</td><td>Hormuz, Malacca, Sunda, Lombok, the Sulu route, Miyako</td><td class="n">5</td><td class="n">0.05</td><td class="src">GPS jamming in Hormuz, 2025: collisions, but traffic kept moving</td></tr>
+          <tr><td>Cyber on a canal or port</td><td>Panama and Suez canals, the three port entries</td><td class="n">5</td><td class="n">0.10</td><td class="src">Nagoya and DP World Australia port shutdowns, 2023 (about 3 days)</td></tr>
+          <tr><td>Cyber on an open strait</td><td>Malacca, Sunda, Lombok, the Sulu route, Miyako</td><td class="n">5</td><td class="n">0.05</td><td class="src">GPS jamming in Hormuz, 2025: collisions, but traffic kept moving</td></tr>
+          <tr><td>Jamming delay</td><td>Hormuz, the 20% delayed share</td><td class="n">5</td><td class="n">0.80</td><td class="src"><strong>Assumption</strong>: jamming and harassment reliably slow ships; slower trips mean fewer cargoes a month</td></tr>
           <tr><td>Quarantine (variant A)</td><td>Taiwan approaches</td><td class="n">10</td><td class="n">0.80</td><td class="src">CSIS quarantine scenarios; Iran&rsquo;s 2026 Hormuz permit regime</td></tr>
           <tr><td>Blockade (variant B)</td><td>Taiwan approaches</td><td class="n">20</td><td class="n">0.95</td><td class="src">Hormuz 2026: mines, attacks and permits cut traffic about 95%</td></tr>
           <tr><td>Proxy disruption</td><td>Bab el-Mandeb</td><td class="n">10</td><td class="n">0.60</td><td class="src">Houthi campaign since 2023: Red Sea traffic down 50&ndash;67%</td></tr>
@@ -462,8 +464,9 @@
     <div class="wrap">
       <section class="block" style="padding-top: 22px;">
         <p class="muted">
-          The other 19 edges cannot be interdicted, each with a stated reason: the demand arcs, loading inside the Gulf,
-          the pipelines, the Atlantic, eastern Pacific and Red Sea legs, and Indonesian archipelagic waters.
+          The other 20 edges cannot be interdicted, each with a stated reason: the demand arcs, loading inside the Gulf,
+          the share of Hormuz that always gets through, the Atlantic, Mediterranean, eastern Pacific and Red Sea legs, and
+          Indonesian archipelagic waters.
         </p>
         <div class="callout">
           <span class="eyebrow">First baseline (a graph calculation, not a simulation)</span>
@@ -539,7 +542,6 @@
           <li>Tanker War statistics: <a href="https://www.strausscenter.org/strait-of-hormuz-tanker-war/" target="_blank" rel="noopener">Strauss Center</a>; <a href="https://digital-commons.usnwc.edu/cgi/viewcontent.cgi?article=1444&amp;context=ils" target="_blank" rel="noopener">U.S. Naval War College</a>.</li>
           <li>Houthi campaign: <a href="https://www.maritime.dot.gov/msci/2026-006-red-sea-bab-el-mandeb-strait-gulf-aden-arabian-sea-and-somali-basin-houthi-attacks" target="_blank" rel="noopener">MARAD advisory 2026-006</a>; <a href="https://www.securitycouncilreport.org/monthly-forecast/2026-07/the-red-sea.php" target="_blank" rel="noopener">Security Council Report, July 2026</a>.</li>
           <li>2026 Hormuz closure: <a href="https://www.aljazeera.com/news/2026/8/27/how-a-95-percent-drop-in-hormuz-traffic-changed-global-shipping" target="_blank" rel="noopener">Al Jazeera, August 2026</a>; <a href="https://www.congress.gov/crs-product/R45281" target="_blank" rel="noopener">CRS R45281</a>. Taiwan&rsquo;s reroute: <a href="https://www.malaymail.com/news/money/2026/04/06/taiwan-to-ship-oil-from-saudi-red-sea-ports/215351" target="_blank" rel="noopener">Malay Mail, April 2026</a>.</li>
-          <li>Hormuz bypass pipelines: <a href="https://www.iea.org/about/oil-security-and-emergency-response/strait-of-hormuz" target="_blank" rel="noopener">IEA</a>.</li>
         </ul>
       </section>
 
@@ -554,7 +556,7 @@
         <a class="file" href="ma289-27-1-proposal.pdf" target="_blank" rel="noopener"><span class="fname">Proposal (PDF)</span><span class="fdesc">One-page proposal for LTC Webb, with figures.</span></a>
         <a class="file" href="ma289-27-1-summary.pdf" target="_blank" rel="noopener"><span class="fname">One-page summary (PDF)</span><span class="fdesc">The project pitch: scope, questions, previous work, goals.</span></a>
         <a class="file" href="https://github.com/JettDrums/MA289-27-1/blob/claude/ma289-27-1-ljmxoy/docs/oil-brief.md" target="_blank" rel="noopener"><span class="fname">Scenario brief</span><span class="fdesc">Every design choice, assumption and baseline, in 16 sections. <em>(GitHub, private)</em></span></a>
-        <a class="file" href="https://github.com/JettDrums/MA289-27-1/blob/claude/ma289-27-1-ljmxoy/docs/oil-network-tables.md" target="_blank" rel="noopener"><span class="fname">Every node and edge</span><span class="fdesc">All 55 nodes and 78 edges with action, cost, p, capacity and source. <em>(GitHub, private)</em></span></a>
+        <a class="file" href="https://github.com/JettDrums/MA289-27-1/blob/claude/ma289-27-1-ljmxoy/docs/oil-network-tables.md" target="_blank" rel="noopener"><span class="fname">Every node and edge</span><span class="fdesc">All 57 nodes and 79 edges with action, cost, p, capacity and source. <em>(GitHub, private)</em></span></a>
         <a class="file" href="https://github.com/JettDrums/MA289-27-1/blob/claude/ma289-27-1-ljmxoy/docs/effort-values.md" target="_blank" rel="noopener"><span class="fname">Effort values</span><span class="fdesc">How each action&rsquo;s cost and probability was set, with sources. <em>(GitHub, private)</em></span></a>
         <a class="file" href="https://github.com/JettDrums/MA289-27-1/blob/claude/ma289-27-1-ljmxoy/data/OIL_Nodes.csv" target="_blank" rel="noopener"><span class="fname">Model input: nodes</span><span class="fdesc">OIL_Nodes.csv, in the environment&rsquo;s format. <em>(GitHub, private)</em></span></a>
         <a class="file" href="https://github.com/JettDrums/MA289-27-1/blob/claude/ma289-27-1-ljmxoy/data/OIL_Edges.csv" target="_blank" rel="noopener"><span class="fname">Model input: edges</span><span class="fdesc">OIL_Edges.csv, in the environment&rsquo;s format. <em>(GitHub, private)</em></span></a>
