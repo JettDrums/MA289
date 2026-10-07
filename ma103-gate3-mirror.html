@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gate 3 Mirror | Dennis Pezan</title>
+  <meta name="description" content="A seven-question, 25-point drill built in the exact format of MA103 Gate 3, with new numbers and a full worked key.">
+  <link rel="canonical" href="https://dennis-pezan.com/ma103-gate3-mirror.html">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://dennis-pezan.com/ma103-gate3-mirror.html">
+  <meta property="og:title" content="Gate 3 Mirror | Dennis Pezan">
+  <meta property="og:description" content="A practice examination and answer key for the MA103 linear algebra block at West Point.">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Gate 3 Mirror | Dennis Pezan">
+  <meta name="twitter:description" content="A practice examination and answer key for the MA103 linear algebra block at West Point.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' fill='%230d0d0d'/><text x='32' y='45' font-family='Georgia,serif' font-size='34' fill='%23ffffff' text-anchor='middle'>DP</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:  #0d0d0d;
+      --ink:    #1a1a1a;
+      --mid:    #4a4a4a;
+      --dim:    #767676;
+      --faint:  #9a9a9a;
+      --rule:   #d8d8d8;
+      --rule-lt:#ececea;
+      --bg:     #ffffff;
+      --bg-off: #f7f7f5;
+      --serif:  'EB Garamond', Georgia, serif;
+      --sans:   'Inter', -apple-system, 'Segoe UI', sans-serif;
+      --mono:   ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 15px;
+      font-weight: 300;
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+    }
+    .wrap { width: min(880px, 100%); margin: 0 auto; padding: 0 32px 96px; }
+
+    /* ── sticky control bar ──────────────────────────── */
+    .bar {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(255,255,255,0.96);
+      border-bottom: 1px solid var(--rule);
+      backdrop-filter: blur(8px);
+    }
+    .bar-in {
+      width: min(1080px, 100%); margin: 0 auto;
+      padding: 0 32px; min-height: 56px;
+      display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+    }
+    .bar-home {
+      font-family: var(--serif); font-size: 17px; color: var(--black);
+      text-decoration: none; white-space: nowrap;
+    }
+    .bar-id {
+      font-size: 11px; font-weight: 500; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--dim); margin-right: auto;
+      padding-left: 14px; border-left: 1px solid var(--rule);
+    }
+    .bar-links { display: flex; gap: 16px; }
+    .bar-links a {
+      font-size: 10.5px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--dim); text-decoration: none; border-bottom: 1px solid transparent;
+      padding-bottom: 2px; white-space: nowrap;
+    }
+    .bar-links a:hover { color: var(--black); border-bottom-color: var(--black); }
+    button { font: inherit; color: inherit; cursor: pointer; }
+    .btn {
+      background: none; border: 1px solid var(--rule); padding: 4px 11px;
+      font-size: 10.5px; font-weight: 500; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--mid); transition: .15s;
+    }
+    .btn:hover { border-color: var(--black); color: var(--black); }
+    .btn:focus-visible, .switch:focus-visible { outline: 2px solid var(--black); outline-offset: 2px; }
+    .switch {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: none; border: 1px solid var(--rule); padding: 5px 12px;
+      font-size: 10.5px; font-weight: 500; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--mid); transition: .15s;
+    }
+    .switch .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--rule); flex: none; }
+    .switch[aria-pressed="true"] { background: var(--black); border-color: var(--black); color: #fff; }
+    .switch[aria-pressed="true"] .dot { background: #fff; }
+
+
+    /* ── document body ───────────────────────────────── */
+    .exam-head { padding-top: 64px; }
+    h1 {
+      font-family: var(--serif); font-weight: 400;
+      font-size: clamp(30px, 4.6vw, 42px); line-height: 1.1;
+      color: var(--black); margin-bottom: 8px; text-wrap: balance;
+    }
+    .sub { font-family: var(--serif); font-style: italic; font-size: 19px; color: var(--mid); margin-bottom: 22px; }
+
+    .callout {
+      background: var(--bg-off); border: 1px solid var(--rule);
+      border-left: 2px solid var(--black); padding: 16px 20px; margin: 0 0 24px; font-size: 14px;
+    }
+    .callout p { margin: 0; }
+    .callout p + p { margin-top: 10px; }
+
+    .meta {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(150px,1fr));
+      border: 1px solid var(--rule); margin-bottom: 28px;
+    }
+    .meta div { padding: 12px 16px; border-right: 1px solid var(--rule); }
+    .meta div:last-child { border-right: 0; }
+    .meta dt {
+      font-size: 10px; font-weight: 500; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--faint); margin-bottom: 3px;
+    }
+    .meta dd { font-size: 16px; font-family: var(--serif); color: var(--black); font-variant-numeric: tabular-nums; }
+
+    ol.instr { margin: 0 0 28px; padding-left: 22px; font-size: 14px; }
+    ol.instr li { margin-bottom: 8px; padding-left: 4px; }
+
+    .sheet { border: 1px solid var(--rule); padding: 20px 22px; margin: 0 0 28px; }
+    .sheet h3 {
+      font-size: 10px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase;
+      color: var(--faint); margin-bottom: 16px;
+    }
+    .sheet-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 16px 28px; }
+    .sheet-item .cap {
+      font-size: 10px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase;
+      color: var(--faint); display: block; margin-bottom: 3px;
+    }
+    .sheet-item .formula { margin: 0; font-size: 16px; justify-content: flex-start; }
+
+    .part-head { border-top: 2px solid var(--black); padding-top: 16px; margin: 64px 0 30px; }
+    .part-head .tags {
+      display: flex; gap: 9px; flex-wrap: wrap; align-items: baseline;
+      font-size: 10.5px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--faint);
+    }
+    .part-head .tags b { color: var(--black); font-weight: 600; }
+    h2.part { font-family: var(--serif); font-size: 30px; font-weight: 400; color: var(--black); margin: 6px 0 0; }
+    .part-head p.scope { margin: 10px 0 0; font-size: 13.5px; color: var(--dim); }
+
+    .q { margin: 0 0 34px; scroll-margin-top: 72px; }
+    .q-head { display: flex; gap: 12px; align-items: baseline; margin-bottom: 10px; }
+    .q-num { font-family: var(--mono); font-size: 13px; font-weight: 500; color: var(--black); flex: none; min-width: 28px; }
+    .q-body { flex: 1; min-width: 0; }
+    .abox { border: 1px solid var(--ink); min-height: 46px; margin: 10px 0 0; padding: 8px 12px;
+      font-family: var(--mono); font-size: 15px; display: flex; align-items: center; gap: 8px; }
+    .abox .lab { font-family: var(--serif); font-style: italic; font-size: 15px; color: var(--ink); }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 1px; background: var(--rule); border: 1px solid var(--rule); margin: 22px 0; }
+    .card { background: var(--bg); padding: 16px 18px; }
+    .card h4 { font-size: 10px; font-weight: 500; letter-spacing: .13em; text-transform: uppercase; color: var(--faint); margin-bottom: 10px; }
+    .card .formula { margin: 8px 0; justify-content: flex-start; font-size: 16px; }
+    .card p { margin: 6px 0 0; font-size: 13px; color: var(--mid); }
+    .drill { border-top: 1px solid var(--rule); padding: 12px 0; display: grid; grid-template-columns: 34px 1fr 150px; gap: 12px; align-items: baseline; }
+    .drill .n { font-family: var(--mono); font-size: 12px; color: var(--faint); }
+    .drill .q2 { font-size: 14px; }
+    .drill .a { font-family: var(--mono); font-size: 12.5px; color: var(--black); text-align: right; }
+    @media (max-width:560px){ .drill { grid-template-columns: 28px 1fr; } .drill .a { grid-column: 2; text-align: left; } }
+    .flag {
+      font-size: 9.5px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--bg); background: var(--black); padding: 2px 8px; margin-left: 8px;
+      white-space: nowrap; vertical-align: 2px;
+    }
+    .pts {
+      font-size: 10px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--faint); white-space: nowrap; border: 1px solid var(--rule); padding: 2px 7px; flex: none; align-self: flex-start;
+    }
+    .q p { margin: 0 0 11px; }
+    .q ol.sub { margin: 12px 0 0; padding-left: 24px; }
+    .q ol.sub > li { margin-bottom: 14px; }
+    .q ul { margin: 11px 0; padding-left: 22px; }
+    .q li { margin-bottom: 5px; }
+
+    .write {
+      background-image: repeating-linear-gradient(to bottom, transparent 0, transparent 27px, var(--rule-lt) 27px, var(--rule-lt) 28px);
+      height: calc(28px * var(--n, 3)); margin: 12px 0 4px;
+    }
+    .blank { display: inline-block; min-width: 110px; border-bottom: 1px solid var(--rule); height: 1.15em; vertical-align: -.2em; }
+    .circle-pick { display: flex; gap: 40px; justify-content: center; margin: 18px 0; font-family: var(--serif); font-size: 21px; }
+    .circle-pick span { border: 1px solid var(--rule); border-radius: 40px; padding: 6px 30px; }
+
+    .tw { overflow-x: auto; margin: 16px 0; }
+    table { border-collapse: collapse; width: 100%; font-size: 13.5px; font-variant-numeric: tabular-nums; }
+    caption {
+      caption-side: top; text-align: left; font-size: 10.5px; font-weight: 500;
+      letter-spacing: .09em; text-transform: uppercase; color: var(--faint); padding-bottom: 8px;
+    }
+    th, td { border: 1px solid var(--rule); padding: 8px 11px; text-align: right; }
+    th:first-child, td:first-child { text-align: left; }
+    thead th { background: var(--bg-off); font-weight: 500; font-size: 12.5px; white-space: nowrap; color: var(--ink); }
+    td.fill { background: #fcfcfb; height: 34px; }
+    tfoot td { background: var(--bg-off); font-weight: 500; }
+    .data-mono td, .data-mono th { font-family: var(--mono); font-size: 12.5px; }
+
+    figure { margin: 22px 0; border: 1px solid var(--rule); padding: 18px 14px 12px; }
+    figure svg { display: block; width: 100%; height: auto; max-width: 100%; }
+    figcaption { font-size: 11px; letter-spacing: .04em; color: var(--faint); margin-top: 10px; padding: 0 4px; }
+
+    .ax { stroke: var(--mid); stroke-width: 1.1; fill: none; }
+    .grid { stroke: var(--rule); stroke-width: 1; fill: none; }
+    .grid-min { stroke: var(--rule-lt); stroke-width: .8; fill: none; }
+    .tick { stroke: var(--mid); stroke-width: 1; fill: none; }
+    .lbl { fill: var(--dim); font-family: var(--sans); font-size: 11px; }
+    .lbl-ax { fill: var(--ink); font-family: var(--sans); font-size: 12px; font-weight: 500; }
+    .bar-f { fill: #e6e6e2; stroke: var(--ink); stroke-width: 1; }
+    .pt { fill: var(--black); stroke: #fff; stroke-width: 1.5; }
+    .pt-test { fill: var(--mid); stroke: #fff; stroke-width: 1.5; }
+    .fitline { stroke: var(--black); stroke-width: 1.8; fill: none; }
+    .zeroline { stroke: var(--mid); stroke-width: 1.2; fill: none; }
+    .dash { stroke: var(--dim); stroke-width: 1.5; fill: none; stroke-dasharray: 5 4; }
+    .ring { fill: none; stroke: var(--dim); stroke-width: 1.4; stroke-dasharray: 4 4; }
+    .qpt, .mk-q { fill: var(--black); stroke: #fff; stroke-width: 1.5; }
+    .mk-go { fill: var(--black); stroke: #fff; stroke-width: 1.5; }
+    .mk-no { fill: #fff; stroke: var(--black); stroke-width: 1.8; }
+    .boxb { fill: var(--bg-off); stroke: var(--ink); stroke-width: 1.3; }
+    .whk { stroke: var(--ink); stroke-width: 1.3; fill: none; }
+
+    .var { font-family: var(--serif); font-style: italic; }
+    .formula {
+      font-family: var(--serif); font-size: 18px; margin: 16px 0;
+      display: flex; justify-content: center; align-items: center; gap: 8px; flex-wrap: wrap;
+    }
+    .frac { display: inline-flex; flex-direction: column; text-align: center; vertical-align: middle; font-size: .92em; }
+    .frac .num { border-bottom: 1px solid currentColor; padding: 0 .4em .12em; }
+    .frac .den { padding: .12em .4em 0; }
+    .radical { display: inline-flex; align-items: stretch; gap: 1px; }
+    .radical .sign { font-size: 1.5em; line-height: 1; align-self: center; }
+    .radical .rad-body { border-top: 1px solid currentColor; padding: 4px 4px 0; }
+
+    /* ── answer key ──────────────────────────────────── */
+    .keybox {
+      background: var(--bg-off); border: 1px solid var(--rule);
+      border-left: 2px solid var(--black); padding: 16px 20px; margin: 16px 0 0; font-size: 13.5px;
+    }
+    .keybox > :first-child { margin-top: 0; }
+    .keybox > :last-child { margin-bottom: 0; }
+    .keybox h4 {
+      font-size: 10px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase;
+      color: var(--black); margin: 0 0 11px;
+    }
+    .keybox p { margin: 0 0 10px; }
+    .keybox ul { margin: 0 0 10px; padding-left: 20px; }
+    .keybox li { margin-bottom: 5px; }
+    .keybox b.ans { font-family: var(--mono); font-size: 12.5px; background: #fff; border: 1px solid var(--rule); padding: 1px 7px; white-space: nowrap; }
+    .keybox figure { background: #fff; margin: 14px 0; }
+    .keybox table { font-size: 12.5px; }
+    .keybox thead th { background: #fff; }
+    .keybox tbody td, .keybox tfoot td { background: #fff; }
+    .rubric { font-size: 12px; color: var(--mid); border-top: 1px dashed var(--rule); padding-top: 10px; margin-top: 12px; }
+    .miss { border-left: 2px solid var(--black); padding-left: 13px; margin: 12px 0; font-size: 13px; color: var(--mid); }
+    .miss b {
+      color: var(--black); font-size: 10px; letter-spacing: .12em; text-transform: uppercase;
+      display: block; margin-bottom: 3px; font-weight: 600;
+    }
+
+    /* ── facilitator ─────────────────────────────────── */
+    .facil { margin-top: 72px; border-top: 2px solid var(--black); padding-top: 18px; }
+    .facil h2 { font-family: var(--serif); font-size: 30px; font-weight: 400; color: var(--black); margin: 6px 0 0; }
+    .facil h3 { font-family: var(--serif); font-weight: 400; color: var(--black); }
+
+    footer {
+      margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--rule);
+      font-size: 12px; color: var(--faint); line-height: 1.8;
+    }
+    footer a { color: var(--mid); }
+    .byline { font-family: var(--serif); font-size: 16px; margin-bottom: 8px; }
+    .byline a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--rule); }
+    .byline a:hover { border-bottom-color: var(--black); }
+
+    @media (max-width: 620px) {
+      .wrap { padding: 0 20px 72px; }
+      .bar-in { padding: 8px 20px; gap: 9px; }
+      .bar-id { display: none; }
+    }
+    @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+
+    @media print {
+      .bar, .noprint { display: none !important; }
+      body { font-size: 11pt; }
+      .wrap { width: auto; padding: 0; }
+      .part-head { break-before: page; break-after: avoid; }
+      .q, figure, .keybox, table { break-inside: avoid; }
+      a { color: inherit; text-decoration: none; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="bar noprint">
+  <div class="bar-in">
+    <a class="bar-home" href="index.html">&#8592; Dennis Pezan</a>
+    <div class="bar-id">MA103 &middot; Gate 3 Mirror &middot; 25 pts</div>
+    <nav class="bar-links"><a href="ma103-wpr2.html">WPR 2 Practice</a><a href="ma103-wpr2-reference.html">Reference</a></nav>
+    <button class="switch" id="keytog" type="button" aria-pressed="false"><span class="dot"></span>Answer key</button>
+    <button class="btn" id="pbtn" type="button">Print</button>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <header class="exam-head">
+    <h1>Gate 3 Mirror</h1>
+    <p class="sub">The graded gate, same seven questions, same order, new numbers</p>
+
+    <div class="callout">
+      <p><b>Gate 3 is the only graded work this block</b>, and it is the single best predictor of WPR 2. This page rebuilds it exactly: the same seven questions in the same order, carrying the same point values, with every number changed. Work it closed-book, then check.</p>
+      <p><b>What Gate 3 actually was:</b> 25 points, seven questions, <b>100% computation</b> &mdash; no caption, no interpretation item, nothing to write a paragraph about. That is a hard break from Gates 1 and 2, and it matches the course director's warning that WPR 2 is much more computational.</p>
+    </div>
+
+    <dl class="meta">
+      <div><dt>Total points</dt><dd>25</dd></div>
+      <div><dt>Format</dt><dd>Gate 3, exact</dd></div>
+      <div><dt>Authorized</dt><dd>Calculator only</dd></div>
+    </dl>
+
+    <ol class="instr">
+      <li><b>Show all work.</b> Every Gate 3 rubric awards partial credit for shown work and deducts for a correct answer with none.</li>
+      <li><b>Exact values where asked.</b> Gate 3 said "no decimals" on the magnitude and "exact values" on the unit vector. Leave &radic;29 as &radic;29 and 4/5 as 4/5.</li>
+      <li>The angle question wants <b>degrees, rounded to two decimals</b>. Check your calculator is not in radians.</li>
+      <li>On row reduction you must show the <b>Row Echelon Form</b> and state the solution type. REF is enough &mdash; the gate did not require RREF.</li>
+    </ol>
+  </header>
+
+  <section>
+    <div class="part-head">
+      <div class="tags"><b>Part 1</b> <span>&middot;</span> <span>Vectors</span> <span>&middot;</span> <span>13 points</span></div>
+      <h2 class="part">Vectors</h2>
+    </div>
+
+    <p>Use these vectors for problems 1&ndash;3.</p>
+    <div class="formula" style="font-size:19px"><span class="var">u&#8407;</span> = &lang;&minus;8, 15&rang; &nbsp;&nbsp;&nbsp;&nbsp; <span class="var">v&#8407;</span> = &lang;2, 1&rang;</div>
+
+    <div class="q" id="q1">
+      <div class="q-head"><span class="q-num">1.</span><div class="q-body"><b>Magnitude.</b> Calculate |<span class="var">u&#8407;</span>|. Show all work. Write the <b>exact</b> value in the box below (no decimals).</div><span class="pts">3 pts</span></div>
+      <div class="q-body">
+        <div class="write" style="--n:4"></div>
+        <div class="abox"><span class="lab">|u&#8407;| =</span></div>
+        <div class="keybox" hidden>
+          <h4>Answer &amp; scoring</h4>
+          <p>|<span class="var">u&#8407;</span>| = &radic;((&minus;8)<sup>2</sup> + 15<sup>2</sup>) = &radic;(64 + 225) = &radic;289 = <b class="ans">17</b></p>
+          <p>Squaring kills the minus sign &mdash; (&minus;8)<sup>2</sup> = +64, not &minus;64. That single slip turns 289 into 161 and the answer into &radic;161.</p>
+          <div class="rubric"><b>Gate 3 rubric:</b> 3 pts correct with work shown &middot; 2 pts correct with no work or a minor arithmetic error &middot; 1 pt major error &middot; 0 blank.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="q" id="q2">
+      <div class="q-head"><span class="q-num">2.</span><div class="q-body"><b>Unit vector.</b> Find the unit vector <span class="var">u&#770;</span> in the direction of <span class="var">u&#8407;</span>. Write <b>exact</b> values in the box below.</div><span class="pts">3 pts</span></div>
+      <div class="q-body">
+        <div class="write" style="--n:4"></div>
+        <div class="abox"><span class="lab">u&#770; =</span> &lang; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; , &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &rang;</div>
+        <div class="keybox" hidden>
+          <h4>Answer &amp; scoring</h4>
+          <p><span class="var">u&#770;</span> = <span class="frac"><span class="num"><span class="var">u&#8407;</span></span><span class="den">|<span class="var">u&#8407;</span>|</span></span> = <span class="frac"><span class="num">&lang;&minus;8, 15&rang;</span><span class="den">17</span></span> = <b class="ans">&lang;&minus;8/17, 15/17&rang;</b></p>
+          <p>Divide <b>every component</b> by the magnitude. Leave it as fractions &mdash; the gate asked for exact values, so &lang;&minus;0.47, 0.88&rang; is not the answer it wants.</p>
+          <p>Check your work: a unit vector has magnitude 1. (&minus;8/17)<sup>2</sup> + (15/17)<sup>2</sup> = (64 + 225)/289 = 289/289 = 1 &#10003;</p>
+          <div class="rubric"><b>Gate 3 rubric:</b> 3 pts correct <b>or follows from previous</b> &middot; 2 pts minor error such as a transcription slip &middot; 1 pt major error &middot; 0 blank. Follow-on credit applies &mdash; a wrong magnitude in Q1 carried correctly into Q2 still earns full marks.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="q" id="q3">
+      <div class="q-head"><span class="q-num">3.</span><div class="q-body"><b>Dot product.</b> Compute <span class="var">u&#8407;</span> &middot; <span class="var">v&#8407;</span>. Show all work.</div><span class="pts">3 pts</span></div>
+      <div class="q-body">
+        <div class="write" style="--n:3"></div>
+        <div class="abox"><span class="lab">u&#8407; &middot; v&#8407; =</span></div>
+        <div class="keybox" hidden>
+          <h4>Answer &amp; scoring</h4>
+          <p><span class="var">u&#8407;</span> &middot; <span class="var">v&#8407;</span> = (&minus;8)(2) + (15)(1) = &minus;16 + 15 = <b class="ans">&minus;1</b></p>
+          <p>A <b>scalar</b>, not a vector. The negative sign is real and means the angle between them is obtuse &mdash; just barely.</p>
+          <div class="rubric"><b>Gate 3 rubric:</b> 3 pts correct &middot; 2 pts minor arithmetic error or correct with no work shown &middot; 1 pt major error &middot; 0 blank.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="q" id="q4">
+      <div class="q-head"><span class="q-num">4.</span><div class="q-body"><b>Angle between vectors.</b> Given the information below, find the angle &theta; between <span class="var">w&#8407;</span> and <span class="var">z&#8407;</span> <b>in degrees</b>. Round to two decimal places. Show all work.</div><span class="pts">4 pts</span></div>
+      <div class="q-body">
+        <div class="formula" style="font-size:17px;flex-direction:column;gap:10px">
+          <span><span class="var">w&#8407;</span> = &lang;1, 2, 2&rang; &nbsp;&nbsp;&nbsp; <span class="var">z&#8407;</span> = &lang;6, 3, &minus;2&rang;</span>
+          <span><span class="var">w&#8407;</span> &middot; <span class="var">z&#8407;</span> = 8</span>
+          <span>|<span class="var">w&#8407;</span>| = 3</span>
+          <span>|<span class="var">z&#8407;</span>| = 7</span>
+          <span>cos(&theta;) = <span class="frac"><span class="num"><span class="var">w&#8407;</span> &middot; <span class="var">z&#8407;</span></span><span class="den">|<span class="var">w&#8407;</span>||<span class="var">z&#8407;</span>|</span></span></span>
+        </div>
+        <div class="write" style="--n:5"></div>
+        <div class="abox"><span class="lab">&theta; &asymp;</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; degrees</div>
+        <div class="keybox" hidden>
+          <h4>Answer &amp; scoring</h4>
+          <p>cos&thinsp;&theta; = 8 / (3 &times; 7) = 8/21 = 0.3810</p>
+          <p>&theta; = cos<sup>&minus;1</sup>(0.3810) = <b class="ans">67.61&deg;</b></p>
+          <p>Note the gate <b>hands you</b> the dot product and both magnitudes. The only work being tested is dividing and taking the inverse cosine &mdash; so there is no excuse for losing these four points.</p>
+          <div class="rubric"><b>Gate 3 rubric:</b> 4 pts correct &middot; 3 pts minor arithmetic, a rounding error, <b>computing in radians</b>, or correct with no work &middot; <b>2 pts major error, explicitly including "calculates cosine similarity instead of angle"</b> &middot; 1 pt some work of value &middot; 0 blank.</div>
+          <div class="miss"><b>The named trap</b>Stopping at 0.3810 and calling it the answer is <em>the</em> error the graders wrote into the rubric. cos&thinsp;&theta; is the cosine similarity; &theta; is the angle. If the question says "in degrees," you are not done until you press cos<sup>&minus;1</sup>.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="part-head">
+      <div class="tags"><b>Part 2</b> <span>&middot;</span> <span>Matrices</span> <span>&middot;</span> <span>12 points</span></div>
+      <h2 class="part">Matrices</h2>
+    </div>
+
+    <p>Use the following matrices for problems 5&ndash;6.</p>
+    <div class="tw">
+      <table class="data-mono" style="width:auto">
+        <tbody><tr>
+          <td style="border:0"><b>A</b> = </td><td style="border:0">[ &nbsp;2&nbsp;&nbsp;&minus;1 ]<br>[ &nbsp;3&nbsp;&nbsp;&nbsp;&nbsp;5 ]</td>
+          <td style="border:0;padding-left:44px"><b>B</b> = </td><td style="border:0">[ 4&nbsp;&nbsp;&nbsp;&nbsp;0 ]<br>[ 1&nbsp;&nbsp;&minus;2 ]</td>
+        </tr></tbody>
+      </table>
+    </div>
+
+    <div class="q" id="q5">
+      <div class="q-head"><span class="q-num">5.</span><div class="q-body"><b>Matrix multiplication.</b> Compute <b>AB</b>. Show all work.</div><span class="pts">4 pts</span></div>
+      <div class="q-body">
+        <div class="write" style="--n:6"></div>
+        <div class="abox" style="min-height:70px"><span class="lab">AB =</span></div>
+        <div class="keybox" hidden>
+          <h4>Answer &amp; scoring</h4>
+          <p>Each entry is a row of <b>A</b> dotted with a column of <b>B</b>:</p>
+          <p style="margin-left:16px">(1,1): 2(4) + (&minus;1)(1) = 8 &minus; 1 = <b>7</b><br>
+             (1,2): 2(0) + (&minus;1)(&minus;2) = 0 + 2 = <b>2</b><br>
+             (2,1): 3(4) + 5(1) = 12 + 5 = <b>17</b><br>
+             (2,2): 3(0) + 5(&minus;2) = 0 &minus; 10 = <b>&minus;10</b></p>
+          <p><b class="ans">AB = [ 7&nbsp;&nbsp;2 ; 17&nbsp;&nbsp;&minus;10 ]</b></p>
+          <p>Two sign traps live in this one: (&minus;1)(&minus;2) = <b>+2</b>, and 5(&minus;2) = <b>&minus;10</b>.</p>
+          <div class="rubric"><b>Gate 3 rubric:</b> 4 pts correct &middot; 3 pts minor arithmetic error or correct with no work &middot; 2 pts major error &middot; 1 pt some work of value &middot; 0 blank.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="q" id="q6">
+      <div class="q-head"><span class="q-num">6.</span><div class="q-body"><b>Determinant &amp; inverse.</b> Calculate det(<b>A</b>) and state whether <b>A</b><sup>&minus;1</sup> exists. Show all work.</div><span class="pts">4 pts</span></div>
+      <div class="q-body">
+        <div class="write" style="--n:4"></div>
+        <div class="abox"><span class="lab">det(A) =</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="lab">Does A<sup>&minus;1</sup> exist?</span></div>
+        <div class="keybox" hidden>
+          <h4>Answer &amp; scoring</h4>
+          <p>det(<b>A</b>) = (2)(5) &minus; (&minus;1)(3) = 10 &minus; (&minus;3) = 10 + 3 = <b class="ans">13</b></p>
+          <p>13 &ne; 0, so <b class="ans">yes, A<sup>&minus;1</sup> exists</b>.</p>
+          <p>The subtraction of a negative is the whole difficulty. A cadet who writes 10 &minus; 3 = 7 has the right formula and the wrong sign.</p>
+          <p>Answer <b>both halves</b>. Gate 3's rubric drops you from 4 to 2 if the determinant is right but the existence conclusion does not follow.</p>
+          <div class="rubric"><b>Gate 3 rubric:</b> 4 pts correct &middot; 3 pts minor arithmetic error, existence follows &middot; <b>2 pts determinant correct but existence does not follow</b> &middot; 1 pt some work &middot; 0 blank.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="q" id="q7">
+      <div class="q-head"><span class="q-num">7.</span><div class="q-body"><b>Row reduction.</b> Use row reduction to solve the system below. State whether the solution is <b>unique, none, or infinitely many</b>, and give the solution if it exists. You must show all work <b>and</b> the Row Echelon Form of the augmented matrix.</div><span class="pts">4 pts</span></div>
+      <div class="q-body">
+        <div class="formula" style="font-size:17px">2<span class="var">x</span><sub>1</sub> + 3<span class="var">x</span><sub>2</sub> = 8 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="var">x</span><sub>1</sub> &minus; <span class="var">x</span><sub>2</sub> = 1</div>
+        <div class="write" style="--n:9"></div>
+        <div class="abox"><span class="lab">Solution type:</span></div>
+        <div class="abox"><span class="lab">x<sub>1</sub> =</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="lab">x<sub>2</sub> =</span></div>
+        <div class="keybox" hidden>
+          <h4>Answer &amp; scoring</h4>
+          <p>Augmented matrix: &nbsp;<span style="font-family:var(--mono)">[ 2&nbsp;&nbsp;&nbsp;3&nbsp;|&nbsp;8 ; 1&nbsp;&nbsp;&minus;1&nbsp;|&nbsp;1 ]</span></p>
+          <p><b>R2 &larr; 2R2 &minus; R1</b>: &nbsp;<span style="font-family:var(--mono)">[ 2&nbsp;&nbsp;&nbsp;3&nbsp;|&nbsp;&nbsp;&nbsp;8 ; 0&nbsp;&nbsp;&minus;5&nbsp;|&nbsp;&minus;6 ]</span> &nbsp;&larr; this is a Row Echelon Form</p>
+          <p>Row 2: &minus;5<span class="var">x</span><sub>2</sub> = &minus;6, so <b class="ans">x<sub>2</sub> = 6/5</b></p>
+          <p>Row 1: 2<span class="var">x</span><sub>1</sub> + 3(6/5) = 8 &rarr; 2<span class="var">x</span><sub>1</sub> = 8 &minus; 18/5 = 22/5 &rarr; <b class="ans">x<sub>1</sub> = 11/5</b></p>
+          <p>Solution type: <b class="ans">unique</b> &mdash; every column has a pivot and there is no contradictory row.</p>
+          <p>Check: 2(11/5) + 3(6/5) = 22/5 + 18/5 = 40/5 = 8 &#10003; and 11/5 &minus; 6/5 = 5/5 = 1 &#10003;</p>
+          <p><b>Expect fractions.</b> The real Gate 3 answers were 7/3 and 4/3. If your answer comes out ugly, that is not evidence you made a mistake &mdash; check it by substitution and move on. 11/5 = 2.2 and 6/5 = 1.2 are both acceptable forms.</p>
+          <div class="rubric"><b>Gate 3 rubric:</b> 4 pts correct &mdash; note the grader's own remark that <b>the solution is unique but the REF is not</b>, so any valid sequence of row operations is accepted and RREF is not required &middot; 3 pts minor arithmetic error, solution type follows &middot; <b>2 pts solving by a method other than row reduction</b> &middot; 1 pt no work of value &middot; 0 blank.</div>
+          <div class="miss"><b>Watch for</b>Solving by substitution and writing down the right answer. The gate explicitly docks that to 2 of 4 &mdash; the method is what is being graded, and the REF must appear on the page.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="facil noprint">
+    <h2>What Gate 3 tells you about WPR 2</h2>
+    <p style="color:var(--ink-soft);margin-top:6px">This is no longer prediction. It is the one graded data point for the block.</p>
+
+    <div class="tw">
+      <table>
+        <caption>Gate 3 as administered &mdash; 25 points, seven questions</caption>
+        <thead><tr><th>#</th><th>Question</th><th>Pts</th><th>What it actually required</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>Vector magnitude</td><td>3</td><td>Exact value, no decimals</td></tr>
+          <tr><td>2</td><td><b>Unit vector</b></td><td>3</td><td>Exact fractions; follow-on credit from Q1</td></tr>
+          <tr><td>3</td><td>Dot product</td><td>3</td><td>A scalar, signs intact</td></tr>
+          <tr><td>4</td><td>Angle between vectors</td><td>4</td><td>Degrees to 2 dp; dot and magnitudes supplied</td></tr>
+          <tr><td>5</td><td>Matrix multiplication</td><td>4</td><td>2&times;2 by 2&times;2, by hand</td></tr>
+          <tr><td>6</td><td>Determinant &amp; inverse</td><td>4</td><td>Value <b>and</b> the existence conclusion</td></tr>
+          <tr><td>7</td><td>Row reduction</td><td>4</td><td>REF shown, solution type stated, fractional answer</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 style="font-family:var(--serif);font-size:19px;margin:26px 0 10px">Four things this changes</h3>
+    <div class="miss"><b>1 &mdash; Zero interpretation</b>Not one question asked for a sentence. Gates 1 and 2 put 10 of 25 points on a caption; Gate 3 put <b>none</b>. Drill arithmetic tonight, not prose.</div>
+    <div class="miss"><b>2 &mdash; Unit vectors are on the test</b>They carried 3 of 25 points and appear nowhere in HW3's Section 1 problem list. Divide every component by the magnitude; verify the result has length 1.</div>
+    <div class="miss"><b>3 &mdash; Angle, not cosine similarity</b>The rubric names this as a major error worth 2 of 4. cos&thinsp;&theta; is an intermediate value. The answer is &theta;, in degrees.</div>
+    <div class="miss"><b>4 &mdash; Exact values and fractions</b>"No decimals" on the magnitude, "exact values" on the unit vector, and a row-reduction answer of 7/3 and 4/3. Get comfortable leaving answers as radicals and fractions.</div>
+
+    <h3 style="font-family:var(--serif);font-size:19px;margin:26px 0 10px">Tonight</h3>
+    <p style="font-size:13.5px;color:var(--ink-soft)">Work this page closed-book. Then the <a href="ma103-wpr2-reference.html">reference card drills</a> for speed, then the <a href="ma103-wpr2.html">full practice exam</a> for the application and interpretation questions that the WPR will carry even though the gate did not.</p>
+  </section>
+
+  <footer>
+    <p class="byline"><a href="index.html">Dennis Pezan</a></p>
+    MA103 Data-Driven Modeling &middot; AY27-1 &middot; Unofficial study material prepared for the WPR 2 study session. Structure and rubric language are drawn from a returned, graded Gate 3; all numbers have been changed. It is not the examination and does not reproduce any secured assessment.
+  </footer>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---- answer key toggle ---- */
+  var tog = document.getElementById('keytog');
+  var keys = Array.prototype.slice.call(document.querySelectorAll('.keybox'));
+  function setKeys(on){
+    tog.setAttribute('aria-pressed', on ? 'true' : 'false');
+    keys.forEach(function(k){ k.hidden = !on; });
+    try { localStorage.setItem('ma103.key', on ? '1' : '0'); } catch(e){}
+  }
+  tog.addEventListener('click', function(){
+    setKeys(tog.getAttribute('aria-pressed') !== 'true');
+  });
+  var saved = '0';
+  try { saved = localStorage.getItem('ma103.key') || '0'; } catch(e){}
+  setKeys(saved === '1');
+
+  document.getElementById('pbtn').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+</body>
+</html>

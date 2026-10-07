@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>MA103 Tutoring &mdash; WPR 2 Practice | Dennis Pezan</title>
-  <meta name="description" content="A 180-point practice examination with full answer key and scoring rubrics for MA103 WPR 2, covering vectors, cosine similarity, matrices, determinants, inverses, and row reduction.">
+  <meta name="description" content="A 184-point practice examination with full answer key and scoring rubrics for MA103 WPR 2, covering vectors, cosine similarity, matrices, determinants, inverses, and row reduction.">
   <link rel="canonical" href="https://dennis-pezan.com/ma103-wpr2.html">
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://dennis-pezan.com/ma103-wpr2.html">
@@ -282,8 +282,8 @@
 <div class="bar noprint">
   <div class="bar-in">
     <a class="bar-home" href="index.html">&#8592; Dennis Pezan</a>
-    <div class="bar-id">MA103 &middot; WPR 2 Practice &middot; 180 pts</div>
-    <nav class="bar-links"><a href="ma103.html">WPR 1</a><a href="ma103-wpr2-reference.html">Reference</a></nav>
+    <div class="bar-id">MA103 &middot; WPR 2 Practice &middot; 184 pts</div>
+    <nav class="bar-links"><a href="ma103-gate3-mirror.html">Gate 3 Mirror</a><a href="ma103-wpr2-reference.html">Reference</a><a href="ma103.html">WPR 1</a></nav>
     <button class="switch" id="keytog" type="button" aria-pressed="false"><span class="dot"></span>Answer key</button>
     <button class="btn" id="pbtn" type="button">Print</button>
   </div>
@@ -300,10 +300,11 @@
       <p>Per the course director, study your gate and work the homework problems. The application sections here use <b>platoon_roomate_data</b>, the synthetic dataset she provided, so the practice lines up with the homework you are already doing.</p>
       <p><b>From the course director:</b> WPR 2 "will be much more computational than WPR 1. Students will still have to understand and interpret their results, but they will also have to demonstrate their computational ability with vector and matrix operations."</p>
       <p>Plan accordingly. WPR 1 rewarded interpretation and asked for very little arithmetic; this one asks for both. No formula sheet is provided here, on the assumption WPR 2 follows WPR 1 in not providing one &mdash; you are expected to know the magnitude, dot product, cosine, determinant and inverse formulas cold. The <a href="ma103-wpr2-reference.html">reference card</a> is the list to memorize, and its drills are where you build speed.</p>
+      <p><b>Start with the <a href="ma103-gate3-mirror.html">Gate 3 mirror</a>.</b> Gate 3 has been returned: 25 points, seven questions, all computation. That page rebuilds it question for question with new numbers, and it is the closest thing to a preview of WPR 2 that exists.</p>
     </div>
 
     <dl class="meta">
-      <div><dt>Total points</dt><dd>180</dd></div>
+      <div><dt>Total points</dt><dd>184</dd></div>
       <div><dt>Authorized</dt><dd>Calculator only</dd></div>
       <div><dt>Coverage</dt><dd>Lessons 23&ndash;32</dd></div>
     </dl>
@@ -323,7 +324,7 @@
 
   <section>
     <div class="part-head">
-      <div class="tags"><b>Part I</b> <span>&middot;</span> <span>36 points</span></div>
+      <div class="tags"><b>Part I</b> <span>&middot;</span> <span>40 points</span></div>
       <h2 class="part">Vector Mechanics</h2>
       <p class="scope">Lessons 23&ndash;24. Component arithmetic, magnitude, the dot product, and the tests for orthogonal and parallel.</p>
     </div>
@@ -357,17 +358,26 @@
     </div>
 
     <div class="q" id="q2">
-      <div class="q-head"><span class="q-num">2.</span><div class="q-body"><b>Magnitude.</b></div><span class="pts">6 pts</span></div>
+      <div class="q-head"><span class="q-num">2.</span><div class="q-body"><b>Magnitude and unit vectors.</b> <span class="flag">On Gate 3</span></div><span class="pts">10 pts</span></div>
       <div class="q-body">
-        <p>Compute the magnitude of each vector. Show the work for at least one.</p>
+        <p>(a) Compute the magnitude of each vector. Show the work for at least one.</p>
         <p>|<span class="var">u&#8407;</span>| = <span class="blank"></span> &nbsp;&nbsp; |<span class="var">v&#8407;</span>| = <span class="blank"></span> &nbsp;&nbsp; |<span class="var">w&#8407;</span>| = <span class="blank"></span> &nbsp;&nbsp; |<span class="var">t&#8407;</span>| = <span class="blank"></span></p>
         <div class="write" style="--n:4"></div>
+        <p>(b) Find the unit vector in the direction of <span class="var">u&#8407;</span>, and the unit vector in the direction of <span class="var">t&#8407;</span>. Give <b>exact</b> values &mdash; fractions, not decimals.</p>
+        <div class="write" style="--n:4"></div>
+        <p><span class="var">u&#770;</span> = <span class="blank w"></span> &nbsp;&nbsp; <span class="var">t&#770;</span> = <span class="blank w"></span></p>
+        <p>(c) How can you check a unit vector is correct without redoing the division?</p>
+        <div class="write" style="--n:2"></div>
         <div class="keybox" hidden>
           <h4>Answer &amp; scoring</h4>
-          <p>|<span class="var">u&#8407;</span>| = &radic;(16+4+16) = &radic;36 = <b class="ans">6</b> &nbsp;&nbsp; |<span class="var">v&#8407;</span>| = &radic;(4+4+1) = &radic;9 = <b class="ans">3</b></p>
-          <p>|<span class="var">w&#8407;</span>| = &radic;(64+16+64) = &radic;144 = <b class="ans">12</b> &nbsp;&nbsp; |<span class="var">t&#8407;</span>| = &radic;(0+9+16) = &radic;25 = <b class="ans">5</b></p>
-          <p>All four are exact integers &mdash; if you are getting decimals, check your squaring. Note that squaring kills the sign: the negative components of <span class="var">u&#8407;</span> and <span class="var">w&#8407;</span> contribute the same as positive ones.</p>
-          <div class="rubric">1.5 pts each. Full credit requires the radical form or the exact integer, not a rounded decimal.</div>
+          <p>(a) |<span class="var">u&#8407;</span>| = &radic;(16+4+16) = &radic;36 = <b class="ans">6</b> &nbsp;&nbsp; |<span class="var">v&#8407;</span>| = &radic;(4+4+1) = &radic;9 = <b class="ans">3</b> &nbsp;&nbsp; |<span class="var">w&#8407;</span>| = &radic;144 = <b class="ans">12</b> &nbsp;&nbsp; |<span class="var">t&#8407;</span>| = &radic;25 = <b class="ans">5</b></p>
+          <p>All four are exact integers. Squaring kills the sign, so the negative components contribute just as much as positive ones.</p>
+          <p>(b) A unit vector is the original divided by its own magnitude &mdash; <b>every component</b>, same divisor:</p>
+          <p><span class="var">u&#770;</span> = <span class="frac"><span class="num">&lang;4, &minus;2, 4&rang;</span><span class="den">6</span></span> = <b class="ans">&lang;2/3, &minus;1/3, 2/3&rang;</b> &nbsp;&nbsp;&nbsp; <span class="var">t&#770;</span> = <span class="frac"><span class="num">&lang;0, 3, 4&rang;</span><span class="den">5</span></span> = <b class="ans">&lang;0, 3/5, 4/5&rang;</b></p>
+          <p>Leave them as fractions. Gate 3 asked for "exact values" and marked decimals down.</p>
+          <p>(c) <b>Its magnitude must be 1.</b> Check <span class="var">u&#770;</span>: (2/3)<sup>2</sup> + (&minus;1/3)<sup>2</sup> + (2/3)<sup>2</sup> = (4 + 1 + 4)/9 = 9/9 = 1 &#10003;. A unit vector keeps the <b>direction</b> of the original and throws away its length, which is why normalizing a preference vector never changes a cosine ranking.</p>
+          <div class="rubric">4 pts (a), 1 each. 4 pts (b), 2 per unit vector &mdash; <b>follow-on credit applies</b>, so a wrong magnitude carried correctly through still earns the points, exactly as Gate 3 scored it. 2 pts (c).</div>
+          <div class="miss"><b>Why this is here</b>Unit vectors carried 3 of 25 points on Gate 3 and appear nowhere in HW3's Section 1 problem list. They are the easiest points on the test to lose by never having practised them.</div>
         </div>
       </div>
     </div>
@@ -410,7 +420,7 @@
     </div>
 
     <div class="q" id="q5">
-      <div class="q-head"><span class="q-num">5.</span><div class="q-body"><b>Angle between vectors.</b></div><span class="pts">4 pts</span></div>
+      <div class="q-head"><span class="q-num">5.</span><div class="q-body"><b>Angle between vectors.</b> <span class="flag">On Gate 3</span></div><span class="pts">4 pts</span></div>
       <div class="q-body">
         <p>Compute the angle &theta; between <span class="var">u&#8407;</span> and <span class="var">t&#8407;</span>. Give cos&thinsp;&theta; exactly and &theta; to one decimal place.</p>
         <div class="write" style="--n:4"></div>
@@ -420,7 +430,8 @@
           <p>cos&thinsp;&theta; = <span class="var">u&#8407;</span>&middot;<span class="var">t&#8407;</span> / (|<span class="var">u&#8407;</span>||<span class="var">t&#8407;</span>|) = 10 / (6 &times; 5) = 10/30 = <b class="ans">1/3 &asymp; 0.3333</b></p>
           <p>&theta; = cos<sup>&minus;1</sup>(1/3) = <b class="ans">70.5&deg;</b></p>
           <p>Sanity check the sign: a positive dot product means an acute angle, so anything above 90&deg; here is an arithmetic error.</p>
-          <div class="rubric">2 pts cos&thinsp;&theta;, 2 pts &theta;. Answers in radians (1.231 rad) accepted if labeled.</div>
+          <div class="rubric">2 pts cos&thinsp;&theta;, 2 pts &theta;. Gate 3 gave 3 of 4 for an answer left in radians, and <b>2 of 4 for stopping at the cosine</b>.</div>
+          <div class="miss"><b>The named trap</b>Gate 3's rubric spells this out: "calculates cosine similarity instead of angle" is a major error. cos&thinsp;&theta; = 1/3 is an intermediate value; the answer is 70.5&deg;. If the question says "in degrees," you are not finished until you press cos<sup>&minus;1</sup>.</div>
         </div>
       </div>
     </div>
@@ -953,18 +964,18 @@
     <p style="color:var(--ink-soft);margin-top:6px">The course director's recommendation: work your gate and the homework problems. This exam is built to sit alongside them, on her dataset.</p>
 
     <h3 style="font-family:var(--serif);font-size:19px;margin:28px 0 10px">Where points go</h3>
-    <p style="font-size:13.5px;color:var(--ink-soft);margin-bottom:12px">These are <b>predictions</b>, not confirmed misses &mdash; Gate 3 has not been graded yet. They come from the shape of HW3, PSL 3 and TL 4, and from the patterns that burned people on Gates 1 and 2. What <em>is</em> confirmed is the balance: the course director has said WPR 2 is <b>much more computational</b> than WPR 1, so mechanical accuracy carries real weight this time &mdash; items 4 through 7 below are no longer cheap points.</p>
-    <div class="miss"><b>1 &mdash; Scale before similarity</b>Question 8. Raw AFT scores account for <b>99.6%</b> of a raw magnitude. Any similarity computed on unnormalized features is just an AFT comparison in disguise. Same logic as standardizing before KNN.</div>
-    <div class="miss"><b>2 &mdash; Scaling a vector changes nothing about cosine</b>Question 11. PSL 3 asks this exact question. Doubling a preference vector doubles the dot product and the magnitude; they cancel. Cosine sees angle only.</div>
-    <div class="miss"><b>3 &mdash; Magnitude is not quality</b>Question 9. A big magnitude means a big overall profile, not a better soldier, and two very different soldiers can have nearly identical magnitudes.</div>
-    <div class="miss"><b>4 &mdash; The dot product is a scalar</b>Question 3. Stopping at the component-wise products and reporting a vector is the most common mechanical error in the block.</div>
-    <div class="miss"><b>5 &mdash; Checking that a product is defined</b>Questions 16 and 24. Inner dimensions must match; the result takes the outer ones. Points are awarded for the check itself, so never skip it.</div>
-    <div class="miss"><b>6 &mdash; AB &ne; BA</b>Question 17. And entry-by-entry multiplication is not matrix multiplication at all.</div>
-    <div class="miss"><b>7 &mdash; det = 0 means "not unique", not "no solution"</b>Question 21. A singular system is either inconsistent or has infinitely many solutions, and only row reduction tells you which.</div>
-    <div class="miss"><b>8 &mdash; Interpreting in context</b>Every application item. This is what cost the most points on Gates 1 and 2, in a block where it is tempting to stop at the arithmetic. Name the soldier, name the units, say what the commander should do.</div>
+    <p style="font-size:13.5px;color:var(--ink-soft);margin-bottom:12px">These are no longer predictions. <b>Gate 3 has come back</b>, and it is the only graded work this block: 25 points, seven questions, <b>100% computation</b> &mdash; not one item asked for a sentence. Gates 1 and 2 put 10 of 25 points on a caption; Gate 3 put none. The <a href="ma103-gate3-mirror.html">Gate 3 mirror</a> rebuilds it question for question.</p>
+    <div class="miss"><b>1 &mdash; Unit vectors</b>3 of 25 points on Gate 3, and absent from HW3's Section 1 list. Divide every component by the magnitude, leave it in fractions, and check the result has length 1. Question 2(b) here.</div>
+    <div class="miss"><b>2 &mdash; Angle, not cosine similarity</b>Gate 3's rubric names "calculates cosine similarity instead of angle" as a major error worth 2 of 4. cos&thinsp;&theta; is an intermediate value. Question 5 here.</div>
+    <div class="miss"><b>3 &mdash; Exact values and fractions</b>Gate 3 demanded "no decimals" on the magnitude and "exact values" on the unit vector, and its row reduction came out 7/3 and 4/3. An ugly fraction is not evidence of an error.</div>
+    <div class="miss"><b>4 &mdash; Row reduction, by row reduction</b>Solving by substitution and writing the right answer scored 2 of 4. The REF must appear on the page and the solution type must be stated. RREF is <em>not</em> required &mdash; the grader noted the REF is not unique.</div>
+    <div class="miss"><b>5 &mdash; Answering both halves</b>The determinant item wanted the value <b>and</b> whether the inverse exists. Correct determinant with no existence conclusion dropped from 4 to 2.</div>
+    <div class="miss"><b>6 &mdash; Sign errors</b>The arithmetic that actually bites: (&minus;8)<sup>2</sup> = +64, (&minus;1)(&minus;2) = +2, and 10 &minus; (&minus;3) = 13. Gate 3 is almost entirely signed arithmetic.</div>
+    <div class="miss"><b>7 &mdash; Showing work</b>Every Gate 3 rubric deducts a point for a correct answer with no work shown. Free points, lost silently.</div>
+    <p style="font-size:13.5px;color:var(--ink-soft);margin:14px 0 0"><b>Still worth knowing:</b> the WPR is longer than a gate and the course director has said cadets "will still have to understand and interpret their results." The conceptual traps in Parts II and V &mdash; scale before similarity, scaling a vector leaves cosine unchanged, det = 0 means <em>not unique</em> rather than <em>no solution</em> &mdash; are the likeliest place for that to show up.</p>
 
     <h3 style="font-family:var(--serif);font-size:19px;margin:28px 0 10px">If you are short on time</h3>
-    <p style="font-size:13.5px;color:var(--ink-soft)">Work Questions <b>2, 3, 4, 8, 10, 11, 16, 19, 20, 22, 24</b> &mdash; 84 points covering every mechanic that is likely to be tested (magnitude, dot product, the orthogonal and parallel tests, cosine similarity, defined-or-not, the inverse, the inverse method, row reduction, and matrix&ndash;vector scoring) plus the two conceptual traps most likely to appear. Leave the synthesis items for a second pass.</p>
+    <p style="font-size:13.5px;color:var(--ink-soft)">Work the <a href="ma103-gate3-mirror.html">Gate 3 mirror</a> first &mdash; seven questions, 25 points, the exact format of the only graded work this block. Then Questions <b>2, 3, 4, 5, 16, 19, 20, 22, 24</b> here, which cover every Gate 3 shape at more length plus the matrix mechanics the gate sampled only once. If time remains, Questions 8, 10 and 11 are the conceptual items most likely to carry the interpretation points.</p>
 
     <h3 style="font-family:var(--serif);font-size:19px;margin:28px 0 10px">Work these alongside it</h3>
     <ul style="font-size:13.5px;color:var(--ink-soft);padding-left:22px">
