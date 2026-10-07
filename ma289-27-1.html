@@ -436,24 +436,25 @@
           The attacker spends a single effort budget. Each edge carries the one action that fits where it is, with an
           <strong>effort cost</strong> and a probability <strong>p</strong> that the action shuts the edge, read as the
           expected share of the month it is closed. That is the same per-edge cost and probability the environment
-          already uses. p is anchored on real disruptions; costs are ordinal, ordered by the legal threshold crossed and
-          the distance from PRC bases.
+          already uses. China&rsquo;s budget is fixed at 100, so each cost is the percent of its total effort the action
+          uses. p is anchored on real disruptions; costs are ranked by the legal threshold crossed and the distance from
+          PRC bases.
         </p>
       </section>
     </div>
     <div class="wide">
       <div class="table-wrap">
         <table class="grid">
-          <thead><tr><th>Action</th><th>Where it is allowed</th><th>Cost</th><th>p</th><th>What p is anchored on</th></tr></thead>
+          <thead><tr><th>Action</th><th>Where it is allowed</th><th>Cost (of 100)</th><th>p</th><th>What p is anchored on</th></tr></thead>
           <tbody>
-          <tr><td>Cyber on a canal or port</td><td>Panama Canal, the Suez route, the three port entries</td><td class="n">1</td><td class="n">0.10</td><td class="src">Nagoya and DP World Australia port shutdowns, 2023 (about 3 days)</td></tr>
-          <tr><td>Cyber on an open strait</td><td>Hormuz, Malacca, Sunda, Lombok, the Sulu route, Miyako</td><td class="n">1</td><td class="n">0.05</td><td class="src">GPS jamming in Hormuz, 2025: collisions, but traffic kept moving</td></tr>
-          <tr><td>Quarantine (variant A)</td><td>Taiwan approaches</td><td class="n">2</td><td class="n">0.80</td><td class="src">CSIS quarantine scenarios; Iran&rsquo;s 2026 Hormuz permit regime</td></tr>
-          <tr><td>Blockade (variant B)</td><td>Taiwan approaches</td><td class="n">4</td><td class="n">0.95</td><td class="src">Hormuz 2026: mines, attacks and permits cut traffic about 95%</td></tr>
-          <tr><td>Proxy disruption</td><td>Bab el-Mandeb</td><td class="n">2</td><td class="n">0.60</td><td class="src">Houthi campaign since 2023: Red Sea traffic down 50&ndash;67%</td></tr>
-          <tr><td>Kinetic (naval)</td><td>South China Sea only</td><td class="n">3</td><td class="n">0.90</td><td class="src">CSIS <em>Lights Out?</em> blockade wargames, 26 games (2025)</td></tr>
-          <tr><td>Economic pressure</td><td>The four supplier arcs</td><td class="n">3</td><td class="n">0.20</td><td class="src">Sanctions succeed in 34% of 116 cases (Hufbauer, Schott &amp; Elliott, 1990); 4% on Pape&rsquo;s recount</td></tr>
-          <tr><td>Naval presence (carrier group)</td><td>Indian Ocean, western Pacific</td><td class="n">4</td><td class="n">0.20</td><td class="src"><strong>Assumption</strong>, between the Tanker War (about 2%) and the Houthis (about 60%)</td></tr>
+          <tr><td>Cyber on a canal or port</td><td>Panama Canal, the Suez route, the three port entries</td><td class="n">5</td><td class="n">0.10</td><td class="src">Nagoya and DP World Australia port shutdowns, 2023 (about 3 days)</td></tr>
+          <tr><td>Cyber on an open strait</td><td>Hormuz, Malacca, Sunda, Lombok, the Sulu route, Miyako</td><td class="n">5</td><td class="n">0.05</td><td class="src">GPS jamming in Hormuz, 2025: collisions, but traffic kept moving</td></tr>
+          <tr><td>Quarantine (variant A)</td><td>Taiwan approaches</td><td class="n">10</td><td class="n">0.80</td><td class="src">CSIS quarantine scenarios; Iran&rsquo;s 2026 Hormuz permit regime</td></tr>
+          <tr><td>Blockade (variant B)</td><td>Taiwan approaches</td><td class="n">20</td><td class="n">0.95</td><td class="src">Hormuz 2026: mines, attacks and permits cut traffic about 95%</td></tr>
+          <tr><td>Proxy disruption</td><td>Bab el-Mandeb</td><td class="n">10</td><td class="n">0.60</td><td class="src">Houthi campaign since 2023: Red Sea traffic down 50&ndash;67%</td></tr>
+          <tr><td>Kinetic (naval)</td><td>South China Sea only</td><td class="n">15</td><td class="n">0.90</td><td class="src">CSIS <em>Lights Out?</em> blockade wargames, 26 games (2025)</td></tr>
+          <tr><td>Economic pressure</td><td>The four supplier arcs</td><td class="n">15</td><td class="n">0.20</td><td class="src">Sanctions succeed in 34% of 116 cases (Hufbauer, Schott &amp; Elliott, 1990); 4% on Pape&rsquo;s recount</td></tr>
+          <tr><td>Naval presence (carrier group)</td><td>Indian Ocean, western Pacific</td><td class="n">20</td><td class="n">0.20</td><td class="src"><strong>Assumption</strong>, between the Tanker War (about 2%) and the Houthis (about 60%)</td></tr>
           </tbody>
         </table>
       </div>
@@ -467,7 +468,7 @@
         <div class="callout">
           <span class="eyebrow">First baseline (a graph calculation, not a simulation)</span>
           <p>Counting p, the cheapest way to cut off all of Taiwan&rsquo;s crude is a <strong>five-lane cordon around the west
-          coast</strong> (effort 12.5), because all three crude ports sit on that coast. Ignoring p would pick three cyber
+          coast</strong> (50 of China&rsquo;s budget of 100; 62.5 counting p), because all three crude ports sit on that coast. Ignoring p would pick three cyber
           attacks on the ports instead, which is why p has to stay in the model. This is the number the agent has to beat.</p>
         </div>
       </section>
@@ -487,7 +488,7 @@
           <li>One month, one commodity: no stock drawdown, rationing, or switch to coal or LNG.</li>
           <li>No escorts or defender counter-force; the defender re-routes but does not fight back.</li>
           <li>One action per edge; quarantine and blockade are run as two variants.</li>
-          <li>Effort costs are ordinal and the carrier group&rsquo;s p is assumed; both are swept for sensitivity.</li>
+          <li>Effort costs are a ranking scaled to a budget of 100, and the carrier group&rsquo;s p is assumed; both are swept for sensitivity.</li>
           <li>Similar nodes are merged: one node per origin region, Kaohsiung and Dalin as one port, Oman and Fujairah as one terminal.</li>
           <li>Open, unclassified sources only. A proof of concept, not a targeting model.</li>
         </ul>
