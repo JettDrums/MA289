@@ -491,7 +491,7 @@
           <li>One month, one commodity: no stock drawdown, rationing, or switch to coal or LNG.</li>
           <li>No escorts or defender counter-force; the defender re-routes but does not fight back.</li>
           <li>One action per edge; quarantine and blockade are run as two variants.</li>
-          <li>Effort costs are a ranking scaled to a budget of 100, and the carrier group&rsquo;s p is assumed; both are swept for sensitivity.</li>
+          <li>China always spends its full budget of 100. Effort costs are a ranking scaled to that budget, and the carrier group&rsquo;s p is assumed; both are varied for sensitivity.</li>
           <li>Similar nodes are merged: one node per origin region, Kaohsiung and Dalin as one port, Oman and Fujairah as one terminal.</li>
           <li>Open, unclassified sources only. A proof of concept, not a targeting model.</li>
         </ul>
@@ -510,8 +510,9 @@
           <li><strong>Transfer test:</strong> the rail-trained agent on this network without retraining. If it transfers, it learned
           interdiction rather than a map; if it does not, that is also a result.</li>
         </ol>
-        <p><strong>Products:</strong> an effort&ndash;flow frontier (budget against crude delivered, for min-cut, greedy and the
-        agent), a map of where the agent acts at low, medium and high budget, the transfer result, and a poster.</p>
+        <p><strong>Products:</strong> crude delivered when China spends its full budget of 100 (min-cut, greedy and the
+        agent), how that changes as action costs change (a blockade at 15, 20 and 30 first), a map of where the agent
+        acts, the transfer result, and a poster.</p>
       </section>
 
       <section class="block" id="sources">
