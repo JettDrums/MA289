@@ -392,7 +392,7 @@
     <div class="wide">
       <section class="block" id="model">
         <span class="eyebrow">The Current Model</span>
-        <h2 class="section-title">57 nodes, 79 edges, every lane on a real sea route</h2>
+        <h2 class="section-title">61 nodes, 83 edges, every lane on a real sea route</h2>
         <figure>
           <img src="img/ma289-27-1/fig10_oil_schematic.png" alt="Schematic of the oil network: numbered nodes from the super-source on the left through the Middle East, Cape and Pacific corridors to the Taiwan approaches and the super-sink on the right, with edges shaded by effort cost" loading="lazy">
           <figcaption>The network as the model sees it, numbered with the IDs the environment reads. Left to right follows
@@ -464,7 +464,7 @@
     <div class="wrap">
       <section class="block" style="padding-top: 22px;">
         <p class="muted">
-          The other 20 edges cannot be interdicted, each with a stated reason: the demand arcs, loading inside the Gulf,
+          The other 23 edges cannot be interdicted, each with a stated reason: the demand arcs, loading inside the Gulf,
           the share of Hormuz that always gets through, the Atlantic, Mediterranean, eastern Pacific and Red Sea legs, and
           Indonesian archipelagic waters.
         </p>
@@ -506,10 +506,14 @@
         <h2 class="section-title">How the questions get answered</h2>
         <ol class="plain">
           <li><strong>Baselines on the graph</strong> (exact min-cut, greedy), with sourced capacities.</li>
-          <li><strong>Agent evaluation on MIT SuperCloud</strong> (LTC Webb): zero-sum and canalize strategies, quarantine and blockade variants.</li>
+          <li><strong>Agent evaluation on an Army cloud environment</strong> (LTC Webb): zero-sum and canalize strategies, quarantine and blockade variants.</li>
           <li><strong>Transfer test:</strong> the rail-trained agent on this network without retraining. If it transfers, it learned
           interdiction rather than a map; if it does not, that is also a result.</li>
+          <li><strong>Future work:</strong> a traveling salesman problem (TSP) formulation, possibly with k-nearest
+          neighbors, once the current model is working. Not yet decided.</li>
         </ol>
+        <p><strong>Random and fixed:</strong> whether each action works is random (its chance of success); the network,
+        capacities, costs, China&rsquo;s budget and Taiwan&rsquo;s best rerouting are fixed.</p>
         <p><strong>Products:</strong> crude delivered when China spends its full budget of 100 (min-cut, greedy and the
         agent), how that changes as action costs change (a blockade at 15, 20 and 30 first), a map of where the agent
         acts, the transfer result, and a poster.</p>
@@ -557,7 +561,7 @@
         <a class="file" href="ma289-27-1-proposal.pdf" target="_blank" rel="noopener"><span class="fname">Proposal (PDF)</span><span class="fdesc">One-page proposal for LTC Webb, with figures.</span></a>
         <a class="file" href="ma289-27-1-summary.pdf" target="_blank" rel="noopener"><span class="fname">One-page summary (PDF)</span><span class="fdesc">The project pitch: scope, questions, previous work, goals.</span></a>
         <a class="file" href="https://github.com/JettDrums/MA289-27-1/blob/claude/ma289-27-1-ljmxoy/docs/oil-brief.md" target="_blank" rel="noopener"><span class="fname">Scenario brief</span><span class="fdesc">Every design choice, assumption and baseline, in 16 sections. <em>(GitHub, private)</em></span></a>
-        <a class="file" href="https://github.com/JettDrums/MA289-27-1/blob/claude/ma289-27-1-ljmxoy/docs/oil-network-tables.md" target="_blank" rel="noopener"><span class="fname">Every node and edge</span><span class="fdesc">All 57 nodes and 79 edges with action, cost, p, capacity and source. <em>(GitHub, private)</em></span></a>
+        <a class="file" href="https://github.com/JettDrums/MA289-27-1/blob/claude/ma289-27-1-ljmxoy/docs/oil-network-tables.md" target="_blank" rel="noopener"><span class="fname">Every node and edge</span><span class="fdesc">All 61 nodes and 83 edges with action, cost, p, capacity and source. <em>(GitHub, private)</em></span></a>
         <a class="file" href="https://github.com/JettDrums/MA289-27-1/blob/claude/ma289-27-1-ljmxoy/docs/effort-values.md" target="_blank" rel="noopener"><span class="fname">Effort values</span><span class="fdesc">How each action&rsquo;s cost and probability was set, with sources. <em>(GitHub, private)</em></span></a>
         <a class="file" href="https://github.com/JettDrums/MA289-27-1/blob/claude/ma289-27-1-ljmxoy/data/OIL_Nodes.csv" target="_blank" rel="noopener"><span class="fname">Model input: nodes</span><span class="fdesc">OIL_Nodes.csv, in the environment&rsquo;s format. <em>(GitHub, private)</em></span></a>
         <a class="file" href="https://github.com/JettDrums/MA289-27-1/blob/claude/ma289-27-1-ljmxoy/data/OIL_Edges.csv" target="_blank" rel="noopener"><span class="fname">Model input: edges</span><span class="fdesc">OIL_Edges.csv, in the environment&rsquo;s format. <em>(GitHub, private)</em></span></a>
