@@ -338,6 +338,15 @@ button.sm { padding: 6px 12px; font-size: 13px; letter-spacing: .5px; }
 .lb .tscore .tb { color: #6ac8ff; } .lb .tscore .tr { color: #ff7a6a; }
 .lb .tinfo { font-size: .82em; font-weight: 600; color: #ffe8a0; padding: 0 .2em .2em; }
 .lb .tsep { height: 1px; background: rgba(255,255,255,.15); margin: .15em 0; }
+.lobby { margin: 0 0 14px; padding: 12px 14px; border-radius: 14px; background: rgba(90, 216, 255, .08); border: 1px solid rgba(90, 216, 255, .3); }
+.lobby .sec { margin-top: 0; }
+.lobrow { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.lobor { color: var(--ink-faint); }
+#lobCode { width: 6.5em; font: 700 18px var(--font-body); letter-spacing: 3px; text-transform: uppercase; padding: 7px 10px; border-radius: 9px; border: 1px solid var(--line); background: rgba(255,255,255,.08); color: var(--ink); text-align: center; }
+.lobcode { font: 400 30px var(--font-display); letter-spacing: 6px; color: var(--sand); padding: 2px 12px; border-radius: 10px; background: rgba(0,0,0,.3); }
+.lobok b { color: #7aff9a; }
+.lobtog { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; cursor: pointer; }
+.lobst { color: #9ae8ff; }
 </style>
 </head>
 <body>
@@ -410,6 +419,7 @@ button.sm { padding: 6px 12px; font-size: 13px; letter-spacing: .5px; }
   </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/peerjs@1.5.4/dist/peerjs.min.js"></script>
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
 <script type="module">
 import * as THREE from 'three';
@@ -438,8 +448,9 @@ const SLOT_COLORS = ["#8fd0ff", "#ffcc66", "#b7f07a", "#ff9ad0"];
 
 const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
 const lerp = (a, b, t) => a + (b - a) * t;
-const rand = (a, b) => a + Math.random() * (b - a);
-const pick = arr => arr[Math.floor(Math.random() * arr.length)];
+let RNG = Math.random;   // swapped for a seeded generator while a shared online map is built
+const rand = (a, b) => a + RNG() * (b - a);
+const pick = arr => arr[Math.floor(RNG() * arr.length)];
 const damp = (a, b, k, dt) => a + (b - a) * (1 - Math.exp(-k * dt));
 function wrapAngle(a) { a = (a + Math.PI) % (Math.PI * 2); if (a < 0) a += Math.PI * 2; return a - Math.PI; }
 const angDamp = (a, b, k, dt) => a + wrapAngle(b - a) * (1 - Math.exp(-k * dt));
@@ -577,10 +588,10 @@ const Sfx = (() => {
       ctx = new (window.AudioContext || window.webkitAudioContext)();
       master = ctx.createGain(); master.gain.value = vol0; master.connect(ctx.destination);
       nb = ctx.createBuffer(1, ctx.sampleRate, ctx.sampleRate);
-      const d = nb.getChannelData(0); for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
+      const d = nb.getChannelData(0); for (let i = 0; i < d.length; i++) d[i] = RNG() * 2 - 1;
       // short outdoor reverb tail built from decaying noise
       const len = ctx.sampleRate * 1.6, ir = ctx.createBuffer(2, len, ctx.sampleRate);
-      for (let c = 0; c < 2; c++) { const ch = ir.getChannelData(c); for (let i = 0; i < len; i++) ch[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, 3.2) * (i < 400 ? i / 400 : 1); }
+      for (let c = 0; c < 2; c++) { const ch = ir.getChannelData(c); for (let i = 0; i < len; i++) ch[i] = (RNG() * 2 - 1) * Math.pow(1 - i / len, 3.2) * (i < 400 ? i / 400 : 1); }
       verb = ctx.createConvolver(); verb.buffer = ir; verbIn = ctx.createGain(); verbIn.gain.value = .22; verbIn.connect(verb).connect(master);
       for (const [k, src] of Object.entries(typeof SOUNDS !== 'undefined' ? SOUNDS : {})) {
         const bin = atob(src.split(',')[1]), buf = new Uint8Array(bin.length);
@@ -764,7 +775,7 @@ function emit(pool, x, y, z, vx, vy, vz, size, life, color, o = {}) {
   const p = pool.list[pool.i]; pool.i = (pool.i + 1) % pool.list.length;
   p.m.position.set(x, y, z); p.vx = vx; p.vy = vy; p.vz = vz; p.size = size; p.life = p.max = life;
   p.m.material.color.set(color); p.g = o.g ?? 0; p.drag = o.drag ?? 2.5; p.grow = o.grow ?? 0; p.alpha = o.alpha ?? 1;
-  p.m.visible = true; p.m.scale.setScalar(size); if (pool !== rings) p.m.rotation.set(Math.random() * 6, Math.random() * 6, Math.random() * 6);
+  p.m.visible = true; p.m.scale.setScalar(size); if (pool !== rings) p.m.rotation.set(RNG() * 6, RNG() * 6, RNG() * 6);
 }
 function updateParticles(dt) {
   for (const pool of [sparks, smoke, shells, rings]) for (const p of pool.list) {
@@ -1583,7 +1594,7 @@ function buildBlockyAvatar(side, opts = {}) {
   // big cube head; front face carries the painted face decal
   const faceM = foe ? new THREE.MeshStandardMaterial({ map: faceTex('pla'), emissive: 0xffffff, emissiveMap: faceTex('pla'), emissiveIntensity: 1.6, roughness: .5 })
     : look && look.face ? new THREE.MeshStandardMaterial({ map: faceTexFor(opts.look), emissive: 0xffffff, emissiveMap: faceTexFor(opts.look), emissiveIntensity: .5, roughness: .5 })
-    : new THREE.MeshStandardMaterial({ map: faceTex('us', opts.face ?? Math.floor(Math.random() * 3)), color: M.skin.color, roughness: .6 });
+    : new THREE.MeshStandardMaterial({ map: faceTex('us', opts.face ?? Math.floor(RNG() * 3)), color: M.skin.color, roughness: .6 });
   faceM.userData.shared = false;
   const hm = foe ? M.helm : M.skin;
   const head = new THREE.Mesh(rbox(.44, .44, .44, .07), [hm, hm, hm, hm, faceM, hm]);
@@ -1935,7 +1946,7 @@ function shatterActor(a, dir) {
     const sz = m.userData.size, out = _wp.clone().sub(c); out.y = Math.max(0, out.y) + .4;
     out.normalize().multiplyScalar(rand(3, 6)).addScaledVector(push, rand(2, 5)); out.y += rand(2, 4);
     const col = Array.isArray(m.material) ? m.material[0].color : m.material.color;
-    spawnDebris(_wp, out, [sz[0] * _ws.x, sz[1] * _ws.y, sz[2] * _ws.z], a.team === 'pla' && !game.pvp && Math.random() < .6 ? pick(VEGGIE) : col.getHex(), rand(2.2, 3.4), _wq);
+    spawnDebris(_wp, out, [sz[0] * _ws.x, sz[1] * _ws.y, sz[2] * _ws.z], a.team === 'pla' && !game.pvp && RNG() < .6 ? pick(VEGGIE) : col.getHex(), rand(2.2, 3.4), _wq);
   }
   r.root.visible = false;
   burst(c.x, c.y, c.z, 14, 0xfff2b0, 9, .09, .35, { g: 6 });
@@ -2128,7 +2139,7 @@ function scatterBushes(K, n, tint) {
     if (!world.grassAt || world.grassAt(x, z) < .7) continue;
     const y = terrainH(x, z);
     if (groundAt(x, z, y + .3) > y + .05) continue;
-    const big = Math.random() < .3;
+    const big = RNG() < .3;
     p.set(x, y - .05, z); q.setFromAxisAngle(new THREE.Vector3(0, 1, 0), rand(0, 6.28));
     if (big) sc.set(rand(.6, 1.1), rand(.5, .9), rand(.6, 1.1)); else sc.set(rand(.12, .22), rand(.3, .6), rand(.12, .22));
     mx.compose(p, q, sc); im.setMatrixAt(k, mx);
@@ -2161,7 +2172,7 @@ function farmPatches(K, n, o = {}) {
     const x = rand(-world.size, world.size), z = rand(-world.size, world.size);
     if (o.avoid && o.avoid.some(([ax, az, ar]) => Math.hypot(ax - x, az - z) < ar)) continue;
     if (!farmSpotFree(x, z, 11)) continue;
-    farmPatch(K, x, z, rand(0, Math.PI * 2), made === 0 || Math.random() < .45);
+    farmPatch(K, x, z, rand(0, Math.PI * 2), made === 0 || RNG() < .45);
     made++;
   }
   return made;
@@ -2177,7 +2188,7 @@ function farmPatch(K, cx, cz, rot, withBarn) {
     for (let k = -8; k <= 8; k += 1.1) {
       const [x, z] = L(k, row); const y = K.gy(x, z);
       K.I('crop_' + crop.key, crop.w, crop.h, crop.w, crop.m, x, y - .05, z);
-      if (crop.key === 'corn' && Math.random() < .5) K.I('crop_tip', .18, .25, .18, tip, x, y + crop.h - .1, z);
+      if (crop.key === 'corn' && RNG() < .5) K.I('crop_tip', .18, .25, .18, tip, x, y + crop.h - .1, z);
     }
   }
   for (let row = -4; row <= 4; row += 2) { const [x, z] = L(0, row); K.D(G.box(18, .12, 1.1), tmat(0x5a3e26), [x, K.gy(x, z) + .02, z], [0, rot, 0], null, false); }
@@ -2195,7 +2206,7 @@ function farmPatch(K, cx, cz, rot, withBarn) {
     const [x, z] = L(rand(-9, 9), pick([-7.6, 7.6])); const y = K.gy(x, z);
     K.B(1.3, 1, 1.3, x, y, z, hay, { cover: true });
     K.D(G.box(1.34, .08, 1.34), hayD, [x, y + .3, z]); K.D(G.box(1.34, .08, 1.34), hayD, [x, y + .7, z]);
-    if (Math.random() < .4) K.B(1.2, .9, 1.2, x + rand(-.1, .1), y + 1, z + rand(-.1, .1), hay);
+    if (RNG() < .4) K.B(1.2, .9, 1.2, x + rand(-.1, .1), y + 1, z + rand(-.1, .1), hay);
   }
   // a scarecrow keeping watch, eyes glowing in the dark
   { const [x, z] = L(rand(-4, 4), rand(-1, 1) > 0 ? 1 : -1); const y = K.gy(x, z), post = tmat(0x6a4a2a);
@@ -2673,7 +2684,7 @@ function surroundings(K) {
     for (let i = 0; i < 7; i++) {
       const g = new THREE.Group(), hull = tmat(pick([0xd0302a, 0x2a6ab8, 0xf2f2ee, 0x3a8a4a]));
       P(g, 2.4, 1, 6, hull, 0, .3, 0); P(g, 2, .3, 5.4, tmat(0x8a6a4a), 0, .85, 0); P(g, 1.6, 1.4, 1.8, tmat(0xf2f2ee), 0, 1.6, .8); P(g, .3, 3, .3, tmat(0x5a5a5a), 0, 3, -1);
-      const a0 = rand(0, 6.28), rr = rand(edge + 60, 480), sp = rand(.01, .025) * (Math.random() < .5 ? 1 : -1);
+      const a0 = rand(0, 6.28), rr = rand(edge + 60, 480), sp = rand(.01, .025) * (RNG() < .5 ? 1 : -1);
       W.group.add(g);
       W.anim.push((t) => { const a = a0 + t * sp, x = Math.cos(a) * rr, z = Math.sin(a) * rr; if (landAt(x, z) > W.seaLevel - 1) { g.visible = false; return; } g.visible = true; g.position.set(x, W.seaLevel + 1 + Math.sin(t * 1.3 + a0) * .15, z); g.rotation.y = -a + (sp > 0 ? 0 : Math.PI); g.rotation.z = Math.sin(t * 1.1 + a0) * .05; });
     }
@@ -2780,7 +2791,7 @@ function supplyCache(K, x, z) {
     Sfx.play('streak', g.position, .8); burst(x, y + 1, z, 16, 0xfff0a0, 6, .1, .5, { up: 3 });
     for (let i = 0; i < 4; i++) { const an = rand(0, 6.28); entities.push(new Pickup('coin', new THREE.Vector3(x, y + 1, z), { vel: new THREE.Vector3(Math.cos(an) * 2, 6, Math.sin(an) * 2), life: 40 })); }
     entities.push(new Pickup(pick(['ammo', 'nade', 'aid']), new THREE.Vector3(x + 1.2, y, z), { life: 1e9, auto: true }));
-    if (Math.random() < .4) { const pid = pick(['scar', 'm870', 'mp7', 'revolver', 'glock18', 'm24']), stub = { looted: false, rig: {} }, p = new THREE.Vector3(x - 1.2, y, z);
+    if (RNG() < .4) { const pid = pick(['scar', 'm870', 'mp7', 'revolver', 'glock18', 'm24']), stub = { looted: false, rig: {} }, p = new THREE.Vector3(x - 1.2, y, z);
       entities.push(new Pickup('weapon', p, { stub, weapon: pid, side: 'us', life: 1e9 }));
       addInteract({ pos: p, r: 1.7, time: .45, get text() { return 'Take ' + WEAPONS[pid].name; }, active: () => !stub.looted, done: b2 => takeWeapon(b2, pid, stub) }); }
     addCoins(by, 10, 'cache');
@@ -2791,7 +2802,7 @@ function campfire(K, x, z) {
   for (let i = 0; i < 6; i++) { const a = i / 6 * 6.28; K.D(G.box(.3, .25, .3), tmat(0x6a6a70), [x + Math.cos(a) * .55, y + .12, z + Math.sin(a) * .55], [0, a, 0]); }
   for (let i = 0; i < 3; i++) K.D(G.box(.12, .12, .9), tmat(0x5a3a20), [x, y + .12, z], [0, i * 1.05, 0]);
   K.D(G.box(.3, .35, .3), tmat(0xff9a2a, { e: 0xff7010, ei: .7 }), [x, y + .28, z], [0, .7, 0], null, false);
-  world.anim.push((t, dt) => { if (Math.random() < dt * 5) emit(sparks, x + rand(-.15, .15), y + .45, z + rand(-.15, .15), rand(-.2, .2), rand(1, 2), rand(-.2, .2), rand(.03, .05), rand(.3, .6), pick([0xc06010, 0xa04008, 0xc08020]), { drag: 1, g: -1 }); if (Math.random() < dt * 3) emit(smoke, x, y + .8, z, rand(-.2, .2), rand(.6, 1.2), rand(-.2, .2), .3, 2.2, 0x3a3a3e, { grow: 3, alpha: .35 }); });
+  world.anim.push((t, dt) => { if (RNG() < dt * 5) emit(sparks, x + rand(-.15, .15), y + .45, z + rand(-.15, .15), rand(-.2, .2), rand(1, 2), rand(-.2, .2), rand(.03, .05), rand(.3, .6), pick([0xc06010, 0xa04008, 0xc08020]), { drag: 1, g: -1 }); if (RNG() < dt * 3) emit(smoke, x, y + .8, z, rand(-.2, .2), rand(.6, 1.2), rand(-.2, .2), .3, 2.2, 0x3a3a3e, { grow: 3, alpha: .35 }); });
 }
 function crashedPlane(K, x, z, rot) {
   // the transport that didn't make it: broken fuselage, a wing, scattered cargo
@@ -2804,14 +2815,14 @@ function crashedPlane(K, x, z, rot) {
   g.updateMatrixWorld(true);
   for (const c of g.children) { const b = new THREE.Box3().setFromObject(c); if (b.max.y - b.min.y > .5 && b.max.x - b.min.x < 10 && b.max.z - b.min.z < 10) world.colliders.push({ type: 'box', minX: b.min.x + .1, maxX: b.max.x - .1, minY: b.min.y, maxY: b.max.y, minZ: b.min.z + .1, maxZ: b.max.z - .1 }); }
   const fires = [[6.5, 2, -1.2], [-5, 2, -1.5], [.6, 3, -8]].map(([lx, ly, lz]) => new THREE.Vector3(lx, ly, lz).applyMatrix4(g.matrixWorld));
-  world.anim.push((t, dt) => { for (const f of fires) { if (Math.random() < dt * 10) emit(sparks, f.x + rand(-.4, .4), f.y, f.z + rand(-.4, .4), rand(-.4, .4), rand(2, 4), rand(-.4, .4), rand(.1, .2), rand(.4, .8), pick([0xff9a2a, 0xff6010, 0xffd040]), { drag: 1, g: -1 }); if (Math.random() < dt * 4) emit(smoke, f.x, f.y + 1, f.z, rand(-.3, .3), rand(1.5, 2.5), rand(-.3, .3), .8, 4, 0x2a2a2e, { grow: 3, alpha: .5 }); } });
+  world.anim.push((t, dt) => { for (const f of fires) { if (RNG() < dt * 10) emit(sparks, f.x + rand(-.4, .4), f.y, f.z + rand(-.4, .4), rand(-.4, .4), rand(2, 4), rand(-.4, .4), rand(.1, .2), rand(.4, .8), pick([0xff9a2a, 0xff6010, 0xffd040]), { drag: 1, g: -1 }); if (RNG() < dt * 4) emit(smoke, f.x, f.y + 1, f.z, rand(-.3, .3), rand(1.5, 2.5), rand(-.3, .3), .8, 4, 0x2a2a2e, { grow: 3, alpha: .5 }); } });
   return g;
 }
 function farmExtras(K, L, rot) {
-  if (Math.random() < .6) { const [x, z] = L(rand(-6, 6), 0); for (let i = 0; i < 4; i++) animal(K, x + rand(-2, 2), z + rand(-2, 2), 'chicken'); }
-  if (Math.random() < .5) { const [x, z] = L(rand(-12, -10), rand(-3, 3)); if (farmSpotFree(x, z, 2)) animal(K, x, z, pick(['cow', 'pig'])); }
-  if (Math.random() < .5) { const [x, z] = L(-12, 7.5); if (farmSpotFree(x, z, 1.8)) tractor(K, x, z, rot + rand(-.4, .4)); }
-  if (Math.random() < .4) { const [x, z] = L(11, -8); if (farmSpotFree(x, z, 1)) windmill(K, x, z); }
+  if (RNG() < .6) { const [x, z] = L(rand(-6, 6), 0); for (let i = 0; i < 4; i++) animal(K, x + rand(-2, 2), z + rand(-2, 2), 'chicken'); }
+  if (RNG() < .5) { const [x, z] = L(rand(-12, -10), rand(-3, 3)); if (farmSpotFree(x, z, 2)) animal(K, x, z, pick(['cow', 'pig'])); }
+  if (RNG() < .5) { const [x, z] = L(-12, 7.5); if (farmSpotFree(x, z, 1.8)) tractor(K, x, z, rot + rand(-.4, .4)); }
+  if (RNG() < .4) { const [x, z] = L(11, -8); if (farmSpotFree(x, z, 1)) windmill(K, x, z); }
 }
 // everything extra a map gets on top of its mission layout
 function worldExtras(K, mi) {
@@ -2829,7 +2840,7 @@ function worldExtras(K, mi) {
   for (let i = 0; i < 4; i++) { const c = findSpot(2.5, avoidSpawn); if (c) supplyCache(K, c[0], c[1]); }
   // intel: some tucked inside houses, the rest out in the world
   game.intelTotal = 0;
-  const hs = [...world.houses].sort(() => Math.random() - .5);
+  const hs = [...world.houses].sort(() => RNG() - .5);
   for (let i = 0; i < 5; i++) {
     const h = hs[i];
     if (h && i < 3) { const x = h.x + rand(-h.w / 4, h.w / 4), z = h.z + rand(-h.d / 4, h.d / 4), y = groundAt(x, z, terrainH(x, z) + 2.5); intelItem(x, y, z); }
@@ -2897,6 +2908,7 @@ class Controller {
   raw(dt) {
     const r = { mx: 0, my: 0, lx: 0, ly: 0, turn: 0, fire: false, aim: false, reload: false, jump: false, crouch: false, sprint: false, grenade: false, smoke: false, interact: false, melee: false, swap: false, drone: false, aid: false, nvg: false, sqFollow: false, sqMove: false, pause: false, up: false, down: false, c1: false, c2: false };
     const k = this.kind;
+    if (k === 'net') { const n = NET.input; if (n && n.r) for (const key in r) if (key in n.r) r[key] = n.r[key]; r.lx = r.ly = 0; r.turn = 0; return r; }
     if (k === 'kbm') {
       r.mx = (held('KeyD') ? 1 : 0) - (held('KeyA') ? 1 : 0); r.my = (held('KeyW') ? 1 : 0) - (held('KeyS') ? 1 : 0);
       if (mouse.locked) { r.lx = mouse.dx * settings.sensX * RAD_PER_COUNT; r.ly = mouse.dy * settings.sensY * RAD_PER_COUNT * (settings.invertY ? -1 : 1); }
@@ -2938,6 +2950,7 @@ class Controller {
   }
   read(dt) {
     const r = this.raw(dt), p = this.prev, f = this.owner;
+    if (this.kind === 'net' && NET.input && f && NET.input.yaw !== undefined) { f.yaw = NET.input.yaw; f.pitch = NET.input.pitch; }
     let lookDX = r.lx, mx = r.mx;
     if (this.kind === 'kb2') lookDX += r.turn * 2.4 * dt;
     else if (r.turn) lookDX += r.turn * 2.4 * dt;
@@ -3088,6 +3101,7 @@ document.addEventListener('fullscreenchange', () => { if (!document.fullscreenEl
 // Actors (players, squad, allies, enemies)
 // =====================================================================
 let actors = [];
+let ACTOR_NID = 0;
 const entities = [];
 const interacts = [];
 const smokes = [];
@@ -3100,7 +3114,8 @@ const isFoe = (a, b) => a.team !== b.team;
 class Actor {
   constructor(o) {
     Object.assign(this, { team: 'us', kind: 'enemy', slot: -1, name: '', call: '', type: 'rifle', tag: '', role: '' }, o);
-    this.human = ['kbm', 'kb2', 'pad0', 'pad1', 'pad2', 'pad3'].includes(this.kind);
+    this.human = ['kbm', 'kb2', 'pad0', 'pad1', 'pad2', 'pad3', 'net'].includes(this.kind);
+    this.nid = ++ACTOR_NID;
     this.squad = this.kind === 'squad' || this.human;
     this.ctrl = this.human ? new Controller(this.kind, this) : null;
     this.pos = new THREE.Vector3(o.x || 0, 0, o.z || 0); this.pos.y = o.y ?? groundAt(this.pos.x, this.pos.z);
@@ -3123,10 +3138,10 @@ class Actor {
     this.battery = this.human ? (hasSkill('droneop') ? 90 : 60) : 0;
     this.downed = false; this.dead = false; this.bleedT = 0; this.reviveP = 0; this.action = null; this.actionT = 0;
     this.spottedT = 0; this.lastHurtT = -99; this.hurtDir = 0; this.hurtT = 0; this.trauma = 0; this.markT = 0; this.markKill = false;
-    this.nvg = false; this.chute = null; this.drone = null; this.interactP = 0; this.nearInteract = null; this.walkPh = 0; this.bobPh = 0; this.t = Math.random() * 10;
+    this.nvg = false; this.chute = null; this.drone = null; this.interactP = 0; this.nearInteract = null; this.walkPh = 0; this.bobPh = 0; this.t = RNG() * 10;
     this.ai = { state: o.static ? 'guard' : 'idle', target: null, lastSeen: null, seeT: 0, think: 0, burst: 0, burstT: 0, cover: null, coverT: 0, moveTo: null, patrol: o.patrol || null, pi: 0, nadeT: rand(6, 14), reactT: 0, stuckT: 0, lastPos: new THREE.Vector3(), order: 'follow', orderPos: null, focus: null, strafe: 1, strafeT: 0, healT: 0, alertT: 0 };
     this.home = this.pos.clone();
-    this.rig = buildSoldier(this.team, { weapon: this.weapons[0].id, skin: o.skin, camo: this.marine ? 'marine' : null, look: this.human ? profile.skinSel : null, finish: this.human ? profile.finSel : null, boss: o.boss });
+    this.rig = buildSoldier(this.team, { weapon: this.weapons[0].id, skin: o.skin, camo: this.marine ? 'marine' : null, look: o.look || (this.kind === 'net' ? NET.buddyLook : this.human ? profile.skinSel : null), finish: this.human ? profile.finSel : null, boss: o.boss });
     if (this.human) this.rig.root.traverse(c => { if (c.isMesh) c.layers.set(1 + this.slot); });
     scene.add(this.rig.root);
     this.rig.root.position.copy(this.pos); this.rig.root.rotation.y = this.yaw + Math.PI;
@@ -3185,7 +3200,7 @@ class Actor {
     this.bloom = Math.min(.05, this.bloom + (d.auto ? .004 : .01));
     const eye = this.eye();
     if (d.rocket) {
-      entities.push(new Rocket(this, eye.clone().add(this.lookDir().multiplyScalar(.8)), this.lookDir()));
+      if (game.net !== 'client') entities.push(new Rocket(this, eye.clone().add(this.lookDir().multiplyScalar(.8)), this.lookDir()));
     } else {
       for (let i = 0; i < (d.pellets || 1); i++) shootRay(this, eye, coneDir(this.lookDir(), spread), d, 1);
     }
@@ -3223,6 +3238,7 @@ class Actor {
     Sfx.play('click', this.pos);
   }
   throwItem(kind) {
+    if (game.net === 'client') return;
     if (!this.active || this.action || this.chute) return;
     if (kind === 'frag' && this.grenades <= 0) return; if (kind === 'smoke' && this.smokesN <= 0) return;
     if (kind === 'frag') this.grenades--; else this.smokesN--;
@@ -3271,7 +3287,7 @@ function coneDir(d, spread) {
   if (spread <= 0) return d.clone();
   const up = Math.abs(d.y) > .95 ? new THREE.Vector3(1, 0, 0) : new THREE.Vector3(0, 1, 0);
   const r = new THREE.Vector3().crossVectors(d, up).normalize(), u = new THREE.Vector3().crossVectors(r, d);
-  const a = rand(0, Math.PI * 2), m = Math.sqrt(Math.random()) * spread;
+  const a = rand(0, Math.PI * 2), m = Math.sqrt(RNG()) * spread;
   return d.clone().addScaledVector(r, Math.cos(a) * m).addScaledVector(u, Math.sin(a) * m).normalize();
 }
 function rayActor(o, d, a, maxT) {
@@ -3297,6 +3313,7 @@ function rayActor(o, d, a, maxT) {
   return best;
 }
 function shootRay(src, o, d, def, mul, opts = {}) {
+  NET.shooter = src; NET.shotSound = def.sound || 'smg';
   // every bullet is hitscan with unlimited range, except shotgun pellets, which lose power with distance
   const fo = def.falloff;
   const range = fo ? (def.maxRange || 45) : 1000;
@@ -3325,7 +3342,7 @@ function shootRay(src, o, d, def, mul, opts = {}) {
     burst(end.x, end.y, end.z, 5, head ? 0xffe060 : 0xfff2c0, 4, .06, .22, { g: 6 });
   } else if (wt < range) {
     burst(end.x, end.y, end.z, 4, 0xd8c8a8, 4, .06, .35, { g: 14, drag: 1.5 });
-    if (Math.random() < .3) emit(smoke, end.x, end.y, end.z, 0, .4, 0, .12, .4, 0xb8ad9a, { grow: 1.5, alpha: .5 });
+    if (RNG() < .3) emit(smoke, end.x, end.y, end.z, 0, .4, 0, .12, .4, 0xb8ad9a, { grow: 1.5, alpha: .5 });
   }
   // near misses suppress
   if (src.team === 'pla') for (const a of actors) if (a.human && a.active && a !== hit) {
@@ -3362,6 +3379,7 @@ function updateTracers(dt) {
 }
 
 function damageActor(a, dmg, src, o = {}) {
+  if (game.net === 'client') return;   // the host decides every hit
   if (a.dead || dmg <= 0 || a.shieldT > 0) return;
   if (a.downed) return;
   if (game.pvp) dmg *= .42;   // longer fights: roughly two and a half times the hits to splat someone
@@ -3425,6 +3443,7 @@ function alertEnemies(pos, r, src) {
   for (const a of actors) if (a.team === 'pla' && !a.dead && a.pos.distanceTo(pos) < r) aiAlert(a, pos, src, true);
 }
 function explode(pos, r, dmg, src, o = {}) {
+  if (game.net === 'host') NET.booms.push([+pos.x.toFixed(2), +pos.y.toFixed(2), +pos.z.toFixed(2)]);
   for (const a of actors) {
     if (a.dead) continue;
     if (src && !isFoe(src, a) && a !== src && !o.friendly) continue;
@@ -3550,7 +3569,7 @@ class Destructible {
   }
   update(dt) {
     if (this.charged && !this.destroyed) { this.chargeT -= dt; if (Math.floor(this.chargeT * 2) !== Math.floor((this.chargeT + dt) * 2)) Sfx.play('beep', this.pos, .6, false); if (this.chargeT <= 0) { explode(this.pos, 6, 120, this.planter); this.destroy(this.planter); } }
-    if (this.destroyed && this.smokeT > 0) { this.smokeT -= dt; if (Math.random() < dt * 8) emit(smoke, this.pos.x + rand(-1, 1), this.pos.y + 1.5, this.pos.z + rand(-1, 1), rand(-.3, .3), rand(1.5, 2.5), rand(-.3, .3), rand(.6, 1.2), 3, 0x2a2624, { grow: 2, alpha: .5, drag: .3 }); if (Math.random() < dt * 4) emit(sparks, this.pos.x, this.pos.y + 1, this.pos.z, 0, 2, 0, .2, .4, 0xff8030); }
+    if (this.destroyed && this.smokeT > 0) { this.smokeT -= dt; if (RNG() < dt * 8) emit(smoke, this.pos.x + rand(-1, 1), this.pos.y + 1.5, this.pos.z + rand(-1, 1), rand(-.3, .3), rand(1.5, 2.5), rand(-.3, .3), rand(.6, 1.2), 3, 0x2a2624, { grow: 2, alpha: .5, drag: .3 }); if (RNG() < dt * 4) emit(sparks, this.pos.x, this.pos.y + 1, this.pos.z, 0, 2, 0, .2, .4, 0xff8030); }
     if (this.tick && !this.destroyed) this.tick(dt);
     return true;
   }
@@ -3606,7 +3625,7 @@ class Drone {
     if (inp.firePressed && strike) { this.detonate(); return; }
     if (!strike) {
       o.battery -= dt;
-      if (Math.random() < dt * 10) this.spot();
+      if (RNG() < dt * 10) this.spot();
       if (o.battery <= 0) { o.battery = 0; o.say('Drone battery empty'); this.end(); return; }
     } else if (this.t > 25) { this.detonate(); return; }
     if (Math.floor(this.t * 4) !== Math.floor((this.t - dt) * 4)) Sfx.play('drone', null, .7);
@@ -3790,7 +3809,7 @@ function moveActor(a, wx, wz, dt, jump = false) {
     if (a.onGround) { a.vel.x -= gx * GRAV * .8 * dt; a.vel.z -= gz * GRAV * .8 * dt; }
     a.vel.x += wx * 4 * dt; a.vel.z += wz * 4 * dt;
     if (nv < 3.6 || jump) a.slideT = 0;
-    if (Math.random() < dt * 30 && a.onGround) emit(smoke, a.pos.x, a.pos.y + .1, a.pos.z, rand(-.5, .5), rand(.3, 1), rand(-.5, .5), .25, .5, 0xcfc4ae, { grow: 1.5, alpha: .45 });
+    if (RNG() < dt * 30 && a.onGround) emit(smoke, a.pos.x, a.pos.y + .1, a.pos.z, rand(-.5, .5), rand(.3, 1), rand(-.5, .5), .25, .5, 0xcfc4ae, { grow: 1.5, alpha: .45 });
   } else {
     const tx = wx * speed, tz = wz * speed;
     const idle = tx === 0 && tz === 0;
@@ -3839,7 +3858,7 @@ function updateHuman(a, inp, dt) {
     if (!c.lootAmmo || !c.dead || Math.hypot(c.pos.x - a.pos.x, c.pos.z - a.pos.z) > 1.7) continue;
     c.lootAmmo = false;
     for (const w of a.weapons) if (!w.def.rocket) w.reserve = Math.min(w.def.reserve * 1.5 + w.def.mag, w.reserve + Math.round(w.def.mag * (w.def.pistol ? 1 : .8)));
-    if (Math.random() < .35 && a.grenades < 4) a.grenades++;
+    if (RNG() < .35 && a.grenades < 4) a.grenades++;
     a.say('Picked up ammo', 1); Sfx.play('reload', a.pos, .6);
   }
   if (a.drone) {
@@ -3873,7 +3892,7 @@ function updateHuman(a, inp, dt) {
   if (inp.melee) a.melee();
   if (inp.aid) a.firstAid();
   if (inp.power) usePower(a);
-  if (inp.drone && !a.action) {
+  if (inp.drone && !a.action && game.net !== 'client') {
     if (a.droneType === 'strike' ? a.drones > 0 : a.battery > 1) entities.push(new Drone(a));
     else a.say(a.droneType === 'strike' ? 'No strike drones left' : 'Drone battery empty');
   }
@@ -3932,7 +3951,7 @@ function updateChute(a, inp, dt) {
     const w = localToWorld(a.yaw, inp.mx, inp.my);
     a.vel.x = damp(a.vel.x, w.x * 16, 2.5, dt); a.vel.z = damp(a.vel.z, w.z * 16, 2.5, dt);
     if ((inp.jump && agl < 220) || agl < 55) deployCanopy(a);
-    if (Math.random() < dt * 2) Sfx.play('wind', null, .4);
+    if (RNG() < dt * 2) Sfx.play('wind', null, .4);
   } else {
     // canopy: look where you want to go; W/S speed up or brake, A/D slide sideways
     const fwdSp = a.human ? (inp.my > .2 ? 10.5 : inp.my < -.2 ? 1.5 : 6) : (inp.my > .2 ? 9.5 : inp.my < -.2 ? 2.5 : 6.5);
@@ -4003,7 +4022,7 @@ function aiShoot(a, t, dt, accMul = 1) {
   ai.burst--; if (ai.burst <= 0) ai.burstT = rand(.35, .9);
   w.mag--; a.fireT = 60 / w.def.rpm; a.lastFireT = game.time;
   const e = a.eye();
-  const aimPt = t.chest(); if (Math.random() < .12) aimPt.y += .35;
+  const aimPt = t.chest(); if (RNG() < .12) aimPt.y += .35;
   const d = e.distanceTo(aimPt);
   const tv = Math.hypot(t.vel.x, t.vel.z);
   let spread = (a.team === 'pla' && !game.pvp ? .05 / DIFF[profile.diff].acc : .03) * (1 + d / 60) * (1 + tv / 8) * (t.crouch ? 1.25 : 1) / accMul;
@@ -4067,7 +4086,7 @@ function enemyAI(a, dt) {
         if (d > .8) { const s = steer(a, ai.cover.x, ai.cover.z, dt); wx = s.x; wz = s.z; jump = s.jump; a.crouch = false; a.sprinting = d > 6; }
         else { a.sprinting = false; a.crouch = (Math.floor(a.t / 2.2 + a.slot) % 2 === 0) && ai.burst <= 0; }
       } else {
-        if (ai.strafeT <= 0) { ai.strafe = Math.random() < .5 ? -1 : 1; ai.strafeT = rand(.8, 2); a.crouch = Math.random() < .4; }
+        if (ai.strafeT <= 0) { ai.strafe = RNG() < .5 ? -1 : 1; ai.strafeT = rand(.8, 2); a.crouch = RNG() < .4; }
         const dist = Math.hypot(dx, dz);
         const fx = dx / dist, fz = dz / dist;
         wx = -fz * ai.strafe * .6 + (dist > 30 ? fx * .8 : dist < 8 ? -fx * .5 : 0); wz = fx * ai.strafe * .6 + (dist > 30 ? fz * .8 : dist < 8 ? -fz * .5 : 0);
@@ -4519,7 +4538,7 @@ function makeBuilder() {
     const y = gy(x, z);
     if (Math.abs(Math.sin(rotY)) > .7) B(.8, h, len, x, y, z, MATS.sand, { cover: true }); else B(len, h, .8, x, y, z, MATS.sand, { cover: true });
   };
-  const crate = (x, z, s = 1.2, y) => MODEL.wooden_military_crate ? prop('wooden_military_crate', x, z, { y: y ?? gy(x, z), size: s * 1.25, rot: rand(-.25, .25) + (Math.random() < .5 ? Math.PI / 2 : 0) }) : B(s, s, s, x, y ?? gy(x, z), z, MATS.crate, { cover: true });
+  const crate = (x, z, s = 1.2, y) => MODEL.wooden_military_crate ? prop('wooden_military_crate', x, z, { y: y ?? gy(x, z), size: s * 1.25, rot: rand(-.25, .25) + (RNG() < .5 ? Math.PI / 2 : 0) }) : B(s, s, s, x, y ?? gy(x, z), z, MATS.crate, { cover: true });
   const hedgehog = (x, z) => { const y = gy(x, z); for (const r of [[0, 0, .8], [0, 0, -.8], [.8, 0, 0]]) D(G.box(.12, 2, .12), MATS.steel, [x, y + .6, z], r); };
   const enemy = (x, z, o = {}) => { if (!o.weapon && (!o.type || o.type === 'rifle')) o = Object.assign({}, o, { weapon: rollEnemyWeapon() }); const a = new Actor(Object.assign({ team: 'pla', kind: 'enemy', x, z, yaw: o.yaw ?? rand(-3, 3) }, o)); a.grenades = o.type === 'mg' ? 0 : 1; actors.push(a); return a; };
   const ally = (x, z, o = {}) => { const a = new Actor(Object.assign({ team: o.team || 'us', kind: 'ally', x, z }, o)); actors.push(a); return a; };
@@ -4578,7 +4597,7 @@ function aaGun(K, x, z, label, tag) {
       e.fireT = .09;
       const o = new THREE.Vector3(x, y + 2.2, z), dir = new THREE.Vector3(Math.sin(t.rotation.y) * .5, .85, Math.cos(t.rotation.y) * .5).normalize();
       tracer(o, o.clone().addScaledVector(dir, 120), 0xff9a40);
-      if (Math.random() < .25) Sfx.play('lmg', o, .35);
+      if (RNG() < .25) Sfx.play('lmg', o, .35);
     }
   };
   entities.push(e);
@@ -4612,7 +4631,7 @@ class LandingCraft {
     if (this.state === 'wait') { if (this.t > this.delay) { this.state = 'in'; this.mesh.visible = true; } return true; }
     if (this.state === 'in') {
       this.x = Math.min(this.beachX, this.x + 9 * dt); this.mesh.position.x = this.x; this.mesh.position.y = -.6 + Math.sin(this.t * 1.5) * .15;
-      if (Math.random() < dt * 20) emit(smoke, this.x - 5, -.2, this.z + rand(-1.5, 1.5), -2, .5, 0, .4, .8, 0xffffff, { grow: 1.5, alpha: .5 });
+      if (RNG() < dt * 20) emit(smoke, this.x - 5, -.2, this.z + rand(-1.5, 1.5), -2, .5, 0, .4, .8, 0xffffff, { grow: 1.5, alpha: .5 });
       if (this.x >= this.beachX) { this.state = 'ramp'; this.t2 = 0; }
     } else if (this.state === 'ramp') {
       this.t2 += dt; this.ramp.rotation.x = Math.min(1.45, this.t2 * 1.6);
@@ -4647,7 +4666,7 @@ class Flare {
   update(dt) {
     this.t += dt; this.pos.y -= dt * 2.4; this.pos.x += dt * .8;
     this.light.intensity = Math.min(1, this.t) * 2600 * (1 + Math.sin(this.t * 23) * .08) * Math.min(1, (24 - this.t) / 4);
-    if (Math.random() < dt * 8) emit(smoke, this.pos.x, this.pos.y, this.pos.z, 0, .3, 0, .5, 3, 0xcfc8c0, { grow: 1.5, alpha: .3, drag: .3 });
+    if (RNG() < dt * 8) emit(smoke, this.pos.x, this.pos.y, this.pos.z, 0, .3, 0, .5, 3, 0xcfc8c0, { grow: 1.5, alpha: .3, drag: .3 });
     return this.t < 24;
   }
   render() { this.mesh.position.copy(this.pos); }
@@ -4792,7 +4811,7 @@ const MISSIONS = [
       this.craft[2].onSpawn = (a, i) => { if (i === 0) { a.name = 'GySgt. Reyes'; a.reyes = true; MISSIONS[1].reyes = a; a.maxHp = a.hp = 400; } };
       entities.push(new FlyBy({ from: new THREE.Vector3(-260, 60, -40), to: new THREE.Vector3(240, 60, 20), life: 7, jet: true, color: 0x5a646e }));
       game.landT = 100;
-      world.anim.push((t, dt) => { if (mode === 'play' && Math.random() < dt * .4) { const p = V(rand(-150, -70), rand(-80, 80)); burst(p.x, 0, p.z, 10, 0xffffff, 6, .3, 1, { g: 12, up: 8 }); Sfx.play('boom', p, .25); } });
+      world.anim.push((t, dt) => { if (mode === 'play' && RNG() < dt * .4) { const p = V(rand(-150, -70), rand(-80, 80)); burst(p.x, 0, p.z, 10, 0xffffff, 6, .3, 1, { g: 12, up: 8 }); Sfx.play('boom', p, .25); } });
       decorM2(K); try { worldExtras(K, 1); } catch (e) { reportError(e); } try { farmPatches(K, 2); } catch (e) { reportError(e); }
       return { chute: false, at: [[40, 0], [42, 3], [42, -3], [44, 0]], yaw: Math.PI / 2 };
     },
@@ -4871,8 +4890,8 @@ const MISSIONS = [
       K.house(36, -34, 10, 10, 9.6, { flat: true, wall: MATS.gran, cover: true });
       this.bank = V(30.5, -34);
       // market stalls and scooters
-      for (let z = -40; z <= 70; z += 7) { const s = Math.random() < .5 ? -1 : 1; K.B(2, 1, 1.4, s * 2.8, .2, z, MATS.crate, { cover: true }); K.D(G.box(2.4, .1, 2), mat(pick([0xc8402a, 0x2a6ac8, 0xd8b02a])), [s * 2.8, 2.4, z]); }
-      for (let i = 0; i < 18; i++) { const x = pick([-4, 4]) + rand(-.4, .4), z = rand(-55, 95); const g = scooterMesh(pick([0xe8e8e4, 0x2a2a2a, 0xb83a2a, 0x2a5aa8, 0x7ac0b0])); g.position.set(x, .2, z); g.rotation.y = rand(-.3, .3) + (Math.random() < .5 ? Math.PI : 0); world.group.add(g); }
+      for (let z = -40; z <= 70; z += 7) { const s = RNG() < .5 ? -1 : 1; K.B(2, 1, 1.4, s * 2.8, .2, z, MATS.crate, { cover: true }); K.D(G.box(2.4, .1, 2), mat(pick([0xc8402a, 0x2a6ac8, 0xd8b02a])), [s * 2.8, 2.4, z]); }
+      for (let i = 0; i < 18; i++) { const x = pick([-4, 4]) + rand(-.4, .4), z = rand(-55, 95); const g = scooterMesh(pick([0xe8e8e4, 0x2a2a2a, 0xb83a2a, 0x2a5aa8, 0x7ac0b0])); g.position.set(x, .2, z); g.rotation.y = rand(-.3, .3) + (RNG() < .5 ? Math.PI : 0); world.group.add(g); }
       for (let i = 0; i < 10; i++) K.tree(pick([-28, 28, -44, 44]), rand(-60, 100), 1, 'palm');
       // supply crate with launchers
       K.crate(6, 96); K.crate(-6, 96);
@@ -4964,7 +4983,7 @@ const MISSIONS = [
       entities.push(this.radar);
       roomHouse(K, 10, -60, 8, 6, 1, { flat: true, wall: MATS.concrete, door: [0, 1], furnish: false }); roomHouse(K, -12, -56, 6, 6, 1, { flat: true, wall: MATS.concrete, door: [0, 1], furnish: false });
       for (const [x, z] of [[6, -52], [-6, -64], [14, -66], [-16, -50]]) K.enemy(x, z, { tag: 'radar' });
-      for (let i = 0; i < 40; i++) { const x = rand(-125, 125), z = rand(-125, 125); if (Math.abs(x) > 12 || z > 0) K.tree(x, z, rand(.8, 1.2), Math.random() < .5 ? 'dark' : 'round'); }
+      for (let i = 0; i < 40; i++) { const x = rand(-125, 125), z = rand(-125, 125); if (Math.abs(x) > 12 || z > 0) K.tree(x, z, rand(.8, 1.2), RNG() < .5 ? 'dark' : 'round'); }
       for (const [x, z] of [[-10, 70], [8, 78], [20, 66]]) roomHouse(K, x, z, 7, 6, 1, { door: [0, -1] });
       this.mortar = new Mortar(V(30, -100), 'ridgeMortar'); this.mortar.paused = true; this.mortar.range = 140; entities.push(this.mortar);
       for (const [x, z] of [[29, -101], [32, -99]]) K.enemy(x, z, { tag: 'ridgeMortar' });
@@ -5100,11 +5119,11 @@ function bamboo(K, x, z) { const y = K.gy(x, z); const m = mat(0x7aa83a, { r: .7
 function banana(K, x, z) { const y = K.gy(x, z); K.D(G.cyl(.15, .2, 2.4, 8), mat(0x6a7a3a), [x, y + 1.2, z]); for (let i = 0; i < 6; i++) { const a = i / 6 * Math.PI * 2; K.D(G.box(.5, .04, 2.2), MATS.leaf2, [x + Math.cos(a) * .9, y + 2.5, z + Math.sin(a) * .9], [0, -a + Math.PI / 2, .5]); } }
 function car(K, x, z, color, alongZ = true, wreck = false) {
   const y = K.gy(x, z), w = alongZ ? 1.8 : 4.3, d = alongZ ? 4.3 : 1.8;
-  const g = carMesh(color, wreck); g.position.set(x, y, z); g.rotation.y = (alongZ ? 0 : Math.PI / 2) + (Math.random() < .5 ? Math.PI : 0) + (wreck ? rand(-.3, .3) : 0);
+  const g = carMesh(color, wreck); g.position.set(x, y, z); g.rotation.y = (alongZ ? 0 : Math.PI / 2) + (RNG() < .5 ? Math.PI : 0) + (wreck ? rand(-.3, .3) : 0);
   world.group.add(g);
   world.colliders.push({ type: 'box', minX: x - w / 2, maxX: x + w / 2, minY: y, maxY: y + 1.35, minZ: z - d / 2, maxZ: z + d / 2 });
   K.coverAround(world.colliders[world.colliders.length - 1]);
-  if (wreck) world.anim.push((tt, dt) => { if (mode === 'play' && Math.random() < dt * 14) { emit(sparks, x + rand(-.6, .6), y + 1.4, z + rand(-.6, .6), 0, rand(1, 3), 0, rand(.1, .2), .5, pick([0xff8a20, 0xffc040]), { drag: 1 }); emit(smoke, x, y + 2, z, rand(-.3, .3), rand(2, 3), rand(-.3, .3), rand(.8, 1.4), 4, 0x2a2624, { grow: 2.5, alpha: .55, drag: .2 }); } });
+  if (wreck) world.anim.push((tt, dt) => { if (mode === 'play' && RNG() < dt * 14) { emit(sparks, x + rand(-.6, .6), y + 1.4, z + rand(-.6, .6), 0, rand(1, 3), 0, rand(.1, .2), .5, pick([0xff8a20, 0xffc040]), { drag: 1 }); emit(smoke, x, y + 2, z, rand(-.3, .3), rand(2, 3), rand(-.3, .3), rand(.8, 1.4), 4, 0x2a2624, { grow: 2.5, alpha: .55, drag: .2 }); } });
 }
 const LANTERN = mat(0xff3a2a, { e: 0xff2a10, ei: 1.6 });
 function lanterns(K, x0, x1, z, y) {
@@ -5162,7 +5181,7 @@ function decorM2(K) {
   for (let z = -60; z <= 60; z += 4) { const x = -40, y = K.gy(x, z); K.D(G.box(.08, 1.1, .08), MATS.steel, [x, y + .55, z], null, null, false); limbBox(world.group, new THREE.Vector3(x, y + .9, z), new THREE.Vector3(x, y + .9, z + 4), .02, MATS.steel); }
   for (const [z0, z1] of [[-30, -10], [12, 32]]) for (let z = z0; z <= z1; z += 5.6) K.sandbags(-23, z, 5.4, Math.PI / 2, .9);
   powerLine(K, [[-18, 6], [10, 6], [40, 6], [70, 6], [100, 6]]);
-  for (let i = 0; i < 6; i++) bamboo(K, rand(40, 120), rand(30, 120) * (Math.random() < .5 ? 1 : -1));
+  for (let i = 0; i < 6; i++) bamboo(K, rand(40, 120), rand(30, 120) * (RNG() < .5 ? 1 : -1));
   for (let i = 0; i < 5; i++) banana(K, rand(0, 30), rand(-40, 40));
   propsNear(K, [[-26, -35], [-25, 7], [-27, 38], [-14, 0]]);
   for (const z of [-4, 4]) prop('concrete_road_barrier', -6, z, { size: 2.6, rot: Math.PI / 2 });
@@ -5329,7 +5348,7 @@ function roomHouse(K, x, z, w, d, floors, o = {}) {
       else { fu('cardboard_box_01', cx + 1, cz - .6, .7); fu('wooden_military_crate', cx - 1, cz + .5, 1.2, 0); }
     }
     // a couple of things worth finding on every floor
-    for (let i = 0, n = 1 + (Math.random() < .6 ? 1 : 0); i < n; i++) {
+    for (let i = 0, n = 1 + (RNG() < .6 ? 1 : 0); i < n; i++) {
       for (let tries = 0; tries < 12; tries++) {
         const lx = x + rand(-w / 2 + .9, w / 2 - .9), lz = z + rand(-d / 2 + .9, d / 2 - .9);
         if (lx > hole[0] - .4 && lx < hole[1] + .4 && lz > hole[2] - .4 && lz < hole[3] + .4) continue;
@@ -5374,7 +5393,7 @@ Object.assign(ENEMY_WEAPONS, {
 });
 const lootId = id => (ENEMY_WEAPONS[id] && ENEMY_WEAPONS[id].lootAs) || id;
 function rollEnemyWeapon() {
-  const r = Math.random();
+  const r = RNG();
   return r < .12 ? 'e_sniper' : r < .26 ? 'e_shotgun' : r < .42 ? 'e_smg' : r < .52 ? 'e_battle' : 'qbz';
 }
 { const prev = buildGunModel; buildGunModel = function (kind, metal, side, finish) { return prev(lootId(kind), metal, side, finish); }; }
@@ -5524,7 +5543,7 @@ function runEvent(kind) {
     const p = eventSpawnPoint(L, 40, 60); if (!p) return false;
     for (let i = 0; i < 5; i++) { const e = K.enemy(p[0] + rand(-3, 3), p[1] + rand(-3, 3), { weapon: i % 2 ? 'e_shotgun' : 'e_smg' }); e.rush = true; alert(e); }
   } else if (kind === 'snipers') {
-    const roofs = world.houses.map(h => ({ x: h.x, z: h.z, d: Math.hypot(h.x - L.pos.x, h.z - L.pos.z) })).filter(h => h.d > 30 && h.d < 95).sort(() => Math.random() - .5).slice(0, 3);
+    const roofs = world.houses.map(h => ({ x: h.x, z: h.z, d: Math.hypot(h.x - L.pos.x, h.z - L.pos.z) })).filter(h => h.d > 30 && h.d < 95).sort(() => RNG() - .5).slice(0, 3);
     const list = [];
     for (const h of roofs) { const e = K.enemy(h.x, h.z, { weapon: 'e_sniper', static: true }); e.pos.y = groundAt(h.x, h.z, 200); alert(e); list.push(e); }
     if (list.length < 2) { const p = eventSpawnPoint(L, 50, 80); if (p) for (let i = 0; i < 2; i++) { const e = K.enemy(p[0] + i * 3, p[1], { weapon: 'e_sniper', static: true }); alert(e); list.push(e); } }
@@ -5765,7 +5784,7 @@ function pvpBot(a, dt) {
     a.pitch = Math.atan2(t.chest().y - a.eye().y, dist);
     const react = [.9, .6, .4][profile.diff];
     if (ai.lostT < .3 && ai.seeT > react && Math.abs(wrapAngle(yawTo(dx, dz) - a.yaw)) < .3 && !a.action) aiShoot(a, t, dt, 1.3);
-    if (ai.strafeT <= 0) { ai.strafe = Math.random() < .5 ? -1 : 1; ai.strafeT = rand(.5, 1.4); a.crouch = Math.random() < .15; }
+    if (ai.strafeT <= 0) { ai.strafe = RNG() < .5 ? -1 : 1; ai.strafeT = rand(.5, 1.4); a.crouch = RNG() < .15; }
     const want = a.w.def.pellets ? 6 : a.w.def.scope ? 32 : a.w.def.pistol ? 12 : 16;
     const app = dist > want + 4 ? 1 : dist < want - 4 ? -.6 : 0, fx = dx / dist, fz = dz / dist;
     const s = steer(a, a.pos.x + (fx * app - fz * ai.strafe * .8) * 3, a.pos.z + (fz * app + fx * ai.strafe * .8) * 3, dt);
@@ -5774,14 +5793,14 @@ function pvpBot(a, dt) {
   } else if (game.ffa || game.teamMode) {
     const goal = (game.ffa ? ffaBot(a, dt) : modeBotGoal(a, dt)) || [a.pos.x, a.pos.z];
     if (ai.crate && !ai.crate.stub.looted && a.pos.distanceTo(ai.crate.p) < 1.8) { takeWeapon(a, ai.crate.pid, ai.crate.stub); ai.crate = null; }
-    const s = steer(a, goal[0], goal[1], dt); wx = s.x; wz = s.z; jump = s.jump || Math.random() < dt * .4; a.sprinting = true; a.crouch = false;
+    const s = steer(a, goal[0], goal[1], dt); wx = s.x; wz = s.z; jump = s.jump || RNG() < dt * .4; a.sprinting = true; a.crouch = false;
     if (Math.hypot(wx, wz) > .1) a.yaw = angDamp(a.yaw, yawTo(wx, wz), 6, dt);
     a.pitch *= .9;
   } else {
     if (ai.lane === undefined || ai.laneTeam !== a.team) { ai.lane = pick(PVP_LANES); ai.wp = 0; ai.laneTeam = a.team; }
     const dir = a.team === 'us' ? 1 : -1, route = [-34, -14, 0, 14, 34].map(z => [ai.lane, z * dir]);
     let goal = route[Math.min(ai.wp, route.length - 1)];
-    if (ai.wp >= route.length) { const f = nearestFoe(a, 300, false); goal = f ? [f.pos.x, f.pos.z] : [0, 0]; if (Math.random() < dt * .1) { ai.lane = pick(PVP_LANES); ai.wp = 1; } }
+    if (ai.wp >= route.length) { const f = nearestFoe(a, 300, false); goal = f ? [f.pos.x, f.pos.z] : [0, 0]; if (RNG() < dt * .1) { ai.lane = pick(PVP_LANES); ai.wp = 1; } }
     else if (Math.hypot(goal[0] - a.pos.x, goal[1] - a.pos.z) < 3) ai.wp++;
     const s = steer(a, goal[0], goal[1], dt); wx = s.x; wz = s.z; jump = s.jump; a.sprinting = true; a.crouch = false;
     if (Math.hypot(wx, wz) > .1) a.yaw = angDamp(a.yaw, yawTo(wx, wz), 6, dt);
@@ -5860,7 +5879,7 @@ Object.assign(SKINS.nightops, { name: 'Midnight Snacker', shirt: 0x3a2a6a, pants
 Object.assign(SKINS.robot, { name: 'Robo-Chef' }); Object.assign(SKINS.neon, { name: 'Neon Noodle', hat: 'cap' }); Object.assign(SKINS.gold, { name: 'Golden Chef' });
 SKINS.burnt = { name: 'Burnt Bot', price: 0, hidden: true, shirt: 0x3a3236, pants: 0x221e22, vest: 0x5a2a20, helm: 0x1a1618, accent: 0xff5a1a, boot: 0x141012, glove: 0x2a2224, pack: 0x2a2224, hat: 'burnt', face: 'burnt', head: 0x2a2428, glow: true };
 const ALLY_LOOKS = ['ranger', 'jungle', 'arctic', 'desert'];
-buildSoldier = function (side, opts = {}) { return buildBlockyAvatar(side, Object.assign({}, opts, { look: opts.look || (side === 'pla' && !game.pvp ? 'burnt' : ALLY_LOOKS[Math.floor(Math.random() * ALLY_LOOKS.length)]) })); };
+buildSoldier = function (side, opts = {}) { return buildBlockyAvatar(side, Object.assign({}, opts, { look: opts.look || (side === 'pla' && !game.pvp ? 'burnt' : ALLY_LOOKS[Math.floor(RNG() * ALLY_LOOKS.length)]) })); };
 { const prevFace = faceTexFor; faceTexFor = id => skinStyle(id).face === 'burnt' ? faceTex('pla') : prevFace(id); }
 { const prevHat = skinHat; skinHat = (head, S, accentM) => {
   const W = tmat(S.helm, { r: .7 });
@@ -5941,7 +5960,7 @@ function updateFood(dt) {
       p.life = 0; p.m.visible = false;
       const end = p.a.clone().addScaledVector(p.dir, p.dist), F = p.food, col = F.splat ?? pick(F.c);
       burst(end.x, end.y, end.z, 5, col, 3.5, F.s * .9, .3, { g: 10 });
-      if (!p.hitActor && Math.random() < .7) splatAt(end, p.dir, col, F.s * 5 + .1);
+      if (!p.hitActor && RNG() < .7) splatAt(end, p.dir, col, F.s * 5 + .1);
       continue;
     }
     p.m.position.copy(p.a).addScaledVector(p.dir, p.s); p.m.rotation.x += dt * 12;
@@ -5951,7 +5970,7 @@ function updateFood(dt) {
 function clearFood() { for (const p of foodPool) { p.life = 0; p.m.visible = false; } for (const s of splatPool) { s.life = 0; s.m.visible = false; } }
 
 // ---------- comic words that pop where things happen ----------
-function popWord(pos, text, color = '#ffe14a') { (game.words || (game.words = [])).push({ pos: pos.clone(), text, color, t: 1.1 }); if (game.words.length > 14) game.words.shift(); }
+function popWord(pos, text, color = '#ffe14a') { if (game.net === 'host') NET.words.push([+pos.x.toFixed(2), +pos.y.toFixed(2), +pos.z.toFixed(2), text, color]); (game.words || (game.words = [])).push({ pos: pos.clone(), text, color, t: 1.1 }); if (game.words.length > 14) game.words.shift(); }
 
 // ---------- bouncy movement: double jump, jelly pads, stomps, ground pounds, sugar rush ----------
 const JUMP_PAD_V = 17.5;
@@ -5978,7 +5997,7 @@ function bounceTick(a, dt) {
   }
   if (!a.human) return;
   if (a.onGround) { a.dj = false; }
-  if (a.sugarT > 0) { a.sugarT -= dt; if (Math.random() < dt * 30) emit(sparks, a.pos.x + rand(-.3, .3), a.pos.y + rand(.2, 1.6), a.pos.z + rand(-.3, .3), 0, rand(.2, .8), 0, rand(.05, .09), .6, pick([0xff3a5a, 0xffd23a, 0x3aff7a, 0x3ad0ff, 0xb05aff]), { drag: 2 }); }
+  if (a.sugarT > 0) { a.sugarT -= dt; if (RNG() < dt * 30) emit(sparks, a.pos.x + rand(-.3, .3), a.pos.y + rand(.2, 1.6), a.pos.z + rand(-.3, .3), 0, rand(.2, .8), 0, rand(.05, .09), .6, pick([0xff3a5a, 0xffd23a, 0x3aff7a, 0x3ad0ff, 0xb05aff]), { drag: 2 }); }
   // stomp: land on a bot's head
   if (a.vel.y < -2.5) for (const o of actors) {
     if (!isFoe(a, o) || !o.active) continue;
@@ -6029,7 +6048,7 @@ function ingredientMesh(g, ing) {
 function dropIngredient(pos) {
   if (!game.recipe) newRecipe();
   const need = RECIPES[game.recipe.id].need.filter(k => !game.recipe.have[k]);
-  const ing = need.length && Math.random() < .65 ? pick(need) : pick(Object.keys(INGREDIENTS));
+  const ing = need.length && RNG() < .65 ? pick(need) : pick(Object.keys(INGREDIENTS));
   entities.push(new Pickup('ing', pos.clone().add(new THREE.Vector3(rand(-.6, .6), 0, rand(-.6, .6))), { ing, auto: true, life: 30 }));
 }
 function collectIngredient(h, ing) {
@@ -6041,6 +6060,7 @@ function collectIngredient(h, ing) {
   } else { addCoins(h, 2); }
 }
 function usePower(a) {
+  if (game.net === 'client') return;
   const id = a.power; if (!id || !a.active) return;
   a.power = null;
   const eye = a.eye(), d = a.lookDir();
@@ -6122,7 +6142,7 @@ function arcSpawnTick(dt, cap) {
   const K = makeBuilder();
   for (let i = 0; i < Math.min(3, cap - alive); i++) {
     const e = K.enemy(p[0] + rand(-2.5, 2.5), p[1] + rand(-2.5, 2.5), {});
-    if (Math.random() < .35) e.rush = true;
+    if (RNG() < .35) e.rush = true;
     aiAlert(e, L.pos.clone(), null); e.ai.alertT = 60;
   }
 }
@@ -6146,7 +6166,7 @@ function kitchenRing(at, r) {
   P(g, 1.6, 1, .9, tmat(0xe8e8ee, { m: .4 }), 0, .5, 0); P(g, .5, .08, .5, tmat(0xff5a1a, { e: 0xff3a10, ei: 1 }), -.4, 1.04, 0); P(g, .5, .08, .5, tmat(0xff5a1a, { e: 0xff3a10, ei: 1 }), .4, 1.04, 0);
   P(g, .55, .4, .55, tmat(0x8a8e96, { m: .5 }), .4, 1.28, 0);
   world.group.add(g);
-  world.anim.push(t => { ringM.material.opacity = .4 + Math.sin(t * 4) * .2; if (Math.random() < .1) emit(smoke, at.x + .4, at.y + 1.6, at.z, 0, 1, 0, .2, 1.2, 0xffffff, { grow: 2, alpha: .5 }); });
+  world.anim.push(t => { ringM.material.opacity = .4 + Math.sin(t * 4) * .2; if (RNG() < .1) emit(smoke, at.x + .4, at.y + 1.6, at.z, 0, 1, 0, .2, 1.2, 0xffffff, { grow: 2, alpha: .5 }); });
 }
 function spawnBoss() {
   const L = squadLeader(); const s = (L && (eventSpawnPoint(L, 30, 45) || spotNear(L, 28, 45, 3))) || [0, 0];
@@ -6247,12 +6267,14 @@ function skinBody(r, S) {
   P(r.torso, .4, .1, .1, tmat(S.accent === 0x38b8ff ? 0xe8302a : S.accent), 0, .6, .14); P(r.torso, .12, .14, .06, tmat(S.accent === 0x38b8ff ? 0xe8302a : S.accent), .08, .52, .18, 0, 0, .3);
 }
 const JUNK_IDS = Object.keys(JUNK);
-buildSoldier = function (side, opts = {}) { return buildBlockyAvatar(side, Object.assign({}, opts, { look: opts.look || (side === 'pla' && !game.pvp ? (opts.boss ? 'e_burger' : pick(JUNK_IDS)) : ALLY_LOOKS[Math.floor(Math.random() * ALLY_LOOKS.length)]) })); };
+buildSoldier = function (side, opts = {}) { const look = opts.look || (side === 'pla' && !game.pvp ? (opts.boss ? 'e_burger' : pick(JUNK_IDS)) : ALLY_LOOKS[Math.floor(RNG() * ALLY_LOOKS.length)]); const r = buildBlockyAvatar(side, Object.assign({}, opts, { look })); r.lookId = look; return r; };
 function recipeHTML(a) {
   if (game.pvp || !game.recipe) return '';
   const R = RECIPES[game.recipe.id];
   return `<b>Recipe: ${R.name}</b><span class="ings">${R.need.map(k => `<span class="ing ${game.recipe.have[k] ? 'got' : ''}"><i style="background:#${INGREDIENTS[k].c.toString(16).padStart(6, '0')}"></i>${INGREDIENTS[k].name}</span>`).join('')}</span>${a.power ? `<span class="ready">${RECIPES[a.power].name} ready: press ${a.kind === 'kbm' ? '7' : 'D-pad up'}</span>` : ''}`;
 }
+
+{ const prevFS = foodShot; foodShot = function (a, b, food, hit) { prevFS(a, b, food, hit); if (game.net === 'host') netFx(NET.shooter, a, b, food, hit, NET.shotSound); }; }
 
 // =====================================================================
 // Free-for-all on small arenas, and chaos that rains from the sky
@@ -6265,7 +6287,7 @@ const hexCol = c => '#' + c.toString(16).padStart(6, '0');
 
 // ---------- arenas: a small walled square cut out of each big map ----------
 function pickArena(M) {
-  if ((M.size || world.size) <= 50) return { cx: 0, cz: 0, r: Math.min(world.size - 2, 44) };
+  if ((M.size || world.size) <= 50) return { cx: 0, cz: 0, r: netSolo() ? 26 : Math.min(world.size - 2, 44) };
   const H = world.houses;
   let best = { x: 0, z: 0, n: -1 };
   for (const h of H) {
@@ -6273,7 +6295,7 @@ function pickArena(M) {
     if (near.length > best.n) best = { n: near.length, x: near.reduce((s, o) => s + o.x, 0) / near.length, z: near.reduce((s, o) => s + o.z, 0) / near.length };
   }
   const lim = world.size - ARENA_R - 2;
-  return { cx: clamp(best.x, -lim, lim), cz: clamp(best.z, -lim, lim), r: ARENA_R };
+  return { cx: clamp(best.x, -lim, lim), cz: clamp(best.z, -lim, lim), r: netSolo() ? 28 : ARENA_R };
 }
 const inArena = (x, z, m = 0) => { const A = world.arena; return !A || (Math.abs(x - A.cx) < A.r - m && Math.abs(z - A.cz) < A.r - m); };
 function buildArenaWalls() {
@@ -6305,13 +6327,13 @@ function arenaSpot(minFoeDist = 0, who = null) {
 
 // ---------- free-for-all ----------
 function ffaSpawnAll() {
-  const humans = profile.slots.map((k, i) => [k, i]).filter(([k]) => k !== 'ai' && k !== 'off');
+  const humans = humanSlots();
   const roster = humans.map(([k, slot]) => ({ kind: k, slot }));
   let bi = 0;
-  while (roster.length < FFA_SIZE) roster.push({ kind: 'bot', name: CHEF_NAMES[bi++ % CHEF_NAMES.length] });
+  while (roster.length < (netSolo() ? roster.length : FFA_SIZE)) roster.push({ kind: 'bot', name: CHEF_NAMES[bi++ % CHEF_NAMES.length] });
   roster.forEach((r, i) => {
     const team = 'c' + i, human = r.kind !== 'bot', sp = arenaSpot(8);
-    const a = new Actor({ team, kind: human ? r.kind : 'enemy', slot: human ? r.slot : -1, x: sp[0], z: sp[1], call: human ? (humans.length > 1 ? `P${r.slot + 1}` : 'You') : r.name, name: human ? `Player ${r.slot + 1}` : r.name, weapon: human ? null : pick(['m4', 'mp7', 'scar', 'm870', 'm249', 'm24', 'm1014', 'm110']), yaw: rand(0, 6.28) });
+    const a = new Actor({ team, kind: human ? r.kind : 'enemy', slot: human ? r.slot : -1, x: sp[0], z: sp[1], call: human ? (r.kind === 'net' ? NET.buddy || 'Buddy' : game.net ? ACCOUNT.name || 'Host' : humans.length > 1 ? `P${r.slot + 1}` : 'You') : r.name, name: human ? `Player ${r.slot + 1}` : r.name, weapon: human ? null : pick(['m4', 'mp7', 'scar', 'm870', 'm249', 'm24', 'm1014', 'm110']), yaw: rand(0, 6.28) });
     a.maxHp = a.hp = FFA_HP; a.maxArmor = a.armor = FFA_ARMOR; a.pvpBot = !human; a.shieldT = 2; a.ffaScore = 0; a.color = FFA_COLORS[i % FFA_COLORS.length];
     actors.push(a);
     backupOnly(a); if (game.ladder) { a.ladder = 0; setLadderWeapon(a); }
@@ -6343,7 +6365,7 @@ function ffaBot(a, dt) {
   const ai = a.ai;
   if (!ai.target || !ai.target.active) {
     ai.roamT = (ai.roamT || 0) - dt;
-    if (ai.roamT <= 0) { ai.roamT = rand(3, 6); const f = nearestFoe(a, 70, false); ai.roam = f && Math.random() < .75 ? [f.pos.x, f.pos.z] : arenaSpot(0, a); }
+    if (ai.roamT <= 0) { ai.roamT = rand(3, 6); const f = nearestFoe(a, 70, false); ai.roam = f && RNG() < .75 ? [f.pos.x, f.pos.z] : arenaSpot(0, a); }
   }
   return ai.roam;
 }
@@ -6387,7 +6409,7 @@ class SkyDrop {
         entities.push(new Pickup('weapon', p, { stub, weapon: pid, side: 'us', life: 25 }));
         addInteract({ keep: true, pos: p, r: 1.8, time: .3, get text() { return 'Grab ' + WEAPONS[pid].name; }, active: () => !stub.looted && game.time < exp, done: by => takeWeapon(by, pid, stub) });
         // bots go for crates too
-        for (const a of actors) if (a.pvpBot && a.active && !a.ai.target && a.pos.distanceTo(p) < 25 && Math.random() < .5) { a.ai.roam = [p.x, p.z]; a.ai.roamT = 4; a.ai.crate = { stub, pid, p }; }
+        for (const a of actors) if (a.pvpBot && a.active && !a.ai.target && a.pos.distanceTo(p) < 25 && RNG() < .5) { a.ai.roam = [p.x, p.z]; a.ai.roamT = 4; a.ai.crate = { stub, pid, p }; }
       } else if (this.kind === 'coins') {
         for (let i = 0; i < 8; i++) { const an = rand(0, 6.28); entities.push(new Pickup('coin', p.clone().add(new THREE.Vector3(0, 1, 0)), { vel: new THREE.Vector3(Math.cos(an) * 3, 6, Math.sin(an) * 3), life: 30 })); }
       } else entities.push(new Pickup('gift', p, { gift: this.o.gift || pick(['apple', 'sugar', 'dish', 'shield']), auto: true, life: 30 }));
@@ -6408,7 +6430,7 @@ function skyChaos(dt) {
   const chaos = clamp(game.time / 150, 0, 1);
   // sprinkles and candy drifting down everywhere
   const L = actors.find(a => a.human && !a.dead) || squadLeader();
-  if (L) for (let i = 0; i < 2; i++) if (Math.random() < dt * 40) emit(smoke, L.pos.x + rand(-28, 28), L.pos.y + rand(12, 22), L.pos.z + rand(-28, 28), rand(-.5, .5), -6, rand(-.5, .5), rand(.05, .09), 3, pick([0xff5ab0, 0x5ad8ff, 0xffd23a, 0x7aff5a, 0xffffff, 0xb05aff]), { g: 2, drag: 0, alpha: 1 });
+  if (L) for (let i = 0; i < 2; i++) if (RNG() < dt * 40) emit(smoke, L.pos.x + rand(-28, 28), L.pos.y + rand(12, 22), L.pos.z + rand(-28, 28), rand(-.5, .5), -6, rand(-.5, .5), rand(.05, .09), 3, pick([0xff5ab0, 0x5ad8ff, 0xffd23a, 0x7aff5a, 0xffffff, 0xb05aff]), { g: 2, drag: 0, alpha: 1 });
   game.skyT = (game.skyT ?? 4) - dt;
   if (game.skyT > 0) return;
   game.skyT = lerp(3.6, 1.4, chaos) * rand(.7, 1.3);
@@ -6423,7 +6445,7 @@ function skyChaos(dt) {
     for (let i = 0; i < 6; i++) { const s = spot(); if (s) entities.push(new SkyDrop(storm === 'mixed' ? pick(['meteor', 'crate', 'gift', 'coins']) : storm, s[0], s[1])); }
     return;
   }
-  const r = Math.random(), kind = r < .34 + chaos * .1 ? 'meteor' : r < .58 ? 'gift' : r < .8 ? 'crate' : 'coins';
+  const r = RNG(), kind = r < .34 + chaos * .1 ? 'meteor' : r < .58 ? 'gift' : r < .8 ? 'crate' : 'coins';
   const s = spot(); if (s) entities.push(new SkyDrop(kind, s[0], s[1]));
 }
 function arenaPads() { const K = makeBuilder(); for (let i = 0; i < 6; i++) { const s = arenaSpot(0); if (s && farmSpotFree(s[0], s[1], 1.4)) jellyPad(K, s[0], s[1]); } }
@@ -6554,7 +6576,7 @@ takeWeapon = function (by, pid, corpse) {
   if (by.human) popWord(by.pos.clone().add(new THREE.Vector3(0, 2.2, 0)), def.name.toUpperCase() + '!', '#ffd23a');
 };
 function backupOnly(a) {
-  const id = a.human ? (profile.loadouts[a.slot] || profile.loadouts[0]).secondary : pick(PICK_SECONDARY.filter(k => k !== 'at4'));
+  const id = a.kind === 'net' ? (NET.buddyBackup || 'm17') : a.human ? (profile.loadouts[a.slot] || profile.loadouts[0]).secondary : pick(PICK_SECONDARY.filter(k => k !== 'at4'));
   const def = WEAPONS[id] && WEAPONS[id].slot === 'secondary' ? WEAPONS[id] : WEAPONS.m17;
   a.weapons = [{ id: def === WEAPONS[id] ? id : 'm17', def, mag: def.mag, reserve: def.reserve * 2 }]; a.wi = 0; a.reloadT = 0;
   if (a.vm) for (const w of a.weapons) if (!a.vm.guns[w.id]) { const g = buildViewGun(w.id); g.root.visible = false; a.vm.root.add(g.root); a.vm.guns[w.id] = g; }
@@ -6803,7 +6825,7 @@ const MODES = {
 const TEAM_NAME = { us: 'Blue', pla: 'Red' }, otherTeam = t => t === 'us' ? 'pla' : 'us';
 const TEAM_SIZE = 4;
 let lastMap = -1;
-function randomMap() { let mi; do { mi = Math.floor(Math.random() * MISSIONS.length); } while (mi === lastMap && MISSIONS.length > 1); lastMap = mi; return mi; }
+function randomMap() { let mi; do { mi = Math.floor(RNG() * MISSIONS.length); } while (mi === lastMap && MISSIONS.length > 1); lastMap = mi; return mi; }
 function curMode() { return MODES[profile.gmode] ? profile.gmode : 'ffa'; }
 
 // ---------- home screen: modes, your backup, who is playing ----------
@@ -6836,15 +6858,15 @@ function teamSpawnPoints(team) {
 }
 function teamSpawnAll() {
   game.spawns = { us: teamSpawnPoints('us'), pla: teamSpawnPoints('pla') };
-  const humans = profile.slots.map((k, i) => [k, i]).filter(([k]) => k !== 'ai' && k !== 'off');
+  const humans = humanSlots();
   const roster = { us: [], pla: [] };
   humans.forEach(([k, slot], idx) => roster[idx % 2 ? 'pla' : 'us'].push({ kind: k, slot }));
   let bi = 0;
   for (const team of ['us', 'pla']) {
-    while (roster[team].length < TEAM_SIZE) roster[team].push({ kind: 'bot', name: CHEF_NAMES[bi++ % CHEF_NAMES.length] });
+    while (roster[team].length < (netSolo() ? Math.max(1, roster[team].length) : TEAM_SIZE)) roster[team].push({ kind: 'bot', name: CHEF_NAMES[bi++ % CHEF_NAMES.length] });
     roster[team].forEach((r, i) => {
       const human = r.kind !== 'bot', sp = game.spawns[team][i % game.spawns[team].length];
-      const a = new Actor({ team, kind: human ? r.kind : (team === 'us' ? 'squad' : 'enemy'), slot: human ? r.slot : -1, x: sp[0], z: sp[1], call: human ? (humans.length > 1 ? `P${r.slot + 1}` : 'You') : r.name, name: human ? `Player ${r.slot + 1}` : r.name, yaw: team === 'us' ? Math.PI : 0 });
+      const a = new Actor({ team, kind: human ? r.kind : (team === 'us' ? 'squad' : 'enemy'), slot: human ? r.slot : -1, x: sp[0], z: sp[1], call: human ? (r.kind === 'net' ? NET.buddy || 'Buddy' : game.net ? ACCOUNT.name || 'Host' : humans.length > 1 ? `P${r.slot + 1}` : 'You') : r.name, name: human ? `Player ${r.slot + 1}` : r.name, yaw: team === 'us' ? Math.PI : 0 });
       a.maxHp = a.hp = FFA_HP; a.maxArmor = a.armor = FFA_ARMOR; a.pvpBot = !human; a.shieldT = 2; a.ffaScore = 0; a.color = pvpTeamColor(team);
       a.ai.role = i % 3 === 1 ? 'defend' : 'attack'; a.ai.siteI = i % 2;
       backupOnly(a); actors.push(a);
@@ -6961,7 +6983,7 @@ function hillObjective() {
       if (Z.owner === 'us' || Z.owner === 'pla') { game.ms[Z.owner] = Math.min(100, game.ms[Z.owner] + dt * (.9 + .25 * (Z.owner === 'us' ? us : pla))); }
       const col = Z.owner === 'us' || Z.owner === 'pla' ? pvpTeamColor(Z.owner) : Z.owner === 'contested' ? 0xffffff : 0xffd23a;
       Z.mesh.userData.ringM.material.color.setHex(col); Z.mesh.userData.ringM.material.opacity = .45 + Math.sin(game.time * 6) * .25;
-      if (Math.random() < dt * 6) emit(smoke, Z.pos.x + rand(-.6, .6), Z.pos.y + 1.5, Z.pos.z + rand(-.6, .6), 0, 1.2, 0, .3, 1.4, 0xffffff, { grow: 2, alpha: .5 });
+      if (RNG() < dt * 6) emit(smoke, Z.pos.x + rand(-.6, .6), Z.pos.y + 1.5, Z.pos.z + rand(-.6, .6), 0, 1.2, 0, .3, 1.4, 0xffffff, { grow: 2, alpha: .5 });
     },
     progress() { return `Blue ${Math.floor(game.ms.us)} · Red ${Math.floor(game.ms.pla)}`; },
     marker() { return game.zone && game.zone.pos; },
@@ -7045,7 +7067,7 @@ function newRound() {
   for (const a of actors) { if (a.dead || a.respawnT !== undefined) a.respawnT = undefined; modeRespawn(a); a.flag = null; }
   const att = actors.filter(a => a.team === game.attack);
   const carrier = att.find(a => a.human) || pick(att);
-  game.bomb = { carrier, pos: carrier.pos.clone(), planted: false, timer: 30, plantP: 0, defuseP: 0, target: Math.random() < .5 ? 0 : 1 };
+  game.bomb = { carrier, pos: carrier.pos.clone(), planted: false, timer: 30, plantP: 0, defuseP: 0, target: RNG() < .5 ? 0 : 1 };
   const t = myTeam();
   showBanner(`Round ${game.round}`, game.attack === t ? 'Your team attacks: plant the pie bomb at A or B!' : 'Your team defends: protect A and B!');
   Sfx.play('streak', null, .9);
@@ -7130,6 +7152,266 @@ function ladderObjective() {
 }
 
 // =====================================================================
+// Play with a friend online: 5-character lobby codes over PeerJS.
+// The host runs the match; the buddy's game sends inputs and draws what
+// the host sends back. Both build the same random map from a shared seed.
+// =====================================================================
+const NET = { peer: null, conn: null, role: null, code: '', buddy: null, status: '', bots: false, input: null, acc: {}, inT: 0, snapT: 0, fx: [], words: [], banners: [], booms: [], mirror: new Map(), ver: 3 };
+const CODE_CHARS = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+const peerId = code => 'foodfight-lobby-' + code.toUpperCase();
+let ENT_NID = 0, pendingNet = null;
+const netOK = () => typeof window.Peer === 'function';
+const isHost = () => game.net === 'host', isClient = () => game.net === 'client';
+function netSend(msg) { try { if (NET.conn && NET.conn.open) NET.conn.send(msg); } catch (e) { /* buddy gone */ } }
+function netStatus(s) { NET.status = s; if (mode === 'menu') renderMenu(); }
+function newCode() { let c = ''; for (let i = 0; i < 5; i++) c += CODE_CHARS[Math.floor(Math.random() * CODE_CHARS.length)]; return c; }
+function netReset() { try { if (NET.conn) NET.conn.close(); } catch (e) { /* closed */ } try { if (NET.peer) NET.peer.destroy(); } catch (e) { /* closed */ } Object.assign(NET, { peer: null, conn: null, role: null, code: '', buddy: null, input: null }); }
+function bindConn(conn) {
+  NET.conn = conn;
+  conn.on('open', () => { netSend({ t: 'hello', name: ACCOUNT.name || 'Chef', look: profile.skinSel, backup: profile.loadouts[0].secondary, ver: NET.ver }); });
+  conn.on('data', onNetMsg);
+  conn.on('close', () => { const was = NET.buddy; NET.buddy = null; NET.conn = null; if (game.net && mode !== 'menu' && mode !== 'debrief') { notice(`${was || 'Your buddy'} left the game.`); toMenu(); } netStatus(NET.role === 'host' ? 'Your buddy left. Waiting for someone to join...' : 'Disconnected.'); if (NET.role === 'client') netReset(); });
+  conn.on('error', () => netStatus('Connection problem. Try again.'));
+}
+function netCreate(tries = 0) {
+  if (!netOK()) { netStatus('Online play could not load here. Open the game on your website to play with a friend.'); return; }
+  netReset(); NET.role = 'host'; NET.code = newCode(); netStatus('Creating lobby...');
+  const peer = NET.peer = new Peer(peerId(NET.code), { debug: 0 });
+  peer.on('open', () => netStatus('Waiting for your buddy...'));
+  peer.on('connection', conn => { if (NET.conn && NET.conn.open) { conn.on('open', () => { conn.send({ t: 'full' }); setTimeout(() => conn.close(), 300); }); return; } bindConn(conn); });
+  peer.on('error', e => { if (e.type === 'unavailable-id' && tries < 4) return netCreate(tries + 1); netStatus('Could not create a lobby (' + (e.type || 'error') + ').'); });
+}
+function netJoin(code) {
+  code = (code || '').toUpperCase().replace(/[^A-Z0-9]/g, '');
+  if (code.length !== 5) { netStatus('Lobby codes have 5 letters and numbers.'); return; }
+  if (!netOK()) { netStatus('Online play could not load here. Open the game on your website to play with a friend.'); return; }
+  netReset(); NET.role = 'client'; NET.code = code; netStatus('Joining ' + code + '...');
+  const peer = NET.peer = new Peer({ debug: 0 });
+  peer.on('open', () => { bindConn(peer.connect(peerId(code), { serialization: 'json', reliable: true })); });
+  peer.on('error', e => netStatus(e.type === 'peer-unavailable' ? 'No lobby with that code. Check it and try again.' : 'Could not join (' + (e.type || 'error') + ').'));
+}
+function lobbyHTML() {
+  const connected = NET.conn && NET.conn.open && NET.buddy;
+  let body;
+  if (!NET.role) body = `<div class="lobrow"><button type="button" class="go sm" id="lobCreate">Create lobby</button><span class="lobor">or</span><input id="lobCode" maxlength="5" placeholder="CODE" aria-label="Lobby code" autocomplete="off"><button type="button" class="plain sm" id="lobJoin">Join lobby</button></div>`;
+  else if (NET.role === 'host' && !connected) body = `<div class="lobrow"><span>Lobby code</span><b class="lobcode">${NET.code || '-----'}</b><button type="button" class="plain sm" id="lobLeave">Cancel</button></div>`;
+  else if (connected) body = `<div class="lobrow"><span class="lobok">Connected with <b>${String(NET.buddy).replace(/</g, '&lt;')}</b></span>${NET.role === 'host' ? `<label class="lobtog"><input type="checkbox" id="lobBots" ${NET.bots ? 'checked' : ''}> Bots</label>` : ''}<button type="button" class="plain sm" id="lobLeave">Leave</button></div><p class="note">${NET.role === 'host' ? `1v1 is on: pick any mode and press Play. ${NET.bots ? 'Bots fill the teams.' : 'Just you two, no bots.'}` : 'Waiting for your buddy to pick a mode and start...'}</p>`;
+  else body = `<div class="lobrow"><button type="button" class="plain sm" id="lobLeave">Cancel</button></div>`;
+  return `<div class="lobby"><h2 class="sec">Play with a friend online</h2>${body}${NET.status ? `<p class="note lobst">${NET.status}</p>` : ''}</div>`;
+}
+function bindLobby(root) {
+  const q = s => root.querySelector(s);
+  if (q('#lobCreate')) q('#lobCreate').addEventListener('click', () => netCreate());
+  if (q('#lobJoin')) q('#lobJoin').addEventListener('click', () => netJoin(q('#lobCode').value));
+  if (q('#lobCode')) q('#lobCode').addEventListener('keydown', e => { if (e.key === 'Enter') netJoin(e.target.value); });
+  if (q('#lobLeave')) q('#lobLeave').addEventListener('click', () => { netReset(); NET.status = ''; renderMenu(); });
+  if (q('#lobBots')) q('#lobBots').addEventListener('change', e => { NET.bots = e.target.checked; netSend({ t: 'bots', on: NET.bots }); renderMenu(); });
+}
+{ const prev = renderModesTab; renderModesTab = function () {
+  prev();
+  const t = $('tab-campaign'), connected = NET.conn && NET.conn.open && NET.buddy;
+  t.insertAdjacentHTML('afterbegin', lobbyHTML()); bindLobby(t);
+  if (connected) t.querySelectorAll('.modec b').forEach(b => { if (!b.textContent.startsWith('1v1')) b.textContent = '1v1 ' + b.textContent; });
+  const btn = $('btnStart');
+  if (connected && NET.role === 'client') { btn.disabled = true; btn.textContent = 'Your buddy starts the game'; }
+  else if (connected) btn.textContent = `Play 1v1 ${MODES[curMode()].name}!`;
+}; }
+// host presses Play: share the map, the seed and the rules
+function netStartAsHost() {
+  const mi = randomMap(), seed = Math.floor(Math.random() * 1e9);
+  netSend({ t: 'start', mi, seed, mode: curMode(), bots: NET.bots });
+  pendingNet = { role: 'host', seed };
+  deploy(mi);
+}
+function onNetMsg(m) {
+  if (!m || !m.t) return;
+  if (m.t === 'hello') { NET.buddy = String(m.name || 'Buddy').slice(0, 16); NET.buddyLook = SKINS[m.look] ? m.look : 'ranger'; NET.buddyBackup = WEAPONS[m.backup] ? m.backup : 'm17'; if (m.ver !== NET.ver) netStatus('Your buddy has a different version of the game. Both refresh the page.'); else netStatus(''); if (NET.role === 'host') netSend({ t: 'bots', on: NET.bots }); return; }
+  if (m.t === 'full') { netStatus('That lobby already has two players.'); netReset(); return; }
+  if (m.t === 'bots') { NET.bots = !!m.on; if (mode === 'menu') renderMenu(); return; }
+  if (NET.role === 'client') {
+    if (m.t === 'start') { profile.gmode = m.mode; NET.bots = m.bots; pendingNet = { role: 'client', seed: m.seed }; NET.roster = null; NET.rosterApplied = null; NET.lastSnap = null; deploy(m.mi); return; }
+    if (m.t === 'roster') { NET.roster = m; if (game.net === 'client' && (mode === 'countdown' || mode === 'play' || mode === 'paused')) clientRoster(m); return; }
+    if (m.t === 's') { NET.lastSnap = m; return; }
+    if (m.t === 'b') { showBanner(m.a, m.b); return; }
+    if (m.t === 'end') { clientEnd(m); return; }
+  } else if (NET.role === 'host') {
+    if (m.t === 'i') { NET.input = m; return; }
+  }
+}
+
+// ---------- match setup on both sides ----------
+function netBeginBuild() {
+  if (!pendingNet) { game.net = null; return; }
+  game.net = pendingNet.role; RNG = mulberry(pendingNet.seed); game.pvp = true;
+}
+function netEndBuild() { RNG = Math.random; pendingNet = null; }
+function humanSlots() {
+  const list = profile.slots.map((k, i) => [k, i]).filter(([k]) => k !== 'ai' && k !== 'off');
+  if (isHost()) { const used = new Set(list.map(([, i]) => i)); let s = 1; while (used.has(s)) s++; list.push(['net', s]); }
+  return list;
+}
+const netSolo = () => !!game.net && !NET.bots;
+// host: tell the buddy who is in the match
+function hostRoster() {
+  const me = actors.find(a => a.kind === 'net');
+  netSend({ t: 'roster', you: me ? me.nid : -1, actors: actors.map(a => ({ id: a.nid, team: a.team, call: a.kind === 'net' ? 'You' : a.human ? (ACCOUNT.name || 'Host') : a.call, name: a.name, look: a.kind === 'net' ? NET.buddyLook : a.human ? profile.skinSel : (a.rig && a.rig.lookId), color: a.color, wid: a.w.id, slot: a.slot })), arena: world.arena, spawns: game.spawns || null });
+}
+function clientRoster(m) {
+  NET.rosterApplied = m;
+  for (const a of actors) a.dispose(); actors = [];
+  world.arena = m.arena; game.spawns = m.spawns;
+  for (const r of m.actors) {
+    const mine = r.id === m.you;
+    const a = new Actor({ team: r.team, kind: mine ? 'kbm' : 'enemy', slot: mine ? 0 : -1, x: 0, z: 0, call: mine ? 'You' : r.call, name: r.name, weapon: WEAPONS[r.wid] ? r.wid : null, look: mine ? profile.skinSel : r.look });
+    a.nid = r.id; a.color = r.color; a.ffaScore = 0; a.maxHp = FFA_HP; a.maxArmor = FFA_ARMOR; a.netT = null;
+    actors.push(a);
+  }
+  layoutViews();
+}
+
+// ---------- host: run the buddy's chef from their inputs, send snapshots ----------
+function netHostTick(dt) {
+  if (!isHost()) return;
+  const me = actors.find(a => a.kind === 'net'), n = NET.input;
+  if (me && n && n.p && me.active) {
+    // trust the buddy's own movement when it is close to ours; that keeps their game smooth
+    const d = Math.hypot(me.pos.x - n.p[0], me.pos.y - n.p[1], me.pos.z - n.p[2]);
+    if (d < 4) { me.pos.set(n.p[0], n.p[1], n.p[2]); }
+  }
+  NET.snapT -= dt; if (NET.snapT > 0) return; NET.snapT = .05;
+  const r2 = v => Math.round(v * 100) / 100;
+  const acts = actors.map(a => [a.nid, r2(a.pos.x), r2(a.pos.y), r2(a.pos.z), r2(a.yaw), r2(a.pitch), Math.round(a.hp), Math.round(a.armor), a.dead ? 1 : 0, a.w ? a.w.id : '', a.ffaScore || 0, a.crouch ? 1 : 0, a.w ? a.w.mag : 0, a.w ? a.w.reserve : 0, a.weapons.map(w => w.id).join(','), a.wi, a.shieldT > 0 ? 1 : 0, a.sugarT > 0 ? 1 : 0, a.power || '', a.grenades, a.ladder || 0, a.flashT > 0 ? 1 : 0]);
+  const ents = [];
+  for (const e of entities) {
+    if (e instanceof Pickup) { e.nid = e.nid || ++ENT_NID; ents.push([e.nid, 'p', e.kind, r2(e.pos.x), r2(e.pos.y), r2(e.pos.z), e.o.weapon || e.o.ing || e.o.gift || '']); }
+    else if (e instanceof SkyDrop) { e.nid = e.nid || ++ENT_NID; ents.push([e.nid, 's', e.kind, r2(e.x), r2(e.y), r2(e.z)]); }
+    else if (e instanceof LootSpot && e.available) { e.nid = e.nid || ++ENT_NID; ents.push([e.nid, 'b', '', r2(e.pos.x), r2(e.pos.y), r2(e.pos.z)]); }
+    else if (e instanceof MortarShell && e.t >= 0) { e.nid = e.nid || ++ENT_NID; ents.push([e.nid, 'm', '', r2(e.x), r2(e.y), r2(e.z)]); }
+  }
+  const G = { ms: game.ms, pvpT: game.pvpT, feed: game.killFeed, mode: game.mode, round: game.round, attack: game.attack, roundT: game.roundT, words: NET.words.splice(0) };
+  if (game.flags && game.flags.us) G.flags = ['us', 'pla'].map(t => { const F = game.flags[t]; return [r2(F.pos.x), r2(F.pos.y), r2(F.pos.z), r2(F.home.x), r2(F.home.y), r2(F.home.z), F.atHome ? 1 : 0, F.carrier ? F.carrier.nid : 0]; });
+  if (game.zone && game.zone.pos) G.zone = [r2(game.zone.pos.x), r2(game.zone.pos.y), r2(game.zone.pos.z), game.zone.owner || '', Math.ceil(game.zone.t)];
+  if (game.bomb) { const B = game.bomb; G.bomb = [r2(B.pos.x), r2(B.pos.y), r2(B.pos.z), B.planted ? 1 : 0, r2(B.timer), B.carrier ? B.carrier.nid : 0, B.site ?? -1]; G.sites = game.sites.map(s => [r2(s.x), r2(s.y), r2(s.z)]); }
+  const o = game.obj;
+  netSend({ t: 's', a: acts, e: ents, g: G, fx: NET.fx.splice(0), bm: NET.booms.splice(0), ob: o ? [o.text, o.progress ? o.progress() : '', (o.marker && o.marker()) ? [r2(o.marker().x), r2(o.marker().y), r2(o.marker().z)] : null] : null });
+}
+// record what the buddy needs to see happen
+function netFx(src, from, to, food, hit, sound) { if (isHost()) NET.fx.push([src ? src.nid || 0 : 0, +from.x.toFixed(2), +from.y.toFixed(2), +from.z.toFixed(2), +to.x.toFixed(2), +to.y.toFixed(2), +to.z.toFixed(2), food, hit ? 1 : 0, sound || '']); }
+
+// ---------- buddy: draw the host's world, play our own chef locally ----------
+function clientFrame(dt) {
+  const me = actors.find(a => a.human);
+  if (me && !me.dead) {
+    const inp = me.ctrl.read(dt);
+    if (inp.pause) { togglePause(); tapped.clear(); return; }
+    // keep every press between sends so quick taps reach the host
+    const raw = me.ctrl.prev;
+    for (const k in raw) { if (raw[k] === true) NET.acc[k] = true; else if (typeof raw[k] === 'number') NET.acc[k] = raw[k]; }
+    try { updateHuman(me, inp, dt); } catch (e) { reportError(e); }
+  }
+  tapped.clear();
+  NET.inT -= dt;
+  if (me && NET.inT <= 0) { NET.inT = 1 / 30; netSend({ t: 'i', r: NET.acc, yaw: me.yaw, pitch: me.pitch, p: [me.pos.x, me.pos.y, me.pos.z], crouch: me.crouch }); NET.acc = {}; }
+  const S = NET.lastSnap; if (S) { applySnap(S, me); NET.lastSnap = null; }
+  // ease other chefs toward where the host says they are
+  const k = 1 - Math.exp(-dt * 16);
+  for (const a of actors) {
+    if (a === me || !a.netT) continue;
+    const T = a.netT; a.vel.set((T[0] - a.pos.x) * 8, 0, (T[2] - a.pos.z) * 8);
+    a.pos.x += (T[0] - a.pos.x) * k; a.pos.y += (T[1] - a.pos.y) * k; a.pos.z += (T[2] - a.pos.z) * k;
+    a.yaw = angDamp(a.yaw, T[3], 14, dt); a.pitch += (T[4] - a.pitch) * k; a.onGround = true; a.t += dt;
+    if (a.w) a.walkPh = a.walkPh || 0;
+  }
+  for (const e of entities) if (e.t !== undefined && e instanceof Pickup) e.t += dt;
+  game.time += dt;
+}
+function setWeapons(a, ids, wi) {
+  const want = ids.split(',').filter(Boolean);
+  if (want.join() !== a.weapons.map(w => w.id).join()) {
+    a.weapons = want.map(id => { const def = WEAPONS[id] || ENEMY_WEAPONS[id]; return { id, def, mag: def.mag, reserve: def.reserve }; });
+    if (a.vm) for (const w of a.weapons) if (!a.vm.guns[w.id]) { const g = buildViewGun(w.id); g.root.visible = false; a.vm.root.add(g.root); a.vm.guns[w.id] = g; }
+  }
+  if (wi !== undefined && wi < a.weapons.length) a.wi = wi;
+}
+function applySnap(S, me) {
+  for (const r of S.a) {
+    const a = actors.find(x => x.nid === r[0]); if (!a) continue;
+    const [, x, y, z, yaw, pitch, hp, armor, dead, wid, score, crouch, mag, reserve, wids, wi, shield, sugar, power, nades, ladder, flash] = r;
+    a.hp = hp; a.armor = armor; a.ffaScore = score; a.shieldT = shield ? 1 : 0; a.ladder = ladder;
+    if (dead && !a.dead) { a.dead = true; a.hp = 0; shatterActor(a); }
+    else if (!dead && a.dead) { a.dead = false; a.shattered = false; a.rig.root.visible = true; a.pos.set(x, y, z); }
+    if (a === me) {
+      setWeapons(a, wids, wi); if (a.w) { a.w.mag = mag; a.w.reserve = reserve; }
+      a.power = power || null; a.grenades = nades; a.sugarT = sugar ? Math.max(a.sugarT || 0, .5) : 0;
+      if (Math.hypot(a.pos.x - x, a.pos.y - y, a.pos.z - z) > 4) { a.pos.set(x, y, z); a.vel.set(0, 0, 0); }
+    } else {
+      a.netT = [x, y, z, yaw, pitch]; a.crouch = !!crouch; if (flash) a.flashT = .05;
+      if (wid && (!a.w || a.w.id !== wid)) setWeapons(a, wid, 0);
+    }
+  }
+  // pickups, falling crates, loot beams and warning rings
+  const seen = new Set();
+  for (const e of S.e) {
+    const [id, type, kind, x, y, z, extra] = e; seen.add(id);
+    let m = NET.mirror.get(id);
+    if (!m) {
+      if (type === 'p') m = new Pickup(kind, new THREE.Vector3(x, y, z), kind === 'weapon' ? { weapon: extra, side: 'us', life: 1e9 } : kind === 'ing' ? { ing: extra, life: 1e9 } : kind === 'gift' ? { gift: extra, life: 1e9 } : { life: 1e9 });
+      else if (type === 's') m = new SkyDrop(kind, x, z);
+      else if (type === 'b') { const beam = new THREE.Mesh(new THREE.CylinderGeometry(.18, .18, 9, 6, 1, true), new THREE.MeshBasicMaterial({ color: 0xffd23a, transparent: true, opacity: .32, depthWrite: false, blending: THREE.AdditiveBlending })); beam.position.set(x, y + 4.5, z); scene.add(beam); m = { beam, render() {}, dispose() { scene.remove(beam); beam.geometry.dispose(); beam.material.dispose(); }, pos: new THREE.Vector3(x, y, z), available: true }; Object.setPrototypeOf(m, LootSpot.prototype); m.stub = { looted: false, pid: '' }; m.beamOnly = true; }
+      else if (type === 'm') m = new MortarShell(x, z, 0);
+      m.nid = id; NET.mirror.set(id, m); entities.push(m);
+    }
+    if (type === 'p') { m.pos.set(x, y, z); if (m.gy === undefined || m.kind === 'coin') m.gy = y - .35; }
+    if (type === 's') { m.y = y; }
+    if (type === 'm') { m.t = Math.max(m.t, .01); m.ring.material.opacity = .45 + .35 * Math.abs(Math.sin(game.time * 9)); }
+  }
+  for (const [id, m] of NET.mirror) if (!seen.has(id)) { try { m.dispose(); } catch (e) { /* gone */ } const i = entities.indexOf(m); if (i >= 0) entities.splice(i, 1); NET.mirror.delete(id); }
+  // shots, blasts and pop-up words
+  for (const f of S.fx) { if (me && f[0] === me.nid) continue; foodShot(new THREE.Vector3(f[1], f[2], f[3]), new THREE.Vector3(f[4], f[5], f[6]), f[7], !!f[8]); if (f[9]) Sfx.play(f[9], new THREE.Vector3(f[1], f[2], f[3]), .8); }
+  for (const b of S.bm) { const p = new THREE.Vector3(b[0], b[1], b[2]); burst(p.x, p.y, p.z, 20, 0xffc040, 8, .14, .5, { g: 8 }); puff(p.x, p.y, p.z, 10, 0xfff0d0, .6, .8, 2); Sfx.play('boom', p, .9); }
+  // match state for the scoreboard, minimap and markers
+  const G = S.g;
+  Object.assign(game, { ms: G.ms, pvpT: G.pvpT, killFeed: G.feed, round: G.round, attack: G.attack, roundT: G.roundT });
+  for (const w of G.words || []) popWord(new THREE.Vector3(w[0], w[1], w[2]), w[3], w[4]);
+  if (G.flags) {
+    if (!game.flags || !game.flags.us) { game.flags = {}; for (const T of ['us', 'pla']) game.flags[T] = { team: T, pos: new THREE.Vector3(), home: new THREE.Vector3(), mesh: flagMesh(T) }; }
+    G.flags.forEach((f, i) => { const F = game.flags[i ? 'pla' : 'us']; F.pos.set(f[0], f[1], f[2]); if (!F.ringed) { F.ringed = true; F.home.set(f[3], f[4], f[5]); baseRing(F.home, F.team); } F.atHome = !!f[6]; F.carrier = f[7] ? actors.find(a => a.nid === f[7]) : null; F.mesh.position.set(F.pos.x, F.pos.y + (F.carrier ? 1.2 : 0), F.pos.z); F.mesh.scale.setScalar(F.carrier ? .7 : 1); });
+    for (const a of actors) a.flag = null; for (const T of ['us', 'pla']) if (game.flags[T].carrier) game.flags[T].carrier.flag = game.flags[T];
+  }
+  if (G.zone) { if (!game.zone) game.zone = { r: 6, mesh: potMesh() }; game.zone.pos = new THREE.Vector3(G.zone[0], G.zone[1], G.zone[2]); game.zone.owner = G.zone[3] || null; game.zone.t = G.zone[4]; game.zone.mesh.position.copy(game.zone.pos); const col = game.zone.owner === 'us' || game.zone.owner === 'pla' ? pvpTeamColor(game.zone.owner) : game.zone.owner === 'contested' ? 0xffffff : 0xffd23a; game.zone.mesh.userData.ringM.material.color.setHex(col); }
+  if (G.bomb) {
+    if (!game.sites) { game.sites = G.sites.map(s => new THREE.Vector3(s[0], s[1], s[2])); game.sites.forEach((p, i) => siteMesh(p, 'AB'[i])); game.bombM = pieMesh(); }
+    const b = G.bomb; game.bomb = game.bomb || {}; Object.assign(game.bomb, { pos: new THREE.Vector3(b[0], b[1], b[2]), planted: !!b[3], timer: b[4], carrier: b[5] ? actors.find(a => a.nid === b[5]) : null, site: b[6] });
+    game.bombM.position.set(b[0], b[1] + (game.bomb.carrier ? 2.5 : .2), b[2]); game.bombM.scale.setScalar(game.bomb.carrier ? .6 : 1); game.bombM.userData.light.visible = game.bomb.planted && Math.sin(game.time * 9) > 0;
+  }
+  if (S.ob) { NET.obText = S.ob[0]; NET.obProg = S.ob[1]; NET.obMarker = S.ob[2] ? new THREE.Vector3(S.ob[2][0], S.ob[2][1], S.ob[2][2]) : null; }
+}
+function netObjective() { return { id: 'net', get text() { return NET.obText || ''; }, start() {}, tick() {}, progress() { return NET.obProg || ''; }, marker() { return NET.obMarker; }, check() { return false; } }; }
+function clientEnd(m) {
+  if (mode === 'debrief') return;
+  const me = actors.find(a => a.human), myT = me ? me.team : 'us';
+  const win = m.ffa ? m.winner === (me && me.nid) : m.winTeam === myT, tie = !m.ffa && !m.winTeam;
+  mode = 'debrief'; if (document.pointerLockElement) document.exitPointerLock();
+  const coins = (me ? (me.ffaScore || 0) * 5 : 0) + (win ? 80 : tie ? 40 : 20);
+  profile.coins = (profile.coins || 0) + coins; profile.xp += 150 + (me ? me.ffaScore || 0 : 0) * 50;
+  profile.history = profile.history || []; profile.history.unshift({ when: Date.now(), mission: `1v1 ${MODES[m.mode] ? MODES[m.mode].name : ''} with ${NET.buddy}`, result: tie ? 'Draw' : win ? 'Won' : 'Lost', takedowns: me ? me.ffaScore || 0 : 0, heads: 0, coins, xp: 150, intel: '-', diff: profile.diff });
+  saveProfile();
+  $('dbTitle').textContent = `1v1 ${MODES[m.mode] ? MODES[m.mode].name : ''}: ${tie ? 'draw' : win ? 'you win!' : 'you lose'}`;
+  $('dbStory').textContent = m.story || '';
+  $('dbStats').innerHTML = [['Your splats', me ? me.ffaScore || 0 : 0], ['Coins earned', '+' + coins], ['Coin balance', profile.coins]].map(([k, v]) => `<span>${k}</span><span>${v}</span>`).join('');
+  $('dbRank').innerHTML = '';
+  $('dbActions').innerHTML = '<button class="plain" type="button" id="dbMenu">Back to the lobby</button>';
+  $('dbMenu').addEventListener('click', toMenu);
+  $('debrief').classList.remove('hidden'); views.forEach(v => v.el && v.el.remove());
+}
+function hostEnd() {
+  if (!isHost()) return;
+  const R = typeof ffaRanking === 'function' ? ffaRanking() : [];
+  const winTeam = game.teamMode ? (game.ms.us > game.ms.pla ? 'us' : game.ms.pla > game.ms.us ? 'pla' : null) : null;
+  netSend({ t: 'end', mode: game.mode, ffa: !!game.ffa, winner: game.ffa && R[0] ? R[0].nid : 0, winTeam, story: $('dbStory').textContent });
+}
+
+// =====================================================================
 // Mission flow
 // =====================================================================
 const $ = id => document.getElementById(id);
@@ -7189,13 +7471,16 @@ async function deploy(mi, fromCheckpoint = false) {
 function startMission(mi, fromCheckpoint = false) {
   Sfx.init();
   const keepXP = fromCheckpoint ? game.xp : 0, keepLog = fromCheckpoint ? game.xpLog : {}, cp = fromCheckpoint ? game.checkpoint : 0, cpPos = game.cpPos;
+  netBeginBuild();
   const st = buildMap(mi); previewMi = -1;
   const M = MISSIONS[mi];
   arcadeStrip(); world.arena = pickArena(M); buildArenaWalls(); arenaPads(); if (curMode() !== 'ladder') placeLoot();
   if (world.env) { world.env = Object.assign({}, world.env, { fog: [world.env.fog[0], 90, 360] }); scene.fog.near = 90; scene.fog.far = 360; }
+  netEndBuild();
   Object.assign(game, { time: 0, mi, mission: M, xp: keepXP, xpLog: keepLog, stats: { kills: 0, heads: 0, downs: 0, shots: 0, hits: 0 }, flags: fromCheckpoint ? game.flags : {}, checkpoint: cp, endT: 0, result: null, slowmo: 0, orderMark: null, pvp: true, ffa: ['ffa', 'ladder'].includes(curMode()), teamMode: !['ffa', 'ladder'].includes(curMode()), ladder: curMode() === 'ladder', mode: curMode(), flags: {}, zone: null, bomb: null, sites: null, ms: { us: 0, pla: 0 }, skyT: 4, stormT: 35, ffaPlace: 0, evT: undefined, evI: 0, bonus: null, bonusWins: 0, score: { us: 0, pla: 0 }, coins: fromCheckpoint ? (game.coins || 0) : 0, intel: fromCheckpoint ? (game.intel || 0) : 0 });
   if (!fromCheckpoint) { delete profile.choices[M.id === 'm2' ? 'm2' : M.id === 'm3' ? 'm3' : '_']; }
-  if (game.ffa) ffaSpawnAll();
+  if (isClient()) { for (const e of entities) { try { e.dispose(); } catch (err) { /* gone */ } } entities.length = 0; interacts.length = 0; NET.mirror.clear(); game.flags = {}; game.zone = null; game.bomb = null; game.sites = null; if (NET.roster) clientRoster(NET.roster); }
+  else if (game.ffa) ffaSpawnAll();
   else if (game.teamMode) teamSpawnAll();
   else if (M.pvp) pvpSpawnAll();
   else profile.slots.forEach((kind, i) => {
@@ -7210,7 +7495,8 @@ function startMission(mi, fromCheckpoint = false) {
     }
     actors.push(a);
   });
-  game.objs = game.ladder ? [ladderObjective()] : game.ffa ? [ffaObjective()] : game.mode === 'ctf' ? [ctfObjective()] : game.mode === 'hill' ? [hillObjective()] : game.mode === 'bomb' ? [bombObjective()] : M.objectives();
+  if (isHost()) hostRoster();
+  game.objs = isClient() ? [netObjective()] : game.ladder ? [ladderObjective()] : game.ffa ? [ffaObjective()] : game.mode === 'ctf' ? [ctfObjective()] : game.mode === 'hill' ? [hillObjective()] : game.mode === 'bomb' ? [bombObjective()] : M.objectives();
   for (let i = 0; i < cp; i++) {
     let o = game.objs[i];
     if (o.dynamic) o = M.dynamic(i, o) || o;
@@ -7282,6 +7568,7 @@ function checkFailure() {
   if (humans.every(a => a.dead || a.downed) && !actors.some(a => a.kind === 'squad' && a.active)) missionFailed('No one was left to drag you out');
 }
 function showBanner(t, s) {
+  if (game.net === 'host') netSend({ t: 'b', a: t, b: s || '' });
   const b = $('banner'); b.querySelector('.t').textContent = t; b.querySelector('.s').textContent = s || '';
   b.classList.remove('hidden', 'fade'); void b.offsetWidth; b.classList.add('fade');
   clearTimeout(showBanner.h); showBanner.h = setTimeout(() => b.classList.add('hidden'), 4300);
@@ -7336,8 +7623,9 @@ function debrief() {
   else if (MISSIONS[game.mi + 1] && !MISSIONS[game.mi + 1].pvp) acts.push(`<button class="go" type="button" id="dbNext">Next mission</button>`);
   $('dbActions').innerHTML = acts.join('');
   $('dbMenu').addEventListener('click', toMenu);
-  if ($('dbRetry')) $('dbRetry').addEventListener('click', () => { enterFullscreen(); deploy(randomMap(), false); });
+  if ($('dbRetry')) $('dbRetry').addEventListener('click', () => { enterFullscreen(); if (NET.role === 'host' && NET.buddy && NET.conn && NET.conn.open) netStartAsHost(); else deploy(randomMap(), false); });
   if ($('dbNext')) $('dbNext').addEventListener('click', () => { enterFullscreen(); selMission = game.mi + 1; deploy(game.mi + 1); });
+  hostEnd();
   $('debrief').classList.remove('hidden');
   views.forEach(v => v.el && v.el.remove());
 }
@@ -7458,7 +7746,7 @@ function bindSettings(root) {
   });
   root.querySelector('[data-reset]').addEventListener('click', () => { Object.assign(settings, SETTINGS_DEFAULT); saveSettings(); root.innerHTML = settingsHTML(root.id === 'pauseSettings' ? 'p' : 'm'); bindSettings(root); });
 }
-$('btnStart').addEventListener('click', () => { enterFullscreen(); deploy(randomMap()); });
+$('btnStart').addEventListener('click', () => { if (NET.role === 'client' && NET.buddy) return; enterFullscreen(); if (NET.role === 'host' && NET.buddy && NET.conn && NET.conn.open) netStartAsHost(); else deploy(randomMap()); });
 
 // =====================================================================
 // Views and HUD
@@ -7469,7 +7757,7 @@ const viewsEl = $('views');
 function layoutViews() {
   const W = innerWidth, H = innerHeight;
   viewsEl.innerHTML = ''; views = [];
-  const humans = mode === 'menu' ? [] : actors.filter(a => a.human);
+  const humans = mode === 'menu' ? [] : actors.filter(a => a.human && a.kind !== 'net');
   const n = humans.length;
   let rects;
   if (n <= 1) rects = [[0, 0, W, H]];
@@ -7772,6 +8060,7 @@ function step(dt) {
   else { game.endT -= dt; if (game.endT <= 0) debrief(); }
   for (let i = actors.length - 1; i >= 0; i--) { const a = actors[i]; if (a.dead && (a.deathT || 0) > 45 && (a.team === 'pla' || a.kind === 'ally')) { a.dispose(); actors.splice(i, 1); for (let j = interacts.length - 1; j >= 0; j--) if (interacts[j].corpse === a) interacts.splice(j, 1); } }
   updateRadio(dt);
+  netHostTick(dt);
   tapped.clear();
 }
 // Enemies never run out: small groups keep arriving out of sight, capped so it never swamps you
@@ -7784,7 +8073,7 @@ function reinforcements(dt) {
   const near = actors.filter(a => a.team === 'pla' && !a.dead && a.pos.distanceTo(L.pos) < 100).length;
   const cap = 6 + profile.diff * 2;
   if (near >= cap) return;
-  const n = Math.max(1, Math.min(cap - near, [2, 3, 4][profile.diff] - (Math.random() < .4 ? 1 : 0)));
+  const n = Math.max(1, Math.min(cap - near, [2, 3, 4][profile.diff] - (RNG() < .4 ? 1 : 0)));
   for (let tries = 0; tries < 40; tries++) {
     const ang = rand(0, Math.PI * 2), d = rand(55, 85);
     const x = L.pos.x + Math.sin(ang) * d, z = L.pos.z + Math.cos(ang) * d;
@@ -7795,11 +8084,11 @@ function reinforcements(dt) {
     if (actors.some(h => h.human && !h.dead && lineOfSight(h.eye(), head))) continue;
     const K = makeBuilder();
     for (let i = 0; i < n; i++) {
-      const e = K.enemy(x + rand(-2.5, 2.5), z + rand(-2.5, 2.5), { tag: 'reinf', type: i === 0 && Math.random() < .25 ? 'mg' : 'rifle', weapon: undefined });
+      const e = K.enemy(x + rand(-2.5, 2.5), z + rand(-2.5, 2.5), { tag: 'reinf', type: i === 0 && RNG() < .25 ? 'mg' : 'rifle', weapon: undefined });
       if (e.type === 'mg') { e.weapons[0] = { id: 'qjb', def: ENEMY_WEAPONS.qjb, mag: 100, reserve: 600 }; }
       aiAlert(e, L.pos.clone().add(new THREE.Vector3(rand(-10, 10), 0, rand(-10, 10))), null); e.ai.alertT = 45;
     }
-    if (Math.random() < .7) radioLine(pick(['Cpl. Okafor', 'Spc. Chen', 'Pfc. Ortega']), pick(['More of them moving in.', 'New enemy squad coming up on us.', 'Contact. Small group, closing in.', 'Heads up, reinforcements.']), 2);
+    if (RNG() < .7) radioLine(pick(['Cpl. Okafor', 'Spc. Chen', 'Pfc. Ortega']), pick(['More of them moving in.', 'New enemy squad coming up on us.', 'Contact. Small group, closing in.', 'Heads up, reinforcements.']), 2);
     return;
   }
 }
@@ -7873,9 +8162,11 @@ function frameInner(now) {
   { const L = actors.find(a => a.human && !a.dead) || squadLeader();
     if (L && world.sunDir) { sun.target.position.set(L.pos.x, L.pos.y, L.pos.z); sun.position.copy(sun.target.position).addScaledVector(world.sunDir, 110); listenYaw = L.yaw; } }
   const running = mode === 'play' && !choiceOpen;
+  if (game.net === 'client' && NET.roster && NET.rosterApplied !== NET.roster && (mode === 'countdown' || mode === 'play' || mode === 'paused')) clientRoster(NET.roster);
+  if (running && game.net === 'client') clientFrame(rdt);
   if (choiceOpen) for (const a of actors) if (a.human && a.kind.startsWith('pad')) { const i = a.ctrl.read(rdt); if (i.choice >= 0) pickChoice(i.choice); }
   const dt = running ? rdt : 0;
-  if (running) {
+  if (running && game.net !== 'client') {
     acc += dt; let n = 0;
     while (acc >= STEP && n < 4) { step(STEP); acc -= STEP; n++; if (mode !== 'play' || choiceOpen) break; }
     if (n === 4) acc = 0;
@@ -7933,7 +8224,7 @@ showUserModal();
 renderMenu();
 requestAnimationFrame(frame);
 window.__ofl_shoot = (src, o, d, id) => shootRay(src, o, d, WEAPONS[id], 1);
-window.__ofl_rayActor = rayActor; window.__ofl_goal = a => modeBotGoal(a, 0); window.__ofl_ev = runEvent; window.__ofl_dmg = (a, d, src, o) => damageActor(a, d, src, o || {}); window.__ofl_W = WEAPONS; window.THREE_V = THREE.Vector3;
+window.__ofl_rayActor = rayActor; window.__net = NET; window.__ofl_goal = a => modeBotGoal(a, 0); window.__ofl_ev = runEvent; window.__ofl_dmg = (a, d, src, o) => damageActor(a, d, src, o || {}); window.__ofl_W = WEAPONS; window.THREE_V = THREE.Vector3;
 window.__ofl = { forcePlay: () => { mode = "play"; activateObjective(game.pendingObj); }, simulate: (sec, cb) => { for (let i = 0; i < sec * 60 && mode === "play"; i++) { if (cb && i % 6 === 0) cb(); step(STEP); } }, world, settings, deploy, renderer, scene, get mode() { return mode; }, get choiceOpen() { return choiceOpen; }, pickChoice, actors: () => actors, game, startMission, profile, MISSIONS, entities };
 </script>
 </body>
