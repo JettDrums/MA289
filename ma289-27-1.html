@@ -345,8 +345,8 @@
         <p>
           Taiwan imports nearly all of its crude oil by sea, and every barrel passes through a handful of straits.
           I am turning those shipping routes into a network model, and using a reinforcement-learning
-          interdiction agent to ask two things: where would an adversary with limited resources act to cut
-          Taiwan&rsquo;s oil supply, and can an AI trained on one kind of network reason about a very different one?
+          interdiction agent to ask two things: if China put its full effort into cutting Taiwan&rsquo;s oil supply, where would it act,
+          and can an AI trained on one kind of network reason about a very different one?
         </p>
         <h3 class="sub">Why it matters</h3>
         <p>
@@ -364,7 +364,7 @@
         </ul>
         <h3 class="sub">What I am looking to find</h3>
         <ol class="plain">
-          <li><strong>Where the attacker acts.</strong> Does a budget-limited attacker go after distant chokepoints such
+          <li><strong>Where the attacker acts.</strong> With its full effort (a budget of 100), does China go after distant chokepoints such
           as Hormuz and Malacca, or Taiwan&rsquo;s own approaches?</li>
           <li><strong>Quarantine versus blockade.</strong> How does the answer change between a lower-cost coast-guard
           quarantine and a higher-cost naval blockade?</li>
@@ -385,7 +385,7 @@
         <h3 class="sub">Goals</h3>
         <ul class="plain">
           <li>An open-source, defensible model of Taiwan&rsquo;s crude oil supply network (built; shown below).</li>
-          <li>A clear picture of where interdiction is most effective at low, medium and high effort.</li>
+          <li>A clear picture of where China&rsquo;s full effort does the most damage, and how that depends on what each action costs.</li>
           <li>An answer on whether the agent&rsquo;s learned strategy transfers from rail to sea.</li>
           <li>A poster presenting the results at the end of the semester.</li>
         </ul>
@@ -604,7 +604,7 @@
     <div class="wrap">
       <section class="block" style="padding-top: 22px;">
         <p class="muted">
-          The other 20 edges cannot be interdicted, each with a stated reason: the demand arcs, loading inside the Gulf,
+          The other 23 edges cannot be interdicted, each with a stated reason: the demand arcs, loading inside the Gulf,
           the share of Hormuz that always gets through, the Atlantic, Mediterranean, eastern Pacific and Red Sea legs, and
           Indonesian archipelagic waters.
         </p>
@@ -651,7 +651,11 @@
           <li><strong>Next training run:</strong> practice across every scenario, then score the agent on each one,
           including cases where the best cut is not the base-case ring.</li>
           <li><strong>Defender questions:</strong> which edges Taiwan should protect, and the blockade variant.</li>
+          <li><strong>Future work:</strong> a traveling salesman problem (TSP) formulation, possibly with k-nearest
+          neighbors, once the current model is working. Not yet decided.</li>
         </ol>
+        <p><strong>Random and fixed:</strong> whether each action works is random (its chance of success); the network,
+        capacities, costs, China&rsquo;s budget and Taiwan&rsquo;s best rerouting are fixed.</p>
         <p><strong>Products:</strong> the results above for every scenario and method, a map of where each method acts,
         the quarantine tipping point, and the poster.</p>
       </section>
