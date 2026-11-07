@@ -469,18 +469,18 @@
         </p>
 
         <h3 class="sub">Scenarios</h3>
-        <p>Each scenario changes one input. The RL agent has so far been trained and scored on the base case only
-        (run 2 / run 3).</p>
+        <p>Each scenario changes one input. The run 3 agent was trained once, on the base case, and played every
+        scenario without retraining (about 3 seconds per plan).</p>
         <div class="table-wrap">
           <table class="grid">
             <thead><tr><th>Scenario</th><th>Greedy</th><th>Optimal</th><th>RL agent</th></tr></thead>
             <tbody>
-              <tr><td>Base case</td><td class="n">70.1%</td><td class="n">31.7%</td><td class="n">62.0% / 31.7%</td></tr>
-              <tr><td>Costs 50% lower</td><td class="n">50.4%</td><td class="n">12.9%</td><td class="n">pending</td></tr>
-              <tr><td>Costs 50% higher</td><td class="n">74.4%</td><td class="n">52.8%</td><td class="n">pending</td></tr>
-              <tr><td>Taiwan needs 20% more</td><td class="n">65.2%</td><td class="n">31.7%</td><td class="n">pending</td></tr>
-              <tr><td>Taiwan needs 20% less</td><td class="n">76.7%</td><td class="n">31.7%</td><td class="n">pending</td></tr>
-              <tr><td>Hormuz fully shut (starts at 72%)</td><td class="n">49.3%</td><td class="n">27.2%</td><td class="n">pending</td></tr>
+              <tr><td>Base case</td><td class="n">70.1%</td><td class="n">31.7%</td><td class="n">31.7%</td></tr>
+              <tr><td>Costs 50% lower</td><td class="n">50.4%</td><td class="n">12.9%</td><td class="n">30.2%</td></tr>
+              <tr><td>Costs 50% higher</td><td class="n">74.4%</td><td class="n">52.8%</td><td class="n">100.0%</td></tr>
+              <tr><td>Taiwan needs 20% more</td><td class="n">65.2%</td><td class="n">31.7%</td><td class="n">31.7%</td></tr>
+              <tr><td>Taiwan needs 20% less</td><td class="n">76.7%</td><td class="n">31.7%</td><td class="n">31.7%</td></tr>
+              <tr><td>Hormuz fully shut (starts at 72%)</td><td class="n">49.3%</td><td class="n">27.2%</td><td class="n">27.2%</td></tr>
             </tbody>
           </table>
         </div>
@@ -488,7 +488,9 @@
           The ring is optimal in every scenario except the cost changes: with cheaper actions China adds the Luzon
           Strait and the southern South China Sea; with dearer ones it can afford only part of the west-coast cordon.
           The ring&rsquo;s share does not move with demand because the approaches have no capacity limit: a path is
-          either open or closed.
+          either open or closed. The agent matches the optimum wherever the ring is still the answer, but it was trained
+          at one budget: with cheaper actions it does not use the extra effort well (30% against 13%), and with dearer
+          ones it starts a ring it cannot afford to finish and cuts nothing (100% against 53%).
         </p>
 
         <h3 class="sub">How the results were produced</h3>
@@ -519,9 +521,9 @@
 
         <h3 class="sub">New questions</h3>
         <ul class="plain">
-          <li><strong>Can the agent find rings without the hint?</strong> Run 3&rsquo;s head start used the ring the solver
-          found. The next test is the scenarios it has not trained on (cost changes, Hormuz shut), where the best cut is
-          different.</li>
+          <li><strong>Will training across budgets fix the cost scenarios?</strong> The agent learned one answer for one
+          budget. Training with the budget varied, and head starts from each scenario&rsquo;s own optimal plan, should
+          teach it when the full ring is affordable and what to do when it is not.</li>
           <li><strong>Which edges should Taiwan protect first</strong> to break the ring?</li>
           <li><strong>How long</strong> must a disruption last to matter, given Taiwan&rsquo;s storage?</li>
           <li><strong>Does the same logic hold for LNG</strong>, which Taiwan stores for only about 11 days?</li>
