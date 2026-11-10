@@ -495,6 +495,30 @@
           in every scenario, and in the base case it found a different ten-edge ring worth the same (31.8%).
         </p>
 
+        <h3 class="sub">A test it was never trained for</h3>
+        <p>
+          Every head start in training came from a solver plan, and quarantines in training always succeeded about
+          70 to 90% of the time. Below about 65%, China&rsquo;s best plan is no longer a ring but the far-away plan
+          (62%), which run 4 never saw. Played with no retraining and no hint:
+        </p>
+        <div class="table-wrap">
+          <table class="grid">
+            <thead><tr><th>Quarantine p</th><th>Greedy</th><th>Optimal</th><th>RL run 4</th></tr></thead>
+            <tbody>
+              <tr><td class="n">0.7</td><td class="n">70.1%</td><td class="n">52.4%</td><td class="n">51.7%</td></tr>
+              <tr><td class="n">0.6</td><td class="n">70.1%</td><td class="n">62.0%</td><td class="n">69.7%</td></tr>
+              <tr><td class="n">0.5</td><td class="n">70.1%</td><td class="n">62.0%</td><td class="n">76.1%</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="muted">
+          At 0.7, inside its training range, it slightly beats the solver&rsquo;s best plan. At 0.5 and 0.6 it still
+          builds a ring of nine or ten quarantines that now mostly fail, and at 0.5 it does worse than greedy. Like the
+          single-budget run before it, the agent learned what its training covered: where it can be trusted is set by
+          what it practised on. The next run varies quarantine reliability as well, with no hint toward the far-away
+          plan, to test whether it learns when to switch.
+        </p>
+
         <h3 class="sub">How the results were produced</h3>
         <ul class="plain">
           <li><strong>RL agent.</strong> The Threat-Adaptive Network Interdiction Model (TANIM; Webb and Caplice, 2025),
