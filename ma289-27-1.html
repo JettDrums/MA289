@@ -519,6 +519,30 @@
           plan, to test whether it learns when to switch.
         </p>
 
+        <h3 class="sub">What Taiwan should protect first</h3>
+        <p>
+          For every edge China could act on, the exact solver re-planned China&rsquo;s attack with that edge protected
+          (China&rsquo;s action there can no longer succeed). One edge stands out:
+        </p>
+        <div class="table-wrap">
+          <table class="grid">
+            <thead><tr><th>Edge Taiwan protects</th><th>Taiwan keeps</th><th>Gain</th></tr></thead>
+            <tbody>
+              <tr><td>None</td><td class="n">31.7%</td><td class="n">&ndash;</td></tr>
+              <tr><td>Northern South China Sea to Kaohsiung</td><td class="n">46.9%</td><td class="n">+15.2</td></tr>
+              <tr><td>South cape to Kaohsiung offshore</td><td class="n">38.9%</td><td class="n">+7.2</td></tr>
+              <tr><td>Northern South China Sea to the Taiwan Strait</td><td class="n">36.9%</td><td class="n">+5.2</td></tr>
+              <tr><td>Strait south entrance to Kaohsiung offshore</td><td class="n">35.9%</td><td class="n">+4.2</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="muted">
+          Kaohsiung is Taiwan&rsquo;s largest refinery port. Protecting its approach from the northern South China Sea
+          forces China&rsquo;s best ring out to the Luzon Strait and the southern South China Sea, a wider and costlier
+          cordon, and Taiwan keeps nearly half again as much crude. Every other single edge changes the answer by less
+          than two points, which is within the solver&rsquo;s sampling noise.
+        </p>
+
         <h3 class="sub">How the results were produced</h3>
         <ul class="plain">
           <li><strong>RL agent.</strong> The Threat-Adaptive Network Interdiction Model (TANIM; Webb and Caplice, 2025),
@@ -549,7 +573,8 @@
         <ul class="plain">
           <li><strong>Does it hold on networks it has never seen?</strong> Run 4 handles every scenario of this network.
           The next test is a different network, without a solver&rsquo;s hint.</li>
-          <li><strong>Which edges should Taiwan protect first</strong> to break the ring?</li>
+          <li><strong>What would protecting the Kaohsiung approach take</strong> (escorts, presence), and how does
+          China&rsquo;s plan change if Taiwan can protect two edges?</li>
           <li><strong>How long</strong> must a disruption last to matter, given Taiwan&rsquo;s storage?</li>
           <li><strong>Does the same logic hold for LNG</strong>, which Taiwan stores for only about 11 days?</li>
         </ul>
