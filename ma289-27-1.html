@@ -467,6 +467,12 @@
           should surround Taiwan; below it, act far away. Anything that makes a quarantine less reliable (escorts,
           reflagging, presence) pushes China back to the far-away plan.
         </p>
+        <figure>
+          <img src="img/ma289-27-1/tipping_point_agent.png" alt="Chart: the ring's value falls as quarantines become more reliable and crosses the far-away plan's 62% at about 0.65; the RL agent's results follow the far-away plan below 0.65 and the ring above it" loading="lazy">
+          <figcaption>The trained agent (run 6) was never told where the tipping point is. Played at twelve levels of
+          quarantine reliability, it uses the far-away plan below about 0.65 and the ring above it, within about one
+          point of the better plan at every level.</figcaption>
+        </figure>
 
         <h3 class="sub">Scenarios</h3>
         <p>Each scenario changes one input. Each agent was trained once and played every scenario without retraining
@@ -535,7 +541,8 @@
           Is it luck, or a tuned number? Run 6 was repeated twice with new random seeds, and once each with the bonus
           at 0.1 and 1.0 instead of 0.3. All five runs left the far-away plan and reached the best known plan (31.8%)
           within 700,000 steps. The largest bonus got there fastest (500,000 steps); the smallest drifted to a
-          slightly weaker ring (35.8%) by the end. Training ran to 3 million steps for run 6 and 1 million for the
+          slightly weaker ring (35.8%) by the end. On all nine tests, every run is within 5.2 points of the best
+          known plan, and three of the five within 1.5. Training ran to 3 million steps for run 6 and 1 million for the
           repeats.
         </p>
       <figure>
